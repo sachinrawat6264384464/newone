@@ -45,42 +45,48 @@ const services: Service[] = [
     title: "Kitchen Design",
     description: "Modern, functional kitchens that are the heart of your home",
     image: "/pic1.jpeg",
-    color: "from-green-400 to-blue-500"
+   color: "from-red-400 to-red-600 border-2 border-blue-500"
+
   },
   {
     icon: Utensils,
     title: "Dining Areas",
     description: "Elegant dining spaces for memorable meals and gatherings",
     image: "/pic2.jpeg",
-    color: "from-green-400 to-blue-500"
+   color: "from-red-400 to-red-600 border-2 border-blue-500"
+
   },
   {
     icon: Sofa,
     title: "Living Spaces",
     description: "Comfortable and stylish living areas for relaxation",
     image: "/pic3.jpeg",
-    color: "from-green-400 to-blue-500"
+    color: "from-red-400 to-red-600 border-2 border-blue-500"
+ 
   },
   {
     icon: Bed,
     title: "Bedrooms",
     description: "Peaceful retreats designed for rest and rejuvenation",
     image: "/pic4.jpeg",
-    color: "from-green-400 to-blue-500"
+    color: "from-red-400 to-red-600 border-2 border-blue-500"
+ 
   },
   {
     icon: Bath,
     title: "Bathrooms",
     description: "Spa-like bathrooms that combine luxury and functionality",
     image: "/pic5.jpeg",
-    color: "from-green-400 to-blue-500"
+   color: "from-red-400 to-red-600 border-2 border-blue-500"
+ 
   },
   {
     icon: Building,
     title: "Commercial Spaces",
     description: "Professional environments that enhance productivity",
     image: "/pic6.jpeg",
-    color: "from-green-400 to-blue-500"
+    color: "from-red-400 to-red-600 border-2 border-blue-500"
+
   }
 ]
 
@@ -242,7 +248,7 @@ export default function Home() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5 }}
-                  className="text-6xl md:text-7xl font-bold text-blue-600 mt-4 mb-6 leading-tight"
+                  className="text-4xl md:text-6xl font-bold text-blue-600 mt-4 mb-6 leading-tight"
                 >
                   Nidhi Mittal
                 </motion.h2>
@@ -389,7 +395,7 @@ export default function Home() {
           >
             <span className="text-red-400 font-semibold text-lg">Client Stories</span>
             <h2 className="text-5xl font-bold text-white mt-4 mb-6">What Our Clients Say</h2>
-            <p className="text-xl text-red-100 max-w-3xl mx-auto">
+            <p className="text-xl text-blue-400 max-w-3xl mx-auto">
               Don&apos;t just take our word for it - hear from satisfied homeowners and businesses who trusted us with their dreams
             </p>
           </motion.div>
@@ -403,7 +409,7 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: index * 0.2 }}
                 viewport={{ once: true }}
                 whileHover={{ y: -5 }}
-                className="bg-white/10 backdrop-blur-md rounded-3xl p-8 relative border border-red-300/30 hover:bg-white/20 transition-all duration-300"
+                className="bg-white/10 backdrop-blur-md rounded-3xl p-8 relative border border-blue-300/30 hover:bg-white/20 transition-all duration-300"
               >
                 <Quote className="w-12 h-12 text-red-400 mb-6 opacity-70" />
                 <p className="text-white mb-8 italic text-lg leading-relaxed">&quot;{testimonial.content}&quot;</p>
@@ -416,7 +422,7 @@ export default function Home() {
                       whileInView={{ scale: 1 }}
                       transition={{ delay: index * 0.2 + i * 0.1 }}
                     >
-                      <Star className="w-5 h-5 text-red-400 fill-current" />
+                      <Star className="w-5 h-5 text-blue-400 fill-current" />
                     </motion.div>
                   ))}
                 </div>
@@ -430,7 +436,6 @@ export default function Home() {
                       width={64}
                       height={64}
                     />
-                    <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-red-500 rounded-full border-2 border-white"></div>
                   </div>
                   <div>
                     <h4 className="font-bold text-white text-lg">{testimonial.name}</h4>

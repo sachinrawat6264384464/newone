@@ -22,7 +22,7 @@ const slides: Slide[] = [
     description: "Create beautiful, functional spaces that reflect your style and enhance your lifestyle with our award-winning team.",
     image: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1920&h=1080&fit=crop",
     cta: "Start Your Project",
-    accent: "from-green-500 to-teal-500"
+    accent: "from-red-500 to-orange-500"
   },
   {
     id: 2,
@@ -31,7 +31,7 @@ const slides: Slide[] = [
     description: "Design the heart of your home with our expert kitchen renovation services that blend functionality with stunning aesthetics.",
     image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1920&h=1080&fit=crop",
     cta: "Explore Kitchens",
-    accent: "from-green-500 to-teal-500"
+    accent: "from-red-500 to-orange-500"
   },
   {
     id: 3,
@@ -40,7 +40,7 @@ const slides: Slide[] = [
     description: "Transform your business environment with our commercial design expertise that enhances productivity and impresses clients.",
     image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&h=1080&fit=crop",
     cta: "View Commercial",
-    accent: "from-green-500 to-teal-500"
+    accent: "from-red-500 to-orange-500"
   }
 ]
 

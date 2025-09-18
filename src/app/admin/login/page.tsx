@@ -26,11 +26,21 @@ export default function AdminLogin() {
 
   const onSubmit: SubmitHandler<LoginFormData> = async (data) => {
     setIsLoading(true)
+    
     try {
+      console.log('Attempting login with:', data.email)
       await login(data.email, data.password)
+      
       toast.success('Welcome back to Home Storey Admin!')
-      router.push('/admin/dashboard')
-    } catch {
+      console.log('Login successful, redirecting to dashboard...')
+      
+      // Small delay to show the success message, then redirect
+      setTimeout(() => {
+        router.push('/admin/dashboard')
+      }, 1000)
+      
+    } catch (error) {
+      console.error('Login error:', error)
       toast.error('Invalid credentials. Please try again.')
     } finally {
       setIsLoading(false)
@@ -38,18 +48,18 @@ export default function AdminLogin() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-50 via-white to-brick-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-red-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-brick-pattern opacity-5"></div>
       <motion.div
         animate={{ rotate: 360, scale: [1, 1.1, 1] }}
         transition={{ duration: 20, repeat: Infinity }}
-        className="absolute top-20 right-20 w-32 h-32 bg-gradient-to-br from-primary-200 to-brick-200 rounded-full opacity-20"
+        className="absolute top-20 right-20 w-32 h-32 bg-gradient-to-br from-blue-200 to-red-200 rounded-full opacity-20"
       />
       <motion.div
         animate={{ rotate: -360, y: [0, -20, 0] }}
         transition={{ duration: 15, repeat: Infinity }}
-        className="absolute bottom-20 left-20 w-24 h-24 bg-gradient-to-br from-brick-200 to-primary-200 rounded-full opacity-20"
+        className="absolute bottom-20 left-20 w-24 h-24 bg-gradient-to-br from-red-200 to-blue-200 rounded-full opacity-20"
       />
       
       <motion.div
@@ -66,7 +76,7 @@ export default function AdminLogin() {
             className="flex justify-center mb-6"
           >
             <div className="relative">
-              <div className="w-20 h-20 bg-gradient-to-br from-primary-600 to-brick-600 rounded-2xl flex items-center justify-center shadow-2xl">
+              <div className="w-20 h-20 bg-gradient-to-br from-blue-600 to-red-600 rounded-2xl flex items-center justify-center shadow-2xl">
                 <Shield className="w-10 h-10 text-white" />
               </div>
               <div className="absolute -top-2 -right-2 w-6 h-6 bg-green-500 rounded-full border-2 border-white animate-pulse"></div>
@@ -76,7 +86,7 @@ export default function AdminLogin() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
-            className="text-4xl font-bold bg-gradient-to-r from-primary-600 to-brick-600 bg-clip-text text-transparent"
+            className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-red-600 bg-clip-text text-transparent"
           >
             Admin Portal
           </motion.h2>
@@ -111,10 +121,10 @@ export default function AdminLogin() {
                       message: 'Invalid email address'
                     }
                   })}
-                  className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all duration-300 bg-white/70 backdrop-blur-sm"
+                  className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 bg-white/70 backdrop-blur-sm"
                   placeholder="admin@gmail.com"
                 />
-                <Mail className="w-5 h-5 text-primary-500 absolute left-4 top-1/2 transform -translate-y-1/2" />
+                <Mail className="w-5 h-5 text-blue-500 absolute left-4 top-1/2 transform -translate-y-1/2" />
               </div>
               {errors.email && (
                 <motion.p
@@ -135,10 +145,10 @@ export default function AdminLogin() {
                 <input
                   type="password"
                   {...register('password', { required: 'Password is required' })}
-                  className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all duration-300 bg-white/70 backdrop-blur-sm"
+                  className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 bg-white/70 backdrop-blur-sm"
                   placeholder="admin@123"
                 />
-                <Lock className="w-5 h-5 text-primary-500 absolute left-4 top-1/2 transform -translate-y-1/2" />
+                <Lock className="w-5 h-5 text-blue-500 absolute left-4 top-1/2 transform -translate-y-1/2" />
               </div>
               {errors.password && (
                 <motion.p
@@ -156,7 +166,7 @@ export default function AdminLogin() {
               disabled={isLoading}
               whileHover={{ scale: 1.02, boxShadow: "0 10px 30px rgba(0,0,0,0.2)" }}
               whileTap={{ scale: 0.98 }}
-              className="w-full bg-gradient-to-r from-primary-600 to-brick-600 hover:from-primary-700 hover:to-brick-700 text-white py-4 px-6 rounded-xl font-bold text-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-3 shadow-lg"
+              className="w-full bg-gradient-to-r from-blue-600 to-red-600 hover:from-blue-700 hover:to-red-700 text-white py-4 px-6 rounded-xl font-bold text-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-3 shadow-lg"
             >
               {isLoading ? (
                 <>
@@ -176,10 +186,10 @@ export default function AdminLogin() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.2 }}
-            className="mt-6 p-4 bg-gradient-to-r from-blue-50 to-orange-50 rounded-xl border border-blue-200"
+            className="mt-6 p-4 bg-gradient-to-r from-blue-50 to-red-50 rounded-xl border border-blue-200"
           >
             <p className="text-sm text-gray-600 text-center">
-              <span className="font-semibold text-primary-600">Demo Credentials:</span><br />
+              <span className="font-semibold text-blue-600">Demo Credentials:</span><br />
               Email: admin@gmail.com<br />
               Password: admin@123
             </p>

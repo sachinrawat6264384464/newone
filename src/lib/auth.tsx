@@ -4,9 +4,24 @@ import { createContext, useContext, useEffect, useState, ReactNode } from 'react
 import { onAuthStateChanged, signInWithEmailAndPassword, signOut, User, UserCredential } from 'firebase/auth'
 import { auth } from './firebase'
 
+// Define a type for the mock user
+interface MockUser {
+  uid: string
+  email: string
+  displayName: string
+  emailVerified: boolean
+}
+
+// Define a type for the mock credential
+interface MockCredential {
+  user: MockUser
+  operationType: string
+  providerId: string
+}
+
 interface AuthContextType {
   user: User | null
-  login: (email: string, password: string) => Promise<UserCredential | { user: any }>
+  login: (email: string, password: string) => Promise<UserCredential | MockCredential>
   logout: () => Promise<void>
   loading: boolean
 }
@@ -32,7 +47,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     return () => unsubscribe()
   }, [])
 
-  const login = async (email: string, password: string): Promise<UserCredential | { user: any }> => {
+  const login = async (email: string, password: string): Promise<UserCredential | MockCredential> => {
     // Demo credentials
     const adminEmail = process.env.NEXT_PUBLIC_ADMIN_USERNAME || 'admin@gmail.com'
     const adminPassword = process.env.NEXT_PUBLIC_ADMIN_PASSWORD || 'admin@123'
@@ -41,7 +56,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       console.log('Demo credentials detected, bypassing Firebase auth')
       
       // Create a mock user object for demo purposes
-      const mockUser = {
+      const mockUser: MockUser = {
         uid: 'demo-admin-uid',
         email: adminEmail,
         displayName: 'Demo Admin',
@@ -56,7 +71,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         user: mockUser,
         operationType: 'signIn',
         providerId: 'password'
-      } as any)
+      } as MockCredential)
     } 
     
     // For non-demo credentials, try Firebase authentication
@@ -70,7 +85,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const logout = async (): Promise<void> => {
     // Handle demo user logout
-    if (user && (user as any).uid === 'demo-admin-uid') {
+    if (user && (user as MockUser).uid === 'demo-admin-uid') {
       setUser(null)
       return Promise.resolve()
     }

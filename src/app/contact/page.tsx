@@ -315,7 +315,7 @@ export default function Contact() {
                     </div>
                     <div>
                       <h3 className="font-bold text-gray-800 mb-1 text-lg">Phone</h3>
-                      <p className="text-gray-700 font-semibold">+91 96438 24303</p>
+                      <p className="text-gray-700 font-semibold">+91 9319866287</p>
                       <p className="text-sm text-gray-500">Mon-Sat 9AM-7PM</p>
                     </div>
                   </motion.div>
@@ -329,7 +329,7 @@ export default function Contact() {
                     </div>
                     <div>
                       <h3 className="font-bold text-gray-800 mb-1 text-lg">Email</h3>
-                      <p className="text-gray-700 font-semibold">info@homestorey.com</p>
+                      <p className="text-gray-700 font-semibold">homestorey@thenidhimittal.com</p>
                       <p className="text-sm text-gray-500">Response within 24 hours</p>
                     </div>
                   </motion.div>

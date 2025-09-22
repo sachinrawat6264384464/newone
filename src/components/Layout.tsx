@@ -45,15 +45,15 @@ const Layout = ({ children }: LayoutProps) => {
     ];
 
     return (
-      <footer className="relative bg-gradient-to-br from-gray-500 via-gray-600 to-black text-white overflow-hidden">
+      <footer className="relative bg-gradient-to-br from-gray-50 via-white to-red-50 text-black overflow-hidden border-t border-gray-200">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent"></div>
+          <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-gray-200/20 via-transparent to-transparent"></div>
         </div>
         
         {/* Floating Decorative Elements */}
-        <div className="absolute top-20 left-10 w-32 h-32 bg-red-500/10 rounded-full blur-2xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-40 h-40 bg-blue-500/10 rounded-full blur-2xl animate-pulse delay-1000"></div>
+        <div className="absolute top-20 left-10 w-32 h-32 bg-red-500/5 rounded-full blur-2xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-10 w-40 h-40 bg-blue-500/5 rounded-full blur-2xl animate-pulse delay-1000"></div>
         
         <div className="container mx-auto px-4 py-16 relative z-10">
           {/* Main Footer Content */}
@@ -78,11 +78,11 @@ const Layout = ({ children }: LayoutProps) => {
                   alt="Home Storey Logo"
                   width={80}
                   height={80}
-                  className="h-30 w-auto object-contain filter drop-shadow-lg"
+                  className="h-20 w-auto object-contain filter drop-shadow-lg"
                 />
               </motion.div>
               
-              <p className="text-gray-300 leading-relaxed mb-6 text-lg">
+              <p className="text-gray-700 leading-relaxed mb-6 text-lg">
                 Transforming spaces into beautiful homes with expert design and
                 construction services that bring your vision to life.
               </p>
@@ -114,7 +114,7 @@ const Layout = ({ children }: LayoutProps) => {
                     <Star className="w-5 h-5 text-yellow-400 fill-current" />
                   </motion.div>
                 ))}
-                <span className="text-gray-300 ml-2 text-sm">5.0 (250+ reviews)</span>
+                <span className="text-gray-600 ml-2 text-sm">5.0 (250+ reviews)</span>
               </div>
             </motion.div>
 
@@ -125,7 +125,7 @@ const Layout = ({ children }: LayoutProps) => {
               transition={{ duration: 0.6, delay: 0.1 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-2xl font-bold mb-6 text-white relative">
+              <h3 className="text-2xl font-bold mb-6 text-black relative">
                 Our Services
                 <div className="absolute bottom-0 left-0 w-12 h-1 bg-gradient-to-r from-red-500 to-red-600 rounded-full"></div>
               </h3>
@@ -137,7 +137,7 @@ const Layout = ({ children }: LayoutProps) => {
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1, duration: 0.4 }}
-                    className="text-gray-300 hover:text-white transition-colors duration-300 cursor-pointer group flex items-center"
+                    className="text-gray-600 hover:text-black transition-colors duration-300 cursor-pointer group flex items-center"
                   >
                     <ArrowRight className="w-3 h-3 mr-2 text-red-500 group-hover:translate-x-1 transition-transform duration-200" />
                     <span className="group-hover:translate-x-1 transition-transform duration-200">
@@ -155,7 +155,7 @@ const Layout = ({ children }: LayoutProps) => {
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-2xl font-bold mb-6 text-white relative">
+              <h3 className="text-2xl font-bold mb-6 text-black relative">
                 Quick Links
                 <div className="absolute bottom-0 left-0 w-12 h-1 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full"></div>
               </h3>
@@ -177,7 +177,7 @@ const Layout = ({ children }: LayoutProps) => {
                   >
                     <Link 
                       href={link.href}
-                      className="text-gray-300 hover:text-white transition-all duration-300 group flex items-center"
+                      className="text-gray-600 hover:text-black transition-all duration-300 group flex items-center"
                     >
                       <ArrowRight className="w-3 h-3 mr-2 text-blue-500 group-hover:translate-x-1 transition-transform duration-200" />
                       <span className="group-hover:translate-x-1 transition-transform duration-200">
@@ -196,7 +196,7 @@ const Layout = ({ children }: LayoutProps) => {
               transition={{ duration: 0.6, delay: 0.3 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-2xl font-bold mb-6 text-white relative">
+              <h3 className="text-2xl font-bold mb-6 text-black relative">
                 Get In Touch
                 <div className="absolute bottom-0 left-0 w-12 h-1 bg-gradient-to-r from-red-500 to-blue-500 rounded-full"></div>
               </h3>
@@ -207,23 +207,33 @@ const Layout = ({ children }: LayoutProps) => {
                   whileHover={{ x: 5 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <div className="bg-red-600/20 p-2 rounded-lg group-hover:bg-red-600/30 transition-colors duration-300">
-                    <Mail className="w-5 h-5 text-red-400" />
+                  <div className="bg-red-100 p-2 rounded-lg group-hover:bg-red-200 transition-colors duration-300">
+                    <Mail className="w-5 h-5 text-red-600" />
                   </div>
                   <div>
-                    <p className="text-white font-semibold mb-1">Email Us</p>
-                    <p className="text-gray-300 text-sm">homestorey@thenidhimittal.com</p>
+                    <p className="text-black font-semibold mb-1">Email Us</p>
+                    <p className="text-gray-600 text-sm">homestorey@thenidhimittal.com</p>
                   </div>
                 </motion.div>
 
-
-
-        
+                <motion.div 
+                  className="flex items-start space-x-3 group cursor-pointer"
+                  whileHover={{ x: 5 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <div className="bg-green-100 p-2 rounded-lg group-hover:bg-green-200 transition-colors duration-300">
+                    <MapPin className="w-5 h-5 text-green-600" />
+                  </div>
+                  <div>
+                    <p className="text-black font-semibold mb-1">Visit Us</p>
+                    <p className="text-gray-600 text-sm">Indore, Madhya Pradesh</p>
+                  </div>
+                </motion.div>
               </div>
 
               {/* Social Links */}
               <div className="mt-8">
-                <h4 className="text-white font-semibold mb-4">Follow Us</h4>
+                <h4 className="text-black font-semibold mb-4">Follow Us</h4>
                 <div className="flex space-x-4">
                   {socialLinks.map((social, index) => {
                     const IconComponent = social.icon;
@@ -237,10 +247,10 @@ const Layout = ({ children }: LayoutProps) => {
                         whileHover={{ 
                           scale: 1.2, 
                           y: -2,
-                          boxShadow: "0 8px 25px rgba(255, 255, 255, 0.1)"
+                          boxShadow: "0 8px 25px rgba(0, 0, 0, 0.1)"
                         }}
                         whileTap={{ scale: 0.9 }}
-                        className={`bg-gray-700/50 p-3 rounded-full text-gray-400 ${social.color} transition-all duration-300 border border-gray-600/50 hover:border-gray-500/50 backdrop-blur-sm`}
+                        className={`bg-gray-100 hover:bg-gray-200 p-3 rounded-full text-gray-600 ${social.color} transition-all duration-300 border border-gray-200 hover:border-gray-300`}
                         aria-label={social.label}
                       >
                         <IconComponent className="w-5 h-5" />
@@ -252,22 +262,20 @@ const Layout = ({ children }: LayoutProps) => {
             </motion.div>
           </div>
 
-          {/* Newsletter Section Removed */}
-
           {/* Bottom Section */}
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.5 }}
             viewport={{ once: true }}
-            className="border-t border-gray-700/50 mt-16 pt-8"
+            className="border-t border-gray-200 mt-16 pt-8"
           >
             <div className="text-center space-y-4">
-              <p className="text-gray-300">
+              <p className="text-gray-600">
                 &copy; 2025 Home Storey. All rights reserved.
               </p>
               
-              <div className="flex justify-center items-center space-x-2 text-gray-300">
+              <div className="flex justify-center items-center space-x-2 text-gray-600">
                 <span>Made with</span>
                 <motion.div
                   animate={{ 
@@ -285,7 +293,7 @@ const Layout = ({ children }: LayoutProps) => {
                 <span>by</span>
                 <Link 
                   href="#"
-                  className="text-white font-semibold hover:text-red-400 transition-colors duration-300"
+                  className="text-black font-semibold hover:text-red-500 transition-colors duration-300"
                 >
                   Botmartz IT Solutions
                 </Link>
@@ -310,7 +318,7 @@ const Layout = ({ children }: LayoutProps) => {
                 alt="Home Storey Logo"
                 width={54}
                 height={54}
-                className="h-12 w-auto object-contain"
+                className="h-18 w-auto object-contain"
                 priority
               />
             </Link>

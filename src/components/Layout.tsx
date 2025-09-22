@@ -5,6 +5,18 @@ import Link from "next/link";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { 
+  Phone, 
+  Mail, 
+  MapPin, 
+  Facebook, 
+  Twitter, 
+  Instagram, 
+  Linkedin,
+  ArrowRight,
+  Star,
+  Heart
+} from 'lucide-react';
 
 interface LayoutProps {
   children: ReactNode;
@@ -12,6 +24,278 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Footer Component
+  const Footer = () => {
+    const services = [
+      "Exterior & First Impressions",
+      "Living & Gathering Spaces", 
+      "Functional Spaces",
+      "Lifestyle & Wellness",
+      "Smart & Space-Saving Solutions",
+      "Execution & Services",
+      "Finishes & Detailing"
+    ];
+
+    const socialLinks = [
+      { icon: Facebook, href: "#", label: "Facebook", color: "hover:text-blue-500" },
+      { icon: Instagram, href: "#", label: "Instagram", color: "hover:text-pink-500" },
+      { icon: Twitter, href: "#", label: "Twitter", color: "hover:text-blue-400" }
+     
+    ];
+
+    return (
+      <footer className="relative bg-gradient-to-br from-gray-500 via-gray-600 to-black text-white overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent"></div>
+        </div>
+        
+        {/* Floating Decorative Elements */}
+        <div className="absolute top-20 left-10 w-32 h-32 bg-red-500/10 rounded-full blur-2xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-10 w-40 h-40 bg-blue-500/10 rounded-full blur-2xl animate-pulse delay-1000"></div>
+        
+        <div className="container mx-auto px-4 py-16 relative z-10">
+          {/* Main Footer Content */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+            
+            {/* Company Info */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="lg:col-span-1"
+            >
+              {/* Logo */}
+              <motion.div 
+                className="mb-6"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.3 }}
+              >
+                <Image
+                  src="/logo1img.png"
+                  alt="Home Storey Logo"
+                  width={80}
+                  height={80}
+                  className="h-30 w-auto object-contain filter drop-shadow-lg"
+                />
+              </motion.div>
+              
+              <p className="text-gray-300 leading-relaxed mb-6 text-lg">
+                Transforming spaces into beautiful homes with expert design and
+                construction services that bring your vision to life.
+              </p>
+              
+              {/* Book Consultation Button */}
+              <Link href="/contact">
+                <motion.button
+                  whileHover={{ 
+                    scale: 1.05,
+                    boxShadow: "0 10px 30px rgba(59, 130, 246, 0.4)"
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  className="group bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold py-3 px-6 rounded-full transition-all duration-300 shadow-lg inline-flex items-center space-x-2"
+                >
+                  <span>Book a Consultation</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
+                </motion.button>
+              </Link>
+
+              {/* Rating Stars */}
+              <div className="flex items-center space-x-1 mt-4">
+                {[...Array(5)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    transition={{ delay: i * 0.1, duration: 0.3 }}
+                  >
+                    <Star className="w-5 h-5 text-yellow-400 fill-current" />
+                  </motion.div>
+                ))}
+                <span className="text-gray-300 ml-2 text-sm">5.0 (250+ reviews)</span>
+              </div>
+            </motion.div>
+
+            {/* Services */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: true }}
+            >
+              <h3 className="text-2xl font-bold mb-6 text-white relative">
+                Our Services
+                <div className="absolute bottom-0 left-0 w-12 h-1 bg-gradient-to-r from-red-500 to-red-600 rounded-full"></div>
+              </h3>
+              
+              <ul className="space-y-3">
+                {services.map((service, index) => (
+                  <motion.li
+                    key={index}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.1, duration: 0.4 }}
+                    className="text-gray-300 hover:text-white transition-colors duration-300 cursor-pointer group flex items-center"
+                  >
+                    <ArrowRight className="w-3 h-3 mr-2 text-red-500 group-hover:translate-x-1 transition-transform duration-200" />
+                    <span className="group-hover:translate-x-1 transition-transform duration-200">
+                      {service}
+                    </span>
+                  </motion.li>
+                ))}
+              </ul>
+            </motion.div>
+
+            {/* Quick Links */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              <h3 className="text-2xl font-bold mb-6 text-white relative">
+                Quick Links
+                <div className="absolute bottom-0 left-0 w-12 h-1 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full"></div>
+              </h3>
+              
+              <ul className="space-y-3">
+                {[
+                  { name: "About Us", href: "/about" },
+                  { name: "Our Work", href: "/gallery" },
+                  { name: "Services", href: "/services" },
+                  { name: "Contact", href: "/contact" },
+                  { name: "Blog", href: "/blog" },
+                  { name: "Testimonials", href: "/testimonials" }
+                ].map((link, index) => (
+                  <motion.li
+                    key={index}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.1, duration: 0.4 }}
+                  >
+                    <Link 
+                      href={link.href}
+                      className="text-gray-300 hover:text-white transition-all duration-300 group flex items-center"
+                    >
+                      <ArrowRight className="w-3 h-3 mr-2 text-blue-500 group-hover:translate-x-1 transition-transform duration-200" />
+                      <span className="group-hover:translate-x-1 transition-transform duration-200">
+                        {link.name}
+                      </span>
+                    </Link>
+                  </motion.li>
+                ))}
+              </ul>
+            </motion.div>
+
+            {/* Contact Info */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              viewport={{ once: true }}
+            >
+              <h3 className="text-2xl font-bold mb-6 text-white relative">
+                Get In Touch
+                <div className="absolute bottom-0 left-0 w-12 h-1 bg-gradient-to-r from-red-500 to-blue-500 rounded-full"></div>
+              </h3>
+              
+              <div className="space-y-4">
+                <motion.div 
+                  className="flex items-start space-x-3 group cursor-pointer"
+                  whileHover={{ x: 5 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <div className="bg-red-600/20 p-2 rounded-lg group-hover:bg-red-600/30 transition-colors duration-300">
+                    <Mail className="w-5 h-5 text-red-400" />
+                  </div>
+                  <div>
+                    <p className="text-white font-semibold mb-1">Email Us</p>
+                    <p className="text-gray-300 text-sm">homestorey@thenidhimittal.com</p>
+                  </div>
+                </motion.div>
+
+
+
+        
+              </div>
+
+              {/* Social Links */}
+              <div className="mt-8">
+                <h4 className="text-white font-semibold mb-4">Follow Us</h4>
+                <div className="flex space-x-4">
+                  {socialLinks.map((social, index) => {
+                    const IconComponent = social.icon;
+                    return (
+                      <motion.a
+                        key={index}
+                        href={social.href}
+                        initial={{ scale: 0 }}
+                        whileInView={{ scale: 1 }}
+                        transition={{ delay: index * 0.1, duration: 0.3 }}
+                        whileHover={{ 
+                          scale: 1.2, 
+                          y: -2,
+                          boxShadow: "0 8px 25px rgba(255, 255, 255, 0.1)"
+                        }}
+                        whileTap={{ scale: 0.9 }}
+                        className={`bg-gray-700/50 p-3 rounded-full text-gray-400 ${social.color} transition-all duration-300 border border-gray-600/50 hover:border-gray-500/50 backdrop-blur-sm`}
+                        aria-label={social.label}
+                      >
+                        <IconComponent className="w-5 h-5" />
+                      </motion.a>
+                    );
+                  })}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Newsletter Section Removed */}
+
+          {/* Bottom Section */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            viewport={{ once: true }}
+            className="border-t border-gray-700/50 mt-16 pt-8"
+          >
+            <div className="text-center space-y-4">
+              <p className="text-gray-300">
+                &copy; 2025 Home Storey. All rights reserved.
+              </p>
+              
+              <div className="flex justify-center items-center space-x-2 text-gray-300">
+                <span>Made with</span>
+                <motion.div
+                  animate={{ 
+                    scale: [1, 1.2, 1],
+                    rotate: [0, 5, -5, 0]
+                  }}
+                  transition={{ 
+                    duration: 2,
+                    repeat: Infinity,
+                    repeatType: "reverse"
+                  }}
+                >
+                  <Heart className="w-4 h-4 text-red-500 fill-current" />
+                </motion.div>
+                <span>by</span>
+                <Link 
+                  href="#"
+                  className="text-white font-semibold hover:text-red-400 transition-colors duration-300"
+                >
+                  Botmartz IT Solutions
+                </Link>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </footer>
+    );
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -24,9 +308,9 @@ const Layout = ({ children }: LayoutProps) => {
               <Image
                 src="/logo1img.png"
                 alt="Home Storey Logo"
-                width={64}
-                height={64}
-                className="h-16 w-auto object-contain"
+                width={54}
+                height={54}
+                className="h-12 w-auto object-contain"
                 priority
               />
             </Link>
@@ -40,6 +324,12 @@ const Layout = ({ children }: LayoutProps) => {
                 Home
               </Link>
               <Link
+                href="/gallery"
+                className="text-gray-700 hover:text-primary-600 transition-colors"
+              >
+                Gallery
+              </Link>
+              <Link
                 href="/contact"
                 className="text-gray-700 hover:text-primary-600 transition-colors"
               >
@@ -47,9 +337,9 @@ const Layout = ({ children }: LayoutProps) => {
               </Link>
               <Link
                 href="/contact"
-                className="bg-primary-600 text-white px-6 py-2 rounded-lg hover:bg-primary-700 transition-colors"
+                className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition-colors"
               >
-                Free Consultation
+                Get Free Consultation
               </Link>
             </div>
 
@@ -83,6 +373,12 @@ const Layout = ({ children }: LayoutProps) => {
                     Home
                   </Link>
                   <Link
+                    href="/gallery"
+                    className="text-gray-700 hover:text-primary-600 transition-colors"
+                  >
+                    Gallery
+                  </Link>
+                  <Link
                     href="/contact"
                     className="text-gray-700 hover:text-primary-600 transition-colors"
                   >
@@ -90,9 +386,9 @@ const Layout = ({ children }: LayoutProps) => {
                   </Link>
                   <Link
                     href="/contact"
-                    className="bg-primary-600 text-white px-6 py-2 rounded-lg hover:bg-primary-700 transition-colors text-center"
+                    className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition-colors text-center"
                   >
-                    Free Consultation
+                    Get Free Consultation
                   </Link>
                 </div>
               </motion.div>
@@ -104,60 +400,8 @@ const Layout = ({ children }: LayoutProps) => {
       {/* Main Content */}
       <main>{children}</main>
 
-      {/* Footer */}
-      <footer className="bg-gray-400 text-white py-12">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div>
-              <div className="mb-4">
-                <Image
-                  src="/logo1img.png"
-                  alt="Home Storey Logo"
-                  width={68}
-                  height={68}
-                  className="h-26 w-auto object-contain"
-                />
-              </div>
-              <p className="text-gray-100">
-                Transforming spaces into beautiful homes with expert design and
-                construction services.
-              </p>
-              {/* Book Consultation Button */}
-              <div className="mt-6">
-                <Link
-                  href="/contact"
-                  className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg transition-colors duration-300"
-                >
-                  Book a Consultation
-                </Link>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="font-semibold mb-4">Services</h3>
-              <ul className="space-y-2 text-gray-100">
-                <li>Kitchen Design</li>
-                <li>Living Areas</li>
-                <li>Bedrooms</li>
-                <li>Commercial Spaces</li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="font-semibold mb-4">Contact Info</h3>
-              <div className="space-y-2 text-gray-100">
-                <p>📧 https://www.thenidhimittal.com/</p>
-                <p>📞 +91 9319866287</p>
-                <p>📍 123 Design Street, City</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="border-t border-gray-300 mt-8 pt-8 text-center text-gray-100">
-            <p>&copy; 2025 Home Storey. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+      {/* Enhanced Footer */}
+      <Footer />
     </div>
   );
 };

@@ -306,20 +306,7 @@ export default function Contact() {
                 </div>
 
                 <div className="space-y-4">
-                  <motion.div
-                    whileHover={{ scale: 1.02, x: 10 }}
-                    className="flex items-start space-x-4 bg-white p-6 rounded-xl shadow-lg border border-gray-200"
-                  >
-                    <div className="bg-red-600 p-3 rounded-xl shadow-lg">
-                      <Phone className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-gray-800 mb-1 text-lg">Phone</h3>
-                      <p className="text-gray-700 font-semibold">+91 9319866287</p>
-                      <p className="text-sm text-gray-500">Mon-Sat 9AM-7PM</p>
-                    </div>
-                  </motion.div>
-
+        
                   <motion.div
                     whileHover={{ scale: 1.02, x: 10 }}
                     className="flex items-start space-x-4 bg-white p-6 rounded-xl shadow-lg border border-gray-200"
@@ -333,21 +320,6 @@ export default function Contact() {
                       <p className="text-sm text-gray-500">Response within 24 hours</p>
                     </div>
                   </motion.div>
-
-                  <motion.div
-                    whileHover={{ scale: 1.02, x: 10 }}
-                    className="flex items-start space-x-4 bg-white p-6 rounded-xl shadow-lg border border-gray-200"
-                  >
-                    <div className="bg-green-600 p-3 rounded-xl shadow-lg">
-                      <MapPin className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-gray-800 mb-1 text-lg">Location</h3>
-                      <p className="text-gray-700 font-semibold">Indore, Madhya Pradesh</p>
-                      <p className="text-sm text-gray-500">Serving Northern India</p>
-                    </div>
-                  </motion.div>
-
                   <motion.div
                     whileHover={{ scale: 1.02, x: 10 }}
                     className="flex items-start space-x-4 bg-white p-6 rounded-xl shadow-lg border border-gray-200"

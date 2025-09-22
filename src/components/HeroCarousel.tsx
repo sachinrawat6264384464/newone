@@ -94,12 +94,12 @@ const HeroCarousel = () => {
             className="absolute bottom-32 right-32 w-16 h-16 bg-gradient-to-br from-primary-400/30 to-brick-400/30 rounded-lg backdrop-blur-sm"
           />
 
-          <div className="container mx-auto px-4 h-full flex items-center relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
-              {/* Content Side */}
+          <div className="container mx-auto px-4 h-full flex items-center justify-center relative z-10">
+            <div className="max-w-4xl mx-auto text-center">
+              {/* Content */}
               <motion.div
-                initial={{ x: -100, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
+                initial={{ y: 50, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.3, duration: 0.8 }}
                 className="text-white space-y-6"
               >
@@ -119,7 +119,7 @@ const HeroCarousel = () => {
                   initial={{ y: 50, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.6, duration: 0.8 }}
-                  className="text-5xl md:text-7xl font-bold leading-tight"
+                  className="text-5xl md:text-7xl lg:text-8xl font-bold leading-tight"
                 >
                   {slides[currentSlide].title.split(' ').map((word, index) => (
                     <motion.span
@@ -139,7 +139,7 @@ const HeroCarousel = () => {
                   initial={{ y: 30, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.9, duration: 0.8 }}
-                  className="text-xl text-gray-200 leading-relaxed max-w-lg"
+                  className="text-xl md:text-2xl text-gray-200 leading-relaxed max-w-3xl mx-auto"
                 >
                   {slides[currentSlide].description}
                 </motion.p>
@@ -149,12 +149,12 @@ const HeroCarousel = () => {
                   initial={{ y: 30, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 1.1, duration: 0.8 }}
-                  className="flex flex-col sm:flex-row gap-4 pt-4"
+                  className="flex flex-col sm:flex-row gap-4 pt-6 justify-center"
                 >
                   <motion.button
                     whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(0,0,0,0.3)" }}
                     whileTap={{ scale: 0.95 }}
-                    className={`bg-gradient-to-r ${slides[currentSlide].accent} text-white px-8 py-4 rounded-xl text-lg font-bold transition-all duration-300 shadow-2xl inline-flex items-center space-x-2`}
+                    className={`bg-gradient-to-r ${slides[currentSlide].accent} text-white px-8 py-4 rounded-xl text-lg font-bold transition-all duration-300 shadow-2xl inline-flex items-center space-x-2 justify-center`}
                   >
                     <span>{slides[currentSlide].cta}</span>
                     <ChevronRight className="w-5 h-5" />
@@ -163,7 +163,7 @@ const HeroCarousel = () => {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="border-2 border-white text-white px-8 py-4 rounded-xl text-lg font-bold hover:bg-white hover:text-gray-900 transition-all duration-300 inline-flex items-center space-x-2"
+                    className="border-2 border-white text-white px-8 py-4 rounded-xl text-lg font-bold hover:bg-white hover:text-gray-900 transition-all duration-300 inline-flex items-center space-x-2 justify-center"
                   >
                     <Play className="w-5 h-5" />
                     <span>Watch Portfolio</span>
@@ -175,65 +175,17 @@ const HeroCarousel = () => {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 1.3 }}
-                  className="flex items-center space-x-6 pt-6"
+                  className="flex items-center justify-center space-x-6 pt-8 flex-wrap gap-4"
                 >
                   <div className="flex items-center space-x-2">
                     <Star className="w-5 h-5 text-yellow-400 fill-current" />
                     <span className="text-white font-semibold">4.9/5 Rating</span>
                   </div>
-                  <div className="w-px h-6 bg-white/30"></div>
+                  <div className="w-px h-6 bg-white/30 hidden sm:block"></div>
                   <div className="text-white font-semibold">300+ Projects</div>
-                  <div className="w-px h-6 bg-white/30"></div>
+                  <div className="w-px h-6 bg-white/30 hidden sm:block"></div>
                   <div className="text-white font-semibold">10+ Years</div>
                 </motion.div>
-              </motion.div>
-
-              {/* Visual Side */}
-              <motion.div
-                initial={{ x: 100, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ delay: 0.4, duration: 0.8 }}
-                className="hidden lg:block relative"
-              >
-                <div className="relative">
-                  {/* Decorative Elements */}
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                    className="absolute -top-10 -right-10 w-20 h-20 border-2 border-white/30 rounded-full"
-                  />
-                  <motion.div
-                    animate={{ rotate: -360 }}
-                    transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                    className="absolute -bottom-10 -left-10 w-16 h-16 bg-gradient-to-br from-primary-400/30 to-brick-400/30 rounded-lg backdrop-blur-sm"
-                  />
-                  
-                  {/* Main Visual Container */}
-                  <div className="bg-white/10 backdrop-blur-md rounded-3xl p-8 border border-white/20 shadow-2xl">
-                    <div className="space-y-4">
-                      <div className="flex items-center justify-between">
-                        <h3 className="text-white font-bold text-xl">Project Preview</h3>
-                        <div className="flex space-x-1">
-                          <div className="w-3 h-3 bg-red-400 rounded-full"></div>
-                          <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
-                          <div className="w-3 h-3 bg-green-400 rounded-full"></div>
-                        </div>
-                      </div>
-                      <div className="h-48 bg-gradient-to-br from-white/20 to-white/5 rounded-xl flex items-center justify-center">
-                        <motion.div
-                          animate={{ scale: [1, 1.1, 1] }}
-                          transition={{ duration: 3, repeat: Infinity }}
-                          className="text-white/70 text-center"
-                        >
-                          <div className="w-16 h-16 bg-white/20 rounded-full mx-auto mb-3 flex items-center justify-center">
-                            <Play className="w-8 h-8" />
-                          </div>
-                          <p className="font-semibold">Interactive Preview</p>
-                        </motion.div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </motion.div>
             </div>
           </div>

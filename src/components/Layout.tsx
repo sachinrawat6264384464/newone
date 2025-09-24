@@ -315,7 +315,7 @@ const Layout = ({ children }: LayoutProps) => {
                 alt="Home Storey Logo"
                 width={54}
                 height={54}
-                className="h-18 w-auto object-contain"
+                className="h-16 w-auto object-contain"
                 priority
               />
             </Link>

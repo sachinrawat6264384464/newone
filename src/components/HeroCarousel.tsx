@@ -160,14 +160,6 @@ const HeroCarousel = () => {
                     <ChevronRight className="w-5 h-5" />
                   </motion.button>
                   
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="border-2 border-white text-white px-8 py-4 rounded-xl text-lg font-bold hover:bg-white hover:text-gray-900 transition-all duration-300 inline-flex items-center space-x-2 justify-center"
-                  >
-                    <Play className="w-5 h-5" />
-                    <span>Watch Portfolio</span>
-                  </motion.button>
                 </motion.div>
 
                 {/* Stats */}

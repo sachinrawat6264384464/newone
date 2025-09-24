@@ -1,4 +1,4 @@
-// app/contact/page.tsx
+// app/contact/page.tsx - Updated with email notification
 'use client'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
@@ -25,13 +25,38 @@ export default function Contact() {
 
   const onSubmit: SubmitHandler<ContactFormData> = async (data) => {
     setIsSubmitting(true)
+    
     try {
+      // Save to Firebase
       await addDoc(collection(db, 'contacts'), {
         ...data,
         timestamp: serverTimestamp(),
         status: 'new'
       })
-      toast.success('Thank you! We&apos;ll get back to you within 24 hours.')
+
+      // Send email notification
+      try {
+        const response = await fetch('/api/send-notification', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        })
+
+        if (!response.ok) {
+          const errorData = await response.json()
+          console.error('Email notification failed:', errorData)
+          // Don't fail the entire form submission if email fails
+        } else {
+          console.log('Email notification sent successfully')
+        }
+      } catch (emailError) {
+        console.error('Email notification error:', emailError)
+        // Continue with success message even if email fails
+      }
+
+      toast.success('Thank you! We\'ll get back to you within 24 hours.')
       reset()
     } catch (error) {
       console.error('Error submitting form:', error)
@@ -290,13 +315,14 @@ export default function Contact() {
                 </div>
               </motion.div>
 
-              {/* Contact Information */}
+              {/* Contact Information - Rest of your existing code */}
               <motion.div
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="space-y-8"
               >
+                {/* Your existing contact information section */}
                 <div>
                   <span className="text-red-600 font-semibold text-lg">Lets Connect</span>
                   <h2 className="text-3xl font-bold text-gray-800 mt-2 mb-4">Contact Information</h2>
@@ -306,7 +332,6 @@ export default function Contact() {
                 </div>
 
                 <div className="space-y-4">
-        
                   <motion.div
                     whileHover={{ scale: 1.02, x: 10 }}
                     className="flex items-start space-x-4 bg-white p-6 rounded-xl shadow-lg border border-gray-200"

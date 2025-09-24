@@ -1,4 +1,4 @@
-// app/contact/page.tsx - Updated with email notification
+// app/contact/page.tsx - Updated with email notification and fixed warnings
 'use client'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
@@ -315,14 +315,13 @@ export default function Contact() {
                 </div>
               </motion.div>
 
-              {/* Contact Information - Rest of your existing code */}
+              {/* Contact Information */}
               <motion.div
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="space-y-8"
               >
-                {/* Your existing contact information section */}
                 <div>
                   <span className="text-red-600 font-semibold text-lg">Lets Connect</span>
                   <h2 className="text-3xl font-bold text-gray-800 mt-2 mb-4">Contact Information</h2>
@@ -345,6 +344,35 @@ export default function Contact() {
                       <p className="text-sm text-gray-500">Response within 24 hours</p>
                     </div>
                   </motion.div>
+
+                  <motion.div
+                    whileHover={{ scale: 1.02, x: 10 }}
+                    className="flex items-start space-x-4 bg-white p-6 rounded-xl shadow-lg border border-gray-200"
+                  >
+                    <div className="bg-green-600 p-3 rounded-xl shadow-lg">
+                      <Phone className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-gray-800 mb-1 text-lg">Phone</h3>
+                      <p className="text-gray-700 font-semibold">+91 98765 43210</p>
+                      <p className="text-sm text-gray-500">Available during business hours</p>
+                    </div>
+                  </motion.div>
+
+                  <motion.div
+                    whileHover={{ scale: 1.02, x: 10 }}
+                    className="flex items-start space-x-4 bg-white p-6 rounded-xl shadow-lg border border-gray-200"
+                  >
+                    <div className="bg-purple-600 p-3 rounded-xl shadow-lg">
+                      <MapPin className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-gray-800 mb-1 text-lg">Office Location</h3>
+                      <p className="text-gray-700 font-semibold">Indore, Madhya Pradesh</p>
+                      <p className="text-sm text-gray-500">Visit by appointment only</p>
+                    </div>
+                  </motion.div>
+
                   <motion.div
                     whileHover={{ scale: 1.02, x: 10 }}
                     className="flex items-start space-x-4 bg-white p-6 rounded-xl shadow-lg border border-gray-200"

@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import Layout from "../../components/Layout";
-import { ChevronLeft, ChevronRight, Star, ArrowRight, Home, Sparkles, Circle } from "lucide-react";
+import { ChevronLeft, ChevronRight, Star, ArrowRight, Home, Sparkles } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -593,7 +593,7 @@ export default function Gallery() {
               viewport={{ once: true }}
               className="text-xl lg:text-2xl mb-12 opacity-90 leading-relaxed max-w-3xl mx-auto"
             >
-              Let's bring your vision to life with our comprehensive design services. 
+              Let&apos;s bring your vision to life with our comprehensive design services. 
               Your dream space is just one consultation away.
             </motion.p>
             

@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import Layout from "../components/Layout";
 import HeroCarousel from "../components/HeroCarousel";
 import FloatingElements from "../components/FloatingElements";
-import { ChevronRight } from "lucide-react";
 import {
   ChefHat,
   Utensils,

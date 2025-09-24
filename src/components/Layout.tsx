@@ -6,13 +6,11 @@ import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
-  Phone, 
   Mail, 
   MapPin, 
   Facebook, 
   Twitter, 
-  Instagram, 
-  Linkedin,
+  Instagram,
   ArrowRight,
   Star,
   Heart
@@ -41,7 +39,6 @@ const Layout = ({ children }: LayoutProps) => {
       { icon: Facebook, href: "#", label: "Facebook", color: "hover:text-blue-500" },
       { icon: Instagram, href: "#", label: "Instagram", color: "hover:text-pink-500" },
       { icon: Twitter, href: "#", label: "Twitter", color: "hover:text-blue-400" }
-     
     ];
 
     return (
@@ -355,6 +352,7 @@ const Layout = ({ children }: LayoutProps) => {
             <button
               className="md:hidden"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label="Toggle mobile menu"
             >
               {isMenuOpen ? (
                 <X className="w-6 h-6" />
@@ -377,24 +375,28 @@ const Layout = ({ children }: LayoutProps) => {
                   <Link
                     href="/"
                     className="text-gray-700 hover:text-primary-600 transition-colors"
+                    onClick={() => setIsMenuOpen(false)}
                   >
                     Home
                   </Link>
                   <Link
                     href="/gallery"
                     className="text-gray-700 hover:text-primary-600 transition-colors"
+                    onClick={() => setIsMenuOpen(false)}
                   >
                     Gallery
                   </Link>
                   <Link
                     href="/contact"
                     className="text-gray-700 hover:text-primary-600 transition-colors"
+                    onClick={() => setIsMenuOpen(false)}
                   >
                     Contact
                   </Link>
                   <Link
                     href="/contact"
                     className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition-colors text-center"
+                    onClick={() => setIsMenuOpen(false)}
                   >
                     Get Free Consultation
                   </Link>

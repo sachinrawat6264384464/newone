@@ -1,4 +1,4 @@
-// lib/emailService.ts - Final TypeScript-Safe Version
+// lib/emailService.ts - Production-Ready TypeScript Version
 import nodemailer from 'nodemailer'
 
 interface ContactFormData {
@@ -22,6 +22,13 @@ interface EmailResult {
     response?: string
     command?: string
   }
+}
+
+interface SMTPError extends Error {
+  code?: string
+  response?: string
+  responseCode?: number
+  command?: string
 }
 
 // Create transporter for Brevo
@@ -147,15 +154,16 @@ export const sendContactNotification = async (formData: ContactFormData): Promis
     try {
       await transporter.verify()
       console.log('✅ Brevo SMTP connection successful!')
-    } catch (verifyError: any) {
+    } catch (verifyError) {
+      const smtpError = verifyError as SMTPError
       console.error('❌ SMTP verification failed:', {
-        error: verifyError.message,
-        code: verifyError.code,
-        response: verifyError.response
+        error: smtpError.message,
+        code: smtpError.code,
+        response: smtpError.response
       })
       
       // Provide specific guidance based on error
-      if (verifyError.code === 'EAUTH') {
+      if (smtpError.code === 'EAUTH') {
         console.error('🔑 Authentication Error - Possible causes:')
         console.error('   1. Using API key instead of SMTP key')
         console.error('   2. Incorrect SMTP username (should be your Brevo login email)')
@@ -219,18 +227,19 @@ Submitted: ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}
       provider: 'Brevo'
     }
 
-  } catch (error: any) {
+  } catch (error) {
+    const smtpError = error as SMTPError
     console.error('❌ Brevo email sending failed:')
-    console.error('   Error:', error.message)
-    console.error('   Code:', error.code)
-    console.error('   Response:', error.response)
-    console.error('   Command:', error.command)
+    console.error('   Error:', smtpError.message)
+    console.error('   Code:', smtpError.code)
+    console.error('   Response:', smtpError.response)
+    console.error('   Command:', smtpError.command)
 
     // Enhanced error messages with proper typing
     let errorMessage = 'Unknown error'
     const suggestions: string[] = []
     
-    if (error.code === 'EAUTH') {
+    if (smtpError.code === 'EAUTH') {
       errorMessage = 'Brevo authentication failed'
       suggestions.push(
         'Check you\'re using SMTP key (not API key)',
@@ -238,17 +247,17 @@ Submitted: ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}
         'Generate a new SMTP key from Brevo dashboard',
         'Ensure SMTP key is active and not expired'
       )
-    } else if (error.code === 'ESOCKET') {
+    } else if (smtpError.code === 'ESOCKET') {
       errorMessage = 'Network connection failed'
       suggestions.push('Check internet connection', 'Try again in a moment')
-    } else if (error.responseCode === 550) {
+    } else if (smtpError.responseCode === 550) {
       errorMessage = 'Email rejected by Brevo'
       suggestions.push(
         'Verify sender email is authorized',
         'Check if account is in good standing'
       )
     } else {
-      errorMessage = error.message
+      errorMessage = smtpError.message || 'Unknown error occurred'
     }
 
     if (suggestions.length > 0) {
@@ -264,9 +273,9 @@ Submitted: ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}
       provider: 'Brevo',
       suggestions,
       details: {
-        code: error.code,
-        response: error.response,
-        command: error.command
+        code: smtpError.code,
+        response: smtpError.response,
+        command: smtpError.command
       }
     }
   }

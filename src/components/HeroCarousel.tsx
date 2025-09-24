@@ -17,7 +17,7 @@ interface Slide {
 const slides: Slide[] = [
   {
     id: 1,
-    title: "Transform Your Dream Home",
+    title: "Shape Dream Home",
     subtitle: "Expert Interior Design & Construction",
     description: "Create beautiful, functional spaces that reflect your style and enhance your lifestyle with our award-winning team.",
     image: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1920&h=1080&fit=crop",

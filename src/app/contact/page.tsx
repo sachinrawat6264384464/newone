@@ -111,7 +111,7 @@ export default function Contact() {
               >
                 <div className="flex items-center space-x-2 text-red-600 bg-red-100 px-4 py-2 rounded-full">
                   <Star className="w-5 h-5 text-yellow-500 fill-current" />
-                  <span className="font-semibold">4.9/5 Rating</span>
+                  <span className="font-semibold">4.5/5 Rating</span>
                 </div>
                 <div className="flex items-center space-x-2 text-blue-600 bg-blue-100 px-4 py-2 rounded-full">
                   <Users className="w-5 h-5" />
@@ -263,10 +263,9 @@ export default function Contact() {
                         className="w-full px-4 py-3 border-2 border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 bg-white"
                       >
                         <option value="">Select budget range</option>
-                        <option value="under-5-lakh">Under ₹5 Lakh</option>
-                        <option value="5-10-lakh">₹5 - ₹10 Lakh</option>
-                        <option value="10-25-lakh">₹10 - ₹25 Lakh</option>
-                        <option value="25-50-lakh">₹25 - ₹50 Lakh</option>
+                        <option value="5-10-lakh">₹10 - ₹20 Lakh</option>
+                        <option value="10-25-lakh">₹20 - ₹30 Lakh</option>
+                        <option value="25-50-lakh">₹30 - ₹50 Lakh</option>
                         <option value="over-50-lakh">Over ₹50 Lakh</option>
                       </select>
                     </div>
@@ -354,7 +353,7 @@ export default function Contact() {
                     </div>
                     <div>
                       <h3 className="font-bold text-gray-800 mb-1 text-lg">Phone</h3>
-                      <p className="text-gray-700 font-semibold">+91 98765 43210</p>
+                      <p className="text-gray-700 font-semibold">+91 96257 69768</p>
                       <p className="text-sm text-gray-500">Available during business hours</p>
                     </div>
                   </motion.div>
@@ -368,7 +367,7 @@ export default function Contact() {
                     </div>
                     <div>
                       <h3 className="font-bold text-gray-800 mb-1 text-lg">Office Location</h3>
-                      <p className="text-gray-700 font-semibold">Indore, Madhya Pradesh</p>
+                      <p className="text-gray-700 font-semibold">Delhi</p>
                       <p className="text-sm text-gray-500">Visit by appointment only</p>
                     </div>
                   </motion.div>

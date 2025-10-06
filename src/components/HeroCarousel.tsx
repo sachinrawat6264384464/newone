@@ -2,7 +2,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronLeft, ChevronRight, Play, Star, Award } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Star, Award } from 'lucide-react'
 
 interface Slide {
   id: number
@@ -29,19 +29,10 @@ const slides: Slide[] = [
     title: "Luxury Kitchen Solutions",
     subtitle: "Where Culinary Dreams Come Alive",
     description: "Design the heart of your home with our expert kitchen renovation services that blend functionality with stunning aesthetics.",
-    image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1920&h=1080&fit=crop",
+    image: "/kitchen1.jpg",
     cta: "Explore Kitchens",
     accent: "from-red-500 to-orange-500"
   },
-  {
-    id: 3,
-    title: "Commercial Excellence",
-    subtitle: "Inspiring Professional Environments",
-    description: "Transform your business environment with our commercial design expertise that enhances productivity and impresses clients.",
-    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&h=1080&fit=crop",
-    cta: "View Commercial",
-    accent: "from-red-500 to-orange-500"
-  }
 ]
 
 const HeroCarousel = () => {
@@ -171,7 +162,7 @@ const HeroCarousel = () => {
                 >
                   <div className="flex items-center space-x-2">
                     <Star className="w-5 h-5 text-yellow-400 fill-current" />
-                    <span className="text-white font-semibold">4.9/5 Rating</span>
+                    <span className="text-white font-semibold">4.5/5 Rating</span>
                   </div>
                   <div className="w-px h-6 bg-white/30 hidden sm:block"></div>
                   <div className="text-white font-semibold">300+ Projects</div>

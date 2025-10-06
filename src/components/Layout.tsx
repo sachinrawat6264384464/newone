@@ -8,14 +8,15 @@ import { motion, AnimatePresence } from "framer-motion";
 import { 
   Mail, 
   MapPin, 
-  Facebook, 
-  Twitter, 
+  Facebook,  
   Instagram,
   ArrowRight,
   Star,
-  Heart
+  Heart,
+  Phone,
+  Linkedin
 } from 'lucide-react';
-
+import WhatsAppButton from '../components/WhatsAppButton'
 interface LayoutProps {
   children: ReactNode;
 }
@@ -36,9 +37,34 @@ const Layout = ({ children }: LayoutProps) => {
     ];
 
     const socialLinks = [
-      { icon: Facebook, href: "#", label: "Facebook", color: "hover:text-blue-500" },
-      { icon: Instagram, href: "#", label: "Instagram", color: "hover:text-pink-500" },
-      { icon: Twitter, href: "#", label: "Twitter", color: "hover:text-blue-400" }
+      { 
+        icon: Facebook, 
+        href: "https://www.facebook.com/people/Home-storey/61563975190788", 
+        label: "Facebook", 
+        color: "hover:text-blue-600" 
+      },
+      { 
+        icon: Instagram, 
+        href: "https://instagram.com/homestorey.ai/", 
+        label: "Instagram", 
+        color: "hover:text-pink-600" 
+      },
+      { 
+        icon: Linkedin, 
+        href: "https://www.linkedin.com/company/homestorey", 
+        label: "LinkedIn", 
+        color: "hover:text-blue-700" 
+      },
+      { 
+        icon: ({ className }: { className?: string }) => (
+          <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.373 0 0 5.372 0 12c0 4.983 3.656 9.128 8.438 10.309-.117-.875-.223-2.217.047-3.175.242-.839 1.563-5.34 1.563-5.34s-.398-.797-.398-1.976c0-1.853 1.075-3.236 2.413-3.236 1.138 0 1.687.854 1.687 1.878 0 1.144-.728 2.854-1.102 4.441-.316 1.334.67 2.422 1.986 2.422 2.383 0 4.213-2.512 4.213-6.131 0-3.202-2.303-5.442-5.592-5.442-3.808 0-6.051 2.853-6.051 5.801 0 1.144.437 2.372.984 3.039.108.131.124.246.093.377-.103.41-.336 1.303-.382 1.486-.06.242-.197.294-.456.177-1.693-.79-2.75-3.266-2.75-5.26 0-4.282 3.114-8.215 8.987-8.215 4.72 0 8.393 3.364 8.393 7.861 0 4.688-2.951 8.462-7.05 8.462-1.376 0-2.671-.714-3.113-1.561 0 0-.685 2.61-.852 3.249-.258.99-.76 1.981-1.219 2.751.974.293 2.005.452 3.076.452 6.627 0 12-5.373 12-12S18.627 0 12 0z" />
+          </svg>
+        ),
+        href: "https://in.pinterest.com/Hstoreyin/", 
+        label: "Pinterest", 
+        color: "hover:text-red-600" 
+      }
     ];
 
     return (
@@ -85,7 +111,7 @@ const Layout = ({ children }: LayoutProps) => {
               </p>
               
               {/* Book Consultation Button */}
-              <Link href="/contact">
+              <Link href="https://tidycal.com/homestorey/free-design-discussion" target="_blank" rel="noopener noreferrer">
                 <motion.button
                   whileHover={{ 
                     scale: 1.05,
@@ -108,10 +134,21 @@ const Layout = ({ children }: LayoutProps) => {
                     whileInView={{ scale: 1 }}
                     transition={{ delay: i * 0.1, duration: 0.3 }}
                   >
-                    <Star className="w-5 h-5 text-yellow-400 fill-current" />
+                    {i < 4 ? (
+                      <Star className="w-5 h-5 text-yellow-400 fill-current" />
+                    ) : i === 4 ? (
+                      <div className="relative">
+                        <Star className="w-5 h-5 text-gray-300 fill-current" />
+                        <div className="absolute inset-0 overflow-hidden" style={{ width: '50%' }}>
+                          <Star className="w-5 h-5 text-yellow-400 fill-current" />
+                        </div>
+                      </div>
+                    ) : (
+                      <Star className="w-5 h-5 text-gray-300 fill-current" />
+                    )}
                   </motion.div>
                 ))}
-                <span className="text-gray-600 ml-2 text-sm">5.0 (250+ reviews)</span>
+                <span className="text-gray-600 ml-2 text-sm">4.5 (250+ reviews)</span>
               </div>
             </motion.div>
 
@@ -129,18 +166,19 @@ const Layout = ({ children }: LayoutProps) => {
               
               <ul className="space-y-3">
                 {services.map((service, index) => (
-                  <motion.li
-                    key={index}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1, duration: 0.4 }}
-                    className="text-gray-600 hover:text-black transition-colors duration-300 cursor-pointer group flex items-center"
-                  >
-                    <ArrowRight className="w-3 h-3 mr-2 text-red-500 group-hover:translate-x-1 transition-transform duration-200" />
-                    <span className="group-hover:translate-x-1 transition-transform duration-200">
-                      {service}
-                    </span>
-                  </motion.li>
+                  <li key={index} className="list-none">
+                    <motion.div
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1, duration: 0.4 }}
+                      className="text-gray-600 hover:text-black transition-colors duration-300 cursor-pointer group flex items-center"
+                    >
+                      <ArrowRight className="w-3 h-3 mr-2 text-red-500 group-hover:translate-x-1 transition-transform duration-200" />
+                      <span className="group-hover:translate-x-1 transition-transform duration-200 text-sm">
+                        {service}
+                      </span>
+                    </motion.div>
+                  </li>
                 ))}
               </ul>
             </motion.div>
@@ -177,7 +215,7 @@ const Layout = ({ children }: LayoutProps) => {
                       className="text-gray-600 hover:text-black transition-all duration-300 group flex items-center"
                     >
                       <ArrowRight className="w-3 h-3 mr-2 text-blue-500 group-hover:translate-x-1 transition-transform duration-200" />
-                      <span className="group-hover:translate-x-1 transition-transform duration-200">
+                      <span className="group-hover:translate-x-1 transition-transform duration-200 text-sm">
                         {link.name}
                       </span>
                     </Link>
@@ -199,7 +237,23 @@ const Layout = ({ children }: LayoutProps) => {
               </h3>
               
               <div className="space-y-4">
-                <motion.div 
+                <motion.a
+                  href="tel:+919625769768"
+                  className="flex items-start space-x-3 group cursor-pointer"
+                  whileHover={{ x: 5 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <div className="bg-green-100 p-2 rounded-lg group-hover:bg-green-200 transition-colors duration-300">
+                    <Phone className="w-5 h-5 text-green-600" />
+                  </div>
+                  <div>
+                    <p className="text-black font-semibold mb-1">Call Us</p>
+                    <p className="text-gray-600 text-sm">+91 96257 69768</p>
+                  </div>
+                </motion.a>
+
+                <motion.a
+                  href="mailto:homestorey@thenidhimittal.com"
                   className="flex items-start space-x-3 group cursor-pointer"
                   whileHover={{ x: 5 }}
                   transition={{ duration: 0.2 }}
@@ -211,19 +265,19 @@ const Layout = ({ children }: LayoutProps) => {
                     <p className="text-black font-semibold mb-1">Email Us</p>
                     <p className="text-gray-600 text-sm">homestorey@thenidhimittal.com</p>
                   </div>
-                </motion.div>
+                </motion.a>
 
                 <motion.div 
                   className="flex items-start space-x-3 group cursor-pointer"
                   whileHover={{ x: 5 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <div className="bg-green-100 p-2 rounded-lg group-hover:bg-green-200 transition-colors duration-300">
-                    <MapPin className="w-5 h-5 text-green-600" />
+                  <div className="bg-blue-100 p-2 rounded-lg group-hover:bg-blue-200 transition-colors duration-300">
+                    <MapPin className="w-5 h-5 text-blue-600" />
                   </div>
                   <div>
                     <p className="text-black font-semibold mb-1">Visit Us</p>
-                    <p className="text-gray-600 text-sm">Indore, Madhya Pradesh</p>
+                    <p className="text-gray-600 text-sm">Delhi</p>
                   </div>
                 </motion.div>
               </div>
@@ -238,6 +292,8 @@ const Layout = ({ children }: LayoutProps) => {
                       <motion.a
                         key={index}
                         href={social.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         initial={{ scale: 0 }}
                         whileInView={{ scale: 1 }}
                         transition={{ delay: index * 0.1, duration: 0.3 }}
@@ -265,36 +321,22 @@ const Layout = ({ children }: LayoutProps) => {
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.5 }}
             viewport={{ once: true }}
-            className="border-t border-gray-200 mt-16 pt-8"
+            className="border-t border-gray-200 mt-16 pt-6"
           >
-            <div className="text-center space-y-4">
-              <p className="text-gray-600">
-                &copy; 2025 Home Storey. All rights reserved.
+            <div className="text-center">
+              <p className="text-gray-500 text-xs flex flex-wrap items-center justify-center gap-1">
+                <span>© 2025 Home Storey. All rights reserved.</span>
+                <span className="hidden sm:inline">•</span>
+                <span className="flex items-center gap-1">
+                  Made with <Heart className="w-3 h-3 text-red-500 fill-current inline" /> by
+                  <Link 
+                    href="#"
+                    className="text-black font-semibold hover:text-red-500 transition-colors duration-300"
+                  >
+                    Botmartz IT Solutions
+                  </Link>
+                </span>
               </p>
-              
-              <div className="flex justify-center items-center space-x-2 text-gray-600">
-                <span>Made with</span>
-                <motion.div
-                  animate={{ 
-                    scale: [1, 1.2, 1],
-                    rotate: [0, 5, -5, 0]
-                  }}
-                  transition={{ 
-                    duration: 2,
-                    repeat: Infinity,
-                    repeatType: "reverse"
-                  }}
-                >
-                  <Heart className="w-4 h-4 text-red-500 fill-current" />
-                </motion.div>
-                <span>by</span>
-                <Link 
-                  href="#"
-                  className="text-black font-semibold hover:text-red-500 transition-colors duration-300"
-                >
-                  Botmartz IT Solutions
-                </Link>
-              </div>
             </div>
           </motion.div>
         </div>
@@ -341,7 +383,9 @@ const Layout = ({ children }: LayoutProps) => {
                 Contact
               </Link>
               <Link
-                href="/contact"
+                href="https://tidycal.com/homestorey/free-design-discussion"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition-colors"
               >
                 Get Free Consultation
@@ -394,7 +438,9 @@ const Layout = ({ children }: LayoutProps) => {
                     Contact
                   </Link>
                   <Link
-                    href="/contact"
+                    href="https://tidycal.com/homestorey/free-design-discussion"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition-colors text-center"
                     onClick={() => setIsMenuOpen(false)}
                   >
@@ -408,7 +454,10 @@ const Layout = ({ children }: LayoutProps) => {
       </header>
 
       {/* Main Content */}
-      <main>{children}</main>
+      <main>
+        {children}
+        <WhatsAppButton />
+      </main>
 
       {/* Enhanced Footer */}
       <Footer />

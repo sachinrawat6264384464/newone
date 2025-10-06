@@ -6,22 +6,27 @@ import HeroCarousel from "../components/HeroCarousel";
 import FloatingElements from "../components/FloatingElements";
 import {
   ChefHat,
-  Utensils,
   Sofa,
   Bed,
   Bath,
-  Building,
   Star,
   Quote,
   ArrowRight,
   LucideIcon,
   Award,
   Users,
-  Sparkles,
-  Heart,
+  Clock,
+  DollarSign,
+  AlertTriangle,
+  HomeIcon,
+  Briefcase,
+  Ruler,  Zap, Palette
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import MasonryGrid from '@/components/MasonryGrid';
+import CommonProblems from "../components/CommonProblems";
+
 
 interface Service {
   icon: LucideIcon;
@@ -39,50 +44,52 @@ interface Testimonial {
   image: string;
 }
 
+
 const services: Service[] = [
   {
-    icon: ChefHat,
-    title: "Kitchen Design",
-    description: "Modern, functional kitchens that are the heart of your home",
+    icon: HomeIcon,
+    title: "Facade Design",
+    description: "Stunning exterior designs that create lasting first impressions",
     image: "/pic1.jpeg",
     color: "from-red-400 to-red-600",
   },
   {
-    icon: Utensils,
-    title: "Dining Areas",
-    description: "Elegant dining spaces for memorable meals and gatherings",
+    icon: Sofa,
+    title: "Living Area",
+    description: "Comfortable and stylish living spaces perfect for family gatherings",
     image: "/pic2.jpeg",
     color: "from-blue-400 to-blue-600",
   },
   {
-    icon: Sofa,
-    title: "Living Spaces",
-    description: "Comfortable and stylish living areas for relaxation",
+    icon: ChefHat,
+    title: "Kitchen Design",
+    description: "Modern, functional kitchens that are the heart of your home",
     image: "/pic3.jpeg",
     color: "from-red-400 to-red-600",
   },
   {
     icon: Bed,
-    title: "Bedrooms",
+    title: "Bedroom Design",
     description: "Peaceful retreats designed for rest and rejuvenation",
     image: "/pic4.jpeg",
     color: "from-blue-400 to-blue-600",
   },
   {
     icon: Bath,
-    title: "Bathrooms",
-    description: "Spa-like bathrooms that combine luxury and functionality",
+    title: "Bathroom Design",
+    description: "Spa-like bathrooms combining luxury and functionality",
     image: "/pic5.jpeg",
     color: "from-red-400 to-red-600",
   },
   {
-    icon: Building,
-    title: "Commercial Spaces",
-    description: "Professional environments that enhance productivity",
+    icon: Briefcase,
+    title: "Home Office Design",
+    description: "Productive work-from-home spaces tailored to your needs",
     image: "/pic6.jpeg",
     color: "from-blue-400 to-blue-600",
   },
 ];
+
 
 const testimonials: Testimonial[] = [
   {
@@ -111,11 +118,54 @@ const testimonials: Testimonial[] = [
   },
 ];
 
+const problems = [
+  {
+    title: "Budget Overruns",
+    description: "Unexpected costs and hidden expenses that derail your project finances and timeline.",
+    icon: DollarSign
+  },
+  {
+    title: "Time Delays",
+    description: "Projects taking longer than planned due to poor planning and coordination issues.",
+    icon: Clock
+  },
+  {
+    title: "Space Planning Issues",
+    description: "Inefficient use of space leading to cramped areas and poor functionality in daily use.",
+    icon: Ruler
+  },
+  {
+    title: "Quality Compromises",
+    description: "Substandard materials and workmanship that affect durability and overall satisfaction.",
+    icon: AlertTriangle
+  },
+  {
+    title: "Design Inconsistency",
+    description: "Mismatched styles and themes creating a disjointed look throughout your home.",
+    icon: Palette
+  },
+  {
+    title: "Poor Functionality",
+    description: "Beautiful designs that don't work for your lifestyle and daily routines.",
+    icon: Zap
+  },
+  {
+    title: "Communication Gaps",
+    description: "Misunderstandings between homeowners, designers, and contractors causing rework.",
+    icon: Users
+  },
+  {
+    title: "Technical Challenges",
+    description: "Structural, electrical, and plumbing issues that weren't anticipated in the design.",
+    icon: Briefcase
+  }
+];
+
+
 const stats = [
   { label: "Happy Clients", value: "250+", icon: Users },
   { label: "Projects Completed", value: "300+", icon: Award },
   { label: "Years Experience", value: "10+", icon: Star },
-  { label: "Design Awards", value: "15+", icon: Sparkles },
 ];
 
 // Process Section Component
@@ -154,19 +204,13 @@ const ProcessSection = () => {
             className="group relative"
           >
             <div className="relative bg-white rounded-3xl p-8 h-full shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-red-200 overflow-hidden hover:scale-105">
-              
-              {/* Background Pattern */}
               <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-red-50 to-transparent rounded-bl-full opacity-50"></div>
-              
-              {/* Step Number Badge */}
               <div className="flex items-center justify-between mb-6">
                 <span className="text-6xl font-black bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300">
                   01
                 </span>
                 <div className="w-3 h-3 bg-red-400 rounded-full group-hover:scale-150 transition-transform duration-300"></div>
               </div>
-
-              {/* Icon */}
               <div className="flex justify-start mb-6">
                 <div className="relative">
                   <div className="w-20 h-20 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transform group-hover:rotate-6 transition-all duration-300">
@@ -175,8 +219,6 @@ const ProcessSection = () => {
                   <div className="absolute inset-0 w-20 h-20 bg-red-200 rounded-2xl blur-md opacity-30 -z-10 transform translate-y-2"></div>
                 </div>
               </div>
-
-              {/* Content */}
               <div className="space-y-4">
                 <h3 className="text-2xl font-bold text-gray-900 mb-3 leading-tight">
                   Consultation
@@ -185,12 +227,8 @@ const ProcessSection = () => {
                   Understand your lifestyle, taste, and requirements through detailed discussion and space assessment.
                 </p>
               </div>
-
-              {/* Bottom Accent Line */}
               <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-red-500 to-red-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
             </div>
-            
-            {/* Connection Arrow */}
             <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gray-300 z-10">
               <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-2 h-2 bg-gray-400 rounded-full"></div>
             </div>
@@ -205,19 +243,13 @@ const ProcessSection = () => {
             className="group relative"
           >
             <div className="relative bg-white rounded-3xl p-8 h-full shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-blue-200 overflow-hidden hover:scale-105">
-              
-              {/* Background Pattern */}
               <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-blue-50 to-transparent rounded-bl-full opacity-50"></div>
-              
-              {/* Step Number Badge */}
               <div className="flex items-center justify-between mb-6">
                 <span className="text-6xl font-black bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300">
                   02
                 </span>
                 <div className="w-3 h-3 bg-blue-400 rounded-full group-hover:scale-150 transition-transform duration-300"></div>
               </div>
-
-              {/* Icon */}
               <div className="flex justify-start mb-6">
                 <div className="relative">
                   <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transform group-hover:rotate-6 transition-all duration-300">
@@ -226,8 +258,6 @@ const ProcessSection = () => {
                   <div className="absolute inset-0 w-20 h-20 bg-blue-200 rounded-2xl blur-md opacity-30 -z-10 transform translate-y-2"></div>
                 </div>
               </div>
-
-              {/* Content */}
               <div className="space-y-4">
                 <h3 className="text-2xl font-bold text-gray-900 mb-3 leading-tight">
                   Concept & Estimate
@@ -236,12 +266,8 @@ const ProcessSection = () => {
                   Create moodboards, select materials, and provide transparent pricing with detailed project timeline.
                 </p>
               </div>
-
-              {/* Bottom Accent Line */}
               <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-blue-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
             </div>
-            
-            {/* Connection Arrow */}
             <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gray-300 z-10">
               <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-2 h-2 bg-gray-400 rounded-full"></div>
             </div>
@@ -256,19 +282,13 @@ const ProcessSection = () => {
             className="group relative"
           >
             <div className="relative bg-white rounded-3xl p-8 h-full shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-red-200 overflow-hidden hover:scale-105">
-              
-              {/* Background Pattern */}
               <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-red-50 to-transparent rounded-bl-full opacity-50"></div>
-              
-              {/* Step Number Badge */}
               <div className="flex items-center justify-between mb-6">
                 <span className="text-6xl font-black bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300">
                   03
                 </span>
                 <div className="w-3 h-3 bg-red-400 rounded-full group-hover:scale-150 transition-transform duration-300"></div>
               </div>
-
-              {/* Icon */}
               <div className="flex justify-start mb-6">
                 <div className="relative">
                   <div className="w-20 h-20 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transform group-hover:rotate-6 transition-all duration-300">
@@ -277,8 +297,6 @@ const ProcessSection = () => {
                   <div className="absolute inset-0 w-20 h-20 bg-red-200 rounded-2xl blur-md opacity-30 -z-10 transform translate-y-2"></div>
                 </div>
               </div>
-
-              {/* Content */}
               <div className="space-y-4">
                 <h3 className="text-2xl font-bold text-gray-900 mb-3 leading-tight">
                   Execution
@@ -287,12 +305,8 @@ const ProcessSection = () => {
                   Professional on-site work with regular quality checks, and clear milestone timelines.
                 </p>
               </div>
-
-              {/* Bottom Accent Line */}
               <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-red-500 to-red-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
             </div>
-            
-            {/* Connection Arrow */}
             <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gray-300 z-10">
               <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-2 h-2 bg-gray-400 rounded-full"></div>
             </div>
@@ -307,19 +321,13 @@ const ProcessSection = () => {
             className="group relative"
           >
             <div className="relative bg-white rounded-3xl p-8 h-full shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-blue-200 overflow-hidden hover:scale-105">
-              
-              {/* Background Pattern */}
               <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-blue-50 to-transparent rounded-bl-full opacity-50"></div>
-              
-              {/* Step Number Badge */}
               <div className="flex items-center justify-between mb-6">
                 <span className="text-6xl font-black bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300">
                   04
                 </span>
                 <div className="w-3 h-3 bg-blue-400 rounded-full group-hover:scale-150 transition-transform duration-300"></div>
               </div>
-
-              {/* Icon */}
               <div className="flex justify-start mb-6">
                 <div className="relative">
                   <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transform group-hover:rotate-6 transition-all duration-300">
@@ -328,8 +336,6 @@ const ProcessSection = () => {
                   <div className="absolute inset-0 w-20 h-20 bg-blue-200 rounded-2xl blur-md opacity-30 -z-10 transform translate-y-2"></div>
                 </div>
               </div>
-
-              {/* Content */}
               <div className="space-y-4">
                 <h3 className="text-2xl font-bold text-gray-900 mb-3 leading-tight">
                   Handover
@@ -338,8 +344,6 @@ const ProcessSection = () => {
                   Complete final styling, and provide ongoing support for your satisfaction.
                 </p>
               </div>
-
-              {/* Bottom Accent Line */}
               <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-blue-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
             </div>
           </motion.div>
@@ -360,7 +364,6 @@ export default function Home() {
 
       {/* Stats Section */}
       <section className="py-20 relative overflow-hidden">
-        {/* Animated Background Elements */}
         <div className="absolute top-10 left-10 w-32 h-32 bg-white/5 rounded-full blur-xl animate-pulse"></div>
         <div className="absolute bottom-10 right-10 w-40 h-40 bg-white/5 rounded-full blur-xl animate-pulse delay-1000"></div>
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-60 h-60 bg-white/3 rounded-full blur-2xl"></div>
@@ -375,20 +378,18 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {stats.map((stat, index) => {
               const IconComponent = stat.icon;
               const colors = [
                 "from-blue-500 to-blue-600",
                 "from-red-500 to-red-600",
                 "from-blue-500 to-blue-600",
-                "from-red-500 to-red-600",
               ];
               const borderColors = [
                 "border-blue-400/50",
                 "border-red-400/50",
                 "border-blue-400/50",
-                "border-red-400/50",
               ];
 
               return (
@@ -433,7 +434,7 @@ export default function Home() {
       </section>
 
       {/* Meet Nidhi Section */}
-      <section className="py-10 relative">
+      <section className="py-20 relative bg-white">
         <div className="absolute inset-0 bg-red-100/20 opacity-50"></div>
         <div className="container mx-auto px-4 relative">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -453,9 +454,6 @@ export default function Home() {
                     height={600}
                     className="w-full h-[500px] object-cover rounded-3xl shadow-2xl"
                   />
-                  <div className="absolute -bottom-6 -right-6 bg-red-600 text-white p-6 rounded-2xl shadow-xl">
-                    <Heart className="w-10 h-10" />
-                  </div>
                 </div>
               </div>
             </motion.div>
@@ -474,7 +472,7 @@ export default function Home() {
                   transition={{ delay: 0.4 }}
                   className="text-red-600 font-bold text-xl tracking-wide uppercase"
                 >
-                  Meet the Founder
+                  Meet Your Designer
                 </motion.span>
                 <motion.h2
                   initial={{ opacity: 0, y: 20 }}
@@ -482,16 +480,8 @@ export default function Home() {
                   transition={{ delay: 0.5 }}
                   className="text-4xl md:text-6xl font-bold text-blue-600 mt-4 mb-6 leading-tight"
                 >
-                  Nidhi Mittal
+                  Hi, Nidhi here
                 </motion.h2>
-                <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.6 }}
-                  className="text-2xl text-blue-700 font-bold"
-                >
-                  Founder & Principal Designer
-                </motion.p>
               </div>
 
               <motion.div
@@ -500,48 +490,15 @@ export default function Home() {
                 transition={{ delay: 0.7 }}
                 className="space-y-6 text-gray-700 leading-relaxed"
               >
-                <p className="text-xl">
-                  With over a decade of expertise in luxury interior design,
-                  Nidhi Mittal has established HomeStorey as a premier
-                  destination for those seeking exceptional living spaces.
+                <p className="text-lg">
+                  I am on a mission to help &ldquo;Luxury Lifestyle Seekers&rdquo; tackle the challenges of limited time, budget constraints and complex coordination of Home Design and Construction.
                 </p>
-                <p className="text-xl">
-                  Her vision combines timeless elegance with contemporary
-                  innovation, creating spaces that reflect each client&apos;s
-                  unique lifestyle and aspirations. Nidhi&apos;s approach
-                  focuses on understanding the intricate balance between
-                  aesthetics and functionality, ensuring every project becomes a
-                  masterpiece of design excellence.
+                <p className="text-lg">
+                  I am an Interior Designer with over a decade of work experience. I have worked with a lot of home design and construction companies, where i have learned and implemented various techniques to work on space design in this highly unorganized industry. There came a time when i realized that just be sticking to the corporate culture, i will not be able to provide the type of solutions which can actually help people tackle a lot of challenges when it comes to Construction and Home Design.
                 </p>
-                <p className="text-xl">
-                  Under her leadership, HomeStorey has transformed countless
-                  spaces across Northern India, earning a reputation for
-                  meticulous attention to detail and unparalleled client
-                  satisfaction.
+                <p className="text-lg">
+                  Having learned this I Founded &ldquo;Homestorey&rdquo; which suggests a narrative of creating beautiful personalized spaces and evokes the sense of storytelling and transformation, our clients not only got their spaces designed but discovered a journey of expression and scalability.
                 </p>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8 }}
-                className="flex flex-wrap gap-6 pt-6"
-              >
-                <div className="bg-blue-100 px-6 py-3 rounded-full shadow-md">
-                  <span className="text-blue-700 font-bold text-lg">
-                    10+ Years Experience
-                  </span>
-                </div>
-                <div className="bg-red-100 px-6 py-3 rounded-full shadow-md">
-                  <span className="text-red-700 font-bold text-lg">
-                    Luxury Design Expert
-                  </span>
-                </div>
-                <div className="bg-green-100 px-6 py-3 rounded-full shadow-md">
-                  <span className="text-green-700 font-bold text-lg">
-                    Trusted by Clients
-                  </span>
-                </div>
               </motion.div>
 
               <motion.div
@@ -565,6 +522,7 @@ export default function Home() {
         </div>
       </section>
 
+
       {/* Services Section */}
       <section className="py-24 bg-gradient-to-br from-white via-gray-50 to-blue-50 relative overflow-hidden">
         <div className="container mx-auto px-4 relative">
@@ -576,44 +534,14 @@ export default function Home() {
             className="text-center mb-20"
           >
             <span className="text-red-600 font-semibold text-lg">
-              What We Offer
+              What We Create
             </span>
             <h2 className="text-5xl font-bold text-gray-800 mt-4 mb-6">
-              Our Services
+              Forget Typical Boring Designs, Look at What We Have
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              From residential renovations to commercial transformations, we
-              bring your vision to life with unmatched creativity and precision
+              From stunning facades to functional interiors, we bring your vision to life with creativity and precision
             </p>
-
-            {/* View All Services Button */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              viewport={{ once: true }}
-              className="mt-8"
-            >
-              <Link
-                href="/gallery"
-                className="inline-flex items-center space-x-2 bg-red-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-red-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
-              >
-                <span>View All Services</span>
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </Link>
-            </motion.div>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -665,8 +593,29 @@ export default function Home() {
               );
             })}
           </div>
+
+          {/* View All Button */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            viewport={{ once: true }}
+            className="mt-12 text-center"
+          >
+            <Link
+              href="/gallery"
+              className="inline-flex items-center space-x-2 bg-red-600 text-white px-10 py-4 rounded-full font-semibold hover:bg-red-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+            >
+              <span>Explore All Our Services</span>
+              <ArrowRight className="w-5 h-5" />
+            </Link>
+          </motion.div>
         </div>
       </section>
+
+      <MasonryGrid />
+
+      <CommonProblems problems={problems} />
 
       {/* Testimonials Section */}
       <section className="py-24 bg-white relative overflow-hidden">
@@ -686,8 +635,7 @@ export default function Home() {
               What Our Clients Say
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Don&apos;t just take our word for it - hear from satisfied
-              homeowners and businesses who trusted us with their dreams
+              Hear from satisfied homeowners and businesses who trusted us with their dreams
             </p>
           </motion.div>
 
@@ -743,7 +691,6 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* Decorative elements */}
                 <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-br from-red-500 to-red-600 rounded-full opacity-20"></div>
                 <div className="absolute -bottom-2 -left-2 w-6 h-6 bg-gradient-to-br from-red-400 to-red-500 rounded-full opacity-20"></div>
               </motion.div>
@@ -775,7 +722,7 @@ export default function Home() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              <Link href="/contact">
+              <Link href="https://tidycal.com/homestorey/free-design-discussion" target="_blank" rel="noopener noreferrer">
                 <motion.button
                   whileHover={{
                     scale: 1.05,
@@ -788,22 +735,10 @@ export default function Home() {
                   <ArrowRight className="w-6 h-6" />
                 </motion.button>
               </Link>
-
-              <Link href="/gallery">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="border-2 border-red-500 text-red-600 px-10 py-5 rounded-2xl text-xl font-bold hover:bg-red-500 hover:text-white transition-all duration-300 inline-flex items-center space-x-3"
-                >
-                  <span>View Portfolio</span>
-                  <Sparkles className="w-6 h-6" />
-                </motion.button>
-              </Link>
             </div>
           </motion.div>
         </div>
 
-        {/* Bottom decorative wave */}
         <div className="absolute bottom-0 left-0 right-0">
           <svg
             viewBox="0 0 1200 120"

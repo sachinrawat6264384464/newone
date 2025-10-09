@@ -28,7 +28,7 @@ const services: ServiceCarousel[] = [
       "Entrance foyer & door designs",
       "Exterior lighting solutions"
     ],
-    images: ["/pic1.jpeg", "/pic2.jpeg", "/pic3.jpeg", "/pic4.jpeg", "/pic5.jpeg"],
+    images: ["/Facade_1.jpg", "/Facade_2.jpg", "/Facade_3.jpg", "/Facade_4.jpg", "/Facade_5.jpg"],
     color: "text-blue-600",
     bgGradient: "from-blue-50 to-blue-100"
   },
@@ -42,7 +42,7 @@ const services: ServiceCarousel[] = [
       "Entertainment center setup",
       "Open-plan space organization"
     ],
-    images: ["/pic6.jpeg", "/pic1.jpeg", "/pic2.jpeg", "/pic3.jpeg", "/pic4.jpeg"],
+    images: ["/Living_1.jpg", "/Living_2.jpg", "/Living_3.jpg", "/Living_4.jpg", "/Living_5.jpg"],
     color: "text-red-600", 
     bgGradient: "from-red-50 to-red-100"
   },
@@ -56,7 +56,7 @@ const services: ServiceCarousel[] = [
       "Spa-like bathroom transformations",
       "Premium fixtures & finishes"
     ],
-    images: ["/pic5.jpeg", "/pic6.jpeg", "/pic1.jpeg", "/pic2.jpeg", "/pic3.jpeg"],
+    images: ["/kitchen1.jpg", "/pic6.jpeg", "/pic1.jpeg", "/Bathroom_1.jpg", "/Bathroom_2.jpg"],
     color: "text-blue-600",
     bgGradient: "from-blue-50 to-blue-100"
   },
@@ -70,7 +70,7 @@ const services: ServiceCarousel[] = [
       "Work-from-home office spaces",
       "Walk-in closet organization"
     ],
-    images: ["/pic4.jpeg", "/pic5.jpeg", "/pic6.jpeg", "/pic1.jpeg", "/pic2.jpeg"],
+    images: ["/Bedroom_1.png", "/Bedroom_2.jpg", "/Bedroom_3.jpg", "/Bedroom_4.jpeg", "/Bedroom_5.jpg"],
     color: "text-red-600",
     bgGradient: "from-red-50 to-red-100"
   },
@@ -84,7 +84,7 @@ const services: ServiceCarousel[] = [
       "Terrace party & BBQ areas",
       "Balcony & bay window designs"
     ],
-    images: ["/pic3.jpeg", "/pic4.jpeg", "/pic5.jpeg", "/pic6.jpeg", "/pic1.jpeg"],
+    images: ["/Mandir_2.jpg", "/Mandir_3.jpg", "/Mandir_1.jpg", "/Mandir_4.jpg", "/Mandir_5.jpg"],
     color: "text-blue-600",
     bgGradient: "from-blue-50 to-blue-100"
   },
@@ -98,24 +98,10 @@ const services: ServiceCarousel[] = [
       "False ceiling & lighting design",
       "Wall decor & flooring solutions"
     ],
-    images: ["/pic2.jpeg", "/pic3.jpeg", "/pic4.jpeg", "/pic5.jpeg", "/pic6.jpeg"],
+    images: ["/pic3.jpeg", "/pic4.jpeg"],
     color: "text-red-600",
     bgGradient: "from-red-50 to-red-100"
   },
-  {
-    title: "Complete Project Solutions",
-    subtitle: "End-to-End Excellence",
-    description: "From concept to completion, we manage every aspect of your project. Turnkey solutions and building construction services with quality craftsmanship and timely delivery.",
-    features: [
-      "Design to execution turnkey",
-      "Building construction services",
-      "Project timeline management",
-      "Quality control & handover"
-    ],
-    images: ["/pic1.jpeg", "/pic2.jpeg", "/pic3.jpeg", "/pic4.jpeg", "/pic5.jpeg"],
-    color: "text-blue-600",
-    bgGradient: "from-blue-50 to-blue-100"
-  }
 ];
 
 const ImageCarousel = ({ images, currentIndex, onNext, onPrev }: {

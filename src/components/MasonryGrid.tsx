@@ -85,7 +85,7 @@ const MasonryGrid: React.FC = () => {
       id: 7,
       title: "Mandir & Prayer Rooms",
       description: "Sacred spaces with traditional elements and modern design integration",
-      image: "/pic2.jpeg",
+      image: "/Mandir_2.jpg",
       size: "small",
       buttonText: "Explore",
       delay: 0.6

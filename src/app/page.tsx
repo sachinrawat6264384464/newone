@@ -168,7 +168,6 @@ const stats = [
   { label: "Years Experience", value: "10+", icon: Star },
 ];
 
-// Process Section Component
 const ProcessSection = () => {
   return (
     <section className="py-24 bg-white relative overflow-hidden">
@@ -188,164 +187,81 @@ const ProcessSection = () => {
             Our Process
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            From initial consultation to final handover, we follow a proven process that ensures your project is delivered on time, within budget, and beyond expectations
+            From initial consultation to final handover, we follow a proven
+            process that ensures your project is delivered on time, within
+            budget, and beyond expectations.
           </p>
         </motion.div>
 
-        {/* Process Cards - Single Row */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-          
-          {/* Card 1 - Consultation */}
+        {/* Process Steps */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* Step 1 */}
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
-            className="group relative"
+            className="p-8 border border-gray-100 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-white"
           >
-            <div className="relative bg-white rounded-3xl p-8 h-full shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-red-200 overflow-hidden hover:scale-105">
-              <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-red-50 to-transparent rounded-bl-full opacity-50"></div>
-              <div className="flex items-center justify-between mb-6">
-                <span className="text-6xl font-black bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300">
-                  01
-                </span>
-                <div className="w-3 h-3 bg-red-400 rounded-full group-hover:scale-150 transition-transform duration-300"></div>
-              </div>
-              <div className="flex justify-start mb-6">
-                <div className="relative">
-                  <div className="w-20 h-20 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transform group-hover:rotate-6 transition-all duration-300">
-                    <span className="text-3xl filter drop-shadow-sm">🏠</span>
-                  </div>
-                  <div className="absolute inset-0 w-20 h-20 bg-red-200 rounded-2xl blur-md opacity-30 -z-10 transform translate-y-2"></div>
-                </div>
-              </div>
-              <div className="space-y-4">
-                <h3 className="text-2xl font-bold text-gray-900 mb-3 leading-tight">
-                  Consultation
-                </h3>
-                <p className="text-gray-600 leading-relaxed text-base">
-                  Understand your lifestyle, taste, and requirements through detailed discussion and space assessment.
-                </p>
-              </div>
-              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-red-500 to-red-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-            </div>
-            <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gray-300 z-10">
-              <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-2 h-2 bg-gray-400 rounded-full"></div>
-            </div>
+            <h3 className="text-2xl font-bold text-red-600 mb-3">
+              Consultation
+            </h3>
+            <p className="text-gray-600 leading-relaxed text-base">
+              Understand your lifestyle, taste, and requirements through
+              detailed discussions and space assessments.
+            </p>
           </motion.div>
 
-          {/* Card 2 - Concept & Estimate */}
+          {/* Step 2 */}
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
-            className="group relative"
+            className="p-8 border border-gray-100 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-white"
           >
-            <div className="relative bg-white rounded-3xl p-8 h-full shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-blue-200 overflow-hidden hover:scale-105">
-              <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-blue-50 to-transparent rounded-bl-full opacity-50"></div>
-              <div className="flex items-center justify-between mb-6">
-                <span className="text-6xl font-black bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300">
-                  02
-                </span>
-                <div className="w-3 h-3 bg-blue-400 rounded-full group-hover:scale-150 transition-transform duration-300"></div>
-              </div>
-              <div className="flex justify-start mb-6">
-                <div className="relative">
-                  <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transform group-hover:rotate-6 transition-all duration-300">
-                    <span className="text-3xl filter drop-shadow-sm">🎨</span>
-                  </div>
-                  <div className="absolute inset-0 w-20 h-20 bg-blue-200 rounded-2xl blur-md opacity-30 -z-10 transform translate-y-2"></div>
-                </div>
-              </div>
-              <div className="space-y-4">
-                <h3 className="text-2xl font-bold text-gray-900 mb-3 leading-tight">
-                  Concept & Estimate
-                </h3>
-                <p className="text-gray-600 leading-relaxed text-base">
-                  Create moodboards, select materials, and provide transparent pricing with detailed project timeline.
-                </p>
-              </div>
-              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-blue-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-            </div>
-            <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gray-300 z-10">
-              <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-2 h-2 bg-gray-400 rounded-full"></div>
-            </div>
+            <h3 className="text-2xl font-bold text-blue-600 mb-3">
+              Concept & Estimate
+            </h3>
+            <p className="text-gray-600 leading-relaxed text-base">
+              Develop creative concepts, moodboards, and material selections
+              while maintaining transparency in pricing and timelines.
+            </p>
           </motion.div>
 
-          {/* Card 3 - Execution */}
+          {/* Step 3 */}
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
             viewport={{ once: true }}
-            className="group relative"
+            className="p-8 border border-gray-100 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-white"
           >
-            <div className="relative bg-white rounded-3xl p-8 h-full shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-red-200 overflow-hidden hover:scale-105">
-              <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-red-50 to-transparent rounded-bl-full opacity-50"></div>
-              <div className="flex items-center justify-between mb-6">
-                <span className="text-6xl font-black bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300">
-                  03
-                </span>
-                <div className="w-3 h-3 bg-red-400 rounded-full group-hover:scale-150 transition-transform duration-300"></div>
-              </div>
-              <div className="flex justify-start mb-6">
-                <div className="relative">
-                  <div className="w-20 h-20 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transform group-hover:rotate-6 transition-all duration-300">
-                    <span className="text-3xl filter drop-shadow-sm">🔨</span>
-                  </div>
-                  <div className="absolute inset-0 w-20 h-20 bg-red-200 rounded-2xl blur-md opacity-30 -z-10 transform translate-y-2"></div>
-                </div>
-              </div>
-              <div className="space-y-4">
-                <h3 className="text-2xl font-bold text-gray-900 mb-3 leading-tight">
-                  Execution
-                </h3>
-                <p className="text-gray-600 leading-relaxed text-base">
-                  Professional on-site work with regular quality checks, and clear milestone timelines.
-                </p>
-              </div>
-              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-red-500 to-red-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-            </div>
-            <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gray-300 z-10">
-              <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-2 h-2 bg-gray-400 rounded-full"></div>
-            </div>
+            <h3 className="text-2xl font-bold text-red-600 mb-3">
+              Execution
+            </h3>
+            <p className="text-gray-600 leading-relaxed text-base">
+              Execute the design with precision and craftsmanship, ensuring
+              every element aligns with the vision through quality checks and
+              progress updates.
+            </p>
           </motion.div>
 
-          {/* Card 4 - Handover */}
+          {/* Step 4 */}
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
             viewport={{ once: true }}
-            className="group relative"
+            className="p-8 border border-gray-100 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-white"
           >
-            <div className="relative bg-white rounded-3xl p-8 h-full shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-blue-200 overflow-hidden hover:scale-105">
-              <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-blue-50 to-transparent rounded-bl-full opacity-50"></div>
-              <div className="flex items-center justify-between mb-6">
-                <span className="text-6xl font-black bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300">
-                  04
-                </span>
-                <div className="w-3 h-3 bg-blue-400 rounded-full group-hover:scale-150 transition-transform duration-300"></div>
-              </div>
-              <div className="flex justify-start mb-6">
-                <div className="relative">
-                  <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transform group-hover:rotate-6 transition-all duration-300">
-                    <span className="text-3xl filter drop-shadow-sm">✨</span>
-                  </div>
-                  <div className="absolute inset-0 w-20 h-20 bg-blue-200 rounded-2xl blur-md opacity-30 -z-10 transform translate-y-2"></div>
-                </div>
-              </div>
-              <div className="space-y-4">
-                <h3 className="text-2xl font-bold text-gray-900 mb-3 leading-tight">
-                  Handover
-                </h3>
-                <p className="text-gray-600 leading-relaxed text-base">
-                  Complete final styling, and provide ongoing support for your satisfaction.
-                </p>
-              </div>
-              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-blue-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-            </div>
+            <h3 className="text-2xl font-bold text-blue-600 mb-3">
+              Handover
+            </h3>
+            <p className="text-gray-600 leading-relaxed text-base">
+              Complete final styling and walkthroughs, followed by a smooth
+              handover and post-project support for lasting satisfaction.
+            </p>
           </motion.div>
         </div>
       </div>
@@ -494,7 +410,7 @@ export default function Home() {
                   I am on a mission to help &ldquo;Luxury Lifestyle Seekers&rdquo; tackle the challenges of limited time, budget constraints and complex coordination of Home Design and Construction.
                 </p>
                 <p className="text-lg">
-                  I am an Interior Designer with over a decade of work experience. I have worked with a lot of home design and construction companies, where i have learned and implemented various techniques to work on space design in this highly unorganized industry. There came a time when i realized that just be sticking to the corporate culture, i will not be able to provide the type of solutions which can actually help people tackle a lot of challenges when it comes to Construction and Home Design.
+                  I am an Interior Designer with over a decade of work experience. I have worked with a lot of home design and construction companies, where I have learned and implemented various techniques to work on space design in this highly unorganized industry. There came a time when I realized that just by sticking to the corporate culture, I will not be able to provide the type of solutions which can actually help people tackle a lot of challenges when it comes to Construction and Home Design.
                 </p>
                 <p className="text-lg">
                   Having learned this I Founded &ldquo;Homestorey&rdquo; which suggests a narrative of creating beautiful personalized spaces and evokes the sense of storytelling and transformation, our clients not only got their spaces designed but discovered a journey of expression and scalability.

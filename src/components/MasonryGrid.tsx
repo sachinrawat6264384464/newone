@@ -50,7 +50,7 @@ const MasonryGrid: React.FC = () => {
       id: 4,
       title: "Home Office Design",
       description: "Productive workspaces optimized for remote work and creativity",
-      image: "/pic3.jpeg",
+      image: "/home_office1.jpg",
       badge: {
         text: "In Demand",
         color: "blue"
@@ -94,7 +94,7 @@ const MasonryGrid: React.FC = () => {
       id: 8,
       title: "Bay Window Seating",
       description: "Cozy reading nooks and seating areas that maximize natural light",
-      image: "/pic3.jpeg",
+      image: "/bay_window.png",
       size: "small",
       buttonText: "Explore",
       delay: 0.7

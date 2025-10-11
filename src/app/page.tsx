@@ -102,7 +102,7 @@ const testimonials: Testimonial[] = [
   },
   {
     name: "Mani Bansal",
-    role: "Business Owner",
+    role: "Pranic healer",
     content:
       "I got my home designed by home storey to revamp my home,and I am very happy with the work.From start to finish, the team at Homestorey exhibited professionalism, creativity,and an unwavering commitment to bringing my vision to life . Their attention to detail was impeccable, and they were able to seamlessly blend functionality with aesthetics, creating a space that is both beautiful and liveable. I highly recommend them for all your home design services.",
     rating: 4.5,
@@ -110,7 +110,7 @@ const testimonials: Testimonial[] = [
   },
   {
     name: "Manish Agarwal",
-    role: "Pharmacist",
+    role: "Exporter",
     content:
       "I recently hired 'Homestorey' for the office space design, and I couldn't be more pleased with the results. My requirements were very clear that I needed a very simple and minimalistic atmosphere. Throughout the construction process, the team maintained open communication, keeping me updated on progress and addressing any concerns promptly.",
     rating: 4.5,

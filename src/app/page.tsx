@@ -93,28 +93,28 @@ const services: Service[] = [
 
 const testimonials: Testimonial[] = [
   {
-    name: "Sarah Johnson",
+    name: "Akku",
     role: "Homeowner",
     content:
-      "Home Storey transformed our outdated kitchen into a modern masterpiece. The attention to detail and quality of work exceeded our expectations.",
+      "Before, it felt like everything was just…cluttered. I had furniture from here and there, and nothing really flowed together. But Homestorey came in and listened to all my requirements –the cozy armchair by the window for reading, the extra storage in the kitchen for all my spices. I highly recommend HOMESTOREY for full home interior design, They were so professional, always on time, and kept everything clean throughout the whole process",
     rating: 5,
-    image: "/pic4.jpeg",
+    image: "/akku1.webp",
   },
   {
-    name: "Michael Chen",
+    name: "Mani Bansal",
     role: "Business Owner",
     content:
-      "Their commercial design expertise helped us create an office space that our employees love. Professional, timely, and within budget.",
-    rating: 5,
-    image: "/pic5.jpeg",
+      "I got my home designed by home storey to revamp my home,and I am very happy with the work.From start to finish, the team at Homestorey exhibited professionalism, creativity,and an unwavering commitment to bringing my vision to life . Their attention to detail was impeccable, and they were able to seamlessly blend functionality with aesthetics, creating a space that is both beautiful and liveable. I highly recommend them for all your home design services.",
+    rating: 4.5,
+    image: "/mani1.webp",
   },
   {
-    name: "Emily Rodriguez",
-    role: "Interior Designer",
+    name: "Manish Agarwal",
+    role: "Pharmacist",
     content:
-      "I've worked with many contractors, but Home Storey stands out for their creativity and commitment to excellence. Highly recommended!",
-    rating: 5,
-    image: "/pic6.jpeg",
+      "I recently hired 'Homestorey' for the office space design, and I couldn't be more pleased with the results. My requirements were very clear that I needed a very simple and minimalistic atmosphere. Throughout the construction process, the team maintained open communication, keeping me updated on progress and addressing any concerns promptly.",
+    rating: 4.5,
+    image: "/manish1.webp",
   },
 ];
 
@@ -361,13 +361,13 @@ export default function Home() {
               viewport={{ once: true }}
             >
               <div className="relative">
-                <div className="absolute -top-4 -left-4 w-32 h-32 bg-blue-400 rounded-full opacity-30 animate-pulse"></div>
+                <div className="absolute -top-4 -left-4 w-32 h-50 bg-blue-400 rounded-full opacity-30 animate-pulse"></div>
                 <div className="relative">
                   <Image
-                    src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&h=600&fit=crop&crop=face"
+                    src="/nidhi.jpg"
                     alt="Nidhi Mittal"
                     width={500}
-                    height={600}
+                    height={950}
                     className="w-full h-[500px] object-cover rounded-3xl shadow-2xl"
                   />
                 </div>
@@ -575,7 +575,7 @@ export default function Home() {
                 </p>
 
                 <div className="flex items-center mb-6">
-                  {[...Array(testimonial.rating)].map((_, i) => (
+                  {[...Array(Math.floor(testimonial.rating))].map((_, i) => (
                     <motion.div
                       key={i}
                       initial={{ scale: 0 }}
@@ -585,6 +585,16 @@ export default function Home() {
                       <Star className="w-5 h-5 text-yellow-500 fill-current" />
                     </motion.div>
                   ))}
+                  {/* Render half-star if needed */}
+                  {testimonial.rating % 1 !== 0 && (
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      whileInView={{ scale: 1 }}
+                      transition={{ delay: index * 0.2 + Math.floor(testimonial.rating) * 0.1 }}
+                    >
+                      <Star className="w-5 h-5 text-yellow-500 fill-current opacity-50" />
+                    </motion.div>
+                  )}
                 </div>
 
                 <div className="flex items-center">

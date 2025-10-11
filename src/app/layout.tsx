@@ -16,6 +16,10 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/logo1img.png" type="image/png" sizes="32x32" />
+      </head>
+
       <body>
         <AuthProvider>
           {children}

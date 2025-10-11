@@ -349,94 +349,93 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Meet Nidhi Section */}
-      <section className="py-20 relative bg-white">
-        <div className="absolute inset-0 bg-red-100/20 opacity-50"></div>
-        <div className="container mx-auto px-4 relative">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <div className="relative">
-                <div className="absolute -top-4 -left-4 w-32 h-50 bg-blue-400 rounded-full opacity-30 animate-pulse"></div>
-                <div className="relative">
-                  <Image
-                    src="/nidhi.jpg"
-                    alt="Nidhi Mittal"
-                    width={500}
-                    height={950}
-                    className="w-full h-[500px] object-cover rounded-3xl shadow-2xl"
-                  />
-                </div>
-              </div>
-            </motion.div>
+{/* Meet Nidhi Section */}
+<section className="relative py-24 overflow-hidden bg-gradient-to-br from-white via-red-50 to-blue-50">
+  {/* Soft glowing background orbs */}
+  <div className="absolute top-0 left-0 w-72 h-72 bg-red-300/20 rounded-full blur-3xl -z-10"></div>
+  <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-300/20 rounded-full blur-3xl -z-10"></div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="space-y-8"
-            >
-              <div>
-                <motion.span
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  transition={{ delay: 0.4 }}
-                  className="text-red-600 font-bold text-xl tracking-wide uppercase"
-                >
-                  Meet Your Designer
-                </motion.span>
-                <motion.h2
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 }}
-                  className="text-4xl md:text-6xl font-bold text-blue-600 mt-4 mb-6 leading-tight"
-                >
-                  Hi, Nidhi here
-                </motion.h2>
-              </div>
+  <div className="container mx-auto px-6 lg:px-12 relative">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      {/* Left: Nidhi Image */}
+      <motion.div
+        initial={{ opacity: 0, x: -50 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="relative flex justify-center"
+      >
+        <div className="relative group w-[420px] h-[550px]">
+          {/* Framed gradient border */}
+          <div className="absolute -inset-2 bg-gradient-to-tr from-red-400 via-blue-400 to-pink-300 rounded-[2rem] blur opacity-60 group-hover:opacity-100 transition-all duration-500"></div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.7 }}
-                className="space-y-6 text-gray-700 leading-relaxed"
-              >
-                <p className="text-lg">
-                  I am on a mission to help &ldquo;Luxury Lifestyle Seekers&rdquo; tackle the challenges of limited time, budget constraints and complex coordination of Home Design and Construction.
-                </p>
-                <p className="text-lg">
-                  I am an Interior Designer with over a decade of work experience. I have worked with a lot of home design and construction companies, where I have learned and implemented various techniques to work on space design in this highly unorganized industry. There came a time when I realized that just by sticking to the corporate culture, I will not be able to provide the type of solutions which can actually help people tackle a lot of challenges when it comes to Construction and Home Design.
-                </p>
-                <p className="text-lg">
-                  Having learned this I Founded &ldquo;Homestorey&rdquo; which suggests a narrative of creating beautiful personalized spaces and evokes the sense of storytelling and transformation, our clients not only got their spaces designed but discovered a journey of expression and scalability.
-                </p>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.9 }}
-                className="pt-2"
-              >
-                <Link href="/contact">
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-4 px-8 rounded-full shadow-xl text-lg"
-                  >
-                    Book a Consultation
-                  </motion.button>
-                </Link>
-              </motion.div>
-            </motion.div>
+          {/* Main image with glass-like shadow */}
+          <div className="relative rounded-[2rem] overflow-hidden shadow-2xl">
+            <Image
+              src="/nidhi.jpg"
+              alt="Nidhi Mittal"
+              width={500}
+              height={700}
+              className="w-full h-[550px] object-cover rounded-[2rem] transform group-hover:scale-105 transition-transform duration-700 ease-out"
+            />
           </div>
+
+          {/* Decorative glow on hover */}
+          <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-60 transition duration-500"></div>
         </div>
-      </section>
+      </motion.div>
+
+      {/* Right: Text Content */}
+      <motion.div
+        initial={{ opacity: 0, x: 50 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+        viewport={{ once: true }}
+        className="space-y-8"
+      >
+        {/* Header */}
+        <div>
+          <span className="text-red-600 font-bold text-xl tracking-wide uppercase block">
+            Meet Your Designer
+          </span>
+          <h2 className="text-5xl md:text-6xl font-extrabold text-gray-900 mt-4 mb-6 leading-tight">
+            Hi, <span className="text-blue-600">I’m Nidhi</span>
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-red-500 to-blue-500 rounded-full"></div>
+        </div>
+
+        {/* Paragraphs */}
+        <div className="space-y-6 text-gray-700 leading-relaxed text-lg">
+          <p>
+            I’m passionate about helping <span className="font-semibold text-red-600">&ldquo;Luxury Lifestyle Seekers&rdquo;</span> 
+            navigate the challenges of limited time, budget constraints, and the complex coordination of home design and construction.
+          </p>
+          <p>
+            With over a decade of experience in <span className="font-semibold text-blue-600">interior design</span>, 
+            I’ve collaborated with top construction and home design firms — learning what truly works in an industry often defined by chaos.
+          </p>
+          <p>
+            That journey led me to found <span className="font-semibold text-red-600">Home Storey</span> — 
+            a brand built on storytelling, transformation, and the belief that every home should tell the story of the people who live in it.
+          </p>
+        </div>
+
+        {/* Button */}
+        <div className="pt-4">
+          <Link href="/contact">
+            <motion.button
+              whileHover={{ scale: 1.07, boxShadow: "0 15px 35px rgba(255, 99, 132, 0.4)" }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-red-500 hover:bg-red-700 text-white font-bold py-4 px-8 rounded-full shadow-xl text-lg"
+            >
+              Book a Consultation
+            </motion.button>
+          </Link>
+        </div>
+      </motion.div>
+    </div>
+  </div>
+</section>
 
 
       {/* Services Section */}

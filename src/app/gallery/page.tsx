@@ -84,7 +84,7 @@ const services: ServiceCarousel[] = [
       "Terrace party & BBQ areas",
       "Balcony & bay window designs"
     ],
-    images: ["/Mandir_2.jpg", "/Mandir_3.jpg", "/Mandir_1.jpg", "/Mandir_4.jpg", "/Mandir_5.jpg"],
+    images: ["/Mandir_2.jpg", "/Mandir_3.jpg", "/bay_window.png", "/gym.jpg", "/images/Rooftop/terrace.jpg"],
     color: "text-blue-600",
     bgGradient: "from-blue-50 to-blue-100"
   },
@@ -98,7 +98,7 @@ const services: ServiceCarousel[] = [
       "False ceiling & lighting design",
       "Wall decor & flooring solutions"
     ],
-    images: ["/pic3.jpeg", "/pic4.jpeg"],
+    images: ["/pic3.jpeg", "/pic4.jpeg", "/false_ceiling.jpg", "/wall_decor.jpg"],
     color: "text-red-600",
     bgGradient: "from-red-50 to-red-100"
   },

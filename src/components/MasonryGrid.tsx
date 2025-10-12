@@ -24,7 +24,7 @@ const MasonryGrid: React.FC = () => {
       id: 2,
       title: "Modular Kitchen Storage",
       description: "Smart storage solutions with pull-out systems and corner optimizers for maximum efficiency",
-      image: "/pic5.jpeg",
+      image: "/images/Kitchen/kitchen.jpg",
       badge: {
         text: "Popular",
         color: "green"
@@ -76,7 +76,7 @@ const MasonryGrid: React.FC = () => {
       id: 6,
       title: "Terrace BBQ & Lounges",
       description: "Outdoor entertainment spaces designed for relaxation and social gatherings",
-      image: "/pic1.jpeg",
+      image: "/images/Rooftop/terrace.jpg",
       size: "small",
       buttonText: "Explore",
       delay: 0.5

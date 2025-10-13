@@ -13,7 +13,6 @@ import {
   ArrowRight,
   Star,
   Heart,
-  Phone,
   Linkedin
 } from 'lucide-react';
 import WhatsAppButton from '../components/WhatsAppButton'
@@ -237,20 +236,6 @@ const Layout = ({ children }: LayoutProps) => {
               </h3>
               
               <div className="space-y-4">
-                <motion.a
-                  href="tel:+919625769768"
-                  className="flex items-start space-x-3 group cursor-pointer"
-                  whileHover={{ x: 5 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <div className="bg-green-100 p-2 rounded-lg group-hover:bg-green-200 transition-colors duration-300">
-                    <Phone className="w-5 h-5 text-green-600" />
-                  </div>
-                  <div>
-                    <p className="text-black font-semibold mb-1">Call Us</p>
-                    <p className="text-gray-600 text-sm">+91 96257 69768</p>
-                  </div>
-                </motion.a>
 
                 <motion.a
                   href="mailto:homestorey@thenidhimittal.com"
@@ -330,7 +315,7 @@ const Layout = ({ children }: LayoutProps) => {
                 <span className="flex items-center gap-1">
                   Made with <Heart className="w-3 h-3 text-red-500 fill-current inline" /> by
                   <Link 
-                    href="#"
+                    href="https://botmartz.com"
                     className="text-black font-semibold hover:text-red-500 transition-colors duration-300"
                   >
                     Botmartz IT Solutions

@@ -28,7 +28,7 @@ const services: ServiceCarousel[] = [
       "Entrance foyer & door designs",
       "Exterior lighting solutions"
     ],
-    images: ["/Facade_1.jpg", "/Facade_2.jpg", "/Facade_3.jpg", "/Facade_4.jpg", "/Facade_5.jpg"],
+    images: ["/facade1.jpg", "/facade2.jpg", "/facade3.jpg", "/facade4.jpg", "/Facade_5.jpg"],
     color: "text-blue-600",
     bgGradient: "from-blue-50 to-blue-100"
   },

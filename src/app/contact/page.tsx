@@ -7,7 +7,7 @@ import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
 import { db } from '../../lib/firebase'
 import toast from 'react-hot-toast'
 import Layout from '../../components/Layout'
-import { Mail, Phone, MapPin, Clock, Send, Star, CheckCircle, Users } from 'lucide-react'
+import { Mail, MapPin, Clock, Send, Star, CheckCircle, Users } from 'lucide-react'
 
 interface ContactFormData {
   firstName: string
@@ -477,20 +477,6 @@ export default function Contact() {
                       <h3 className="font-bold text-gray-800 mb-1 text-lg">Email</h3>
                       <p className="text-gray-700 font-semibold">homestorey@thenidhimittal.com</p>
                       <p className="text-sm text-gray-500">Response within 24 hours</p>
-                    </div>
-                  </motion.div>
-
-                  <motion.div
-                    whileHover={{ scale: 1.02, x: 10 }}
-                    className="flex items-start space-x-4 bg-white p-6 rounded-xl shadow-lg border border-gray-200"
-                  >
-                    <div className="bg-green-600 p-3 rounded-xl shadow-lg">
-                      <Phone className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-gray-800 mb-1 text-lg">Phone</h3>
-                      <p className="text-gray-700 font-semibold">+91 96257 69768</p>
-                      <p className="text-sm text-gray-500">Available during business hours</p>
                     </div>
                   </motion.div>
 

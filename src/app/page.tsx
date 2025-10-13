@@ -50,14 +50,14 @@ const services: Service[] = [
     icon: HomeIcon,
     title: "Facade Design",
     description: "Stunning exterior designs that create lasting first impressions",
-    image: "/Facade_1.jpg",
+    image: "/facade1.jpg",
     color: "from-red-400 to-red-600",
   },
   {
     icon: Sofa,
     title: "Living Area",
     description: "Comfortable and stylish living spaces perfect for family gatherings",
-    image: "/Living_3.jpg",
+    image: "/living.jpg",
     color: "from-blue-400 to-blue-600",
   },
   {

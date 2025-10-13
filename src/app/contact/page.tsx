@@ -1,4 +1,4 @@
-// app/contact/page.tsx - Updated with email notification and fixed warnings
+// app/contact/page.tsx - Updated with new fields
 'use client'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
@@ -14,6 +14,11 @@ interface ContactFormData {
   lastName: string
   email: string
   phone?: string
+  propertyAddress: string
+  pinCode: string
+  houseType: string
+  requirements: string
+  preferredContact: string
   projectType: string
   budget?: string
   message: string
@@ -47,13 +52,11 @@ export default function Contact() {
         if (!response.ok) {
           const errorData = await response.json()
           console.error('Email notification failed:', errorData)
-          // Don't fail the entire form submission if email fails
         } else {
           console.log('Email notification sent successfully')
         }
       } catch (emailError) {
         console.error('Email notification error:', emailError)
-        // Continue with success message even if email fails
       }
 
       toast.success('Thank you! We\'ll get back to you within 24 hours.')
@@ -142,6 +145,7 @@ export default function Contact() {
                   <h2 className="text-3xl font-bold text-blue-600 mb-6">Send Us a Message</h2>
                   
                   <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                    {/* Name Fields */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
                         <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -186,6 +190,7 @@ export default function Contact() {
                       </div>
                     </div>
 
+                    {/* Email */}
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-2">
                         Email Address *
@@ -213,47 +218,177 @@ export default function Contact() {
                       )}
                     </div>
 
+                    {/* Phone */}
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        Phone Number
+                        Phone Number *
                       </label>
                       <input
                         type="tel"
-                        {...register('phone')}
+                        {...register('phone', { required: 'Phone number is required' })}
                         className="w-full px-4 py-3 border-2 border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 bg-white"
                         placeholder="+91 98765 43210"
                       />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        Project Type *
-                      </label>
-                      <select
-                        {...register('projectType', { required: 'Please select a project type' })}
-                        className="w-full px-4 py-3 border-2 border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 bg-white"
-                      >
-                        <option value="">Select a project type</option>
-                        <option value="kitchen">Kitchen Renovation</option>
-                        <option value="bathroom">Bathroom Renovation</option>
-                        <option value="living">Living Area Design</option>
-                        <option value="bedroom">Bedroom Design</option>
-                        <option value="dining">Dining Area</option>
-                        <option value="commercial">Commercial Space</option>
-                        <option value="full-home">Full Home Renovation</option>
-                        <option value="other">Other</option>
-                      </select>
-                      {errors.projectType && (
+                      {errors.phone && (
                         <motion.p
                           initial={{ opacity: 0, x: -10 }}
                           animate={{ opacity: 1, x: 0 }}
                           className="text-red-500 text-sm mt-1"
                         >
-                          {errors.projectType.message}
+                          {errors.phone.message}
                         </motion.p>
                       )}
                     </div>
 
+                    {/* Property Address and Pin Code */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="md:col-span-2">
+                        <label className="block text-sm font-semibold text-gray-700 mb-2">
+                          Property Address *
+                        </label>
+                        <input
+                          type="text"
+                          {...register('propertyAddress', { required: 'Property address is required' })}
+                          className="w-full px-4 py-3 border-2 border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 bg-white"
+                          placeholder="Street, Area, City, State"
+                        />
+                        {errors.propertyAddress && (
+                          <motion.p
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            className="text-red-500 text-sm mt-1"
+                          >
+                            {errors.propertyAddress.message}
+                          </motion.p>
+                        )}
+                      </div>
+                      
+                      <div className="md:col-span-2">
+                        <label className="block text-sm font-semibold text-gray-700 mb-2">
+                          Pin Code *
+                        </label>
+                        <input
+                          type="text"
+                          {...register('pinCode', { 
+                            required: 'Pin code is required',
+                            pattern: {
+                              value: /^\d{6}$/,
+                              message: 'Invalid pin code (6 digits required)'
+                            }
+                          })}
+                          className="w-full px-4 py-3 border-2 border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 bg-white"
+                          placeholder="110001"
+                          maxLength={6}
+                        />
+                        {errors.pinCode && (
+                          <motion.p
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            className="text-red-500 text-sm mt-1"
+                          >
+                            {errors.pinCode.message}
+                          </motion.p>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* House Type */}
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">
+                        Type of House *
+                      </label>
+                      <select
+                        {...register('houseType', { required: 'Please select house type' })}
+                        className="w-full px-4 py-3 border-2 border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 bg-white"
+                      >
+                        <option value="">Select house type</option>
+                        <option value="3bhk">3 BHK</option>
+                        <option value="4bhk">4 BHK</option>
+                        <option value="villa">Villa</option>
+                        <option value="penthouse">Penthouse</option>
+                        <option value="independent-house">Independent House</option>
+                      </select>
+                      {errors.houseType && (
+                        <motion.p
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          className="text-red-500 text-sm mt-1"
+                        >
+                          {errors.houseType.message}
+                        </motion.p>
+                      )}
+                    </div>
+
+                    {/* Requirements */}
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">
+                        What are your requirements? *
+                      </label>
+                      <select
+                        {...register('requirements', { required: 'Please select your requirements' })}
+                        className="w-full px-4 py-3 border-2 border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 bg-white"
+                      >
+                        <option value="">Select your requirements</option>
+                        <option value="full-home-design">Full Home Design</option>
+                        <option value="partial-home-design">Partial Home Design</option>
+                        <option value="renovation-required">Already Living (Renovation Required)</option>
+                      </select>
+                      {errors.requirements && (
+                        <motion.p
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          className="text-red-500 text-sm mt-1"
+                        >
+                          {errors.requirements.message}
+                        </motion.p>
+                      )}
+                    </div>
+
+                    {/* Preferred Contact Method */}
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">
+                        What is the best way to reach you? *
+                      </label>
+                      <select
+                        {...register('preferredContact', { required: 'Please select preferred contact method' })}
+                        className="w-full px-4 py-3 border-2 border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 bg-white"
+                      >
+                        <option value="">Select contact method</option>
+                        <option value="whatsapp">WhatsApp</option>
+                        <option value="call">Call</option>
+                        <option value="email">Email</option>
+                      </select>
+                      {errors.preferredContact && (
+                        <motion.p
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          className="text-red-500 text-sm mt-1"
+                        >
+                          {errors.preferredContact.message}
+                        </motion.p>
+                      )}
+                    </div>
+
+                    {/* Project Type */}
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">
+                        Specific Area Focus (Optional)
+                      </label>
+                      <select
+                        {...register('projectType')}
+                        className="w-full px-4 py-3 border-2 border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 bg-white"
+                      >
+                        <option value="">Select area (if any specific)</option>
+                        <option value="kitchen">Kitchen</option>
+                        <option value="bathroom">Bathroom</option>
+                        <option value="living">Living Area</option>
+                        <option value="bedroom">Bedroom</option>
+                        <option value="dining">Dining Area</option>
+                        <option value="other">Other</option>
+                      </select>
+                    </div>
+
+                    {/* Budget Range */}
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-2">
                         Budget Range
@@ -263,16 +398,17 @@ export default function Contact() {
                         className="w-full px-4 py-3 border-2 border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 bg-white"
                       >
                         <option value="">Select budget range</option>
-                        <option value="5-10-lakh">₹10 - ₹20 Lakh</option>
-                        <option value="10-25-lakh">₹20 - ₹30 Lakh</option>
-                        <option value="25-50-lakh">₹30 - ₹50 Lakh</option>
-                        <option value="over-50-lakh">Over ₹50 Lakh</option>
+                        <option value="20-30-lakh">₹20 - ₹30 Lakh</option>
+                        <option value="30-40-lakh">₹30 - ₹40 Lakh</option>
+                        <option value="40-50-lakh">₹40 - ₹50 Lakh</option>
+                        <option value="50-plus-lakh">₹50+ Lakh</option>
                       </select>
                     </div>
 
+                    {/* Message */}
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        Message *
+                        Additional Message *
                       </label>
                       <textarea
                         {...register('message', { required: 'Message is required' })}
@@ -322,7 +458,7 @@ export default function Contact() {
                 className="space-y-8"
               >
                 <div>
-                  <span className="text-red-600 font-semibold text-lg">Lets Connect</span>
+                  <span className="text-red-600 font-semibold text-lg">Let&apos;s Connect</span>
                   <h2 className="text-3xl font-bold text-gray-800 mt-2 mb-4">Contact Information</h2>
                   <p className="text-lg text-gray-600 leading-relaxed">
                     Get in touch with us today to start your journey toward a beautiful, functional space that exceeds your expectations.
@@ -457,8 +593,8 @@ export default function Contact() {
                   <div className="text-white/80 text-sm">Happy Clients</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-red-400 mb-2">15+</div>
-                  <div className="text-white/80 text-sm">Design Awards</div>
+                  <div className="text-3xl font-bold text-yellow-400 mb-2">4.5</div>
+                  <div className="text-white/80 text-sm">Average Rating</div>
                 </div>
               </div>
             </motion.div>

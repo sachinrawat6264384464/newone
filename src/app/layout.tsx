@@ -3,10 +3,13 @@ import './globals.css'
 import { AuthProvider } from '../lib/auth'
 import { Toaster } from 'react-hot-toast'
 import { ReactNode } from 'react'
+import Script from 'next/script'
+import Image from 'next/image'
 
 export const metadata = {
   title: 'Home Storey - Transform Your Space',
-  description: 'Expert design and construction services for beautiful homes and commercial spaces',
+  description:
+    'Expert design and construction services for beautiful homes and commercial spaces',
 }
 
 interface RootLayoutProps {
@@ -24,6 +27,34 @@ export default function RootLayout({ children }: RootLayoutProps) {
           name="p:domain_verify"
           content="1a1790fb7ce1e5bb3f196d4367d7142a"
         />
+
+        {/* ✅ Meta Pixel Code */}
+        <Script id="meta-pixel" strategy="afterInteractive">
+          {`
+            !function(f,b,e,v,n,t,s)
+            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window, document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '419405604519953');
+            fbq('track', 'PageView');
+          `}
+        </Script>
+
+        {/* ✅ NoScript fallback for Meta Pixel using Next.js <Image> */}
+        <noscript>
+          <Image
+            src="https://www.facebook.com/tr?id=419405604519953&ev=PageView&noscript=1"
+            height={1}
+            width={1}
+            alt="facebook pixel"
+            style={{ display: 'none' }}
+            unoptimized
+          />
+        </noscript>
       </head>
 
       <body>

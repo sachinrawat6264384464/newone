@@ -22,10 +22,17 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <head>
         <link rel="icon" href="/logo1img.png" type="image/png" sizes="32x32" />
 
-        {/* ✅ Pinterest verification meta tag */}
         <meta
           name="p:domain_verify"
           content="1a1790fb7ce1e5bb3f196d4367d7142a"
+        />
+
+        {/* ✅ Trustpilot Script - Loads once for entire site */}
+        <Script
+          id="trustpilot-script"
+          src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js"
+          strategy="lazyOnload"
+          async
         />
 
         {/* ✅ Meta Pixel Code */}
@@ -44,7 +51,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
           `}
         </Script>
 
-        {/* ✅ NoScript fallback for Meta Pixel using Next.js <Image> */}
         <noscript>
           <Image
             src="https://www.facebook.com/tr?id=419405604519953&ev=PageView&noscript=1"

@@ -8,6 +8,7 @@ import { db } from '../../lib/firebase'
 import toast from 'react-hot-toast'
 import Layout from '../../components/Layout'
 import { Mail, MapPin, Clock, Send, Star, CheckCircle, Users } from 'lucide-react'
+import TrustpilotReviewCollector from '@/components/TrustPilotReviewCollector'
 
 interface ContactFormData {
   firstName: string
@@ -549,6 +550,17 @@ export default function Contact() {
                   </div>
                 </motion.div>
               </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Trustpilot Widget Section */}
+        <section className="py-12 bg-white">
+          <div className="container mx-auto px-6 text-center">
+            <h3 className="text-2xl font-bold text-gray-800 mb-4">Our Clients Love Us</h3>
+            <p className="text-gray-600 mb-6">See what homeowners are saying about their Home Storey experience</p>
+            <div className="flex justify-center">
+              <TrustpilotReviewCollector />
             </div>
           </div>
         </section>

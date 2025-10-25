@@ -16,6 +16,8 @@ import {
   Linkedin
 } from 'lucide-react';
 import WhatsAppButton from '../components/WhatsAppButton'
+
+import TrustpilotReviewCollector from './TrustPilotReviewCollector';
 interface LayoutProps {
   children: ReactNode;
 }
@@ -265,6 +267,19 @@ const Layout = ({ children }: LayoutProps) => {
                     <p className="text-gray-600 text-sm">Delhi</p>
                   </div>
                 </motion.div>
+              </div>
+
+              {/* Trustpilot Review Collector Section */}
+              <div className="border-t border-gray-800 pt-8 mb-8">
+                <div className="max-w-xl mx-auto text-center">
+                  <h3 className="text-lg font-semibold mb-2">
+                    Share Your Experience
+                  </h3>
+                  <p className="text-gray-400 text-sm mb-4">
+                    Already worked with us? We&apos;d love to hear from you!
+                  </p>
+                  <TrustpilotReviewCollector />
+                </div>
               </div>
 
               {/* Social Links */}

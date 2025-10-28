@@ -27,6 +27,21 @@ export default function RootLayout({ children }: RootLayoutProps) {
           content="1a1790fb7ce1e5bb3f196d4367d7142a"
         />
 
+        {/* ✅ Google Analytics (gtag.js) */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-8C1BX4DVDH"
+          strategy="afterInteractive"
+          async
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-8C1BX4DVDH');
+          `}
+        </Script>
+
         {/* ✅ Trustpilot Script - Loads once for entire site */}
         <Script
           id="trustpilot-script"

@@ -200,9 +200,7 @@ const Layout = ({ children }: LayoutProps) => {
                 {[
                   { name: "About Us", href: "/about" },
                   { name: "Our Work", href: "/gallery" },
-                  
                   { name: "Contact", href: "/contact" },
-                  
                   
                 ].map((link, index) => (
                   <motion.li

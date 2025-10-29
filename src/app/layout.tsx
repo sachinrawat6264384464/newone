@@ -31,7 +31,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-8C1BX4DVDH"
           strategy="afterInteractive"
-          async
         />
         <Script id="google-analytics" strategy="afterInteractive">
           {`
@@ -42,12 +41,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
           `}
         </Script>
 
-        {/* ✅ Trustpilot Script - Loads once for entire site */}
+        {/* ✅ Trustpilot Script */}
         <Script
           id="trustpilot-script"
           src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js"
           strategy="lazyOnload"
-          async
         />
 
         {/* ✅ Meta Pixel Code */}
@@ -61,14 +59,15 @@ export default function RootLayout({ children }: RootLayoutProps) {
             t.src=v;s=b.getElementsByTagName(e)[0];
             s.parentNode.insertBefore(t,s)}(window, document,'script',
             'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '419405604519953');
+            fbq('init', '2437076866695197');
             fbq('track', 'PageView');
           `}
         </Script>
 
+        {/* ✅ noscript fallback using Next.js Image */}
         <noscript>
           <Image
-            src="https://www.facebook.com/tr?id=419405604519953&ev=PageView&noscript=1"
+            src="https://www.facebook.com/tr?id=2437076866695197&ev=PageView&noscript=1"
             height={1}
             width={1}
             alt="facebook pixel"

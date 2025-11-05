@@ -20,13 +20,14 @@ import {
   AlertTriangle,
   HomeIcon,
   Briefcase,
-  Ruler,  Zap, Palette
+  Ruler,
+  Zap,
+  Palette,
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import MasonryGrid from '@/components/MasonryGrid';
+import MasonryGrid from "@/components/MasonryGrid";
 import CommonProblems from "../components/CommonProblems";
-
 
 interface Service {
   icon: LucideIcon;
@@ -44,52 +45,58 @@ interface Testimonial {
   image: string;
 }
 
-
 const services: Service[] = [
   {
     icon: HomeIcon,
     title: "Facade Design",
-    description: "Stunning exterior designs that create lasting first impressions",
-    image: "/facade1.jpg",
+    description:
+      "Stunning exterior designs that create lasting first impressions",
+    image:
+      "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298162/Homestorey-media/What%20we%20create/vt9avmrazh3jvii5ytl9.jpg",
     color: "from-red-400 to-red-600",
   },
   {
     icon: Sofa,
     title: "Living Area",
-    description: "Comfortable and stylish living spaces perfect for family gatherings",
-    image: "/living.jpg",
+    description:
+      "Comfortable and stylish living spaces perfect for family gatherings",
+    image:
+      "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298165/Homestorey-media/What%20we%20create/jjhie0tfazmie9laeimu.jpg",
     color: "from-blue-400 to-blue-600",
   },
   {
     icon: ChefHat,
     title: "Kitchen Design",
     description: "Modern, functional kitchens that are the heart of your home",
-    image: "/kitchen1.jpg",
+    image:
+      "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298164/Homestorey-media/What%20we%20create/t6w21ualgsjkz6ifc8bo.jpg",
     color: "from-red-400 to-red-600",
   },
   {
     icon: Bed,
     title: "Bedroom Design",
     description: "Peaceful retreats designed for rest and rejuvenation",
-    image: "/Bedroom_4.jpeg",
+    image:
+      "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298161/Homestorey-media/What%20we%20create/edh6sfa6zt7byruupb2b.jpg",
     color: "from-blue-400 to-blue-600",
   },
   {
     icon: Bath,
     title: "Bathroom Design",
     description: "Spa-like bathrooms combining luxury and functionality",
-    image: "/Bathroom_1.jpg",
+    image:
+      "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298160/Homestorey-media/What%20we%20create/wqnxhezwbtsnivywxqej.jpg",
     color: "from-red-400 to-red-600",
   },
   {
     icon: Briefcase,
     title: "Home Office Design",
     description: "Productive work-from-home spaces tailored to your needs",
-    image: "/pic3.jpeg",
+    image:
+      "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298163/Homestorey-media/What%20we%20create/hqflyynqrv1uccqarkmf.jpg",
     color: "from-blue-400 to-blue-600",
   },
 ];
-
 
 const testimonials: Testimonial[] = [
   {
@@ -98,7 +105,8 @@ const testimonials: Testimonial[] = [
     content:
       "Before, it felt like everything was just…cluttered. I had furniture from here and there, and nothing really flowed together. But Homestorey came in and listened to all my requirements –the cozy armchair by the window for reading, the extra storage in the kitchen for all my spices. I highly recommend HOMESTOREY for full home interior design, They were so professional, always on time, and kept everything clean throughout the whole process",
     rating: 5,
-    image: "/akku1.webp",
+    image:
+      "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298140/Homestorey-media/Testimonials/qseuicqak0uskkbrsubz.webp",
   },
   {
     name: "Mani Bansal",
@@ -106,7 +114,8 @@ const testimonials: Testimonial[] = [
     content:
       "I got my home designed by home storey to revamp my home,and I am very happy with the work.From start to finish, the team at Homestorey exhibited professionalism, creativity,and an unwavering commitment to bringing my vision to life . Their attention to detail was impeccable, and they were able to seamlessly blend functionality with aesthetics, creating a space that is both beautiful and liveable. I highly recommend them for all your home design services.",
     rating: 4.5,
-    image: "/mani1.webp",
+    image:
+      "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298140/Homestorey-media/Testimonials/qseuicqak0uskkbrsubz.webp",
   },
   {
     name: "Manish Agarwal",
@@ -114,53 +123,61 @@ const testimonials: Testimonial[] = [
     content:
       "I recently hired 'Homestorey' for the office space design, and I couldn't be more pleased with the results. My requirements were very clear that I needed a very simple and minimalistic atmosphere. Throughout the construction process, the team maintained open communication, keeping me updated on progress and addressing any concerns promptly.",
     rating: 4.5,
-    image: "/manish1.webp",
+    image:
+      "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298140/Homestorey-media/Testimonials/qseuicqak0uskkbrsubz.webp",
   },
 ];
 
 const problems = [
   {
     title: "Budget Overruns",
-    description: "Unexpected costs and hidden expenses that derail your project finances and timeline.",
-    icon: DollarSign
+    description:
+      "Unexpected costs and hidden expenses that derail your project finances and timeline.",
+    icon: DollarSign,
   },
   {
     title: "Time Delays",
-    description: "Projects taking longer than planned due to poor planning and coordination issues.",
-    icon: Clock
+    description:
+      "Projects taking longer than planned due to poor planning and coordination issues.",
+    icon: Clock,
   },
   {
     title: "Space Planning Issues",
-    description: "Inefficient use of space leading to cramped areas and poor functionality in daily use.",
-    icon: Ruler
+    description:
+      "Inefficient use of space leading to cramped areas and poor functionality in daily use.",
+    icon: Ruler,
   },
   {
     title: "Quality Compromises",
-    description: "Substandard materials and workmanship that affect durability and overall satisfaction.",
-    icon: AlertTriangle
+    description:
+      "Substandard materials and workmanship that affect durability and overall satisfaction.",
+    icon: AlertTriangle,
   },
   {
     title: "Design Inconsistency",
-    description: "Mismatched styles and themes creating a disjointed look throughout your home.",
-    icon: Palette
+    description:
+      "Mismatched styles and themes creating a disjointed look throughout your home.",
+    icon: Palette,
   },
   {
     title: "Poor Functionality",
-    description: "Beautiful designs that don't work for your lifestyle and daily routines.",
-    icon: Zap
+    description:
+      "Beautiful designs that don't work for your lifestyle and daily routines.",
+    icon: Zap,
   },
   {
     title: "Communication Gaps",
-    description: "Misunderstandings between homeowners, designers, and contractors causing rework.",
-    icon: Users
+    description:
+      "Misunderstandings between homeowners, designers, and contractors causing rework.",
+    icon: Users,
   },
   {
     title: "Technical Challenges",
-    description: "Structural, electrical, and plumbing issues that weren't anticipated in the design.",
-    icon: Briefcase
-  }
+    description:
+      "Structural, electrical, and plumbing issues that weren't anticipated in the design.",
+    icon: Briefcase,
+  },
 ];
-
 
 const stats = [
   { label: "Happy Clients", value: "250+", icon: Users },
@@ -237,9 +254,7 @@ const ProcessSection = () => {
             viewport={{ once: true }}
             className="p-8 border border-gray-100 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-white"
           >
-            <h3 className="text-2xl font-bold text-red-600 mb-3">
-              Execution
-            </h3>
+            <h3 className="text-2xl font-bold text-red-600 mb-3">Execution</h3>
             <p className="text-gray-600 leading-relaxed text-base">
               Execute the design with precision and craftsmanship, ensuring
               every element aligns with the vision through quality checks and
@@ -255,9 +270,7 @@ const ProcessSection = () => {
             viewport={{ once: true }}
             className="p-8 border border-gray-100 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-white"
           >
-            <h3 className="text-2xl font-bold text-blue-600 mb-3">
-              Handover
-            </h3>
+            <h3 className="text-2xl font-bold text-blue-600 mb-3">Handover</h3>
             <p className="text-gray-600 leading-relaxed text-base">
               Complete final styling and walkthroughs, followed by a smooth
               handover and post-project support for lasting satisfaction.
@@ -349,94 +362,110 @@ export default function Home() {
         </div>
       </section>
 
-{/* Meet Nidhi Section */}
-<section className="relative py-24 overflow-hidden bg-gradient-to-br from-white via-red-50 to-blue-50">
-  {/* Soft glowing background orbs */}
-  <div className="absolute top-0 left-0 w-72 h-72 bg-red-300/20 rounded-full blur-3xl -z-10"></div>
-  <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-300/20 rounded-full blur-3xl -z-10"></div>
+      {/* Meet Nidhi Section */}
+      <section className="relative py-24 overflow-hidden bg-gradient-to-br from-white via-red-50 to-blue-50">
+        {/* Soft glowing background orbs */}
+        <div className="absolute top-0 left-0 w-72 h-72 bg-red-300/20 rounded-full blur-3xl -z-10"></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-300/20 rounded-full blur-3xl -z-10"></div>
 
-  <div className="container mx-auto px-6 lg:px-12 relative">
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-      {/* Left: Nidhi Image */}
-      <motion.div
-        initial={{ opacity: 0, x: -50 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-        className="relative flex justify-center"
-      >
-        <div className="relative group w-[420px] h-[550px]">
-          {/* Framed gradient border */}
-          <div className="absolute -inset-2 bg-gradient-to-tr from-red-400 via-blue-400 to-pink-300 rounded-[2rem] blur opacity-60 group-hover:opacity-100 transition-all duration-500"></div>
-
-          {/* Main image with glass-like shadow */}
-          <div className="relative rounded-[2rem] overflow-hidden shadow-2xl">
-            <Image
-              src="/nidhi.jpg"
-              alt="Nidhi Mittal"
-              width={500}
-              height={700}
-              className="w-full h-[550px] object-cover rounded-[2rem] transform group-hover:scale-105 transition-transform duration-700 ease-out"
-            />
-          </div>
-
-          {/* Decorative glow on hover */}
-          <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-60 transition duration-500"></div>
-        </div>
-      </motion.div>
-
-      {/* Right: Text Content */}
-      <motion.div
-        initial={{ opacity: 0, x: 50 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-        viewport={{ once: true }}
-        className="space-y-8"
-      >
-        {/* Header */}
-        <div>
-          <span className="text-red-600 font-bold text-xl tracking-wide uppercase block">
-            Meet Your Designer
-          </span>
-          <h2 className="text-5xl md:text-6xl font-extrabold text-gray-900 mt-4 mb-6 leading-tight">
-            Hi, <span className="text-blue-600">I’m Nidhi</span>
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-red-500 to-blue-500 rounded-full"></div>
-        </div>
-
-        {/* Paragraphs */}
-        <div className="space-y-6 text-gray-700 leading-relaxed text-lg">
-          <p>
-            I’m passionate about helping <span className="font-semibold text-red-600">&ldquo;Luxury Lifestyle Seekers&rdquo;</span> 
-            navigate the challenges of limited time, budget constraints, and the complex coordination of home design and construction.
-          </p>
-          <p>
-            With over a decade of experience in <span className="font-semibold text-blue-600">interior design</span>, 
-            I’ve collaborated with top construction and home design firms — learning what truly works in an industry often defined by chaos.
-          </p>
-          <p>
-            That journey led me to found <span className="font-semibold text-red-600">Home Storey</span> — 
-            a brand built on storytelling, transformation, and the belief that every home should tell the story of the people who live in it.
-          </p>
-        </div>
-
-        {/* Button */}
-        <div className="pt-4">
-          <Link href="/contact">
-            <motion.button
-              whileHover={{ scale: 1.07, boxShadow: "0 15px 35px rgba(255, 99, 132, 0.4)" }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-red-500 hover:bg-red-700 text-white font-bold py-4 px-8 rounded-full shadow-xl text-lg"
+        <div className="container mx-auto px-6 lg:px-12 relative">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            {/* Left: Nidhi Image */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="relative flex justify-center"
             >
-              Book a Consultation
-            </motion.button>
-          </Link>
-        </div>
-      </motion.div>
-    </div>
-  </div>
-</section>
+              <div className="relative group w-[420px] h-[550px]">
+                {/* Framed gradient border */}
+                <div className="absolute -inset-2 bg-gradient-to-tr from-red-400 via-blue-400 to-pink-300 rounded-[2rem] blur opacity-60 group-hover:opacity-100 transition-all duration-500"></div>
 
+                {/* Main image with glass-like shadow */}
+                <div className="relative rounded-[2rem] overflow-hidden shadow-2xl">
+                  <Image
+                    src="https://res.cloudinary.com/dfjecbhki/image/upload/v1762298139/Homestorey-media/Owner/xyergldmjm9mfacihjb5.jpg"
+                    alt="Nidhi Mittal"
+                    width={500}
+                    height={700}
+                    className="w-full h-[550px] object-cover rounded-[2rem] transform group-hover:scale-105 transition-transform duration-700 ease-out"
+                  />
+                </div>
+
+                {/* Decorative glow on hover */}
+                <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-60 transition duration-500"></div>
+              </div>
+            </motion.div>
+
+            {/* Right: Text Content */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="space-y-8"
+            >
+              {/* Header */}
+              <div>
+                <span className="text-red-600 font-bold text-xl tracking-wide uppercase block">
+                  Meet Your Designer
+                </span>
+                <h2 className="text-5xl md:text-6xl font-extrabold text-gray-900 mt-4 mb-6 leading-tight">
+                  Hi, <span className="text-blue-600">I’m Nidhi</span>
+                </h2>
+                <div className="w-24 h-1 bg-gradient-to-r from-red-500 to-blue-500 rounded-full"></div>
+              </div>
+
+              {/* Paragraphs */}
+              <div className="space-y-6 text-gray-700 leading-relaxed text-lg">
+                <p>
+                  I’m passionate about helping{" "}
+                  <span className="font-semibold text-red-600">
+                    &ldquo;Luxury Lifestyle Seekers&rdquo;
+                  </span>
+                  navigate the challenges of limited time, budget constraints,
+                  and the complex coordination of home design and construction.
+                </p>
+                <p>
+                  With over a decade of experience in{" "}
+                  <span className="font-semibold text-blue-600">
+                    interior design
+                  </span>
+                  , I’ve collaborated with top construction and home design
+                  firms — learning what truly works in an industry often defined
+                  by chaos.
+                </p>
+                <p>
+                  That journey led me to found{" "}
+                  <span className="font-semibold text-red-600">
+                    Home Storey
+                  </span>{" "}
+                  — a brand built on storytelling, transformation, and the
+                  belief that every home should tell the story of the people who
+                  live in it.
+                </p>
+              </div>
+
+              {/* Button */}
+              <div className="pt-4">
+                <Link href="/contact">
+                  <motion.button
+                    whileHover={{
+                      scale: 1.07,
+                      boxShadow: "0 15px 35px rgba(255, 99, 132, 0.4)",
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-4 px-8 rounded-full shadow-xl text-lg"
+                  >
+                    Book a Consultation
+                  </motion.button>
+                </Link>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
 
       {/* Services Section */}
       <section className="py-24 bg-gradient-to-br from-white via-gray-50 to-blue-50 relative overflow-hidden">
@@ -455,7 +484,8 @@ export default function Home() {
               Forget Typical Boring Designs, Look at What We Have
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              From stunning facades to functional interiors, we bring your vision to life with creativity and precision
+              From stunning facades to functional interiors, we bring your
+              vision to life with creativity and precision
             </p>
           </motion.div>
 
@@ -472,7 +502,7 @@ export default function Home() {
                   whileHover={{ y: -10, scale: 1.02 }}
                   className="group bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 border border-gray-100"
                 >
-                  <div className="relative h-64 overflow-hidden">
+                  <div className="relative h-82 overflow-hidden">
                     <Image
                       src={service.image}
                       alt={service.title}
@@ -481,9 +511,7 @@ export default function Home() {
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                    <div className="absolute top-6 left-6 bg-white/20 backdrop-blur-md p-4 rounded-2xl shadow-lg group-hover:scale-110 transition-transform duration-300 border border-white/30">
-                      <IconComponent className="w-6 h-6 text-white" />
-                    </div>
+
                     <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
                       <span className="text-xs font-semibold text-gray-700">
                         Premium
@@ -550,7 +578,8 @@ export default function Home() {
               What Our Clients Say
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Hear from satisfied homeowners and businesses who trusted us with their dreams
+              Hear from satisfied homeowners and businesses who trusted us with
+              their dreams
             </p>
           </motion.div>
 
@@ -589,7 +618,10 @@ export default function Home() {
                     <motion.div
                       initial={{ scale: 0 }}
                       whileInView={{ scale: 1 }}
-                      transition={{ delay: index * 0.2 + Math.floor(testimonial.rating) * 0.1 }}
+                      transition={{
+                        delay:
+                          index * 0.2 + Math.floor(testimonial.rating) * 0.1,
+                      }}
                     >
                       <Star className="w-5 h-5 text-yellow-500 fill-current opacity-50" />
                     </motion.div>
@@ -647,7 +679,11 @@ export default function Home() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              <Link href="https://tidycal.com/homestorey/free-design-discussion" target="_blank" rel="noopener noreferrer">
+              <Link
+                href="https://tidycal.com/homestorey/free-design-discussion"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <motion.button
                   whileHover={{
                     scale: 1.05,

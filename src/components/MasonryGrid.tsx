@@ -11,7 +11,7 @@ const MasonryGrid: React.FC = () => {
       id: 1,
       title: "Smart Home Automation",
       description: "Control your entire home with voice commands - lighting, temperature, security, and entertainment systems integrated seamlessly",
-      image: "/pic1.jpeg",
+      image: "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298154/Homestorey-media/Trending%20Now/sifrsnviuyzkfovsl3ni.jpg",
       badge: {
         text: "Most Popular",
         color: "red"
@@ -24,7 +24,7 @@ const MasonryGrid: React.FC = () => {
       id: 2,
       title: "Modular Kitchen Storage",
       description: "Smart storage solutions with pull-out systems and corner optimizers for maximum efficiency",
-      image: "/images/Kitchen/kitchen.jpg",
+      image: "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298145/Homestorey-media/Trending%20Now/aivfp1pqwgtfcop6virc.jpg",
       badge: {
         text: "Popular",
         color: "green"
@@ -37,7 +37,7 @@ const MasonryGrid: React.FC = () => {
       id: 3,
       title: "Space-Saving Solutions",
       description: "Murphy beds and convertible furniture for modern living spaces",
-      image: "/pic2.jpeg",
+      image: "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298159/Homestorey-media/Trending%20Now/yaxvkmmtlui2ikbxgaih.jpg",
       badge: {
         text: "Trending",
         color: "blue"
@@ -50,7 +50,7 @@ const MasonryGrid: React.FC = () => {
       id: 4,
       title: "Home Office Design",
       description: "Productive workspaces optimized for remote work and creativity",
-      image: "/home_office1.jpg",
+      image: "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298144/Homestorey-media/Trending%20Now/nkmqkyeymplfwaizumgq.jpg",
       badge: {
         text: "In Demand",
         color: "blue"
@@ -61,9 +61,9 @@ const MasonryGrid: React.FC = () => {
     },
     {
       id: 5,
-      title: "Wellness & Fitness Spaces",
-      description: "Dedicated yoga rooms, home gyms, and meditation areas for a healthier lifestyle",
-      image: "/pic4.jpeg",
+      title: "Pooja Areas",
+      description: "Dedicated pooja rooms, meditation corners, and serene spaces for spiritual and peaceful living",
+      image: "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298152/Homestorey-media/Trending%20Now/smltkqjvr60siwugu5gv.jpg",
       badge: {
         text: "Wellness Focus",
         color: "purple"
@@ -76,7 +76,7 @@ const MasonryGrid: React.FC = () => {
       id: 6,
       title: "Terrace BBQ & Lounges",
       description: "Outdoor entertainment spaces designed for relaxation and social gatherings",
-      image: "/images/Rooftop/terrace.jpg",
+      image: "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298159/Homestorey-media/Trending%20Now/yaxvkmmtlui2ikbxgaih.jpg",
       size: "small",
       buttonText: "Explore",
       delay: 0.5
@@ -85,7 +85,7 @@ const MasonryGrid: React.FC = () => {
       id: 7,
       title: "Mandir & Prayer Rooms",
       description: "Sacred spaces with traditional elements and modern design integration",
-      image: "/Mandir_2.jpg",
+      image: "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298153/Homestorey-media/Trending%20Now/kdcsevhnupm4vtm9s2my.jpg",
       size: "small",
       buttonText: "Explore",
       delay: 0.6
@@ -94,7 +94,7 @@ const MasonryGrid: React.FC = () => {
       id: 8,
       title: "Bay Window Seating",
       description: "Cozy reading nooks and seating areas that maximize natural light",
-      image: "/bay_window.png",
+      image: "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298143/Homestorey-media/Trending%20Now/el023n4t0hfl8ofbq5ui.png",
       size: "small",
       buttonText: "Explore",
       delay: 0.7

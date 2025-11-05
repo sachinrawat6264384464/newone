@@ -20,7 +20,7 @@ const slides: Slide[] = [
     title: "Shape Dream Home",
     subtitle: "Expert Interior Design & Construction",
     description: "Create beautiful, functional spaces that reflect your style and enhance your lifestyle with our award-winning team.",
-    image: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1920&h=1080&fit=crop",
+    image: "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298136/Homestorey-media/Hero/hfqrz6nqcaxbwa22urgx.jpg",
     cta: "Start Your Project",
     accent: "from-red-500 to-orange-500"
   },
@@ -29,7 +29,7 @@ const slides: Slide[] = [
     title: "Luxury Kitchen Solutions",
     subtitle: "Where Culinary Dreams Come Alive",
     description: "Design the heart of your home with our expert kitchen renovation services that blend functionality with stunning aesthetics.",
-    image: "/kitchen1.jpg",
+    image: "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298138/Homestorey-media/Hero/haemuplqyv9glq1651fc.jpg",
     cta: "Explore Kitchens",
     accent: "from-red-500 to-orange-500"
   },

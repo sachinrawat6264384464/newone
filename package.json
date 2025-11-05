@@ -11,6 +11,7 @@
   "dependencies": {
     "@types/nodemailer": "^7.0.1",
     "autoprefixer": "^10.4.21",
+    "cloudinary": "^2.8.0",
     "firebase": "^12.2.1",
     "framer-motion": "^12.23.12",
     "lucide-react": "^0.544.0",

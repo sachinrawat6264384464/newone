@@ -1,4 +1,6 @@
 // components/MasonryCard.tsx
+'use client';
+
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
@@ -33,11 +35,11 @@ const MasonryCard: React.FC<MasonryCardProps> = ({ card }) => {
       case 'red':
         return 'bg-red-500';
       case 'blue':
-        return 'bg-blue-500';
+        return 'bg-red-600';
       case 'green':
-        return 'bg-green-500';
+        return 'bg-red-500';
       case 'purple':
-        return 'bg-purple-500';
+        return 'bg-rose-600';
       case 'orange':
         return 'bg-orange-500';
       default:

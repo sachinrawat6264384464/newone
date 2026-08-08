@@ -105,24 +105,25 @@ const HeroCarousel = () => {
                   <span>{slides[currentSlide].subtitle}</span>
                 </motion.div>
 
-                {/* Main title: native <h1> for crawlers; animation on inner spans only */}
-                <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-tight">
+                {/* Main Title */}
+                <motion.h1
+                  initial={{ y: 50, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.6, duration: 0.8 }}
+                  className="text-5xl md:text-7xl lg:text-8xl font-bold leading-tight"
+                >
                   {slides[currentSlide].title.split(' ').map((word, index) => (
                     <motion.span
-                      key={`${currentSlide}-${index}`}
+                      key={index}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.6 + index * 0.1, duration: 0.8 }}
-                      className={
-                        index === 2
-                          ? `block bg-gradient-to-r ${slides[currentSlide].accent} bg-clip-text text-transparent`
-                          : ''
-                      }
+                      transition={{ delay: 0.7 + index * 0.1 }}
+                      className={index === 2 ? `block bg-gradient-to-r ${slides[currentSlide].accent} bg-clip-text text-transparent` : ''}
                     >
                       {word}{' '}
                     </motion.span>
                   ))}
-                </h1>
+                </motion.h1>
 
                 {/* Description */}
                 <motion.p
@@ -164,7 +165,7 @@ const HeroCarousel = () => {
                     <span className="text-white font-semibold">4.5/5 Rating</span>
                   </div>
                   <div className="w-px h-6 bg-white/30 hidden sm:block"></div>
-                  <div className="text-white font-semibold">300+ Projects</div>
+                  <div className="text-white font-semibold">300+ Designs</div>
                   <div className="w-px h-6 bg-white/30 hidden sm:block"></div>
                   <div className="text-white font-semibold">10+ Years</div>
                 </motion.div>

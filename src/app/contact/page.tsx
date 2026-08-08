@@ -92,7 +92,7 @@ export default function Contact() {
           <motion.div
             animate={{ y: [0, -15, 0] }}
             transition={{ duration: 3, repeat: Infinity }}
-            className="absolute bottom-10 left-10 w-20 h-20 bg-blue-200 rounded-full"
+            className="absolute bottom-10 left-10 w-20 h-20 bg-red-200 rounded-full"
           />
           
           <div className="container mx-auto px-6 text-center relative z-10 max-w-4xl">
@@ -101,9 +101,9 @@ export default function Contact() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <span className="text-blue-600 font-semibold text-lg bg-blue-100 px-4 py-2 rounded-full">Ready to Start?</span>
+              <span className="text-red-600 font-semibold text-lg bg-red-100 px-4 py-2 rounded-full">Ready to Start?</span>
               <h1 className="text-5xl md:text-6xl font-bold text-gray-800 mb-6 mt-6">Get In Touch</h1>
-              <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed mb-4">
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed mb-8">
                 Ready to start your dream project? Let&apos;s discuss your vision and create something extraordinary together.
               </p>
               
@@ -117,7 +117,7 @@ export default function Contact() {
                   <Star className="w-5 h-5 text-yellow-500 fill-current" />
                   <span className="font-semibold">4.5/5 Rating</span>
                 </div>
-                <div className="flex items-center space-x-2 text-blue-600 bg-blue-100 px-4 py-2 rounded-full">
+                <div className="flex items-center space-x-2 text-red-600 bg-red-100 px-4 py-2 rounded-full">
                   <Users className="w-5 h-5" />
                   <span className="font-semibold">250+ Happy Clients</span>
                 </div>
@@ -143,7 +143,7 @@ export default function Contact() {
               >
                 <div className="absolute -top-4 -left-4 w-20 h-20 bg-red-200 rounded-full animate-pulse"></div>
                 <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-200 relative z-10">
-                  <h2 className="text-3xl font-bold text-blue-600 mb-6">Send Us a Message</h2>
+                  <h2 className="text-3xl font-bold text-red-600 mb-6">Send Us a Message</h2>
                   
                   <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                     {/* Name Fields */}
@@ -155,7 +155,7 @@ export default function Contact() {
                         <input
                           type="text"
                           {...register('firstName', { required: 'First name is required' })}
-                          className="w-full px-4 py-3 border-2 border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 bg-white"
+                          className="w-full px-4 py-3 border-2 border-red-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-300 bg-white"
                           placeholder="John"
                         />
                         {errors.firstName && (
@@ -176,7 +176,7 @@ export default function Contact() {
                         <input
                           type="text"
                           {...register('lastName', { required: 'Last name is required' })}
-                          className="w-full px-4 py-3 border-2 border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 bg-white"
+                          className="w-full px-4 py-3 border-2 border-red-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-300 bg-white"
                           placeholder="Doe"
                         />
                         {errors.lastName && (
@@ -205,7 +205,7 @@ export default function Contact() {
                             message: 'Invalid email address'
                           }
                         })}
-                        className="w-full px-4 py-3 border-2 border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 bg-white"
+                        className="w-full px-4 py-3 border-2 border-red-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-300 bg-white"
                         placeholder="john@example.com"
                       />
                       {errors.email && (
@@ -227,7 +227,7 @@ export default function Contact() {
                       <input
                         type="tel"
                         {...register('phone', { required: 'Phone number is required' })}
-                        className="w-full px-4 py-3 border-2 border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 bg-white"
+                        className="w-full px-4 py-3 border-2 border-red-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-300 bg-white"
                         placeholder="+91 98765 43210"
                       />
                       {errors.phone && (
@@ -250,7 +250,7 @@ export default function Contact() {
                         <input
                           type="text"
                           {...register('propertyAddress', { required: 'Property address is required' })}
-                          className="w-full px-4 py-3 border-2 border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 bg-white"
+                          className="w-full px-4 py-3 border-2 border-red-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-300 bg-white"
                           placeholder="Street, Area, City, State"
                         />
                         {errors.propertyAddress && (
@@ -277,7 +277,7 @@ export default function Contact() {
                               message: 'Invalid pin code (6 digits required)'
                             }
                           })}
-                          className="w-full px-4 py-3 border-2 border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 bg-white"
+                          className="w-full px-4 py-3 border-2 border-red-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-300 bg-white"
                           placeholder="110001"
                           maxLength={6}
                         />
@@ -300,7 +300,7 @@ export default function Contact() {
                       </label>
                       <select
                         {...register('houseType', { required: 'Please select house type' })}
-                        className="w-full px-4 py-3 border-2 border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 bg-white"
+                        className="w-full px-4 py-3 border-2 border-red-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-300 bg-white"
                       >
                         <option value="">Select house type</option>
                         <option value="3bhk">3 BHK</option>
@@ -327,7 +327,7 @@ export default function Contact() {
                       </label>
                       <select
                         {...register('requirements', { required: 'Please select your requirements' })}
-                        className="w-full px-4 py-3 border-2 border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 bg-white"
+                        className="w-full px-4 py-3 border-2 border-red-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-300 bg-white"
                       >
                         <option value="">Select your requirements</option>
                         <option value="full-home-design">Full Home Design</option>
@@ -352,7 +352,7 @@ export default function Contact() {
                       </label>
                       <select
                         {...register('preferredContact', { required: 'Please select preferred contact method' })}
-                        className="w-full px-4 py-3 border-2 border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 bg-white"
+                        className="w-full px-4 py-3 border-2 border-red-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-300 bg-white"
                       >
                         <option value="">Select contact method</option>
                         <option value="whatsapp">WhatsApp</option>
@@ -377,7 +377,7 @@ export default function Contact() {
                       </label>
                       <select
                         {...register('projectType')}
-                        className="w-full px-4 py-3 border-2 border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 bg-white"
+                        className="w-full px-4 py-3 border-2 border-red-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-300 bg-white"
                       >
                         <option value="">Select area (if any specific)</option>
                         <option value="kitchen">Kitchen</option>
@@ -396,7 +396,7 @@ export default function Contact() {
                       </label>
                       <select
                         {...register('budget')}
-                        className="w-full px-4 py-3 border-2 border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 bg-white"
+                        className="w-full px-4 py-3 border-2 border-red-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-300 bg-white"
                       >
                         <option value="">Select budget range</option>
                         <option value="20-30-lakh">₹20 - ₹30 Lakh</option>
@@ -414,7 +414,7 @@ export default function Contact() {
                       <textarea
                         {...register('message', { required: 'Message is required' })}
                         rows={4}
-                        className="w-full px-4 py-3 border-2 border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 resize-none bg-white"
+                        className="w-full px-4 py-3 border-2 border-red-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-300 resize-none bg-white"
                         placeholder="Tell us about your project, timeline, and any specific requirements..."
                       />
                       {errors.message && (
@@ -433,7 +433,7 @@ export default function Contact() {
                       disabled={isSubmitting}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      className="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 px-6 rounded-lg font-bold text-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 shadow-lg"
+                      className="w-full bg-red-600 hover:bg-red-700 text-white py-4 px-6 rounded-lg font-bold text-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 shadow-lg"
                     >
                       {isSubmitting ? (
                         <>
@@ -471,7 +471,7 @@ export default function Contact() {
                     whileHover={{ scale: 1.02, x: 10 }}
                     className="flex items-start space-x-4 bg-white p-6 rounded-xl shadow-lg border border-gray-200"
                   >
-                    <div className="bg-blue-600 p-3 rounded-xl shadow-lg">
+                    <div className="bg-red-600 p-3 rounded-xl shadow-lg">
                       <Mail className="w-6 h-6 text-white" />
                     </div>
                     <div>
@@ -485,7 +485,7 @@ export default function Contact() {
                     whileHover={{ scale: 1.02, x: 10 }}
                     className="flex items-start space-x-4 bg-white p-6 rounded-xl shadow-lg border border-gray-200"
                   >
-                    <div className="bg-purple-600 p-3 rounded-xl shadow-lg">
+                    <div className="bg-rose-600 p-3 rounded-xl shadow-lg">
                       <MapPin className="w-6 h-6 text-white" />
                     </div>
                     <div>
@@ -520,7 +520,7 @@ export default function Contact() {
                   transition={{ delay: 0.6 }}
                   className="bg-red-50 border-2 border-red-200 rounded-xl p-6 shadow-lg relative overflow-hidden"
                 >
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-blue-200 rounded-full -translate-y-12 translate-x-12"></div>
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-red-200 rounded-full -translate-y-12 translate-x-12"></div>
                   <div className="relative">
                     <h3 className="text-xl font-bold text-gray-800 mb-3">Free Design Consultation</h3>
                     <p className="text-gray-600 mb-4 leading-relaxed">
@@ -543,7 +543,7 @@ export default function Contact() {
                     <motion.button
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      className="bg-blue-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-blue-700 transition-all duration-300 w-full"
+                      className="bg-red-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-red-700 transition-all duration-300 w-full"
                     >
                       Book Free Consultation
                     </motion.button>
@@ -567,7 +567,7 @@ export default function Contact() {
 
         {/* Trust Indicators */}
         <section className="py-12 bg-gray-800 relative overflow-hidden">
-          <div className="absolute inset-0 opacity-10 bg-blue-500"></div>
+          <div className="absolute inset-0 opacity-10 bg-red-500"></div>
           <div className="container mx-auto px-6 relative">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -583,8 +583,8 @@ export default function Contact() {
                   <div className="text-white/80 text-sm">Years Experience</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-blue-400 mb-2">300+</div>
-                  <div className="text-white/80 text-sm">Projects Completed</div>
+                  <div className="text-3xl font-bold text-red-400 mb-2">300+</div>
+                  <div className="text-white/80 text-sm">Designs Completed</div>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-green-400 mb-2">250+</div>

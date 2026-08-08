@@ -62,7 +62,7 @@ const services: Service[] = [
       "Comfortable and stylish living spaces perfect for family gatherings",
     image:
       "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298165/Homestorey-media/What%20we%20create/jjhie0tfazmie9laeimu.jpg",
-    color: "from-blue-400 to-blue-600",
+    color: "from-red-400 to-red-600",
   },
   {
     icon: ChefHat,
@@ -78,7 +78,7 @@ const services: Service[] = [
     description: "Peaceful retreats designed for rest and rejuvenation",
     image:
       "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298161/Homestorey-media/What%20we%20create/edh6sfa6zt7byruupb2b.jpg",
-    color: "from-blue-400 to-blue-600",
+    color: "from-red-400 to-red-600",
   },
   {
     icon: Bath,
@@ -94,7 +94,7 @@ const services: Service[] = [
     description: "Productive work-from-home spaces tailored to your needs",
     image:
       "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298163/Homestorey-media/What%20we%20create/hqflyynqrv1uccqarkmf.jpg",
-    color: "from-blue-400 to-blue-600",
+    color: "from-red-400 to-red-600",
   },
 ];
 
@@ -237,7 +237,7 @@ const ProcessSection = () => {
             viewport={{ once: true }}
             className="p-8 border border-gray-100 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-white"
           >
-            <h3 className="text-2xl font-bold text-blue-600 mb-3">
+            <h3 className="text-2xl font-bold text-red-600 mb-3">
               Concept & Estimate
             </h3>
             <p className="text-gray-600 leading-relaxed text-base">
@@ -270,7 +270,7 @@ const ProcessSection = () => {
             viewport={{ once: true }}
             className="p-8 border border-gray-100 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-white"
           >
-            <h3 className="text-2xl font-bold text-blue-600 mb-3">Handover</h3>
+            <h3 className="text-2xl font-bold text-red-600 mb-3">Handover</h3>
             <p className="text-gray-600 leading-relaxed text-base">
               Complete final styling and walkthroughs, followed by a smooth
               handover and post-project support for lasting satisfaction.
@@ -291,82 +291,11 @@ export default function Home() {
       {/* Hero Carousel */}
       <HeroCarousel />
 
-      {/* Stats Section */}
-      <section className="py-20 relative overflow-hidden">
-        <div className="absolute top-10 left-10 w-32 h-32 bg-white/5 rounded-full blur-xl animate-pulse"></div>
-        <div className="absolute bottom-10 right-10 w-40 h-40 bg-white/5 rounded-full blur-xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-60 h-60 bg-white/3 rounded-full blur-2xl"></div>
-
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold text-black mb-4">
-              Our Achievements
-            </h2>
-            <p className="text-xl text-black/90 max-w-2xl mx-auto">
-              Numbers that speak for our commitment to excellence
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            {stats.map((stat, index) => {
-              const IconComponent = stat.icon;
-              const colors = [
-                "from-blue-500 to-blue-600",
-                "from-red-500 to-red-600",
-                "from-blue-500 to-blue-600",
-              ];
-              const borderColors = [
-                "border-blue-400/50",
-                "border-red-400/50",
-                "border-blue-400/50",
-              ];
-
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="text-center"
-                >
-                  <motion.div
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    className={`w-20 h-20 bg-gradient-to-br ${
-                      colors[index % colors.length]
-                    } rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-2xl border-2 ${
-                      borderColors[index % borderColors.length]
-                    } backdrop-blur-sm`}
-                  >
-                    <IconComponent className="w-10 h-10 text-white drop-shadow-lg" />
-                  </motion.div>
-                  <motion.h3
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    transition={{
-                      delay: index * 0.1 + 0.3,
-                      type: "spring",
-                      stiffness: 200,
-                    }}
-                    className="text-5xl md:text-6xl font-bold mb-3 text-black drop-shadow-lg"
-                  >
-                    {stat.value}
-                  </motion.h3>
-                  <p className="text-black/95 font-semibold text-lg tracking-wide">
-                    {stat.label}
-                  </p>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
       {/* Meet Nidhi Section */}
-      <section className="relative py-24 overflow-hidden bg-gradient-to-br from-white via-red-50 to-blue-50">
+      <section className="relative py-24 overflow-hidden bg-gradient-to-br from-white via-red-50 to-red-100">
         {/* Soft glowing background orbs */}
         <div className="absolute top-0 left-0 w-72 h-72 bg-red-300/20 rounded-full blur-3xl -z-10"></div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-300/20 rounded-full blur-3xl -z-10"></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-red-300/20 rounded-full blur-3xl -z-10"></div>
 
         <div className="container mx-auto px-6 lg:px-12 relative">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -380,7 +309,7 @@ export default function Home() {
             >
               <div className="relative group w-[420px] h-[550px]">
                 {/* Framed gradient border */}
-                <div className="absolute -inset-2 bg-gradient-to-tr from-red-400 via-blue-400 to-pink-300 rounded-[2rem] blur opacity-60 group-hover:opacity-100 transition-all duration-500"></div>
+                <div className="absolute -inset-2 bg-gradient-to-tr from-red-500 via-rose-500 to-orange-400 rounded-[2rem] blur opacity-60 group-hover:opacity-100 transition-all duration-500"></div>
 
                 {/* Main image with glass-like shadow */}
                 <div className="relative rounded-[2rem] overflow-hidden shadow-2xl">
@@ -412,9 +341,9 @@ export default function Home() {
                   Meet Your Designer
                 </span>
                 <h2 className="text-5xl md:text-6xl font-extrabold text-gray-900 mt-4 mb-6 leading-tight">
-                  Hi, <span className="text-blue-600">I’m Nidhi</span>
+                  Hi, <span className="text-red-600">I’m Nidhi</span>
                 </h2>
-                <div className="w-24 h-1 bg-gradient-to-r from-red-500 to-blue-500 rounded-full"></div>
+                <div className="w-24 h-1 bg-gradient-to-r from-red-500 to-rose-600 rounded-full"></div>
               </div>
 
               {/* Paragraphs */}
@@ -429,7 +358,7 @@ export default function Home() {
                 </p>
                 <p>
                   With over a decade of experience in{" "}
-                  <span className="font-semibold text-blue-600">
+                  <span className="font-semibold text-red-600">
                     interior design
                   </span>
                   , I’ve collaborated with top construction and home design
@@ -453,10 +382,10 @@ export default function Home() {
                   <motion.button
                     whileHover={{
                       scale: 1.07,
-                      boxShadow: "0 15px 35px rgba(255, 99, 132, 0.4)",
+                      boxShadow: "0 15px 35px rgba(239, 68, 68, 0.4)",
                     }}
                     whileTap={{ scale: 0.95 }}
-                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-4 px-8 rounded-full shadow-xl text-lg"
+                    className="bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-8 rounded-full shadow-xl text-lg"
                   >
                     Book a Consultation
                   </motion.button>
@@ -468,7 +397,7 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section className="py-24 bg-gradient-to-br from-white via-gray-50 to-blue-50 relative overflow-hidden">
+      <section className="py-24 bg-gradient-to-br from-white via-gray-50 to-red-50 relative overflow-hidden">
         <div className="container mx-auto px-4 relative">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -481,7 +410,7 @@ export default function Home() {
               What We Create
             </span>
             <h2 className="text-5xl font-bold text-gray-800 mt-4 mb-6">
-              Forget Typical Boring Designs, Look at What We Have
+              Look at what we design
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               From stunning facades to functional interiors, we bring your
@@ -549,7 +478,7 @@ export default function Home() {
               href="/gallery"
               className="inline-flex items-center space-x-2 bg-red-600 text-white px-10 py-4 rounded-full font-semibold hover:bg-red-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
             >
-              <span>Explore All Our Services</span>
+              <span>Explore All Designs</span>
               <ArrowRight className="w-5 h-5" />
             </Link>
           </motion.div>
@@ -690,7 +619,7 @@ export default function Home() {
                     boxShadow: "0 20px 40px rgba(239, 68, 68, 0.3)",
                   }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-5 rounded-2xl text-xl font-bold transition-all duration-300 shadow-lg inline-flex items-center space-x-3"
+                  className="bg-red-600 hover:bg-red-700 text-white px-10 py-5 rounded-2xl text-xl font-bold transition-all duration-300 shadow-lg inline-flex items-center space-x-3"
                 >
                   <span>Start Your Free Consultation</span>
                   <ArrowRight className="w-6 h-6" />

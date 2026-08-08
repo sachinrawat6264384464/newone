@@ -36,8 +36,8 @@ const services: ServiceCarousel[] = [
       "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298118/Homestorey-media/Gallery%20page/y8fzk10gfdjb8vus5jkv.jpg",
       "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298123/Homestorey-media/Gallery%20page/rmocq2ue2azvxqebzzsw.jpg",
     ],
-    color: "text-blue-600",
-    bgGradient: "from-blue-50 to-blue-100",
+    color: "text-red-600",
+    bgGradient: "from-red-50 to-red-100",
   },
   {
     title: "Living & Dining Spaces",
@@ -75,11 +75,9 @@ const services: ServiceCarousel[] = [
       "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298127/Homestorey-media/Gallery%20page/edk6q2gjwi5g0u2mw3pp.jpg",
       "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298126/Homestorey-media/Gallery%20page/spkd2fuj0bcyoomyi1pq.jpg",
       "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298125/Homestorey-media/Gallery%20page/ceecfgprdjhjobsjqcm8.jpg",
-      //  "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298119/Homestorey-media/Gallery%20page/it9ndirw06qiromci5nm.jpg",
-      //   "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298109/Homestorey-media/Gallery%20page/r4wfq5luwxnnktcbw85b.jpg"
     ],
-    color: "text-blue-600",
-    bgGradient: "from-blue-50 to-blue-100",
+    color: "text-red-600",
+    bgGradient: "from-red-50 to-red-100",
   },
   {
     title: "Bedrooms & Bathroom Design",
@@ -120,8 +118,8 @@ const services: ServiceCarousel[] = [
       "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298133/Homestorey-media/Gallery%20page/qrvccsdngw1eemstykjc.jpg",
       "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298143/Homestorey-media/Trending%20Now/el023n4t0hfl8ofbq5ui.png",
     ],
-    color: "text-blue-600",
-    bgGradient: "from-blue-50 to-blue-100",
+    color: "text-red-600",
+    bgGradient: "from-red-50 to-red-100",
   },
 ];
 
@@ -206,7 +204,7 @@ export default function Gallery() {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="py-20 lg:py-28 bg-gradient-to-br from-white via-blue-50 to-red-50 relative overflow-hidden">
+      <section className="py-20 lg:py-28 bg-gradient-to-br from-white via-red-50 to-red-100 relative overflow-hidden">
         <div className="absolute inset-0 opacity-5 bg-brick-pattern"></div>
 
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
@@ -223,7 +221,7 @@ export default function Gallery() {
               className="text-4xl lg:text-6xl font-bold text-gray-800 mb-6 leading-tight"
             >
               Welcome Home to Your
-              <span className="block text-blue-600 mt-2">
+              <span className="block text-red-600 mt-2">
                 Dream Design Journey
               </span>
             </motion.h1>
@@ -247,7 +245,7 @@ export default function Gallery() {
             >
               <div className="bg-white px-6 py-3 rounded-full shadow-md border border-gray-200">
                 <span className="text-gray-700 font-semibold">
-                  300+ Projects
+                  300+ Designs
                 </span>
               </div>
               <div className="bg-white px-6 py-3 rounded-full shadow-md border border-gray-200">
@@ -270,7 +268,7 @@ export default function Gallery() {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-2xl text-xl font-bold shadow-xl transition-all duration-300 inline-flex items-center space-x-3"
+                  className="bg-red-600 hover:bg-red-700 text-white px-10 py-4 rounded-2xl text-xl font-bold shadow-xl transition-all duration-300 inline-flex items-center space-x-3"
                 >
                   <span>Start Your Project</span>
                   <ArrowRight className="w-6 h-6" />
@@ -284,7 +282,7 @@ export default function Gallery() {
       {/* Services Timeline Section */}
       <section className="py-24 lg:py-32 relative overflow-hidden bg-white">
         <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-200 rounded-full blur-3xl"></div>
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-red-200 rounded-full blur-3xl"></div>
           <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-red-200 rounded-full blur-3xl"></div>
         </div>
 
@@ -296,7 +294,7 @@ export default function Gallery() {
             viewport={{ once: true }}
             className="text-center mb-20"
           >
-            <span className="text-blue-600 font-semibold text-lg bg-blue-100 px-6 py-3 rounded-full shadow-sm">
+            <span className="text-red-600 font-semibold text-lg bg-red-100 px-6 py-3 rounded-full shadow-sm">
               Our Expertise
             </span>
             <h2 className="text-4xl lg:text-6xl xl:text-7xl font-bold text-gray-800 mt-8 mb-6">
@@ -309,7 +307,7 @@ export default function Gallery() {
           </motion.div>
 
           <div className="relative max-w-7xl mx-auto">
-            <div className="absolute left-8 lg:left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-400 via-purple-400 to-red-400 transform lg:-translate-x-1/2 rounded-full shadow-lg"></div>
+            <div className="absolute left-8 lg:left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-red-500 via-rose-500 to-red-600 transform lg:-translate-x-1/2 rounded-full shadow-lg"></div>
 
             <div className="space-y-32 lg:space-y-40">
               {services.map((service, index) => (
@@ -332,11 +330,7 @@ export default function Gallery() {
                     viewport={{ once: true }}
                     className="absolute left-2 lg:left-1/2 w-16 h-16 rounded-full transform lg:-translate-x-1/2 shadow-xl z-20 flex items-center justify-center overflow-hidden"
                     style={{
-                      background: `linear-gradient(135deg, ${
-                        service.color.includes("blue") ? "#3B82F6" : "#EF4444"
-                      } 0%, ${
-                        service.color.includes("blue") ? "#1D4ED8" : "#DC2626"
-                      } 100%)`,
+                      background: `linear-gradient(135deg, #EF4444 0%, #DC2626 100%)`,
                     }}
                   >
                     <div className="w-3 h-3 bg-white rounded-full"></div>
@@ -361,7 +355,7 @@ export default function Gallery() {
                           onNext={() => updateCarousel(index, "next")}
                           onPrev={() => updateCarousel(index, "prev")}
                         />
-                        <div className="absolute -inset-4 bg-gradient-to-r from-blue-100 to-red-100 rounded-3xl opacity-50 -z-10 blur-sm"></div>
+                        <div className="absolute -inset-4 bg-gradient-to-r from-red-100 to-rose-100 rounded-3xl opacity-50 -z-10 blur-sm"></div>
                       </div>
                     </motion.div>
 
@@ -404,11 +398,7 @@ export default function Gallery() {
                                 className="flex items-center space-x-3 bg-white/60 backdrop-blur-sm p-4 rounded-lg shadow-sm border border-white/30"
                               >
                                 <div
-                                  className={`w-7 h-7 ${
-                                    service.color.includes("blue")
-                                      ? "bg-gradient-to-r from-blue-500 to-blue-600"
-                                      : "bg-gradient-to-r from-red-500 to-red-600"
-                                  } rounded-full flex items-center justify-center flex-shrink-0 shadow-sm`}
+                                  className="w-7 h-7 bg-gradient-to-r from-red-500 to-red-600 rounded-full flex items-center justify-center flex-shrink-0 shadow-sm"
                                 >
                                   <Sparkles className="w-4 h-4 text-white" />
                                 </div>
@@ -434,7 +424,7 @@ export default function Gallery() {
       </section>
 
       {/* Compact CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-600 relative overflow-hidden">
+      <section className="py-20 bg-gradient-to-r from-red-600 via-red-700 to-rose-800 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-0 left-0 w-72 h-72 bg-white rounded-full blur-3xl"></div>
           <div className="absolute bottom-0 right-0 w-72 h-72 bg-white rounded-full blur-3xl"></div>
@@ -483,7 +473,7 @@ export default function Gallery() {
                 <motion.button
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.98 }}
-                  className="bg-white text-blue-600 px-8 py-4 rounded-xl text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 inline-flex items-center space-x-2"
+                  className="bg-white text-red-600 px-8 py-4 rounded-xl text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 inline-flex items-center space-x-2"
                 >
                   <span>Start Your Project</span>
                   <ArrowRight className="w-5 h-5" />

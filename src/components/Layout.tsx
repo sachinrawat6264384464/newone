@@ -3,6 +3,7 @@
 import { useState, ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
@@ -13,7 +14,8 @@ import {
   ArrowRight,
   Star,
   Heart,
-  Linkedin
+  Linkedin,
+  Youtube
 } from 'lucide-react';
 import WhatsAppButton from '../components/WhatsAppButton'
 
@@ -24,6 +26,7 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   // Footer Component
   const Footer = () => {
@@ -42,7 +45,7 @@ const Layout = ({ children }: LayoutProps) => {
         icon: Facebook, 
         href: "https://www.facebook.com/people/Home-storey/61563975190788", 
         label: "Facebook", 
-        color: "hover:text-blue-600" 
+        color: "hover:text-red-600" 
       },
       { 
         icon: Instagram, 
@@ -54,7 +57,13 @@ const Layout = ({ children }: LayoutProps) => {
         icon: Linkedin, 
         href: "https://www.linkedin.com/company/homestorey", 
         label: "LinkedIn", 
-        color: "hover:text-blue-700" 
+        color: "hover:text-red-700" 
+      },
+      { 
+        icon: Youtube, 
+        href: "https://www.youtube.com/@homestorey.interiors", 
+        label: "YouTube", 
+        color: "hover:text-red-600" 
       },
       { 
         icon: ({ className }: { className?: string }) => (
@@ -77,7 +86,7 @@ const Layout = ({ children }: LayoutProps) => {
         
         {/* Floating Decorative Elements */}
         <div className="absolute top-20 left-10 w-32 h-32 bg-red-500/5 rounded-full blur-2xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-40 h-40 bg-blue-500/5 rounded-full blur-2xl animate-pulse delay-1000"></div>
+        <div className="absolute bottom-20 right-10 w-40 h-40 bg-red-500/5 rounded-full blur-2xl animate-pulse delay-1000"></div>
         
         <div className="container mx-auto px-4 py-16 relative z-10">
           {/* Main Footer Content */}
@@ -116,10 +125,10 @@ const Layout = ({ children }: LayoutProps) => {
                 <motion.button
                   whileHover={{ 
                     scale: 1.05,
-                    boxShadow: "0 10px 30px rgba(59, 130, 246, 0.4)"
+                    boxShadow: "0 10px 30px rgba(239, 68, 68, 0.4)"
                   }}
                   whileTap={{ scale: 0.95 }}
-                  className="group bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold py-3 px-6 rounded-full transition-all duration-300 shadow-lg inline-flex items-center space-x-2"
+                  className="group bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold py-3 px-6 rounded-full transition-all duration-300 shadow-lg inline-flex items-center space-x-2"
                 >
                   <span>Book a Consultation</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
@@ -193,7 +202,7 @@ const Layout = ({ children }: LayoutProps) => {
             >
               <h3 className="text-2xl font-bold mb-6 text-black relative">
                 Quick Links
-                <div className="absolute bottom-0 left-0 w-12 h-1 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full"></div>
+                <div className="absolute bottom-0 left-0 w-12 h-1 bg-gradient-to-r from-red-500 to-red-600 rounded-full"></div>
               </h3>
               
               <ul className="space-y-3">
@@ -213,7 +222,7 @@ const Layout = ({ children }: LayoutProps) => {
                       href={link.href}
                       className="text-gray-600 hover:text-black transition-all duration-300 group flex items-center"
                     >
-                      <ArrowRight className="w-3 h-3 mr-2 text-blue-500 group-hover:translate-x-1 transition-transform duration-200" />
+                      <ArrowRight className="w-3 h-3 mr-2 text-red-500 group-hover:translate-x-1 transition-transform duration-200" />
                       <span className="group-hover:translate-x-1 transition-transform duration-200 text-sm">
                         {link.name}
                       </span>
@@ -232,7 +241,7 @@ const Layout = ({ children }: LayoutProps) => {
             >
               <h3 className="text-2xl font-bold mb-6 text-black relative">
                 Get In Touch
-                <div className="absolute bottom-0 left-0 w-12 h-1 bg-gradient-to-r from-red-500 to-blue-500 rounded-full"></div>
+                <div className="absolute bottom-0 left-0 w-12 h-1 bg-gradient-to-r from-red-500 to-rose-600 rounded-full"></div>
               </h3>
               
               <div className="space-y-4">
@@ -257,8 +266,8 @@ const Layout = ({ children }: LayoutProps) => {
                   whileHover={{ x: 5 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <div className="bg-blue-100 p-2 rounded-lg group-hover:bg-blue-200 transition-colors duration-300">
-                    <MapPin className="w-5 h-5 text-blue-600" />
+                  <div className="bg-red-100 p-2 rounded-lg group-hover:bg-red-200 transition-colors duration-300">
+                    <MapPin className="w-5 h-5 text-red-600" />
                   </div>
                   <div>
                     <p className="text-black font-semibold mb-1">Visit Us</p>
@@ -361,45 +370,57 @@ const Layout = ({ children }: LayoutProps) => {
             </Link>
 
             {/* Desktop Menu */}
-            <div className="hidden md:flex items-center space-x-8">
-              <Link
-                href="/"
-                className="text-gray-700 hover:text-primary-600 transition-colors"
-              >
-                Home
-              </Link>
-              <Link
-                href="/gallery"
-                className="text-gray-700 hover:text-primary-600 transition-colors"
-              >
-                Gallery
-              </Link>
-              <Link
-                href="/contact"
-                className="text-gray-700 hover:text-primary-600 transition-colors"
-              >
-                Contact
-              </Link>
+            <div className="hidden md:flex items-center space-x-6">
+              {[
+                { name: "Home", href: "/" },
+                { name: "Gallery", href: "/gallery" },
+                { name: "Contact", href: "/contact" },
+              ].map((item) => {
+                const isActive = pathname === item.href;
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={`relative px-4 py-2 text-base font-semibold transition-all duration-300 rounded-full group ${
+                      isActive
+                        ? "text-red-600 font-bold bg-red-50"
+                        : "text-gray-700 hover:text-red-600 hover:bg-red-50/70"
+                    }`}
+                  >
+                    <span>{item.name}</span>
+                    <span
+                      className={`absolute bottom-1 left-1/2 transform -translate-x-1/2 h-0.5 bg-red-600 rounded-full transition-all duration-300 ${
+                        isActive ? "w-1/2" : "w-0 group-hover:w-1/2"
+                      }`}
+                    />
+                  </Link>
+                );
+              })}
               <Link
                 href="https://tidycal.com/homestorey/free-design-discussion"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition-colors"
               >
-                Get Free Consultation
+                <motion.button
+                  whileHover={{ scale: 1.05, boxShadow: "0 10px 25px rgba(239, 68, 68, 0.4)" }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-red-600 text-white px-6 py-2.5 rounded-full font-bold hover:bg-red-700 transition-all duration-300 shadow-md"
+                >
+                  Get Free Consultation
+                </motion.button>
               </Link>
             </div>
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden"
+              className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Toggle mobile menu"
             >
               {isMenuOpen ? (
-                <X className="w-6 h-6" />
+                <X className="w-6 h-6 text-gray-800" />
               ) : (
-                <Menu className="w-6 h-6" />
+                <Menu className="w-6 h-6 text-gray-800" />
               )}
             </button>
           </div>
@@ -413,33 +434,33 @@ const Layout = ({ children }: LayoutProps) => {
                 exit={{ opacity: 0, height: 0 }}
                 className="md:hidden mt-4 pb-4 border-t border-gray-200 pt-4"
               >
-                <div className="flex flex-col space-y-3">
-                  <Link
-                    href="/"
-                    className="text-gray-700 hover:text-primary-600 transition-colors"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    Home
-                  </Link>
-                  <Link
-                    href="/gallery"
-                    className="text-gray-700 hover:text-primary-600 transition-colors"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    Gallery
-                  </Link>
-                  <Link
-                    href="/contact"
-                    className="text-gray-700 hover:text-primary-600 transition-colors"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    Contact
-                  </Link>
+                <div className="flex flex-col space-y-2">
+                  {[
+                    { name: "Home", href: "/" },
+                    { name: "Gallery", href: "/gallery" },
+                    { name: "Contact", href: "/contact" },
+                  ].map((item) => {
+                    const isActive = pathname === item.href;
+                    return (
+                      <Link
+                        key={item.name}
+                        href={item.href}
+                        className={`px-4 py-3 rounded-xl font-medium transition-all duration-200 ${
+                          isActive
+                            ? "bg-red-50 text-red-600 font-bold"
+                            : "text-gray-700 hover:bg-red-50 hover:text-red-600"
+                        }`}
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        {item.name}
+                      </Link>
+                    );
+                  })}
                   <Link
                     href="https://tidycal.com/homestorey/free-design-discussion"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition-colors text-center"
+                    className="bg-red-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-red-700 transition-all duration-300 text-center shadow-md mt-2"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     Get Free Consultation

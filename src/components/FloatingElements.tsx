@@ -9,7 +9,7 @@ const FloatingElements = () => {
     { Icon: Palette, delay: 0.5, x: '80%', y: '30%', color: 'text-brick-400' },
     { Icon: Lightbulb, delay: 1, x: '15%', y: '70%', color: 'text-yellow-400' },
     { Icon: Ruler, delay: 1.5, x: '85%', y: '80%', color: 'text-green-400' },
-    { Icon: Hammer, delay: 2, x: '50%', y: '15%', color: 'text-purple-400' },
+    { Icon: Hammer, delay: 2, x: '50%', y: '15%', color: 'text-rose-400' },
     { Icon: Paintbrush, delay: 2.5, x: '25%', y: '85%', color: 'text-pink-400' },
   ]
 

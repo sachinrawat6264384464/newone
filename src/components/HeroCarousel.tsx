@@ -165,7 +165,7 @@ const HeroCarousel = () => {
                     <span className="text-white font-semibold">4.5/5 Rating</span>
                   </div>
                   <div className="w-px h-6 bg-white/30 hidden sm:block"></div>
-                  <div className="text-white font-semibold">300+ Projects</div>
+                  <div className="text-white font-semibold">300+ Designs</div>
                   <div className="w-px h-6 bg-white/30 hidden sm:block"></div>
                   <div className="text-white font-semibold">10+ Years</div>
                 </motion.div>

@@ -107,7 +107,7 @@ const validateBrevoConfig = (): void => {
 const generateEmailTemplate = (data: ContactFormData): string => {
   return `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-      <h2 style="color: #dc2626;">🏠 Home Storey - New Contact</h2>
+      <h2 style="color: #2563eb;">🏠 Home Storey - New Contact</h2>
       
       <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
         <h3>Contact Information:</h3>
@@ -116,7 +116,7 @@ const generateEmailTemplate = (data: ContactFormData): string => {
         ${data.phone ? `<p><strong>Phone:</strong> ${data.phone}</p>` : ''}
       </div>
 
-      <div style="background: #fef2f2; padding: 20px; border-radius: 8px; margin: 20px 0;">
+      <div style="background: #e3f2fd; padding: 20px; border-radius: 8px; margin: 20px 0;">
         <h3>Project Details:</h3>
         <p><strong>Type:</strong> ${data.projectType?.replace('-', ' ') || 'Not specified'}</p>
         <p><strong>Budget:</strong> ${data.budget?.replace('-', ' - ') || 'Not specified'}</p>

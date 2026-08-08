@@ -1,6 +1,4 @@
 // components/MasonryGrid.tsx
-'use client';
-
 import { motion } from 'framer-motion';
 import MasonryCard from './MasonryCard';
 import { MasonryCardData } from '@/types/masonry';
@@ -40,7 +38,7 @@ const MasonryGrid: React.FC = () => {
       image: "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298159/Homestorey-media/Trending%20Now/yaxvkmmtlui2ikbxgaih.jpg",
       badge: {
         text: "Trending",
-        color: "red"
+        color: "blue"
       },
       size: "small",
       buttonText: "Explore",
@@ -53,7 +51,7 @@ const MasonryGrid: React.FC = () => {
       image: "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298144/Homestorey-media/Trending%20Now/nkmqkyeymplfwaizumgq.jpg",
       badge: {
         text: "In Demand",
-        color: "red"
+        color: "blue"
       },
       size: "small",
       buttonText: "Explore",
@@ -66,7 +64,7 @@ const MasonryGrid: React.FC = () => {
       image: "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298152/Homestorey-media/Trending%20Now/smltkqjvr60siwugu5gv.jpg",
       badge: {
         text: "Wellness Focus",
-        color: "red"
+        color: "purple"
       },
       size: "tall",
       buttonText: "Learn More",

@@ -1,6 +1,7 @@
 // app/page.tsx
 "use client";
 import { motion } from "framer-motion";
+import { useState } from "react";
 import Layout from "../components/Layout";
 import HeroCarousel from "../components/HeroCarousel";
 import FloatingElements from "../components/FloatingElements";
@@ -23,6 +24,8 @@ import {
   Ruler,
   Zap,
   Palette,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -33,7 +36,7 @@ interface Service {
   icon: LucideIcon;
   title: string;
   description: string;
-  image: string;
+  images: string[];
   color: string;
 }
 
@@ -51,8 +54,11 @@ const services: Service[] = [
     title: "Facade Design",
     description:
       "Stunning exterior designs that create lasting first impressions",
-    image:
+    images: [
       "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298162/Homestorey-media/What%20we%20create/vt9avmrazh3jvii5ytl9.jpg",
+      "/What_we_create/20220325_164704.jpg",
+      "/What_we_create/IMG-20220420-WA0006.jpg",
+    ],
     color: "from-red-400 to-red-600",
   },
   {
@@ -60,43 +66,180 @@ const services: Service[] = [
     title: "Living Area",
     description:
       "Comfortable and stylish living spaces perfect for family gatherings",
-    image:
+    images: [
       "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298165/Homestorey-media/What%20we%20create/jjhie0tfazmie9laeimu.jpg",
+      "/What_we_create/20230301_170056.jpg",
+      "/What_we_create/20230301_170142.jpg",
+    ],
     color: "from-red-400 to-red-600",
   },
   {
     icon: ChefHat,
     title: "Kitchen Design",
     description: "Modern, functional kitchens that are the heart of your home",
-    image:
+    images: [
       "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298164/Homestorey-media/What%20we%20create/t6w21ualgsjkz6ifc8bo.jpg",
+      "/What_we_create/Kitchen.jpeg",
+      "/What_we_create/12.jpg",
+    ],
     color: "from-red-400 to-red-600",
   },
   {
     icon: Bed,
     title: "Bedroom Design",
     description: "Peaceful retreats designed for rest and rejuvenation",
-    image:
+    images: [
       "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298161/Homestorey-media/What%20we%20create/edh6sfa6zt7byruupb2b.jpg",
+      "/What_we_create/Bedroom.jpeg",
+      "/What_we_create/IMG-20251129-WA0016.jpg",
+    ],
     color: "from-red-400 to-red-600",
   },
   {
     icon: Bath,
     title: "Bathroom Design",
     description: "Spa-like bathrooms combining luxury and functionality",
-    image:
+    images: [
       "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298160/Homestorey-media/What%20we%20create/wqnxhezwbtsnivywxqej.jpg",
+      "/What_we_create/Bathroom.jpg",
+      "/What_we_create/IMG-20251129-WA0018.jpg",
+    ],
     color: "from-red-400 to-red-600",
   },
   {
     icon: Briefcase,
     title: "Home Office Design",
     description: "Productive work-from-home spaces tailored to your needs",
-    image:
+    images: [
       "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298163/Homestorey-media/What%20we%20create/hqflyynqrv1uccqarkmf.jpg",
+      "/What_we_create/Home-office.jpeg",
+      "/What_we_create/IMG-20251129-WA0021.jpg",
+    ],
     color: "from-red-400 to-red-600",
   },
 ];
+
+
+// Per-card image carousel component
+function ServiceCard({
+  service,
+  index,
+}: {
+  service: Service;
+  index: number;
+}) {
+  const [currentImg, setCurrentImg] = useState(0);
+
+  const goNext = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentImg((prev) => (prev + 1) % service.images.length);
+  };
+
+  const goPrev = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentImg((prev) =>
+      prev === 0 ? service.images.length - 1 : prev - 1
+    );
+  };
+
+  return (
+    <motion.div
+      key={index}
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: index * 0.1 }}
+      viewport={{ once: true }}
+      whileHover={{ y: -10, scale: 1.02 }}
+      className="group bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 border border-gray-100"
+    >
+      {/* Image Carousel — opacity fade, guaranteed single image */}
+      <div className="relative overflow-hidden" style={{ height: "260px" }}>
+
+        {/* All 3 images stacked — only active one is visible */}
+        {service.images.map((img, i) => (
+          <div
+            key={i}
+            className="absolute inset-0 transition-opacity duration-500"
+            style={{ opacity: i === currentImg ? 1 : 0, zIndex: i === currentImg ? 1 : 0 }}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={img}
+              alt={`${service.title} - ${i + 1}`}
+              style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+            />
+          </div>
+        ))}
+
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" style={{ zIndex: 10 }} />
+
+        {/* Left Arrow */}
+        <button
+          onClick={goPrev}
+          style={{ zIndex: 20 }}
+          className="absolute left-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white backdrop-blur-sm rounded-full p-1.5 shadow-lg transition-all duration-200 hover:scale-110 opacity-0 group-hover:opacity-100"
+          aria-label="Previous image"
+        >
+          <ChevronLeft className="w-5 h-5 text-gray-800" />
+        </button>
+
+        {/* Right Arrow */}
+        <button
+          onClick={goNext}
+          style={{ zIndex: 20 }}
+          className="absolute right-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white backdrop-blur-sm rounded-full p-1.5 shadow-lg transition-all duration-200 hover:scale-110 opacity-0 group-hover:opacity-100"
+          aria-label="Next image"
+        >
+          <ChevronRight className="w-5 h-5 text-gray-800" />
+        </button>
+
+        {/* Dot indicators */}
+        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5" style={{ zIndex: 20 }}>
+          {service.images.map((_, i) => (
+            <button
+              key={i}
+              onClick={(e) => { e.stopPropagation(); setCurrentImg(i); }}
+              style={{
+                width: "8px", height: "8px", borderRadius: "50%",
+                background: i === currentImg ? "white" : "rgba(255,255,255,0.5)",
+                border: "none", cursor: "pointer",
+                transform: i === currentImg ? "scale(1.3)" : "scale(1)",
+                transition: "all 0.2s",
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Premium badge */}
+        <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full" style={{ zIndex: 20 }}>
+          <span className="text-xs font-semibold text-gray-700">Premium</span>
+        </div>
+
+        {/* Image counter */}
+        <div className="absolute top-4 left-4 bg-black/40 backdrop-blur-sm px-2.5 py-1 rounded-full" style={{ zIndex: 20 }}>
+          <span className="text-xs font-medium text-white">
+            {currentImg + 1} / {service.images.length}
+          </span>
+        </div>
+      </div>
+
+      {/* Card Content */}
+      <div className="p-8">
+        <h3 className="text-2xl font-bold text-gray-800 mb-3 group-hover:text-red-600 transition-colors">
+          {service.title}
+        </h3>
+        <p className="text-gray-600 leading-relaxed">{service.description}</p>
+        <motion.div
+          initial={{ width: 0 }}
+          whileInView={{ width: "100%" }}
+          transition={{ delay: index * 0.1 + 0.5, duration: 0.8 }}
+          className={`h-1 bg-gradient-to-r ${service.color} rounded-full mt-4`}
+        />
+      </div>
+    </motion.div>
+  );
+}
 
 const testimonials: Testimonial[] = [
   {
@@ -419,51 +562,9 @@ export default function Home() {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => {
-              const IconComponent = service.icon;
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  whileHover={{ y: -10, scale: 1.02 }}
-                  className="group bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 border border-gray-100"
-                >
-                  <div className="relative h-82 overflow-hidden">
-                    <Image
-                      src={service.image}
-                      alt={service.title}
-                      width={400}
-                      height={300}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-
-                    <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
-                      <span className="text-xs font-semibold text-gray-700">
-                        Premium
-                      </span>
-                    </div>
-                  </div>
-                  <div className="p-8">
-                    <h3 className="text-2xl font-bold text-gray-800 mb-3 group-hover:text-red-600 transition-colors">
-                      {service.title}
-                    </h3>
-                    <p className="text-gray-600 leading-relaxed">
-                      {service.description}
-                    </p>
-                    <motion.div
-                      initial={{ width: 0 }}
-                      whileInView={{ width: "100%" }}
-                      transition={{ delay: index * 0.1 + 0.5, duration: 0.8 }}
-                      className={`h-1 bg-gradient-to-r ${service.color} rounded-full mt-4`}
-                    ></motion.div>
-                  </div>
-                </motion.div>
-              );
-            })}
+            {services.map((service, index) => (
+              <ServiceCard key={index} service={service} index={index} />
+            ))}
           </div>
 
           {/* View All Button */}

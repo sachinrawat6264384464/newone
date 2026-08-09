@@ -33,6 +33,33 @@ const slides: Slide[] = [
     cta: "Explore Kitchens",
     accent: "from-red-500 to-orange-500"
   },
+  {
+    id: 3,
+    title: "Serene Bedroom Retreats",
+    subtitle: "Rest, Rejuvenate & Recharge",
+    description: "Transform your bedroom into a peaceful sanctuary with bespoke designs that perfectly balance comfort, elegance, and personal style.",
+    image: "/Bedroom_3.jpg",
+    cta: "Design My Bedroom",
+    accent: "from-rose-500 to-red-600"
+  },
+  {
+    id: 4,
+    title: "Stunning Facade Designs",
+    subtitle: "First Impressions That Last Forever",
+    description: "Elevate your home's curb appeal with our signature facade designs — crafted to make a bold statement while standing the test of time.",
+    image: "/Facade_3.jpg",
+    cta: "See Facade Portfolio",
+    accent: "from-red-600 to-rose-700"
+  },
+  {
+    id: 5,
+    title: "Elegant Living Spaces",
+    subtitle: "Where Every Moment Feels Special",
+    description: "Redefine your living area with thoughtfully curated interiors that bring warmth, style, and comfort to your everyday family gatherings.",
+    image: "/Living_3.jpg",
+    cta: "Explore Living Areas",
+    accent: "from-orange-500 to-red-500"
+  },
 ]
 
 const HeroCarousel = () => {

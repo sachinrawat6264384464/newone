@@ -110,7 +110,7 @@ export default function PageEditor({ initialData }: PageEditorProps) {
 
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-1">Page Content (HTML supported) *</label>
-        <p className="text-xs text-gray-500 mb-2">You can use Tailwind CSS classes in your HTML (e.g. &lt;div className="max-w-7xl mx-auto py-16"&gt;).</p>
+        <p className="text-xs text-gray-500 mb-2">You can use Tailwind CSS classes in your HTML (e.g. &lt;div className=&quot;max-w-7xl mx-auto py-16&quot;&gt;).</p>
         <textarea
           name="content"
           value={formData.content}

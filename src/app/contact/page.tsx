@@ -1,4 +1,4 @@
-// app/contact/page.tsx - Updated with new fields
+// app/contact/page.tsx
 'use client'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
@@ -7,8 +7,9 @@ import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
 import { db } from '../../lib/firebase'
 import toast from 'react-hot-toast'
 import Layout from '../../components/Layout'
-import { Mail, MapPin, Clock, Send, Star, CheckCircle, Users } from 'lucide-react'
+import { Mail, MapPin, Clock, Send, CheckCircle, ArrowRight } from 'lucide-react'
 import TrustpilotReviewCollector from '@/components/TrustPilotReviewCollector'
+import Link from 'next/link'
 
 interface ContactFormData {
   firstName: string
@@ -25,42 +26,37 @@ interface ContactFormData {
   message: string
 }
 
+const inputClass =
+  'w-full px-4 py-3 bg-white border border-gray-200 rounded-xl text-slate-800 text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-red-400 focus:border-transparent transition-all duration-200'
+
+const labelClass = 'block text-xs font-semibold text-slate-600 tracking-wider uppercase mb-1.5'
+
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const { register, handleSubmit, reset, formState: { errors } } = useForm<ContactFormData>()
 
   const onSubmit: SubmitHandler<ContactFormData> = async (data) => {
     setIsSubmitting(true)
-    
     try {
-      // Save to Firebase
       await addDoc(collection(db, 'contacts'), {
         ...data,
         timestamp: serverTimestamp(),
         status: 'new'
       })
-
-      // Send email notification
       try {
         const response = await fetch('/api/send-notification', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data),
         })
-
         if (!response.ok) {
           const errorData = await response.json()
           console.error('Email notification failed:', errorData)
-        } else {
-          console.log('Email notification sent successfully')
         }
       } catch (emailError) {
         console.error('Email notification error:', emailError)
       }
-
-      toast.success('Thank you! We\'ll get back to you within 24 hours.')
+      toast.success("Thank you! We'll get back to you within 24 hours.")
       reset()
     } catch (error) {
       console.error('Error submitting form:', error)
@@ -72,314 +68,197 @@ export default function Contact() {
 
   const features = [
     "Free initial consultation",
-    "3D design visualization", 
+    "3D design visualization",
     "Premium quality materials",
     "Experienced design team",
     "Project timeline guarantee",
     "Post-completion support"
   ]
 
+  const stats = [
+    { value: "10+", label: "Years Experience" },
+    { value: "300+", label: "Designs Created" },
+    { value: "250+", label: "Happy Clients" },
+    { value: "4.5★", label: "Avg Rating" },
+  ]
+
   return (
     <Layout>
-      <div className="min-h-screen bg-white">
-        {/* Hero Section */}
-        <section className="relative py-20 bg-white overflow-hidden">
-          <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            className="absolute top-10 right-10 w-24 h-24 border-2 border-red-300 rounded-full"
-          />
-          <motion.div
-            animate={{ y: [0, -15, 0] }}
-            transition={{ duration: 3, repeat: Infinity }}
-            className="absolute bottom-10 left-10 w-20 h-20 bg-red-200 rounded-full"
-          />
-          
-          <div className="container mx-auto px-6 text-center relative z-10 max-w-4xl">
+      <div className="min-h-screen bg-[#FAF8F5]">
+
+        {/* ── Hero ─────────────────────────────────────── */}
+        <section className="relative pt-32 pb-20 bg-[#FAF8F5] overflow-hidden">
+          {/* Subtle grid bg */}
+          <div className="absolute inset-0 opacity-[0.03]"
+            style={{ backgroundImage: 'linear-gradient(#000 1px,transparent 1px),linear-gradient(90deg,#000 1px,transparent 1px)', backgroundSize: '60px 60px' }} />
+
+          <div className="container mx-auto px-6 text-center relative z-10 max-w-3xl">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <span className="text-red-600 font-semibold text-lg bg-red-100 px-4 py-2 rounded-full">Ready to Start?</span>
-              <h1 className="text-5xl md:text-6xl font-bold text-gray-800 mb-6 mt-6">Get In Touch</h1>
-              <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed mb-8">
-                Ready to start your dream project? Let&apos;s discuss your vision and create something extraordinary together.
+              <span className="text-red-500 font-semibold text-xs tracking-[0.28em] uppercase block mb-4">
+                LET'S CONNECT
+              </span>
+              <h1 className="font-serif-luxury text-5xl md:text-6xl font-semibold text-slate-900 leading-tight mb-5">
+                Start Your Dream<br />
+                <span className="italic text-red-500">Design Journey.</span>
+              </h1>
+              <div className="w-12 h-px bg-red-500 mx-auto mb-6" />
+              <p className="text-slate-500 text-base md:text-lg max-w-xl mx-auto leading-relaxed font-light">
+                Ready to transform your space? Tell us about your vision and our expert team will craft a personalised design plan just for you.
               </p>
-              
+
+              {/* Stat pills */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
-                className="flex flex-wrap justify-center items-center gap-6"
+                className="flex flex-wrap justify-center gap-3 mt-8"
               >
-                <div className="flex items-center space-x-2 text-red-600 bg-red-100 px-4 py-2 rounded-full">
-                  <Star className="w-5 h-5 text-yellow-500 fill-current" />
-                  <span className="font-semibold">4.5/5 Rating</span>
-                </div>
-                <div className="flex items-center space-x-2 text-red-600 bg-red-100 px-4 py-2 rounded-full">
-                  <Users className="w-5 h-5" />
-                  <span className="font-semibold">250+ Happy Clients</span>
-                </div>
-                <div className="flex items-center space-x-2 text-green-600 bg-green-100 px-4 py-2 rounded-full">
-                  <CheckCircle className="w-5 h-5" />
-                  <span className="font-semibold">24hr Response</span>
-                </div>
+                {[
+                  { label: "4.5/5 Rating", icon: "★" },
+                  { label: "250+ Happy Clients", icon: "✦" },
+                  { label: "24hr Response", icon: "✓" },
+                ].map((pill) => (
+                  <span
+                    key={pill.label}
+                    className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-700 bg-white border border-gray-200 px-4 py-1.5 rounded-full shadow-sm"
+                  >
+                    <span className="text-red-500">{pill.icon}</span>
+                    {pill.label}
+                  </span>
+                ))}
               </motion.div>
             </motion.div>
           </div>
         </section>
 
-        {/* Contact Form & Info */}
-        <section className="py-16 relative bg-white">
-          <div className="container mx-auto px-6 relative">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-              {/* Contact Form */}
+        {/* ── Form + Info ───────────────────────────────── */}
+        <section className="py-16 bg-[#FAF8F5]">
+          <div className="container mx-auto px-6">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 max-w-6xl mx-auto">
+
+              {/* ── Contact Form (3 cols) */}
               <motion.div
-                initial={{ opacity: 0, x: -50 }}
+                initial={{ opacity: 0, x: -40 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
-                className="relative"
+                className="lg:col-span-3"
               >
-                <div className="absolute -top-4 -left-4 w-20 h-20 bg-red-200 rounded-full animate-pulse"></div>
-                <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-200 relative z-10">
-                  <h2 className="text-3xl font-bold text-red-600 mb-6">Send Us a Message</h2>
-                  
-                  <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                    {/* Name Fields */}
+                <div className="bg-white rounded-2xl shadow-sm border border-gray-200/80 p-8">
+                  <span className="text-red-500 text-xs font-semibold tracking-[0.22em] uppercase block mb-1">Enquiry Form</span>
+                  <h2 className="font-serif-luxury text-2xl font-semibold text-slate-900 mb-6">Send Us a Message</h2>
+
+                  <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+                    {/* Name */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-sm font-semibold text-gray-700 mb-2">
-                          First Name *
-                        </label>
-                        <input
-                          type="text"
-                          {...register('firstName', { required: 'First name is required' })}
-                          className="w-full px-4 py-3 border-2 border-red-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-300 bg-white"
-                          placeholder="John"
-                        />
-                        {errors.firstName && (
-                          <motion.p
-                            initial={{ opacity: 0, x: -10 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            className="text-red-500 text-sm mt-1"
-                          >
-                            {errors.firstName.message}
-                          </motion.p>
-                        )}
+                        <label className={labelClass}>First Name *</label>
+                        <input type="text" {...register('firstName', { required: 'Required' })}
+                          className={inputClass} placeholder="Nidhi" />
+                        {errors.firstName && <p className="text-red-500 text-xs mt-1">{errors.firstName.message}</p>}
                       </div>
-                      
                       <div>
-                        <label className="block text-sm font-semibold text-gray-700 mb-2">
-                          Last Name *
-                        </label>
-                        <input
-                          type="text"
-                          {...register('lastName', { required: 'Last name is required' })}
-                          className="w-full px-4 py-3 border-2 border-red-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-300 bg-white"
-                          placeholder="Doe"
-                        />
-                        {errors.lastName && (
-                          <motion.p
-                            initial={{ opacity: 0, x: -10 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            className="text-red-500 text-sm mt-1"
-                          >
-                            {errors.lastName.message}
-                          </motion.p>
-                        )}
+                        <label className={labelClass}>Last Name *</label>
+                        <input type="text" {...register('lastName', { required: 'Required' })}
+                          className={inputClass} placeholder="Mittal" />
+                        {errors.lastName && <p className="text-red-500 text-xs mt-1">{errors.lastName.message}</p>}
                       </div>
                     </div>
 
                     {/* Email */}
                     <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        Email Address *
-                      </label>
-                      <input
-                        type="email"
-                        {...register('email', { 
-                          required: 'Email is required',
-                          pattern: {
-                            value: /^\S+@\S+$/i,
-                            message: 'Invalid email address'
-                          }
-                        })}
-                        className="w-full px-4 py-3 border-2 border-red-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-300 bg-white"
-                        placeholder="john@example.com"
-                      />
-                      {errors.email && (
-                        <motion.p
-                          initial={{ opacity: 0, x: -10 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          className="text-red-500 text-sm mt-1"
-                        >
-                          {errors.email.message}
-                        </motion.p>
-                      )}
+                      <label className={labelClass}>Email Address *</label>
+                      <input type="email" {...register('email', {
+                        required: 'Email is required',
+                        pattern: { value: /^\S+@\S+$/i, message: 'Invalid email' }
+                      })} className={inputClass} placeholder="you@example.com" />
+                      {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
                     </div>
 
                     {/* Phone */}
                     <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        Phone Number *
-                      </label>
-                      <input
-                        type="tel"
-                        {...register('phone', { required: 'Phone number is required' })}
-                        className="w-full px-4 py-3 border-2 border-red-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-300 bg-white"
-                        placeholder="+91 98765 43210"
-                      />
-                      {errors.phone && (
-                        <motion.p
-                          initial={{ opacity: 0, x: -10 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          className="text-red-500 text-sm mt-1"
-                        >
-                          {errors.phone.message}
-                        </motion.p>
-                      )}
+                      <label className={labelClass}>Phone Number *</label>
+                      <input type="tel" {...register('phone', { required: 'Phone is required' })}
+                        className={inputClass} placeholder="+91 98765 43210" />
+                      {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone.message}</p>}
                     </div>
 
-                    {/* Property Address and Pin Code */}
+                    {/* Property Address */}
+                    <div>
+                      <label className={labelClass}>Property Address *</label>
+                      <input type="text" {...register('propertyAddress', { required: 'Address is required' })}
+                        className={inputClass} placeholder="Street, Area, City, State" />
+                      {errors.propertyAddress && <p className="text-red-500 text-xs mt-1">{errors.propertyAddress.message}</p>}
+                    </div>
+
+                    {/* Pin Code */}
+                    <div>
+                      <label className={labelClass}>Pin Code *</label>
+                      <input type="text" {...register('pinCode', {
+                        required: 'Pin code is required',
+                        pattern: { value: /^\d{6}$/, message: '6-digit pin code required' }
+                      })} className={inputClass} placeholder="110001" maxLength={6} />
+                      {errors.pinCode && <p className="text-red-500 text-xs mt-1">{errors.pinCode.message}</p>}
+                    </div>
+
+                    {/* House Type + Requirements */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="md:col-span-2">
-                        <label className="block text-sm font-semibold text-gray-700 mb-2">
-                          Property Address *
-                        </label>
-                        <input
-                          type="text"
-                          {...register('propertyAddress', { required: 'Property address is required' })}
-                          className="w-full px-4 py-3 border-2 border-red-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-300 bg-white"
-                          placeholder="Street, Area, City, State"
-                        />
-                        {errors.propertyAddress && (
-                          <motion.p
-                            initial={{ opacity: 0, x: -10 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            className="text-red-500 text-sm mt-1"
-                          >
-                            {errors.propertyAddress.message}
-                          </motion.p>
-                        )}
+                      <div>
+                        <label className={labelClass}>Type of House *</label>
+                        <select {...register('houseType', { required: 'Required' })} className={inputClass}>
+                          <option value="">Select type</option>
+                          <option value="3bhk">3 BHK</option>
+                          <option value="4bhk">4 BHK</option>
+                          <option value="villa">Villa</option>
+                          <option value="penthouse">Penthouse</option>
+                          <option value="independent-house">Independent House</option>
+                        </select>
+                        {errors.houseType && <p className="text-red-500 text-xs mt-1">{errors.houseType.message}</p>}
                       </div>
-                      
-                      <div className="md:col-span-2">
-                        <label className="block text-sm font-semibold text-gray-700 mb-2">
-                          Pin Code *
-                        </label>
-                        <input
-                          type="text"
-                          {...register('pinCode', { 
-                            required: 'Pin code is required',
-                            pattern: {
-                              value: /^\d{6}$/,
-                              message: 'Invalid pin code (6 digits required)'
-                            }
-                          })}
-                          className="w-full px-4 py-3 border-2 border-red-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-300 bg-white"
-                          placeholder="110001"
-                          maxLength={6}
-                        />
-                        {errors.pinCode && (
-                          <motion.p
-                            initial={{ opacity: 0, x: -10 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            className="text-red-500 text-sm mt-1"
-                          >
-                            {errors.pinCode.message}
-                          </motion.p>
-                        )}
+                      <div>
+                        <label className={labelClass}>Requirements *</label>
+                        <select {...register('requirements', { required: 'Required' })} className={inputClass}>
+                          <option value="">Select requirement</option>
+                          <option value="full-home-design">Full Home Design</option>
+                          <option value="partial-home-design">Partial Home Design</option>
+                          <option value="renovation-required">Renovation</option>
+                        </select>
+                        {errors.requirements && <p className="text-red-500 text-xs mt-1">{errors.requirements.message}</p>}
                       </div>
                     </div>
 
-                    {/* House Type */}
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        Type of House *
-                      </label>
-                      <select
-                        {...register('houseType', { required: 'Please select house type' })}
-                        className="w-full px-4 py-3 border-2 border-red-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-300 bg-white"
-                      >
-                        <option value="">Select house type</option>
-                        <option value="3bhk">3 BHK</option>
-                        <option value="4bhk">4 BHK</option>
-                        <option value="villa">Villa</option>
-                        <option value="penthouse">Penthouse</option>
-                        <option value="independent-house">Independent House</option>
-                      </select>
-                      {errors.houseType && (
-                        <motion.p
-                          initial={{ opacity: 0, x: -10 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          className="text-red-500 text-sm mt-1"
-                        >
-                          {errors.houseType.message}
-                        </motion.p>
-                      )}
+                    {/* Preferred Contact + Budget */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className={labelClass}>Best Way to Reach *</label>
+                        <select {...register('preferredContact', { required: 'Required' })} className={inputClass}>
+                          <option value="">Select method</option>
+                          <option value="whatsapp">WhatsApp</option>
+                          <option value="call">Call</option>
+                          <option value="email">Email</option>
+                        </select>
+                        {errors.preferredContact && <p className="text-red-500 text-xs mt-1">{errors.preferredContact.message}</p>}
+                      </div>
+                      <div>
+                        <label className={labelClass}>Budget Range</label>
+                        <select {...register('budget')} className={inputClass}>
+                          <option value="">Select budget</option>
+                          <option value="20-30-lakh">₹20 – ₹30 Lakh</option>
+                          <option value="30-40-lakh">₹30 – ₹40 Lakh</option>
+                          <option value="40-50-lakh">₹40 – ₹50 Lakh</option>
+                          <option value="50-plus-lakh">₹50+ Lakh</option>
+                        </select>
+                      </div>
                     </div>
 
-                    {/* Requirements */}
+                    {/* Specific Area */}
                     <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        What are your requirements? *
-                      </label>
-                      <select
-                        {...register('requirements', { required: 'Please select your requirements' })}
-                        className="w-full px-4 py-3 border-2 border-red-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-300 bg-white"
-                      >
-                        <option value="">Select your requirements</option>
-                        <option value="full-home-design">Full Home Design</option>
-                        <option value="partial-home-design">Partial Home Design</option>
-                        <option value="renovation-required">Already Living (Renovation Required)</option>
-                      </select>
-                      {errors.requirements && (
-                        <motion.p
-                          initial={{ opacity: 0, x: -10 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          className="text-red-500 text-sm mt-1"
-                        >
-                          {errors.requirements.message}
-                        </motion.p>
-                      )}
-                    </div>
-
-                    {/* Preferred Contact Method */}
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        What is the best way to reach you? *
-                      </label>
-                      <select
-                        {...register('preferredContact', { required: 'Please select preferred contact method' })}
-                        className="w-full px-4 py-3 border-2 border-red-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-300 bg-white"
-                      >
-                        <option value="">Select contact method</option>
-                        <option value="whatsapp">WhatsApp</option>
-                        <option value="call">Call</option>
-                        <option value="email">Email</option>
-                      </select>
-                      {errors.preferredContact && (
-                        <motion.p
-                          initial={{ opacity: 0, x: -10 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          className="text-red-500 text-sm mt-1"
-                        >
-                          {errors.preferredContact.message}
-                        </motion.p>
-                      )}
-                    </div>
-
-                    {/* Project Type */}
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        Specific Area Focus (Optional)
-                      </label>
-                      <select
-                        {...register('projectType')}
-                        className="w-full px-4 py-3 border-2 border-red-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-300 bg-white"
-                      >
-                        <option value="">Select area (if any specific)</option>
+                      <label className={labelClass}>Specific Area Focus (Optional)</label>
+                      <select {...register('projectType')} className={inputClass}>
+                        <option value="">Select area</option>
                         <option value="kitchen">Kitchen</option>
                         <option value="bathroom">Bathroom</option>
                         <option value="living">Living Area</option>
@@ -389,60 +268,30 @@ export default function Contact() {
                       </select>
                     </div>
 
-                    {/* Budget Range */}
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        Budget Range
-                      </label>
-                      <select
-                        {...register('budget')}
-                        className="w-full px-4 py-3 border-2 border-red-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-300 bg-white"
-                      >
-                        <option value="">Select budget range</option>
-                        <option value="20-30-lakh">₹20 - ₹30 Lakh</option>
-                        <option value="30-40-lakh">₹30 - ₹40 Lakh</option>
-                        <option value="40-50-lakh">₹40 - ₹50 Lakh</option>
-                        <option value="50-plus-lakh">₹50+ Lakh</option>
-                      </select>
-                    </div>
-
                     {/* Message */}
                     <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        Additional Message *
-                      </label>
-                      <textarea
-                        {...register('message', { required: 'Message is required' })}
-                        rows={4}
-                        className="w-full px-4 py-3 border-2 border-red-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-300 resize-none bg-white"
-                        placeholder="Tell us about your project, timeline, and any specific requirements..."
-                      />
-                      {errors.message && (
-                        <motion.p
-                          initial={{ opacity: 0, x: -10 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          className="text-red-500 text-sm mt-1"
-                        >
-                          {errors.message.message}
-                        </motion.p>
-                      )}
+                      <label className={labelClass}>Additional Message *</label>
+                      <textarea {...register('message', { required: 'Message is required' })}
+                        rows={4} className={`${inputClass} resize-none`}
+                        placeholder="Tell us about your project, timeline, and specific requirements..." />
+                      {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message.message}</p>}
                     </div>
 
                     <motion.button
                       type="submit"
                       disabled={isSubmitting}
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      className="w-full bg-red-600 hover:bg-red-700 text-white py-4 px-6 rounded-lg font-bold text-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 shadow-lg"
+                      whileHover={{ scale: 1.01, boxShadow: '0 8px 24px rgba(239,68,68,0.3)' }}
+                      whileTap={{ scale: 0.99 }}
+                      className="w-full bg-red-600 hover:bg-red-700 text-white py-3.5 px-6 rounded-xl font-semibold text-sm tracking-wide transition-all duration-300 disabled:opacity-50 flex items-center justify-center gap-2"
                     >
                       {isSubmitting ? (
                         <>
-                          <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                          <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white" />
                           <span>Sending...</span>
                         </>
                       ) : (
                         <>
-                          <Send className="w-5 h-5" />
+                          <Send className="w-4 h-4" />
                           <span>Send Message</span>
                         </>
                       )}
@@ -451,153 +300,133 @@ export default function Contact() {
                 </div>
               </motion.div>
 
-              {/* Contact Information */}
+              {/* ── Info Sidebar (2 cols) */}
               <motion.div
-                initial={{ opacity: 0, x: 50 }}
+                initial={{ opacity: 0, x: 40 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="space-y-8"
+                transition={{ duration: 0.8, delay: 0.15 }}
+                className="lg:col-span-2 space-y-6"
               >
+                {/* Heading */}
                 <div>
-                  <span className="text-red-600 font-semibold text-lg">Let&apos;s Connect</span>
-                  <h2 className="text-3xl font-bold text-gray-800 mt-2 mb-4">Contact Information</h2>
-                  <p className="text-lg text-gray-600 leading-relaxed">
+                  <span className="text-red-500 text-xs font-semibold tracking-[0.22em] uppercase block mb-1">Contact Details</span>
+                  <h2 className="font-serif-luxury text-2xl font-semibold text-slate-900 mb-2">Contact Information</h2>
+                  <div className="w-8 h-px bg-red-500 mb-3" />
+                  <p className="text-slate-500 text-sm leading-relaxed font-light">
                     Get in touch with us today to start your journey toward a beautiful, functional space that exceeds your expectations.
                   </p>
                 </div>
 
-                <div className="space-y-4">
-                  <motion.div
-                    whileHover={{ scale: 1.02, x: 10 }}
-                    className="flex items-start space-x-4 bg-white p-6 rounded-xl shadow-lg border border-gray-200"
-                  >
-                    <div className="bg-red-600 p-3 rounded-xl shadow-lg">
-                      <Mail className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-gray-800 mb-1 text-lg">Email</h3>
-                      <p className="text-gray-700 font-semibold">homestorey@thenidhimittal.com</p>
-                      <p className="text-sm text-gray-500">Response within 24 hours</p>
-                    </div>
-                  </motion.div>
-
-                  <motion.div
-                    whileHover={{ scale: 1.02, x: 10 }}
-                    className="flex items-start space-x-4 bg-white p-6 rounded-xl shadow-lg border border-gray-200"
-                  >
-                    <div className="bg-rose-600 p-3 rounded-xl shadow-lg">
-                      <MapPin className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-gray-800 mb-1 text-lg">Office Location</h3>
-                      <p className="text-gray-700 font-semibold">Delhi</p>
-                      <p className="text-sm text-gray-500">Visit by appointment only</p>
-                    </div>
-                  </motion.div>
-
-                  <motion.div
-                    whileHover={{ scale: 1.02, x: 10 }}
-                    className="flex items-start space-x-4 bg-white p-6 rounded-xl shadow-lg border border-gray-200"
-                  >
-                    <div className="bg-red-600 p-3 rounded-xl shadow-lg">
-                      <Clock className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-gray-800 mb-1 text-lg">Business Hours</h3>
-                      <div className="text-gray-700 space-y-1">
-                        <p className="font-semibold">Monday - Friday: 9:00 AM - 7:00 PM</p>
-                        <p className="font-semibold">Saturday: 10:00 AM - 5:00 PM</p>
-                        <p className="font-semibold">Sunday: By Appointment</p>
+                {/* Contact Cards */}
+                <div className="space-y-3">
+                  {[
+                    {
+                      icon: <Mail className="w-5 h-5" />,
+                      title: "Email",
+                      value: "homestorey@thenidhimittal.com",
+                      sub: "Response within 24 hours",
+                      href: "mailto:homestorey@thenidhimittal.com"
+                    },
+                    {
+                      icon: <MapPin className="w-5 h-5" />,
+                      title: "Office Location",
+                      value: "Delhi, India",
+                      sub: "Visit by appointment only"
+                    },
+                    {
+                      icon: <Clock className="w-5 h-5" />,
+                      title: "Business Hours",
+                      value: "Mon–Fri: 9 AM – 7 PM",
+                      sub: "Sat: 10 AM – 5 PM • Sun: Appointment"
+                    },
+                  ].map((card, i) => (
+                    <motion.div
+                      key={i}
+                      whileHover={{ x: 4 }}
+                      className="flex items-start gap-4 bg-white p-4 rounded-xl border border-gray-200/80 shadow-sm"
+                    >
+                      <div className="bg-red-50 border border-red-100 p-2.5 rounded-lg text-red-500 flex-shrink-0">
+                        {card.icon}
                       </div>
-                    </div>
-                  </motion.div>
+                      <div>
+                        <p className="text-slate-900 font-semibold text-sm">{card.title}</p>
+                        {card.href ? (
+                          <a href={card.href} className="text-red-500 hover:text-red-600 text-xs font-medium">{card.value}</a>
+                        ) : (
+                          <p className="text-slate-700 text-xs font-medium">{card.value}</p>
+                        )}
+                        <p className="text-slate-400 text-xs mt-0.5">{card.sub}</p>
+                      </div>
+                    </motion.div>
+                  ))}
                 </div>
 
-                {/* Free Consultation CTA */}
+                {/* Free Consultation CTA Card */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6 }}
-                  className="bg-red-50 border-2 border-red-200 rounded-xl p-6 shadow-lg relative overflow-hidden"
+                  className="bg-slate-950 rounded-2xl p-6 relative overflow-hidden"
                 >
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-red-200 rounded-full -translate-y-12 translate-x-12"></div>
-                  <div className="relative">
-                    <h3 className="text-xl font-bold text-gray-800 mb-3">Free Design Consultation</h3>
-                    <p className="text-gray-600 mb-4 leading-relaxed">
-                      Schedule a complimentary consultation to discuss your project and get expert advice from our design team.
-                    </p>
-                    <div className="grid grid-cols-2 gap-3 mb-4">
-                      {features.map((feature, index) => (
-                        <motion.div
-                          key={index}
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: 0.8 + index * 0.1 }}
-                          className="flex items-center space-x-2"
-                        >
-                          <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
-                          <span className="text-gray-700 font-medium text-sm">{feature}</span>
-                        </motion.div>
-                      ))}
-                    </div>
+                  <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-red-500 to-transparent opacity-60" />
+                  <span className="text-red-400 text-xs font-semibold tracking-[0.22em] uppercase block mb-2">Complimentary</span>
+                  <h3 className="font-serif-luxury text-lg font-semibold text-white mb-2">Free Design Consultation</h3>
+                  <p className="text-slate-400 text-xs leading-relaxed mb-4 font-light">
+                    Schedule a free session to discuss your project and get personalised advice from our design team.
+                  </p>
+                  <div className="grid grid-cols-1 gap-2 mb-5">
+                    {features.map((f, i) => (
+                      <div key={i} className="flex items-center gap-2">
+                        <CheckCircle className="w-3.5 h-3.5 text-red-400 flex-shrink-0" />
+                        <span className="text-slate-400 text-xs">{f}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <Link href="https://tidycal.com/homestorey/free-design-discussion" target="_blank" rel="noopener noreferrer">
                     <motion.button
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      className="bg-red-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-red-700 transition-all duration-300 w-full"
+                      className="w-full bg-red-600 hover:bg-red-700 text-white text-sm font-semibold py-2.5 px-4 rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
                     >
-                      Book Free Consultation
+                      <span>Book Free Consultation</span>
+                      <ArrowRight className="w-4 h-4" />
                     </motion.button>
-                  </div>
+                  </Link>
                 </motion.div>
+
+                {/* Trustpilot */}
+                <div className="bg-white rounded-xl border border-gray-200/80 p-4 shadow-sm text-center">
+                  <p className="text-slate-500 text-xs mb-3">Loved our work? Leave a review!</p>
+                  <div className="flex justify-center">
+                    <TrustpilotReviewCollector />
+                  </div>
+                </div>
               </motion.div>
             </div>
           </div>
         </section>
 
-        {/* Trustpilot Widget Section */}
-        <section className="py-12 bg-white">
-          <div className="container mx-auto px-6 text-center">
-            <h3 className="text-2xl font-bold text-gray-800 mb-4">Our Clients Love Us</h3>
-            <p className="text-gray-600 mb-6">See what homeowners are saying about their Home Storey experience</p>
-            <div className="flex justify-center">
-              <TrustpilotReviewCollector />
+        {/* ── Stats Bar ─────────────────────────────────── */}
+        <section className="py-14 bg-slate-950 relative overflow-hidden">
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-red-500 to-transparent opacity-50" />
+          <div className="container mx-auto px-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl mx-auto text-center">
+              {stats.map((s, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.1, duration: 0.5 }}
+                  viewport={{ once: true }}
+                >
+                  <div className="text-3xl font-bold text-red-400 mb-1 font-serif-luxury">{s.value}</div>
+                  <div className="text-slate-400 text-xs tracking-wider uppercase">{s.label}</div>
+                </motion.div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Trust Indicators */}
-        <section className="py-12 bg-gray-800 relative overflow-hidden">
-          <div className="absolute inset-0 opacity-10 bg-red-500"></div>
-          <div className="container mx-auto px-6 relative">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="text-center text-white"
-            >
-              <h3 className="text-2xl font-bold mb-8">Why Choose Home Storey?</h3>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-red-400 mb-2">10+</div>
-                  <div className="text-white/80 text-sm">Years Experience</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-red-400 mb-2">300+</div>
-                  <div className="text-white/80 text-sm">Designs Completed</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-green-400 mb-2">250+</div>
-                  <div className="text-white/80 text-sm">Happy Clients</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-yellow-400 mb-2">4.5</div>
-                  <div className="text-white/80 text-sm">Average Rating</div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </section>
       </div>
     </Layout>
   )

@@ -103,23 +103,24 @@ const MasonryGrid: React.FC = () => {
 
   return (
     <section className="py-24 bg-white relative overflow-hidden">
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-6 lg:px-12 relative z-10">
         {/* Header Section */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <span className="inline-block text-red-600 font-bold text-lg bg-red-100 px-6 py-3 rounded-full mb-4">
+          <span className="text-red-500 font-semibold text-xs sm:text-sm tracking-[0.25em] uppercase block mb-3">
             Trending Now
           </span>
-          <h2 className="text-5xl font-bold text-gray-800 mb-6">
-            Most Requested Design Solutions
+          <h2 className="font-serif-luxury text-4xl sm:text-5xl lg:text-6xl text-slate-900 font-normal leading-tight">
+            Most Requested Design Solutions.
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            See what homeowners are choosing this year to transform their spaces
+          <div className="w-16 h-0.5 bg-red-500 mx-auto my-5 rounded-full"></div>
+          <p className="text-slate-600 text-base md:text-lg max-w-2xl mx-auto font-light leading-relaxed">
+            Discover what discerning homeowners are choosing this year to elevate their spaces.
           </p>
         </motion.div>
 

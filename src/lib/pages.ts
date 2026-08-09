@@ -1,5 +1,5 @@
 import { db } from './firebase'
-import { collection, doc, getDocs, getDoc, setDoc, deleteDoc, query, where, orderBy } from 'firebase/firestore'
+import { collection, doc, getDocs, setDoc, deleteDoc, query, where, orderBy } from 'firebase/firestore'
 import { CustomPage } from '@/types/page'
 
 const COLLECTION_NAME = 'pages'
@@ -13,8 +13,10 @@ export async function getCustomPages(publishedOnly = true): Promise<CustomPage[]
       
     const snapshot = await getDocs(q)
     return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as CustomPage))
-  } catch (error) {
-    console.error('Error fetching custom pages:', error)
+  } catch (error: unknown) {
+    if ((error as { code?: string })?.code !== 'permission-denied') {
+      console.error('Error fetching custom pages:', error)
+    }
     return []
   }
 }
@@ -29,8 +31,10 @@ export async function getCustomPageBySlug(slug: string): Promise<CustomPage | nu
     
     const doc = snapshot.docs[0]
     return { id: doc.id, ...doc.data() } as CustomPage
-  } catch (error) {
-    console.error('Error fetching custom page by slug:', error)
+  } catch (error: unknown) {
+    if ((error as { code?: string })?.code !== 'permission-denied') {
+      console.error('Error fetching custom page by slug:', error)
+    }
     return null
   }
 }

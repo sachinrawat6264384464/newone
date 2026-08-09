@@ -1,6 +1,6 @@
 // components/Layout.tsx
 "use client";
-import { useState, ReactNode } from "react";
+import { useState, useEffect, ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -26,7 +26,17 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    handleScroll();
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Footer Component
   const Footer = () => {
@@ -78,21 +88,17 @@ const Layout = ({ children }: LayoutProps) => {
     ];
 
     return (
-      <footer className="relative bg-gradient-to-br from-gray-50 via-white to-red-50 text-black overflow-hidden border-t border-gray-200">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-gray-200/20 via-transparent to-transparent"></div>
-        </div>
-        
-        {/* Floating Decorative Elements */}
-        <div className="absolute top-20 left-10 w-32 h-32 bg-red-500/5 rounded-full blur-2xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-40 h-40 bg-red-500/5 rounded-full blur-2xl animate-pulse delay-1000"></div>
-        
-        <div className="container mx-auto px-4 py-16 relative z-10">
-          {/* Main Footer Content */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-            
-            {/* Company Info */}
+      <footer className="relative bg-slate-950 text-white overflow-hidden border-t border-white/10">
+        {/* Subtle red glow top */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-red-500 to-transparent opacity-60" />
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-red-600/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-red-500/5 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="container mx-auto px-6 py-20 relative z-10">
+          {/* Main Footer Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
+
+            {/* Brand Column */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -100,199 +106,153 @@ const Layout = ({ children }: LayoutProps) => {
               viewport={{ once: true }}
               className="lg:col-span-1"
             >
-              {/* Logo */}
-              <motion.div 
-                className="mb-6"
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.3 }}
-              >
-                <Image
-                  src="/logo1img.png"
-                  alt="Home Storey Logo"
-                  width={80}
-                  height={80}
-                  className="h-20 w-auto object-contain filter drop-shadow-lg"
-                />
-              </motion.div>
-              
-              <p className="text-gray-700 leading-relaxed mb-6 text-lg">
+              <div className="flex items-center gap-2.5 mb-5">
+                {/* Original logo in clean white pill */}
+                <div className="bg-white rounded-xl px-2 py-1.5 shadow-md">
+                  <Image
+                    src="/logo1img.png"
+                    alt="Home Storey Logo"
+                    width={36}
+                    height={36}
+                    className="h-8 w-auto object-contain"
+                  />
+                </div>
+                {/* Wordmark */}
+                <div className="flex flex-col leading-none">
+                  <span className="text-white font-bold text-base tracking-tight" style={{ fontFamily: 'Georgia, serif' }}>HomeStorey</span>
+                  <span className="text-[7.5px] tracking-[0.3em] text-red-400 uppercase font-semibold mt-0.5">Build · Design · Live</span>
+                </div>
+              </div>
+
+              <p className="text-slate-400 leading-relaxed mb-6 text-sm font-light">
                 Transforming spaces into beautiful homes with expert design and
                 construction services that bring your vision to life.
               </p>
-              
-              {/* Book Consultation Button */}
+
               <Link href="https://tidycal.com/homestorey/free-design-discussion" target="_blank" rel="noopener noreferrer">
                 <motion.button
-                  whileHover={{ 
-                    scale: 1.05,
-                    boxShadow: "0 10px 30px rgba(239, 68, 68, 0.4)"
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                  className="group bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold py-3 px-6 rounded-full transition-all duration-300 shadow-lg inline-flex items-center space-x-2"
+                  whileHover={{ scale: 1.04, boxShadow: "0 10px 30px rgba(239, 68, 68, 0.35)" }}
+                  whileTap={{ scale: 0.96 }}
+                  className="group bg-red-600 hover:bg-red-700 text-white font-semibold text-sm py-2.5 px-5 rounded-lg transition-all duration-300 inline-flex items-center gap-2"
                 >
-                  <span>Book a Consultation</span>
+                  <span>Book Consultation</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
                 </motion.button>
               </Link>
 
-              {/* Rating Stars */}
-              <div className="flex items-center space-x-1 mt-4">
+              {/* Rating */}
+              <div className="flex items-center gap-1 mt-5">
                 {[...Array(5)].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    transition={{ delay: i * 0.1, duration: 0.3 }}
-                  >
-                    {i < 4 ? (
-                      <Star className="w-5 h-5 text-yellow-400 fill-current" />
-                    ) : i === 4 ? (
-                      <div className="relative">
-                        <Star className="w-5 h-5 text-gray-300 fill-current" />
-                        <div className="absolute inset-0 overflow-hidden" style={{ width: '50%' }}>
-                          <Star className="w-5 h-5 text-yellow-400 fill-current" />
-                        </div>
-                      </div>
-                    ) : (
-                      <Star className="w-5 h-5 text-gray-300 fill-current" />
-                    )}
-                  </motion.div>
+                  <Star key={i} className={`w-4 h-4 ${i < 4 ? 'text-yellow-400 fill-current' : 'text-slate-600 fill-current'}`} />
                 ))}
-                <span className="text-gray-600 ml-2 text-sm">4.5 (250+ reviews)</span>
+                <span className="text-slate-400 ml-1.5 text-xs">4.5 (250+ reviews)</span>
               </div>
             </motion.div>
 
-            {/* Services */}
+            {/* Our Services Column */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-2xl font-bold mb-6 text-black relative">
-                Our Services
-                <div className="absolute bottom-0 left-0 w-12 h-1 bg-gradient-to-r from-red-500 to-red-600 rounded-full"></div>
-              </h3>
-              
+              <h4 className="text-white font-semibold text-sm tracking-[0.18em] uppercase mb-1">Our Services</h4>
+              <div className="w-8 h-0.5 bg-red-500 rounded-full mb-5" />
               <ul className="space-y-3">
                 {services.map((service, index) => (
-                  <li key={index} className="list-none">
+                  <li key={index}>
                     <motion.div
-                      initial={{ opacity: 0, x: -20 }}
+                      initial={{ opacity: 0, x: -10 }}
                       whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1, duration: 0.4 }}
-                      className="text-gray-600 hover:text-black transition-colors duration-300 cursor-pointer group flex items-center"
+                      transition={{ delay: index * 0.07, duration: 0.4 }}
+                      className="text-slate-400 hover:text-red-400 transition-colors duration-200 cursor-pointer group flex items-center gap-2 text-sm"
                     >
-                      <ArrowRight className="w-3 h-3 mr-2 text-red-500 group-hover:translate-x-1 transition-transform duration-200" />
-                      <span className="group-hover:translate-x-1 transition-transform duration-200 text-sm">
-                        {service}
-                      </span>
+                      <div className="w-1 h-1 rounded-full bg-red-500/60 group-hover:bg-red-400 transition-colors" />
+                      <span>{service}</span>
                     </motion.div>
                   </li>
                 ))}
               </ul>
             </motion.div>
 
-            {/* Quick Links */}
+            {/* Quick Links Column */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-2xl font-bold mb-6 text-black relative">
-                Quick Links
-                <div className="absolute bottom-0 left-0 w-12 h-1 bg-gradient-to-r from-red-500 to-red-600 rounded-full"></div>
-              </h3>
-              
+              <h4 className="text-white font-semibold text-sm tracking-[0.18em] uppercase mb-1">Quick Links</h4>
+              <div className="w-8 h-0.5 bg-red-500 rounded-full mb-5" />
               <ul className="space-y-3">
                 {[
-                  { name: "About Us", href: "/about" },
-                  { name: "Our Work", href: "/gallery" },
-                  { name: "Contact", href: "/contact" },
-                  
+                  { name: "Home", href: "/" },
+                  { name: "Design Gallery", href: "/gallery" },
+                  { name: "Contact Us", href: "/contact" },
                 ].map((link, index) => (
                   <motion.li
                     key={index}
-                    initial={{ opacity: 0, x: -20 }}
+                    initial={{ opacity: 0, x: -10 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1, duration: 0.4 }}
+                    transition={{ delay: index * 0.07, duration: 0.4 }}
                   >
-                    <Link 
+                    <Link
                       href={link.href}
-                      className="text-gray-600 hover:text-black transition-all duration-300 group flex items-center"
+                      className="text-slate-400 hover:text-red-400 transition-colors duration-200 group flex items-center gap-2 text-sm"
                     >
-                      <ArrowRight className="w-3 h-3 mr-2 text-red-500 group-hover:translate-x-1 transition-transform duration-200" />
-                      <span className="group-hover:translate-x-1 transition-transform duration-200 text-sm">
-                        {link.name}
-                      </span>
+                      <div className="w-1 h-1 rounded-full bg-red-500/60 group-hover:bg-red-400 transition-colors" />
+                      <span>{link.name}</span>
                     </Link>
                   </motion.li>
                 ))}
               </ul>
             </motion.div>
 
-            {/* Contact Info */}
+            {/* Get In Touch Column */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-2xl font-bold mb-6 text-black relative">
-                Get In Touch
-                <div className="absolute bottom-0 left-0 w-12 h-1 bg-gradient-to-r from-red-500 to-rose-600 rounded-full"></div>
-              </h3>
-              
-              <div className="space-y-4">
+              <h4 className="text-white font-semibold text-sm tracking-[0.18em] uppercase mb-1">Get In Touch</h4>
+              <div className="w-8 h-0.5 bg-red-500 rounded-full mb-5" />
 
+              <div className="space-y-4 mb-7">
                 <motion.a
                   href="mailto:homestorey@thenidhimittal.com"
-                  className="flex items-start space-x-3 group cursor-pointer"
-                  whileHover={{ x: 5 }}
+                  className="flex items-start gap-3 group cursor-pointer"
+                  whileHover={{ x: 4 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <div className="bg-red-100 p-2 rounded-lg group-hover:bg-red-200 transition-colors duration-300">
-                    <Mail className="w-5 h-5 text-red-600" />
+                  <div className="bg-red-500/10 border border-red-500/20 p-2 rounded-lg group-hover:bg-red-500/20 transition-colors mt-0.5">
+                    <Mail className="w-4 h-4 text-red-400" />
                   </div>
                   <div>
-                    <p className="text-black font-semibold mb-1">Email Us</p>
-                    <p className="text-gray-600 text-sm">homestorey@thenidhimittal.com</p>
+                    <p className="text-white text-sm font-medium">Email Us</p>
+                    <p className="text-slate-400 text-xs mt-0.5">homestorey@thenidhimittal.com</p>
                   </div>
                 </motion.a>
 
-                <motion.div 
-                  className="flex items-start space-x-3 group cursor-pointer"
-                  whileHover={{ x: 5 }}
+                <motion.div
+                  className="flex items-start gap-3 group cursor-pointer"
+                  whileHover={{ x: 4 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <div className="bg-red-100 p-2 rounded-lg group-hover:bg-red-200 transition-colors duration-300">
-                    <MapPin className="w-5 h-5 text-red-600" />
+                  <div className="bg-red-500/10 border border-red-500/20 p-2 rounded-lg group-hover:bg-red-500/20 transition-colors mt-0.5">
+                    <MapPin className="w-4 h-4 text-red-400" />
                   </div>
                   <div>
-                    <p className="text-black font-semibold mb-1">Visit Us</p>
-                    <p className="text-gray-600 text-sm">Delhi</p>
+                    <p className="text-white text-sm font-medium">Visit Us</p>
+                    <p className="text-slate-400 text-xs mt-0.5">Delhi, India</p>
                   </div>
                 </motion.div>
               </div>
 
-              {/* Trustpilot Review Collector Section */}
-              <div className="border-t border-gray-800 pt-8 mb-8">
-                <div className="max-w-xl mx-auto text-center">
-                  <h3 className="text-lg font-semibold mb-2">
-                    Share Your Experience
-                  </h3>
-                  <p className="text-gray-400 text-sm mb-4">
-                    Already worked with us? We&apos;d love to hear from you!
-                  </p>
-                  <TrustpilotReviewCollector />
-                </div>
-              </div>
-
               {/* Social Links */}
-              <div className="mt-8">
-                <h4 className="text-black font-semibold mb-4">Follow Us</h4>
-                <div className="flex space-x-4">
+              <div>
+                <p className="text-slate-500 text-xs tracking-widest uppercase mb-3">Follow Us</p>
+                <div className="flex gap-2.5">
                   {socialLinks.map((social, index) => {
                     const IconComponent = social.icon;
                     return (
@@ -304,47 +264,44 @@ const Layout = ({ children }: LayoutProps) => {
                         initial={{ scale: 0 }}
                         whileInView={{ scale: 1 }}
                         transition={{ delay: index * 0.1, duration: 0.3 }}
-                        whileHover={{ 
-                          scale: 1.2, 
-                          y: -2,
-                          boxShadow: "0 8px 25px rgba(0, 0, 0, 0.1)"
-                        }}
+                        whileHover={{ scale: 1.15, y: -2 }}
                         whileTap={{ scale: 0.9 }}
-                        className={`bg-gray-100 hover:bg-gray-200 p-3 rounded-full text-gray-600 ${social.color} transition-all duration-300 border border-gray-200 hover:border-gray-300`}
+                        className="bg-white/5 hover:bg-red-500/20 border border-white/10 hover:border-red-500/40 p-2.5 rounded-lg text-slate-400 hover:text-red-400 transition-all duration-300"
                         aria-label={social.label}
                       >
-                        <IconComponent className="w-5 h-5" />
+                        <IconComponent className="w-4 h-4" />
                       </motion.a>
                     );
                   })}
                 </div>
               </div>
+
+              {/* Trustpilot */}
+              <div className="mt-5 pt-5 border-t border-white/10">
+                <p className="text-slate-500 text-xs mb-2">Loved our work? Leave a review!</p>
+                <TrustpilotReviewCollector />
+              </div>
             </motion.div>
           </div>
 
-          {/* Bottom Section */}
+          {/* Bottom Bar */}
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.5 }}
             viewport={{ once: true }}
-            className="border-t border-gray-200 mt-16 pt-6"
+            className="border-t border-white/10 mt-14 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3"
           >
-            <div className="text-center">
-              <p className="text-gray-500 text-xs flex flex-wrap items-center justify-center gap-1">
-                <span>© 2025 Home Storey. All rights reserved.</span>
-                <span className="hidden sm:inline">•</span>
-                <span className="flex items-center gap-1">
-                  Made with <Heart className="w-3 h-3 text-red-500 fill-current inline" /> by
-                  <Link 
-                    href="https://botmartz.com"
-                    className="text-black font-semibold hover:text-red-500 transition-colors duration-300"
-                  >
-                    Botmartz IT Solutions
-                  </Link>
-                </span>
-              </p>
-            </div>
+            <p className="text-slate-500 text-xs">© 2025 HomeStorey. All rights reserved.</p>
+            <p className="text-slate-600 text-xs flex items-center gap-1">
+              Made with <Heart className="w-3 h-3 text-red-500 fill-current" /> by
+              <Link
+                href="https://botmartz.com"
+                className="text-slate-400 hover:text-red-400 font-semibold transition-colors duration-200 ml-0.5"
+              >
+                Botmartz IT Solutions
+              </Link>
+            </p>
           </motion.div>
         </div>
       </footer>
@@ -354,132 +311,159 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="bg-white shadow-lg sticky top-0 z-50">
-        <nav className="container mx-auto px-4 py-4">
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled || pathname !== '/'
+          ? "bg-slate-950/95 backdrop-blur-md shadow-lg py-2.5 border-b border-white/10 text-white"
+          : "bg-transparent py-4 text-white"
+      }`}>
+        <nav className="container mx-auto px-4 py-3">
           <div className="flex justify-between items-center">
             {/* Logo */}
-            <Link href="/" className="flex items-center space-x-2 ml-10">
-              <Image
-                src="/logo1img.png"
-                alt="Home Storey Logo"
-                width={54}
-                height={54}
-                className="h-16 w-auto object-contain"
-                priority
-              />
+            <Link href="/" className="flex items-center gap-2 group">
+              {/* Original logo in clean white pill - responsive size */}
+              <div className="bg-white rounded-lg px-1.5 sm:px-2.5 py-1 sm:py-1.5 shadow-md group-hover:shadow-lg transition-shadow duration-300">
+                <Image
+                  src="/logo1img.png"
+                  alt="Home Storey Logo"
+                  width={48}
+                  height={48}
+                  className="h-7 sm:h-10 w-auto object-contain"
+                  priority
+                />
+              </div>
+              {/* Wordmark - hidden on xs, visible sm+ */}
+              <div className="hidden sm:flex flex-col leading-none">
+                <span className="text-white font-bold text-[15px] sm:text-[17px] tracking-tight" style={{ fontFamily: 'Georgia, serif' }}>HomeStorey</span>
+                <span className="text-[8px] tracking-[0.3em] text-red-400 uppercase font-semibold mt-0.5">Build · Design · Live</span>
+              </div>
             </Link>
 
-            {/* Desktop Menu */}
-            <div className="hidden md:flex items-center space-x-6">
-              {[
-                { name: "Home", href: "/" },
-                { name: "Gallery", href: "/gallery" },
-                { name: "Contact", href: "/contact" },
-              ].map((item) => {
-                const isActive = pathname === item.href;
-                return (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className={`relative px-4 py-2 text-base font-semibold transition-all duration-300 rounded-full group ${
-                      isActive
-                        ? "text-red-600 font-bold bg-red-50"
-                        : "text-gray-700 hover:text-red-600 hover:bg-red-50/70"
-                    }`}
-                  >
-                    <span>{item.name}</span>
-                    <span
-                      className={`absolute bottom-1 left-1/2 transform -translate-x-1/2 h-0.5 bg-red-600 rounded-full transition-all duration-300 ${
-                        isActive ? "w-1/2" : "w-0 group-hover:w-1/2"
+            {/* Right Side: Desktop Menu Links + CTA Button */}
+            <div className="hidden lg:flex items-center space-x-10">
+              <div className="flex items-center space-x-10 mr-8">
+                {[
+                  { name: "Home", href: "/" },
+                  { name: "Gallery", href: "/gallery" },
+                  { name: "Contact", href: "/contact" },
+                ].map((item) => {
+                  const isActive = pathname === item.href;
+                  return (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      className={`relative text-sm font-semibold tracking-wider uppercase transition-colors duration-200 py-1 ${
+                        isActive ? "text-red-500 font-bold" : "text-gray-200 hover:text-white"
                       }`}
-                    />
-                  </Link>
-                );
-              })}
+                    >
+                      <span>{item.name}</span>
+                      {isActive && (
+                        <motion.div
+                          layoutId="activeNavIndicator"
+                          className="absolute -bottom-1 left-0 right-0 h-0.5 bg-red-500 rounded-full"
+                          transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                        />
+                      )}
+                    </Link>
+                  );
+                })}
+              </div>
+
+              {/* CTA Button */}
               <Link
                 href="https://tidycal.com/homestorey/free-design-discussion"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <motion.button
-                  whileHover={{ scale: 1.05, boxShadow: "0 10px 25px rgba(239, 68, 68, 0.4)" }}
-                  whileTap={{ scale: 0.95 }}
-                  className="bg-red-600 text-white px-6 py-2.5 rounded-full font-bold hover:bg-red-700 transition-all duration-300 shadow-md"
+                  whileHover={{ scale: 1.03, boxShadow: "0 10px 20px rgba(239, 68, 68, 0.35)" }}
+                  whileTap={{ scale: 0.97 }}
+                  className="bg-red-600 hover:bg-red-700 text-white text-xs sm:text-sm font-bold tracking-wide uppercase px-5 py-2.5 rounded-md transition-all shadow-md"
                 >
                   Get Free Consultation
                 </motion.button>
               </Link>
             </div>
 
-            {/* Mobile Menu Button */}
-            <button
-              className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label="Toggle mobile menu"
+            {/* Mobile only: Book button in navbar right */}
+            <Link
+              href="https://tidycal.com/homestorey/free-design-discussion"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="lg:hidden"
             >
-              {isMenuOpen ? (
-                <X className="w-6 h-6 text-gray-800" />
-              ) : (
-                <Menu className="w-6 h-6 text-gray-800" />
-              )}
-            </button>
-          </div>
-
-          {/* Mobile Menu */}
-          <AnimatePresence>
-            {isMenuOpen && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                className="md:hidden mt-4 pb-4 border-t border-gray-200 pt-4"
+              <motion.button
+                whileTap={{ scale: 0.95 }}
+                className="bg-red-600 text-white text-[11px] font-bold tracking-wide uppercase px-3 py-2 rounded-lg shadow-md"
               >
-                <div className="flex flex-col space-y-2">
-                  {[
-                    { name: "Home", href: "/" },
-                    { name: "Gallery", href: "/gallery" },
-                    { name: "Contact", href: "/contact" },
-                  ].map((item) => {
-                    const isActive = pathname === item.href;
-                    return (
-                      <Link
-                        key={item.name}
-                        href={item.href}
-                        className={`px-4 py-3 rounded-xl font-medium transition-all duration-200 ${
-                          isActive
-                            ? "bg-red-50 text-red-600 font-bold"
-                            : "text-gray-700 hover:bg-red-50 hover:text-red-600"
-                        }`}
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        {item.name}
-                      </Link>
-                    );
-                  })}
-                  <Link
-                    href="https://tidycal.com/homestorey/free-design-discussion"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-red-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-red-700 transition-all duration-300 text-center shadow-md mt-2"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    Get Free Consultation
-                  </Link>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+                Book Free
+              </motion.button>
+            </Link>
+
+          </div>
         </nav>
       </header>
 
-      {/* Main Content */}
-      <main>
+      {/* Main Content — extra bottom padding on mobile for bottom nav */}
+      <main className="pb-16 lg:pb-0">
         {children}
         <WhatsAppButton />
       </main>
 
       {/* Enhanced Footer */}
       <Footer />
+
+      {/* ── Mobile Bottom Navigation Bar ── */}
+      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-slate-950/97 backdrop-blur-md border-t border-white/10">
+        <div className="flex items-center justify-around px-4 py-3">
+
+          {/* Home */}
+          <Link
+            href="/"
+            className={`flex flex-col items-center gap-0.5 px-5 py-1 rounded-xl transition-all duration-200 ${
+              pathname === '/' ? 'text-red-400' : 'text-slate-400'
+            }`}
+          >
+            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M3 9.5L12 3l9 6.5V21a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/>
+              <path d="M9 21V12h6v9"/>
+            </svg>
+            <span className="text-[10px] font-semibold">Home</span>
+            {pathname === '/' && <div className="w-1 h-1 bg-red-500 rounded-full" />}
+          </Link>
+
+          {/* Gallery */}
+          <Link
+            href="/gallery"
+            className={`flex flex-col items-center gap-0.5 px-5 py-1 rounded-xl transition-all duration-200 ${
+              pathname === '/gallery' ? 'text-red-400' : 'text-slate-400'
+            }`}
+          >
+            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="3" y="3" width="7" height="7" rx="1"/>
+              <rect x="14" y="3" width="7" height="7" rx="1"/>
+              <rect x="3" y="14" width="7" height="7" rx="1"/>
+              <rect x="14" y="14" width="7" height="7" rx="1"/>
+            </svg>
+            <span className="text-[10px] font-semibold">Gallery</span>
+            {pathname === '/gallery' && <div className="w-1 h-1 bg-red-500 rounded-full" />}
+          </Link>
+
+          {/* Contact */}
+          <Link
+            href="/contact"
+            className={`flex flex-col items-center gap-0.5 px-5 py-1 rounded-xl transition-all duration-200 ${
+              pathname === '/contact' ? 'text-red-400' : 'text-slate-400'
+            }`}
+          >
+            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.23 1.22 2 2 0 012.22 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.59-.59a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92v2z"/>
+            </svg>
+            <span className="text-[10px] font-semibold">Contact</span>
+            {pathname === '/contact' && <div className="w-1 h-1 bg-red-500 rounded-full" />}
+          </Link>
+
+        </div>
+      </nav>
     </div>
   );
 };

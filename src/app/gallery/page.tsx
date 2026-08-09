@@ -19,15 +19,15 @@ interface ServiceCarousel {
 
 const services: ServiceCarousel[] = [
   {
-    title: "Facade & Exterior Design",
-    subtitle: "Creating Stunning First Impressions",
+    title: "Facade & Exterior Architecture",
+    subtitle: "STUNNING FIRST IMPRESSIONS",
     description:
-      "Transform your home's exterior into a welcoming masterpiece. From elegant landscaping to architectural enhancements, we create outdoor spaces that reflect your style from the moment guests arrive.",
+      "Transform your home's exterior into an architectural masterpiece. From grand entrance foyers to bespoke elevation treatments, we craft outdoor spaces that command admiration.",
     features: [
-      "Modern & traditional facade designs",
-      "Outdoor sitting & landscaping",
-      "Entrance foyer & door designs",
-      "Exterior lighting solutions",
+      "Modern & classical elevation design",
+      "Landscaping & outdoor lounge zones",
+      "Entrance foyer & door styling",
+      "Architectural exterior lighting",
     ],
     images: [
       "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298133/Homestorey-media/Gallery%20page/qrvccsdngw1eemstykjc.jpg",
@@ -36,19 +36,19 @@ const services: ServiceCarousel[] = [
       "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298118/Homestorey-media/Gallery%20page/y8fzk10gfdjb8vus5jkv.jpg",
       "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298123/Homestorey-media/Gallery%20page/rmocq2ue2azvxqebzzsw.jpg",
     ],
-    color: "text-red-600",
-    bgGradient: "from-red-50 to-red-100",
+    color: "text-slate-900",
+    bgGradient: "from-white to-white",
   },
   {
     title: "Living & Dining Spaces",
-    subtitle: "Heart of Your Home",
+    subtitle: "BESPOKE GATHERING AREAS",
     description:
-      "Design comfortable living areas where families come together. Our approach balances functionality with aesthetics, creating spaces perfect for both relaxation and entertaining guests.",
+      "Design expansive living areas where families connect. Our approach harmonizes custom layout planning with premium materials for effortless entertaining.",
     features: [
-      "Living room layout optimization",
-      "Dining area design & furniture",
-      "Entertainment center setup",
-      "Open-plan space organization",
+      "Spatial layout & seating flow",
+      "Custom dining tables & mood lighting",
+      "Integrated media wall concepts",
+      "Seamless open-plan organization",
     ],
     images: [
       "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298128/Homestorey-media/Gallery%20page/zi2wip1jxakzjqizhdgm.jpg",
@@ -57,38 +57,38 @@ const services: ServiceCarousel[] = [
       "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298131/Homestorey-media/Gallery%20page/grl8vrpjqr1nv7iaoxnd.jpg",
       "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298131/Homestorey-media/Gallery%20page/crhymjepg1mvcmiahb2d.jpg",
     ],
-    color: "text-red-600",
-    bgGradient: "from-red-50 to-red-100",
+    color: "text-slate-900",
+    bgGradient: "from-white to-white",
   },
   {
-    title: "Kitchen & Private Spaces",
-    subtitle: "Functional Spaces Excellence",
+    title: "Modular Kitchen & Storage",
+    subtitle: "CULINARY & FUNCTIONAL EXCELLENCE",
     description:
-      "Transform your most-used spaces into efficient, beautiful, and highly functional areas. We specialize in creating kitchens and bathrooms that combine luxury with practicality.",
+      "Transform your culinary environment into an efficient, ergonomic work of art featuring German hardware, island counters, and smart storage systems.",
     features: [
-      "Modern kitchen design & renovation",
-      "Modular storage solutions",
-      "Spa-like bathroom transformations",
-      "Premium fixtures & finishes",
+      "Modular island kitchen layouts",
+      "Soft-close tandem drawer systems",
+      "Pantry towers & corner pull-outs",
+      "Quartz & marble countertop finishes",
     ],
     images: [
       "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298127/Homestorey-media/Gallery%20page/edk6q2gjwi5g0u2mw3pp.jpg",
       "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298126/Homestorey-media/Gallery%20page/spkd2fuj0bcyoomyi1pq.jpg",
       "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298125/Homestorey-media/Gallery%20page/ceecfgprdjhjobsjqcm8.jpg",
     ],
-    color: "text-red-600",
-    bgGradient: "from-red-50 to-red-100",
+    color: "text-slate-900",
+    bgGradient: "from-white to-white",
   },
   {
-    title: "Bedrooms & Bathroom Design",
-    subtitle: "Personal Sanctuaries",
+    title: "Bedrooms & Private Suites",
+    subtitle: "PERSONAL SANCTUARIES",
     description:
-      "Create serene bedroom spaces that promote rest and rejuvenation. From master suites to children's rooms and home offices, we design spaces that reflect individual personalities.",
+      "Create serene private retreats that foster rest and comfort. From master suites to walk-in wardrobes, every detail is tailored to your personal aesthetic.",
     features: [
-      "Master bedroom suite design",
-      "Kids room creativity & safety",
-      "Work-from-home office spaces",
-      "Walk-in closet organization",
+      "Master suite layout & headboard walls",
+      "Walk-in closet & wardrobe organization",
+      "Ensuite luxury bathroom designs",
+      "Acoustic & warm ambient lighting",
     ],
     images: [
       "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298115/Homestorey-media/Gallery%20page/pd3nosf13zophljmvzmf.jpg",
@@ -97,19 +97,19 @@ const services: ServiceCarousel[] = [
       "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298105/Homestorey-media/Gallery%20page/oyunrqa34u60lvewohml.jpg",
       "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298104/Homestorey-media/Gallery%20page/y4mdmbgmcykrdvzdhtco.jpg",
     ],
-    color: "text-red-600",
-    bgGradient: "from-red-50 to-red-100",
+    color: "text-slate-900",
+    bgGradient: "from-white to-white",
   },
   {
-    title: "Special Features & Wellness",
-    subtitle: "Unique Spaces That Inspire",
+    title: "Terrace, Mandir & Wellness",
+    subtitle: "SACRED & LIFESTYLE SPACES",
     description:
-      "Incorporate unique elements that add character to your home. From sacred mandir spaces to wellness areas and smart terrace designs for entertainment and relaxation.",
+      "Infuse unique character into your home with tranquil prayer rooms, rooftop deck entertainment areas, and dedicated wellness corners.",
     features: [
-      "Mandir & prayer room design",
-      "Wellness spaces (Gym, Yoga)",
-      "Terrace party & BBQ areas",
-      "Balcony & bay window designs",
+      "Custom marble Mandir room designs",
+      "Terrace party decks & green pergolas",
+      "Yoga & home gym wellness zones",
+      "Balcony seating & planter arrangements",
     ],
     images: [
       "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298132/Homestorey-media/Gallery%20page/lfegjcseu2kxstbqgntm.jpg",
@@ -118,8 +118,8 @@ const services: ServiceCarousel[] = [
       "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298133/Homestorey-media/Gallery%20page/qrvccsdngw1eemstykjc.jpg",
       "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298143/Homestorey-media/Trending%20Now/el023n4t0hfl8ofbq5ui.png",
     ],
-    color: "text-red-600",
-    bgGradient: "from-red-50 to-red-100",
+    color: "text-slate-900",
+    bgGradient: "from-white to-white",
   },
 ];
 
@@ -204,121 +204,150 @@ export default function Gallery() {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="py-20 lg:py-28 bg-gradient-to-br from-white via-red-50 to-red-100 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-5 bg-brick-pattern"></div>
+      <section className="pt-28 pb-16 bg-[#FAF8F5] relative overflow-hidden border-b border-gray-200/60">
+        {/* Subtle grid */}
+        <div className="absolute inset-0 opacity-[0.025]"
+          style={{ backgroundImage: 'linear-gradient(#000 1px,transparent 1px),linear-gradient(90deg,#000 1px,transparent 1px)', backgroundSize: '56px 56px' }} />
 
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-4xl mx-auto text-center"
-          >
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.8 }}
-              className="text-4xl lg:text-6xl font-bold text-gray-800 mb-6 leading-tight"
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+            {/* Left — Text */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
             >
-              Welcome Home to Your
-              <span className="block text-red-600 mt-2">
-                Dream Design Journey
+              <span className="text-red-500 font-semibold text-xs tracking-[0.28em] uppercase block mb-4">
+                Design Portfolio
               </span>
-            </motion.h1>
+              <h1 className="font-serif-luxury text-4xl sm:text-5xl lg:text-6xl text-slate-900 font-normal leading-tight mb-5">
+                Welcome Home<br />to Your
+                <span className="block text-red-600 italic mt-1">Dream Design</span>
+                <span className="block text-red-600 italic">Journey.</span>
+              </h1>
+              <div className="w-10 h-px bg-red-500 mb-5" />
+              <p className="text-slate-500 text-base md:text-lg leading-relaxed mb-8 font-light max-w-md">
+                From the moment you step through your front door to every corner of your living space, we bring your architectural vision to life.
+              </p>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-              className="text-xl lg:text-2xl text-gray-600 leading-relaxed mb-8"
-            >
-              From the moment you step through your front door to every corner
-              of your living space, we bring your vision to life with designs
-              that reflect who you are
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7 }}
-              className="flex flex-wrap justify-center gap-4 mb-8"
-            >
-              <div className="bg-white px-6 py-3 rounded-full shadow-md border border-gray-200">
-                <span className="text-gray-700 font-semibold">
-                  300+ Designs
-                </span>
+              <div className="flex flex-wrap gap-3 mb-8">
+                {["300+ Completed Designs", "10+ Years Experience"].map((label) => (
+                  <div key={label} className="bg-white px-4 py-2 rounded-lg shadow-sm border border-gray-200/80">
+                    <span className="text-slate-800 text-sm font-semibold">{label}</span>
+                  </div>
+                ))}
               </div>
-              <div className="bg-white px-6 py-3 rounded-full shadow-md border border-gray-200">
-                <span className="text-gray-700 font-semibold">
-                  10+ Years Experience
-                </span>
-              </div>
-            </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.9 }}
-            >
               <Link
                 href="https://tidycal.com/homestorey/free-design-discussion"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="bg-red-600 hover:bg-red-700 text-white px-10 py-4 rounded-2xl text-xl font-bold shadow-xl transition-all duration-300 inline-flex items-center space-x-3"
+                  whileHover={{ scale: 1.03, boxShadow: "0 12px 25px rgba(239, 68, 68, 0.3)" }}
+                  whileTap={{ scale: 0.97 }}
+                  className="bg-red-600 hover:bg-red-700 text-white px-7 py-3 rounded-lg text-sm font-bold shadow-md transition-all inline-flex items-center gap-2"
                 >
                   <span>Start Your Project</span>
-                  <ArrowRight className="w-6 h-6" />
+                  <ArrowRight className="w-4 h-4" />
                 </motion.button>
               </Link>
             </motion.div>
-          </motion.div>
+
+            {/* Right — Image Mosaic */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="hidden lg:grid grid-cols-2 gap-3 h-[520px]"
+            >
+              {/* Tall left image */}
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.4 }}
+                className="rounded-2xl overflow-hidden shadow-lg row-span-2"
+              >
+                <img
+                  src="https://res.cloudinary.com/dfjecbhki/image/upload/v1762298136/Homestorey-media/Hero/hfqrz6nqcaxbwa22urgx.jpg"
+                  alt="Interior Design"
+                  className="w-full h-full object-cover"
+                />
+              </motion.div>
+
+              {/* Top right */}
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.4 }}
+                className="rounded-2xl overflow-hidden shadow-lg"
+              >
+                <img
+                  src="https://res.cloudinary.com/dfjecbhki/image/upload/v1762298138/Homestorey-media/Hero/haemuplqyv9glq1651fc.jpg"
+                  alt="Luxury Bedroom"
+                  className="w-full h-full object-cover"
+                />
+              </motion.div>
+
+              {/* Bottom right with overlay badge */}
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.4 }}
+                className="rounded-2xl overflow-hidden shadow-lg relative"
+              >
+                <img
+                  src="/Living_3.jpg"
+                  alt="Living Space"
+                  className="w-full h-full object-cover"
+                />
+                {/* Badge */}
+                <div className="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-md">
+                  <p className="text-slate-900 text-xs font-bold">300+ Designs</p>
+                  <p className="text-red-500 text-[10px] font-medium">Delivered</p>
+                </div>
+              </motion.div>
+            </motion.div>
+
+          </div>
         </div>
       </section>
 
       {/* Services Timeline Section */}
       <section className="py-24 lg:py-32 relative overflow-hidden bg-white">
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-red-200 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-red-200 rounded-full blur-3xl"></div>
-        </div>
-
         <div className="container mx-auto px-6 lg:px-12 xl:px-20 relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
             className="text-center mb-20"
           >
-            <span className="text-red-600 font-semibold text-lg bg-red-100 px-6 py-3 rounded-full shadow-sm">
+            <span className="text-red-500 font-semibold text-xs sm:text-sm tracking-[0.25em] uppercase block mb-3">
               Our Expertise
             </span>
-            <h2 className="text-4xl lg:text-6xl xl:text-7xl font-bold text-gray-800 mt-8 mb-6">
-              Complete Design Services
+            <h2 className="font-serif-luxury text-4xl sm:text-5xl lg:text-6xl text-slate-900 font-normal leading-tight">
+              Complete Architectural & Interior Services.
             </h2>
-            <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-              From initial concept to final execution, we provide comprehensive
-              design solutions for every aspect of your space
+            <div className="w-16 h-0.5 bg-red-500 mx-auto my-5 rounded-full"></div>
+            <p className="text-slate-600 text-base md:text-lg max-w-3xl mx-auto font-light leading-relaxed">
+              From initial concept to turnkey execution, we provide comprehensive design solutions for every aspect of your living space.
             </p>
           </motion.div>
 
           <div className="relative max-w-7xl mx-auto">
-            <div className="absolute left-8 lg:left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-red-500 via-rose-500 to-red-600 transform lg:-translate-x-1/2 rounded-full shadow-lg"></div>
+            {/* Vertical line — desktop only */}
+            <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-red-500 via-rose-500 to-red-600 transform -translate-x-1/2 rounded-full shadow-lg"></div>
 
-            <div className="space-y-32 lg:space-y-40">
+            <div className="space-y-16 lg:space-y-40">
               {services.map((service, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, y: 100 }}
+                  initial={{ opacity: 0, y: 60 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: index * 0.1 }}
                   viewport={{ once: true }}
                   className="relative"
                 >
+                  {/* Circle dot — desktop only */}
                   <motion.div
                     initial={{ scale: 0, rotate: -180 }}
                     whileInView={{ scale: 1, rotate: 0 }}
@@ -328,7 +357,7 @@ export default function Gallery() {
                       stiffness: 200,
                     }}
                     viewport={{ once: true }}
-                    className="absolute left-2 lg:left-1/2 w-16 h-16 rounded-full transform lg:-translate-x-1/2 shadow-xl z-20 flex items-center justify-center overflow-hidden"
+                    className="hidden lg:flex absolute left-1/2 w-14 h-14 rounded-full transform -translate-x-1/2 shadow-xl z-20 items-center justify-center overflow-hidden"
                     style={{
                       background: `linear-gradient(135deg, #EF4444 0%, #DC2626 100%)`,
                     }}
@@ -337,7 +366,7 @@ export default function Gallery() {
                   </motion.div>
 
                   <div
-                    className={`grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center ml-24 lg:ml-0 ${
+                    className={`grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-center ${
                       index % 2 === 0 ? "" : "lg:grid-flow-col-dense"
                     }`}
                   >
@@ -365,28 +394,23 @@ export default function Gallery() {
                       }`}
                     >
                       <div
-                        className={`bg-gradient-to-br ${service.bgGradient} p-6 lg:p-8 rounded-2xl shadow-lg border border-white/50 backdrop-blur-sm relative overflow-hidden`}
+                        className="bg-white p-7 lg:p-9 rounded-2xl shadow-md hover:shadow-xl border border-gray-200/80 transition-all duration-300 relative overflow-hidden"
                       >
-                        <div className="absolute top-0 right-0 w-20 h-20 bg-white/20 rounded-full -translate-y-6 translate-x-6"></div>
-                        <div className="absolute bottom-0 left-0 w-16 h-16 bg-white/10 rounded-full translate-y-4 -translate-x-4"></div>
-
                         <div className="space-y-5 relative z-10">
                           <div>
-                            <h3
-                              className={`text-2xl lg:text-3xl font-bold ${service.color} leading-tight`}
-                            >
+                            <span className="text-red-500 font-semibold text-xs tracking-[0.25em] uppercase block mb-1">
+                              {service.subtitle}
+                            </span>
+                            <h3 className="font-serif-luxury text-2xl lg:text-3xl font-semibold text-slate-900 leading-tight">
                               {service.title}
                             </h3>
-                            <p className="text-lg text-gray-700 font-medium mt-2">
-                              {service.subtitle}
-                            </p>
                           </div>
 
-                          <p className="text-gray-700 leading-relaxed text-base lg:text-lg">
+                          <p className="text-slate-600 leading-relaxed text-sm lg:text-base font-light">
                             {service.description}
                           </p>
 
-                          <div className="grid grid-cols-1 gap-3 mt-5">
+                          <div className="grid grid-cols-1 gap-2.5 mt-5">
                             {service.features.map((feature, featureIndex) => (
                               <motion.div
                                 key={featureIndex}
@@ -394,15 +418,13 @@ export default function Gallery() {
                                 whileInView={{ opacity: 1, x: 0 }}
                                 transition={{ delay: featureIndex * 0.1 + 0.3 }}
                                 viewport={{ once: true }}
-                                whileHover={{ x: 8, scale: 1.02 }}
-                                className="flex items-center space-x-3 bg-white/60 backdrop-blur-sm p-4 rounded-lg shadow-sm border border-white/30"
+                                whileHover={{ x: 6 }}
+                                className="flex items-center space-x-3 bg-[#FAF8F5] p-3.5 rounded-xl border border-gray-200/60"
                               >
-                                <div
-                                  className="w-7 h-7 bg-gradient-to-r from-red-500 to-red-600 rounded-full flex items-center justify-center flex-shrink-0 shadow-sm"
-                                >
-                                  <Sparkles className="w-4 h-4 text-white" />
+                                <div className="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 text-red-500">
+                                  <Sparkles className="w-3.5 h-3.5" />
                                 </div>
-                                <span className="text-gray-800 font-medium text-sm lg:text-base">
+                                <span className="text-slate-800 font-medium text-xs lg:text-sm">
                                   {feature}
                                 </span>
                               </motion.div>

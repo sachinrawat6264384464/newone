@@ -1,5 +1,5 @@
 import { db } from './firebase'
-import { collection, doc, getDocs, getDoc, setDoc, deleteDoc, query, where, orderBy, serverTimestamp } from 'firebase/firestore'
+import { collection, doc, getDocs, setDoc, deleteDoc, query, where, orderBy } from 'firebase/firestore'
 import { BlogPost } from '@/types/blog'
 
 const COLLECTION_NAME = 'blogs'
@@ -13,8 +13,10 @@ export async function getBlogs(publishedOnly = true): Promise<BlogPost[]> {
       
     const snapshot = await getDocs(q)
     return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as BlogPost))
-  } catch (error) {
-    console.error('Error fetching blogs:', error)
+  } catch (error: unknown) {
+    if ((error as { code?: string })?.code !== 'permission-denied') {
+      console.error('Error fetching blogs:', error)
+    }
     return []
   }
 }
@@ -29,8 +31,10 @@ export async function getBlogBySlug(slug: string): Promise<BlogPost | null> {
     
     const doc = snapshot.docs[0]
     return { id: doc.id, ...doc.data() } as BlogPost
-  } catch (error) {
-    console.error('Error fetching blog by slug:', error)
+  } catch (error: unknown) {
+    if ((error as { code?: string })?.code !== 'permission-denied') {
+      console.error('Error fetching blog by slug:', error)
+    }
     return null
   }
 }

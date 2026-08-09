@@ -1,9 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --color-lux-gold: #D4AF37;
-  --color-lux-darkGold: #AA8C2C;
-  --color-lux-lightGold: #F3E5AB;
+  --color-lux-gold: #EF4444;
+  --color-lux-darkGold: #DC2626;
+  --color-lux-lightGold: #FCA5A5;
   --color-lux-charcoal: #1A1A1A;
   --color-lux-gray: #333333;
   --color-lux-cream: #FDFBF7;
@@ -50,5 +51,9 @@
 
   .lux-heading {
     @apply text-lux-charcoal font-semibold tracking-tight;
+  }
+
+  .font-serif-luxury {
+    font-family: 'Cormorant Garamond', Georgia, Cambria, "Times New Roman", Times, serif;
   }
 }

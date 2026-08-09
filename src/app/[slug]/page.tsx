@@ -9,14 +9,19 @@ type Props = {
   params: Promise<{ slug: string }>
 }
 
+const IGNORED_SLUGS = ['admin', 'contact', 'gallery', 'blog', 'robots.txt', 'sitemap.xml', 'favicon.ico']
+
+const isIgnoredSlug = (slug: string) => {
+  return IGNORED_SLUGS.includes(slug) || slug.includes('.')
+}
+
 export async function generateMetadata(
   { params }: Props
 ): Promise<Metadata> {
   const resolvedParams = await params
   const slug = resolvedParams.slug
   
-  // Prevent collision with existing hardcoded routes like 'admin' or 'contact'
-  if (['admin', 'contact', 'gallery', 'blog'].includes(slug)) {
+  if (isIgnoredSlug(slug)) {
     return {}
   }
   
@@ -58,7 +63,7 @@ export async function generateMetadata(
 export async function generateStaticParams() {
   const pages = await getCustomPages(true)
   return pages
-    .filter(page => !['admin', 'contact', 'gallery', 'blog'].includes(page.slug))
+    .filter(page => !isIgnoredSlug(page.slug))
     .map((page) => ({
       slug: page.slug,
     }))
@@ -68,8 +73,7 @@ export default async function DynamicCustomPage({ params }: Props) {
   const resolvedParams = await params
   const slug = resolvedParams.slug
   
-  // Skip hardcoded routes to prevent rendering issues if Next.js catch-all overlaps
-  if (['admin', 'contact', 'gallery', 'blog'].includes(slug)) {
+  if (isIgnoredSlug(slug)) {
     notFound()
   }
   

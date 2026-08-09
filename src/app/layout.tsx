@@ -235,6 +235,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
         {/* ✅ Google Analytics (gtag.js) */}
         <Script
+          id="google-gtag"
           src="https://www.googletagmanager.com/gtag/js?id=G-8C1BX4DVDH"
           strategy="afterInteractive"
         />

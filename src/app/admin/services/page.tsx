@@ -452,7 +452,7 @@ export default function AdminServicesPage() {
       {/* Add/Edit Modal */}
       <AnimatePresence>
         {showModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="fixed inset-0 z-50 flex items-start sm:items-center justify-center p-2 sm:p-4 overflow-y-auto">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -464,29 +464,29 @@ export default function AdminServicesPage() {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="bg-white border border-gray-200 rounded-2xl w-full max-w-2xl overflow-hidden shadow-2xl z-10 max-h-[90vh] flex flex-col font-sans"
+              className="bg-white border border-gray-200 rounded-2xl w-full max-w-2xl overflow-hidden shadow-2xl z-10 max-h-[95vh] sm:max-h-[90vh] flex flex-col font-sans my-2 sm:my-0"
             >
-              <div className="p-6 border-b border-gray-200 flex items-center justify-between">
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-red-50 border border-red-200 rounded-xl flex items-center justify-center text-red-600">
-                    <Wrench className="w-5 h-5" />
+              <div className="p-4 sm:p-6 border-b border-gray-200 flex items-center justify-between gap-3">
+                <div className="flex items-center space-x-3 min-w-0">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 bg-red-50 border border-red-200 rounded-xl flex items-center justify-center text-red-600 flex-shrink-0">
+                    <Wrench className="w-4 h-4 sm:w-5 sm:h-5" />
                   </div>
-                  <div>
-                    <h3 className="text-lg font-bold text-slate-900 font-serif-luxury">
-                      {editingService ? 'Edit Service Card & Gallery' : 'Add New Service Card'}
+                  <div className="min-w-0">
+                    <h3 className="text-sm sm:text-lg font-bold text-slate-900 font-serif-luxury truncate">
+                      {editingService ? 'Edit Service Card' : 'Add New Service Card'}
                     </h3>
-                    <p className="text-xs text-slate-500">{imageUrls.length} / 5 images attached to this card</p>
+                    <p className="text-[11px] sm:text-xs text-slate-500">{imageUrls.length} / 5 images attached</p>
                   </div>
                 </div>
                 <button
                   onClick={() => setShowModal(false)}
-                  className="p-2 text-slate-400 hover:text-slate-900 rounded-lg"
+                  className="p-2 text-slate-400 hover:text-slate-900 rounded-lg flex-shrink-0"
                 >
                   <X className="w-5 h-5" />
                 </button>
               </div>
 
-              <form onSubmit={handleSave} className="p-6 overflow-y-auto space-y-4 flex-1 font-sans">
+              <form onSubmit={handleSave} className="p-4 sm:p-6 overflow-y-auto space-y-4 flex-1 font-sans">
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
                     Service Title *
@@ -635,16 +635,16 @@ export default function AdminServicesPage() {
                 </div>
 
                 {/* Interactive Key Features List Manager (Max 5 points) */}
-                <div className="bg-slate-50 p-4 rounded-xl border border-gray-200 space-y-3">
-                  <div className="flex items-center justify-between">
-                    <label className="block text-xs font-bold uppercase tracking-wider text-red-600">
-                      Key Features Bullet Points ({featuresList.length} / 5)
+                <div className="bg-slate-50 p-3 sm:p-4 rounded-xl border border-gray-200 space-y-3">
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                    <label className="text-xs font-bold uppercase tracking-wider text-red-600">
+                      Bullet Points ({featuresList.length} / 5)
                     </label>
-                    <span className="text-[10px] text-slate-500 font-mono">Max 5 points per service</span>
+                    <span className="text-[10px] text-slate-400 font-mono">Max 5 per service</span>
                   </div>
 
                   {/* Add Input Row */}
-                  <div className="flex items-center space-x-2">
+                  <div className="flex gap-2">
                     <input
                       type="text"
                       disabled={featuresList.length >= 5}
@@ -656,17 +656,17 @@ export default function AdminServicesPage() {
                           handleAddFeature()
                         }
                       }}
-                      placeholder="Type feature e.g. 3D Elevation Rendering..."
-                      className="flex-1 bg-white border border-gray-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-red-500 font-sans disabled:opacity-50 shadow-xs"
+                      placeholder="Type feature e.g. 3D Elevation..."
+                      className="flex-1 min-w-0 bg-white border border-gray-300 rounded-xl px-3 py-2.5 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-red-500 font-sans disabled:opacity-50 shadow-xs"
                     />
                     <button
                       type="button"
                       disabled={featuresList.length >= 5 || !featureInput.trim()}
                       onClick={handleAddFeature}
-                      className="px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-bold transition-all flex items-center space-x-1.5 disabled:opacity-50 shadow-xs"
+                      className="flex-shrink-0 px-3 py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-bold transition-all flex items-center gap-1 disabled:opacity-50 shadow-xs whitespace-nowrap"
                     >
-                      <Plus className="w-4 h-4" />
-                      <span>Add Point</span>
+                      <Plus className="w-3.5 h-3.5" />
+                      <span>Add</span>
                     </button>
                   </div>
 

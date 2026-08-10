@@ -13,12 +13,31 @@ interface Slide {
   image: string
 }
 
-const slides: Slide[] = [
+import { getSiteSettings } from '@/lib/settings'
+
+function formatGoogleDriveUrl(url: string): string {
+  if (!url) return url
+  const driveMatch = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || url.match(/[?&]id=([a-zA-Z0-9_-]+)/)
+  if (driveMatch && driveMatch[1]) {
+    return `https://lh3.googleusercontent.com/d/${driveMatch[1]}`
+  }
+  return url
+}
+
+interface Slide {
+  id: number
+  tagline: string
+  title: string
+  subtitle: string
+  image: string
+}
+
+const DEFAULT_SLIDES: Slide[] = [
   {
     id: 1,
     tagline: "CONSTRUCTION · INTERIORS · ARCHITECTURE",
-    title: "Designing Spaces. Building Dreams.",
-    subtitle: "A studio practice spanning architecture, interior design, and turnkey civil construction — delivering a single, accountable team from first sketch to final handover.",
+    title: "Look At What We Design.",
+    subtitle: "From bespoke architectural facades to functional luxury interiors, we transform spaces with precision, innovation, and timeless elegance.",
     image: "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298136/Homestorey-media/Hero/hfqrz6nqcaxbwa22urgx.jpg",
   },
   {
@@ -33,27 +52,61 @@ const slides: Slide[] = [
     tagline: "LUXURY HOMES · EXPERT EXECUTION",
     title: "Crafting Elegance. Creating Comfort.",
     subtitle: "From initial conceptual rendering to key handover, our team manages every detail of your dream build with complete transparency.",
-    image: "/Facade_3.jpg",
+    image: "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298162/Homestorey-media/What%20we%20create/vt9avmrazh3jvii5ytl9.jpg",
   },
   {
     id: 4,
     tagline: "SERENE BEDROOMS · MODERN KITCHENS",
     title: "Interior Refinement. Lasting Luxury.",
     subtitle: "Redefine your living environments with thoughtfully curated interiors that bring warmth, style, and functional elegance.",
-    image: "/Living_3.jpg",
+    image: "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298165/Homestorey-media/What%20we%20create/jjhie0tfazmie9laeimu.jpg",
   },
 ]
 
 const HeroCarousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0)
+  const [slides, setSlides] = useState<Slide[]>(DEFAULT_SLIDES)
+
+  const fetchSlides = () => {
+    getSiteSettings().then(settings => {
+      if (settings.heroSlides && settings.heroSlides.length > 0) {
+        const mapped = settings.heroSlides.map((slide, idx) => ({
+          id: idx + 1,
+          tagline: slide.tagline || "CONSTRUCTION · INTERIORS · ARCHITECTURE",
+          title: slide.title || "Look At What We Design.",
+          subtitle: slide.subtitle || "From bespoke architectural facades to functional luxury interiors, we transform spaces with precision.",
+          image: formatGoogleDriveUrl(slide.image)
+        }))
+        setSlides(mapped)
+        setCurrentSlide((prev) => (prev >= mapped.length ? 0 : prev))
+      } else if (settings.heroImages && settings.heroImages.length > 0) {
+        const customSlides = settings.heroImages.map((img, idx) => ({
+          id: idx + 1,
+          tagline: "CONSTRUCTION · INTERIORS · ARCHITECTURE",
+          title: settings.heroTitle || "Look At What We Design.",
+          subtitle: settings.heroSubtitle || "From bespoke architectural facades to functional luxury interiors, we transform spaces with precision.",
+          image: formatGoogleDriveUrl(img)
+        }))
+        setSlides(customSlides)
+        setCurrentSlide((prev) => (prev >= customSlides.length ? 0 : prev))
+      }
+    })
+  }
 
   useEffect(() => {
+    fetchSlides()
+    window.addEventListener('storage', fetchSlides)
+    return () => window.removeEventListener('storage', fetchSlides)
+  }, [])
+
+  useEffect(() => {
+    if (slides.length <= 1) return
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length)
     }, 6000)
 
     return () => clearInterval(timer)
-  }, [])
+  }, [slides])
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length)
@@ -63,18 +116,21 @@ const HeroCarousel = () => {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
   }
 
+  const safeIdx = currentSlide < slides.length ? currentSlide : 0
+  const activeSlide = slides[safeIdx] || slides[0] || DEFAULT_SLIDES[0]
+
   return (
     <div className="relative min-h-[90vh] lg:h-screen w-full overflow-hidden bg-slate-950 flex items-center justify-center">
       <AnimatePresence mode="wait">
         <motion.div
-          key={currentSlide}
+          key={safeIdx}
           initial={{ opacity: 0, scale: 1.08 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.96 }}
           transition={{ duration: 1.2, ease: "easeOut" }}
           className="absolute inset-0"
           style={{
-            backgroundImage: `linear-gradient(to bottom, rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.65)), url(${slides[currentSlide].image})`,
+            backgroundImage: `linear-gradient(to bottom, rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.65)), url(${activeSlide.image})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center'
           }}
@@ -98,7 +154,7 @@ const HeroCarousel = () => {
                   transition={{ delay: 0.4, duration: 0.6 }}
                 >
                   <span className="text-red-400 font-semibold text-xs sm:text-sm tracking-[0.25em] uppercase block mb-3">
-                    {slides[currentSlide].tagline}
+                    {activeSlide.tagline}
                   </span>
                 </motion.div>
 
@@ -109,7 +165,7 @@ const HeroCarousel = () => {
                   transition={{ delay: 0.5, duration: 0.8 }}
                   className="font-serif-luxury text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-white font-normal tracking-tight leading-[1.1] max-w-5xl mx-auto drop-shadow-md"
                 >
-                  {slides[currentSlide].title}
+                  {activeSlide.title}
                 </motion.h1>
 
                 {/* Subtitle / Paragraph */}
@@ -119,7 +175,7 @@ const HeroCarousel = () => {
                   transition={{ delay: 0.7, duration: 0.8 }}
                   className="text-gray-200/90 text-sm sm:text-base md:text-lg lg:text-xl font-light max-w-3xl mx-auto leading-relaxed"
                 >
-                  {slides[currentSlide].subtitle}
+                  {activeSlide.subtitle}
                 </motion.p>
 
                 {/* CTA Buttons */}

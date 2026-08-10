@@ -17,12 +17,7 @@ export default function AdminLogin() {
   const [isLoading, setIsLoading] = useState(false)
   const { login } = useAuth()
   const router = useRouter()
-  const { register, handleSubmit, formState: { errors } } = useForm<LoginFormData>({
-    defaultValues: {
-      email: 'admin@gmail.com',
-      password: 'admin@123'
-    }
-  })
+  const { register, handleSubmit, formState: { errors } } = useForm<LoginFormData>()
 
   const onSubmit: SubmitHandler<LoginFormData> = async (data) => {
     setIsLoading(true)
@@ -66,7 +61,7 @@ export default function AdminLogin() {
         initial={{ opacity: 0, y: 50, scale: 0.9 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.8 }}
-        className="max-w-md w-full space-y-8 relative z-10"
+        className="max-w-md w-full space-y-8 relative z-10 font-sans"
       >
         <div className="text-center">
           <motion.div
@@ -86,7 +81,7 @@ export default function AdminLogin() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
-            className="text-4xl font-bold bg-gradient-to-r from-red-600 to-rose-700 bg-clip-text text-transparent"
+            className="text-4xl font-bold bg-gradient-to-r from-red-600 to-rose-700 bg-clip-text text-transparent font-serif-luxury"
           >
             Admin Portal
           </motion.h2>
@@ -94,7 +89,7 @@ export default function AdminLogin() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
-            className="mt-3 text-gray-600"
+            className="mt-3 text-slate-600 text-sm font-light"
           >
             Secure access to Home Storey management
           </motion.p>
@@ -104,11 +99,11 @@ export default function AdminLogin() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8 }}
-          className="bg-white/80 backdrop-blur-lg rounded-2xl shadow-2xl p-8 border border-white/50"
+          className="bg-white/90 backdrop-blur-lg rounded-2xl shadow-2xl p-8 border border-gray-100"
         >
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-3">
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
                 Email Address
               </label>
               <div className="relative">
@@ -121,16 +116,16 @@ export default function AdminLogin() {
                       message: 'Invalid email address'
                     }
                   })}
-                  className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-300 bg-white/70 backdrop-blur-sm"
-                  placeholder="admin@gmail.com"
+                  className="w-full pl-12 pr-4 py-3.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-300 bg-white text-slate-900 text-sm font-medium shadow-xs"
+                  placeholder="Enter email address"
                 />
-                <Mail className="w-5 h-5 text-red-500 absolute left-4 top-1/2 transform -translate-y-1/2" />
+                <Mail className="w-5 h-5 text-red-600 absolute left-4 top-1/2 transform -translate-y-1/2" />
               </div>
               {errors.email && (
                 <motion.p
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
-                  className="text-red-500 text-sm mt-2"
+                  className="text-red-600 text-xs mt-2 font-medium"
                 >
                   {errors.email.message}
                 </motion.p>
@@ -138,23 +133,23 @@ export default function AdminLogin() {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-3">
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
                 Password
               </label>
               <div className="relative">
                 <input
                   type="password"
                   {...register('password', { required: 'Password is required' })}
-                  className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-300 bg-white/70 backdrop-blur-sm"
-                  placeholder="admin@123"
+                  className="w-full pl-12 pr-4 py-3.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-300 bg-white text-slate-900 text-sm font-medium shadow-xs"
+                  placeholder="••••••••"
                 />
-                <Lock className="w-5 h-5 text-red-500 absolute left-4 top-1/2 transform -translate-y-1/2" />
+                <Lock className="w-5 h-5 text-red-600 absolute left-4 top-1/2 transform -translate-y-1/2" />
               </div>
               {errors.password && (
                 <motion.p
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
-                  className="text-red-500 text-sm mt-2"
+                  className="text-red-600 text-xs mt-2 font-medium"
                 >
                   {errors.password.message}
                 </motion.p>
@@ -164,36 +159,23 @@ export default function AdminLogin() {
             <motion.button
               type="submit"
               disabled={isLoading}
-              whileHover={{ scale: 1.02, boxShadow: "0 10px 30px rgba(239,68,68,0.3)" }}
-              whileTap={{ scale: 0.98 }}
-              className="w-full bg-gradient-to-r from-red-600 to-rose-700 hover:from-red-700 hover:to-rose-800 text-white py-4 px-6 rounded-xl font-bold text-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-3 shadow-lg"
+              whileHover={{ scale: 1.01 }}
+              whileTap={{ scale: 0.99 }}
+              className="w-full bg-gradient-to-r from-red-600 to-rose-700 hover:from-red-700 hover:to-rose-800 text-white py-3.5 px-6 rounded-xl font-bold text-sm transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 shadow-md shadow-red-600/20"
             >
               {isLoading ? (
                 <>
-                  <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white"></div>
+                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
                   <span>Authenticating...</span>
                 </>
               ) : (
                 <>
-                  <Shield className="w-5 h-5" />
+                  <Shield className="w-4 h-4" />
                   <span>Access Dashboard</span>
                 </>
               )}
             </motion.button>
           </form>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.2 }}
-            className="mt-6 p-4 bg-gradient-to-r from-red-50 to-rose-50 rounded-xl border border-red-200"
-          >
-            <p className="text-sm text-gray-600 text-center">
-              <span className="font-semibold text-red-600">Demo Credentials:</span><br />
-              Email: admin@gmail.com<br />
-              Password: admin@123
-            </p>
-          </motion.div>
         </motion.div>
       </motion.div>
     </div>

@@ -1,10 +1,13 @@
 // app/page.tsx
 "use client";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Layout from "../components/Layout";
 import HeroCarousel from "../components/HeroCarousel";
 import FloatingElements from "../components/FloatingElements";
+import { getServices } from "@/lib/services";
+import { getSiteSettings } from "@/lib/settings";
+import { ServiceItem } from "@/types/service";
 import {
   ChefHat,
   Sofa,
@@ -26,6 +29,7 @@ import {
   Palette,
   ChevronLeft,
   ChevronRight,
+  Sparkles,
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -245,6 +249,137 @@ function ServiceCard({
   );
 }
 
+// Dynamic Managed Service Card
+function ManagedServiceCard({
+  service,
+  index,
+}: {
+  service: ServiceItem;
+  index: number;
+}) {
+  const imagesList = service.images && service.images.length > 0 ? service.images : [service.coverImage];
+  const [currentImg, setCurrentImg] = useState(0);
+
+  const goNext = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentImg((prev) => (prev + 1) % imagesList.length);
+  };
+
+  const goPrev = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentImg((prev) => (prev === 0 ? imagesList.length - 1 : prev - 1));
+  };
+
+  return (
+    <motion.div
+      key={service.id || index}
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: index * 0.1 }}
+      viewport={{ once: true }}
+      className="group bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-200/80 hover:shadow-2xl hover:border-red-500/30 transition-all duration-500 flex flex-col justify-between"
+    >
+      {/* Image Carousel (Compact 4:3 Ratio Preview) */}
+      <div className="relative overflow-hidden aspect-[4/3] bg-slate-950">
+        {imagesList.map((img, i) => (
+          <div
+            key={i}
+            className="absolute inset-0 transition-opacity duration-700 ease-out"
+            style={{ opacity: i === currentImg ? 1 : 0, zIndex: i === currentImg ? 1 : 0 }}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={img}
+              alt={`${service.title} - ${i + 1}`}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+            />
+          </div>
+        ))}
+
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-black/20 pointer-events-none" style={{ zIndex: 10 }} />
+
+        {/* Carousel Navigation Arrows */}
+        {imagesList.length > 1 && (
+          <button
+            onClick={goPrev}
+            style={{ zIndex: 20 }}
+            className="absolute left-3 top-1/2 -translate-y-1/2 bg-slate-900/60 hover:bg-slate-900 text-white backdrop-blur-md rounded-full p-1.5 shadow-lg transition-all duration-200 hover:scale-110 opacity-0 group-hover:opacity-100 border border-white/20"
+            aria-label="Previous image"
+          >
+            <ChevronLeft className="w-4 h-4" />
+          </button>
+        )}
+
+        {imagesList.length > 1 && (
+          <button
+            onClick={goNext}
+            style={{ zIndex: 20 }}
+            className="absolute right-3 top-1/2 -translate-y-1/2 bg-slate-900/60 hover:bg-slate-900 text-white backdrop-blur-md rounded-full p-1.5 shadow-lg transition-all duration-200 hover:scale-110 opacity-0 group-hover:opacity-100 border border-white/20"
+            aria-label="Next image"
+          >
+            <ChevronRight className="w-4 h-4" />
+          </button>
+        )}
+
+        {/* Dot Indicators */}
+        {imagesList.length > 1 && (
+          <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex gap-1.5" style={{ zIndex: 20 }}>
+            {imagesList.map((_, i) => (
+              <button
+                key={i}
+                onClick={(e) => { e.stopPropagation(); setCurrentImg(i); }}
+                className={`h-1.5 transition-all duration-300 rounded-full ${
+                  i === currentImg ? "w-5 bg-white" : "w-1.5 bg-white/50"
+                }`}
+              />
+            ))}
+          </div>
+        )}
+
+        {/* Category Badge */}
+        <div className="absolute top-3 right-3 bg-slate-900/80 backdrop-blur-md px-2.5 py-0.5 rounded-md border border-white/10" style={{ zIndex: 20 }}>
+          <span className="text-[10px] tracking-wider uppercase font-semibold text-white">
+            {service.category || "Luxury Series"}
+          </span>
+        </div>
+
+        {/* Image Counter Badge */}
+        <div className="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md px-2 py-0.5 rounded-md border border-white/10" style={{ zIndex: 20 }}>
+          <span className="text-[11px] font-mono font-bold text-white">
+            {currentImg + 1} / {imagesList.length} Images
+          </span>
+        </div>
+      </div>
+
+      <div className="p-5 flex flex-col justify-between flex-1">
+        <div>
+          <div className="flex items-center space-x-2.5 mb-2">
+            <div className="bg-red-50 text-red-600 p-2 rounded-lg group-hover:bg-red-600 group-hover:text-white transition-colors duration-300">
+              <Sparkles className="w-4 h-4" />
+            </div>
+            <h3 className="font-serif-luxury text-xl font-bold text-slate-900 group-hover:text-red-600 transition-colors">
+              {service.title}
+            </h3>
+          </div>
+          {service.subtitle && (
+            <p className="text-[11px] font-bold text-red-600 mb-1.5">{service.subtitle}</p>
+          )}
+          <p className="text-slate-600 text-xs leading-relaxed font-light line-clamp-2">{service.description}</p>
+        </div>
+
+        <Link
+          href="/gallery"
+          className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-red-600 uppercase tracking-wider group-hover:translate-x-1 transition-transform"
+        >
+          <span>View Design Gallery</span>
+          <ArrowRight className="w-3.5 h-3.5" />
+        </Link>
+      </div>
+    </motion.div>
+  );
+}
+
+
 const testimonials: Testimonial[] = [
   {
     name: "Akku",
@@ -463,6 +598,16 @@ const ProcessSection = () => {
 };
 
 export default function Home() {
+  const [managedServices, setManagedServices] = useState<ServiceItem[]>([]);
+
+  useEffect(() => {
+    getServices(true).then((data) => {
+      if (data && data.length > 0) {
+        setManagedServices(data);
+      }
+    });
+  }, []);
+
   return (
     <Layout>
       {/* Floating 3D Elements */}
@@ -608,9 +753,13 @@ export default function Home() {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <ServiceCard key={index} service={service} index={index} />
-            ))}
+            {managedServices.length > 0
+              ? managedServices.map((service, index) => (
+                  <ManagedServiceCard key={service.id || index} service={service} index={index} />
+                ))
+              : services.map((service, index) => (
+                  <ServiceCard key={index} service={service} index={index} />
+                ))}
           </div>
 
           {/* View All Button */}

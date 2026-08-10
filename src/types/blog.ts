@@ -1,11 +1,12 @@
 export interface BlogPost {
-  id?: string;
+  id: string;
   slug: string;
   title: string;
   excerpt: string;
   content: string; // Markdown or HTML content
-  coverImage?: string;
+  coverImage: string;
   author: string;
+  category?: string;
   createdAt: number;
   updatedAt: number;
   published: boolean;

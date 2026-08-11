@@ -115,11 +115,20 @@ export const INITIAL_SERVICES: ServiceItem[] = [
   }
 ]
 
+function fetchWithTimeout<T>(promise: Promise<T>, timeoutMs = 3500): Promise<T> {
+  return Promise.race([
+    promise,
+    new Promise<T>((_, reject) =>
+      setTimeout(() => reject(new Error('Firestore timeout')), timeoutMs)
+    )
+  ]);
+}
+
 export async function getServices(publishedOnly = false): Promise<ServiceItem[]> {
   try {
     const servicesRef = collection(db, COLLECTION_NAME)
     const q = query(servicesRef, orderBy('order', 'asc'))
-    const snapshot = await getDocs(q)
+    const snapshot = await fetchWithTimeout(getDocs(q))
     
     let items: ServiceItem[] = []
     if (!snapshot.empty) {

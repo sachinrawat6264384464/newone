@@ -68,6 +68,15 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   updatedAt: Date.now()
 }
 
+function fetchWithTimeout<T>(promise: Promise<T>, timeoutMs = 3500): Promise<T> {
+  return Promise.race([
+    promise,
+    new Promise<T>((_, reject) =>
+      setTimeout(() => reject(new Error('Firestore timeout')), timeoutMs)
+    )
+  ]);
+}
+
 export async function getSiteSettings(): Promise<SiteSettings> {
   let cached: SiteSettings | null = null
   if (typeof window !== 'undefined') {
@@ -83,7 +92,7 @@ export async function getSiteSettings(): Promise<SiteSettings> {
 
   try {
     const docRef = doc(db, COLLECTION_NAME, SETTINGS_DOC_ID)
-    const docSnap = await getDoc(docRef)
+    const docSnap = await fetchWithTimeout(getDoc(docRef))
     
     if (docSnap.exists()) {
       const data = docSnap.data() as Partial<SiteSettings>

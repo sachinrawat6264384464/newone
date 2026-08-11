@@ -292,14 +292,14 @@ const Layout = ({ children }: LayoutProps) => {
             viewport={{ once: true }}
             className="border-t border-white/10 mt-14 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3"
           >
-            <p className="text-slate-500 text-xs">© 2025 HomeStorey. All rights reserved.</p>
+            <p className="text-slate-500 text-xs">© 2026 HomeStorey. All rights reserved.</p>
             <p className="text-slate-600 text-xs flex items-center gap-1">
               Made with <Heart className="w-3 h-3 text-red-500 fill-current" /> by
               <Link
                 href="https://botmartz.com"
                 className="text-slate-400 hover:text-red-400 font-semibold transition-colors duration-200 ml-0.5"
               >
-                Botmartz IT Solutions
+                Botmartz Ai solution pvt ltd
               </Link>
             </p>
           </motion.div>

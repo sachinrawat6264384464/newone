@@ -230,16 +230,16 @@ function ServiceCard({
             <div className="bg-red-50 text-red-600 p-2.5 rounded-xl group-hover:bg-red-600 group-hover:text-white transition-colors duration-300">
               <IconComponent className="w-5 h-5" />
             </div>
-            <h3 className="font-serif-luxury text-2xl font-semibold text-slate-900 group-hover:text-red-600 transition-colors">
+            <h3 className="font-serif-luxury text-2xl font-bold text-slate-950 group-hover:text-red-600 transition-colors">
               {service.title}
             </h3>
           </div>
-          <p className="text-slate-600 text-sm leading-relaxed font-light">{service.description}</p>
+          <p className="text-slate-950 text-base sm:text-[17px] leading-relaxed font-bold">{service.description}</p>
         </div>
 
         <Link 
           href="/gallery"
-          className="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-red-600 uppercase tracking-wider group-hover:translate-x-1 transition-transform"
+          className="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-red-600 uppercase tracking-wider group-hover:translate-x-1 transition-transform"
         >
           <span>View Design Gallery</span>
           <ArrowRight className="w-4 h-4" />
@@ -357,19 +357,19 @@ function ManagedServiceCard({
             <div className="bg-red-50 text-red-600 p-2 rounded-lg group-hover:bg-red-600 group-hover:text-white transition-colors duration-300">
               <Sparkles className="w-4 h-4" />
             </div>
-            <h3 className="font-serif-luxury text-xl font-bold text-slate-900 group-hover:text-red-600 transition-colors">
+            <h3 className="font-serif-luxury text-xl font-bold text-slate-950 group-hover:text-red-600 transition-colors">
               {service.title}
             </h3>
           </div>
           {service.subtitle && (
-            <p className="text-[11px] font-bold text-red-600 mb-1.5">{service.subtitle}</p>
+            <p className="text-xs font-extrabold text-slate-900 mb-1.5">{service.subtitle}</p>
           )}
-          <p className="text-slate-600 text-xs leading-relaxed font-light line-clamp-2">{service.description}</p>
+          <p className="text-slate-950 text-sm sm:text-base leading-relaxed font-bold line-clamp-3">{service.description}</p>
         </div>
 
         <Link
           href="/gallery"
-          className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-red-600 uppercase tracking-wider group-hover:translate-x-1 transition-transform"
+          className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-red-600 uppercase tracking-wider group-hover:translate-x-1 transition-transform"
         >
           <span>View Design Gallery</span>
           <ArrowRight className="w-3.5 h-3.5" />
@@ -513,12 +513,12 @@ const ProcessSection = () => {
 
   return (
     <section className="py-24 bg-slate-950 relative overflow-hidden">
-      {/* Top glow line */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-red-500 to-transparent opacity-50" />
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-red-500/30 to-transparent" />
+      {/* Subtle glow lines */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate-700 to-transparent opacity-50" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate-700/30 to-transparent" />
       {/* Background blobs */}
-      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 bg-red-600/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-64 h-64 bg-red-500/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 bg-slate-800/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-64 h-64 bg-slate-800/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="container mx-auto px-6 relative max-w-6xl">
         {/* Header */}
@@ -529,23 +529,20 @@ const ProcessSection = () => {
           viewport={{ once: true }}
           className="text-center mb-20"
         >
-          <span className="text-red-400 font-semibold text-xs tracking-[0.28em] uppercase block mb-3">
+          <span className="text-amber-400 font-semibold text-xs tracking-[0.28em] uppercase block mb-3">
             How We Work
           </span>
           <h2 className="font-serif-luxury text-4xl lg:text-5xl text-white font-normal leading-tight mb-4">
-            Our <span className="italic text-red-400">Process</span>
+            Our <span className="italic text-amber-300">Process</span>
           </h2>
-          <div className="w-10 h-px bg-red-500 mx-auto mb-5 rounded-full" />
-          <p className="text-slate-400 text-base max-w-xl mx-auto leading-relaxed font-light">
+          <div className="w-10 h-px bg-amber-400 mx-auto mb-5 rounded-full" />
+          <p className="text-slate-300 text-base max-w-xl mx-auto leading-relaxed font-light">
             From initial consultation to final handover — a proven process that ensures your project is delivered on time, within budget, and beyond expectations.
           </p>
         </motion.div>
 
         {/* Steps Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
-          {/* Connector line (desktop only) */}
-          <div className="hidden lg:block absolute top-10 left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-red-500/0 via-red-500/40 to-red-500/0 z-0" />
-
           {steps.map((step, i) => (
             <motion.div
               key={step.num}
@@ -553,42 +550,42 @@ const ProcessSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: i * 0.12 }}
               viewport={{ once: true }}
-              whileHover={{ y: -6, boxShadow: "0 20px 40px rgba(239,68,68,0.12)" }}
-              className="relative bg-white/5 border border-white/8 rounded-2xl p-6 flex flex-col gap-4 cursor-default transition-all duration-300 group"
+              whileHover={{ y: -6, boxShadow: "0 20px 40px rgba(255,255,255,0.06)" }}
+              className="relative bg-slate-900/80 border border-slate-700/80 rounded-2xl p-6 flex flex-col gap-4 cursor-default transition-all duration-300 group shadow-lg"
             >
-              {/* Step number + icon row */}
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-[56px] font-black text-white/5 leading-none select-none absolute top-4 right-5 font-serif-luxury">
-                  {step.num}
-                </span>
+              {/* Top row: Icon badge on left, Big Step Number on top-right */}
+              <div className="flex items-center justify-between">
                 {/* Icon badge */}
-                <div className="bg-red-600/15 border border-red-500/25 p-3 rounded-xl text-red-400 group-hover:bg-red-600/25 transition-colors duration-300 z-10">
+                <div className="bg-white/10 border border-white/20 p-3 rounded-xl text-amber-300 group-hover:bg-white/20 transition-colors duration-300">
                   {step.icon}
                 </div>
-                {/* Tag pill */}
-                <span className="text-[10px] tracking-widest text-red-400/80 uppercase font-semibold bg-red-500/10 border border-red-500/20 px-2 py-1 rounded-full z-10">
+                {/* Big Step Number (Cleanly positioned at top right) */}
+                <span className="text-[52px] font-extrabold text-white/40 leading-none select-none font-serif-luxury tracking-tight">
+                  {step.num}
+                </span>
+              </div>
+
+              {/* Step label & Tag pill row */}
+              <div className="flex items-center justify-between gap-2 pt-1">
+                <span className="text-xs font-bold text-amber-400 tracking-widest uppercase">STEP {step.num}</span>
+                <span className="text-[10px] tracking-widest text-amber-200 uppercase font-semibold bg-white/10 border border-white/15 px-2.5 py-1 rounded-full">
                   {step.tag}
                 </span>
               </div>
-
-              {/* Step number label */}
-              <div className="flex items-center gap-2">
-                <span className="text-xs font-bold text-red-500 tracking-widest">STEP {step.num}</span>
-                <div className="flex-1 h-px bg-white/10" />
-              </div>
+              <div className="w-full h-px bg-white/15" />
 
               {/* Title */}
-              <h3 className="font-serif-luxury text-lg text-white font-semibold leading-snug">
+              <h3 className="font-serif-luxury text-xl text-white font-bold leading-snug">
                 {step.title}
               </h3>
 
               {/* Description */}
-              <p className="text-slate-400 text-sm leading-relaxed font-light">
+              <p className="text-slate-200 text-sm sm:text-[15px] leading-relaxed font-medium">
                 {step.desc}
               </p>
 
               {/* Bottom accent bar */}
-              <div className="absolute bottom-0 left-6 right-6 h-px bg-gradient-to-r from-red-500/0 via-red-500/50 to-red-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute bottom-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-amber-400/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </motion.div>
           ))}
         </div>
@@ -785,6 +782,9 @@ export default function Home() {
 
       <CommonProblems problems={problems} />
 
+      {/* Our Process Section */}
+      <ProcessSection />
+
       {/* Testimonials Section */}
       <section className="py-24 bg-white relative overflow-hidden">
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
@@ -802,7 +802,7 @@ export default function Home() {
               What Our Clients Say.
             </h2>
             <div className="w-16 h-0.5 bg-red-500 mx-auto my-5 rounded-full"></div>
-            <p className="text-slate-600 text-base md:text-lg max-w-2xl mx-auto font-light leading-relaxed">
+            <p className="text-slate-700 text-base md:text-lg max-w-2xl mx-auto font-medium leading-relaxed">
               Hear from satisfied homeowners who trusted us with their architectural and interior dreams.
             </p>
           </motion.div>
@@ -819,7 +819,7 @@ export default function Home() {
               >
                 <div>
                   <Quote className="w-10 h-10 text-red-500 mb-4 opacity-80" />
-                  <p className="text-slate-700 mb-6 italic text-base leading-relaxed font-light">
+                  <p className="text-slate-950 mb-6 italic text-base sm:text-[17px] leading-relaxed font-semibold">
                     &quot;{testimonial.content}&quot;
                   </p>
                 </div>
@@ -858,10 +858,10 @@ export default function Home() {
                       height={48}
                     />
                     <div>
-                      <h4 className="font-serif-luxury text-lg font-semibold text-slate-900">
+                      <h4 className="font-serif-luxury text-lg font-bold text-slate-950">
                         {testimonial.name}
                       </h4>
-                      <p className="text-xs text-slate-500 font-light">
+                      <p className="text-xs text-slate-600 font-medium">
                         {testimonial.role}
                       </p>
                     </div>
@@ -872,9 +872,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Our Process Section */}
-      <ProcessSection />
 
       {/* CTA Section */}
       <section className="py-24 bg-[#FAF8F5] relative overflow-hidden border-t border-gray-200/60">

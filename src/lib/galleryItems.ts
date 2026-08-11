@@ -119,11 +119,20 @@ export const INITIAL_GALLERY_ITEMS: GalleryItem[] = [
   }
 ]
 
+function fetchWithTimeout<T>(promise: Promise<T>, timeoutMs = 3500): Promise<T> {
+  return Promise.race([
+    promise,
+    new Promise<T>((_, reject) =>
+      setTimeout(() => reject(new Error('Firestore timeout')), timeoutMs)
+    )
+  ]);
+}
+
 export async function getGalleryItems(publishedOnly = false): Promise<GalleryItem[]> {
   try {
     const galleryRef = collection(db, COLLECTION_NAME)
     const q = query(galleryRef, orderBy('order', 'asc'))
-    const snapshot = await getDocs(q)
+    const snapshot = await fetchWithTimeout(getDocs(q))
     
     let items: GalleryItem[] = []
     if (!snapshot.empty) {

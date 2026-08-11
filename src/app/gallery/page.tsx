@@ -191,9 +191,8 @@ const ImageCarousel = ({
           {images.map((_, index) => (
             <div
               key={index}
-              className={`h-2 rounded-full transition-all duration-300 ${
-                index === currentIndex ? "w-6 bg-white" : "w-2 bg-white/60"
-              }`}
+              className={`h-2 rounded-full transition-all duration-300 ${index === currentIndex ? "w-6 bg-white" : "w-2 bg-white/60"
+                }`}
             ></div>
           ))}
         </div>
@@ -282,8 +281,8 @@ export default function Gallery() {
                 Design Portfolio
               </span>
               <h1 className="font-serif-luxury text-4xl sm:text-5xl lg:text-6xl text-slate-900 font-normal leading-tight mb-5">
-                Welcome Home<br />to Your
-                <span className="block text-red-600 italic mt-1">Dream Design</span>
+                Welcome to Your
+                <span className="block text-red-600 italic mt-1">Dream home Design</span>
                 <span className="block text-red-600 italic">Journey.</span>
               </h1>
               <div className="w-10 h-px bg-red-500 mb-5" />
@@ -429,16 +428,14 @@ export default function Gallery() {
                   </motion.div>
 
                   <div
-                    className={`grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-center ${
-                      index % 2 === 0 ? "" : "lg:grid-flow-col-dense"
-                    }`}
+                    className={`grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-center ${index % 2 === 0 ? "" : "lg:grid-flow-col-dense"
+                      }`}
                   >
                     <motion.div
                       whileHover={{ scale: 1.02, y: -5 }}
                       transition={{ type: "spring", stiffness: 300 }}
-                      className={`${
-                        index % 2 === 0 ? "lg:pr-16" : "lg:col-start-2 lg:pl-16"
-                      }`}
+                      className={`${index % 2 === 0 ? "lg:pr-16" : "lg:col-start-2 lg:pl-16"
+                        }`}
                     >
                       <div className="relative">
                         <ImageCarousel
@@ -452,9 +449,8 @@ export default function Gallery() {
                     </motion.div>
 
                     <motion.div
-                      className={`space-y-4 ${
-                        index % 2 === 0 ? "lg:pl-16" : "lg:col-start-1 lg:pr-16"
-                      }`}
+                      className={`space-y-4 ${index % 2 === 0 ? "lg:pl-16" : "lg:col-start-1 lg:pr-16"
+                        }`}
                     >
                       <div
                         className="bg-white p-7 lg:p-9 rounded-2xl shadow-md hover:shadow-xl border border-gray-200/80 transition-all duration-300 relative overflow-hidden"

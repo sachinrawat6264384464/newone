@@ -130,13 +130,13 @@ const HeroCarousel = () => {
           transition={{ duration: 1.2, ease: "easeOut" }}
           className="absolute inset-0"
           style={{
-            backgroundImage: `linear-gradient(to bottom, rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.65)), url(${activeSlide.image})`,
+            backgroundImage: `linear-gradient(to bottom, rgba(15, 23, 42, 0.35), rgba(15, 23, 42, 0.25)), url(${activeSlide.image})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center'
           }}
         >
           {/* Subtle vignette gradient overlays */}
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-slate-950/60" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-slate-950/30" />
 
           {/* Main Hero Content */}
           <div className="container mx-auto px-4 h-full flex items-center justify-center relative z-10 pt-16 pb-20">

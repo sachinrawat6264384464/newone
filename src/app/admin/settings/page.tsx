@@ -129,6 +129,41 @@ export default function AdminSettingsPage() {
     })
   }
 
+  // Add a New Featured Service Card
+  const handleAddFeaturedCard = () => {
+    const current = form.featuredServiceCards || DEFAULT_FEATURED_SERVICES
+    const newCard: FeaturedServiceCard = {
+      id: `feat-service-${Date.now()}`,
+      tag: 'NEW SERVICE',
+      title: 'Custom Architecture & Interior',
+      subtitle: 'BESPOKE DESIGN SOLUTIONS',
+      linkUrl: '/contact'
+    }
+
+    const updatedCards = [...current, newCard]
+    setForm((prev) => ({
+      ...prev,
+      featuredServiceCards: updatedCards
+    }))
+    toast.success(`Service Card #${updatedCards.length} added!`)
+  }
+
+  // Remove a Featured Service Card
+  const handleRemoveFeaturedCard = (index: number) => {
+    const current = form.featuredServiceCards || DEFAULT_FEATURED_SERVICES
+    if (current.length <= 1) {
+      toast.error('At least 1 featured service card is required')
+      return
+    }
+
+    const updatedCards = current.filter((_, i) => i !== index)
+    setForm((prev) => ({
+      ...prev,
+      featuredServiceCards: updatedCards
+    }))
+    toast.success(`Service Card #${index + 1} deleted!`)
+  }
+
   // File Upload for a specific Slide Background Image
   const handleSlideImageUpload = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files
@@ -603,28 +638,48 @@ export default function AdminSettingsPage() {
             </div>
           </div>
 
-          {/* Homepage 3 Featured Service Cards Manager */}
+          {/* Homepage Featured Service Cards Manager */}
           <div className="bg-white border border-gray-200/80 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
-            <div className="flex items-center space-x-3 pb-4 border-b border-gray-100">
-              <div className="w-10 h-10 bg-red-50 border border-red-200 rounded-xl flex items-center justify-center text-red-600">
-                <LayoutGrid className="w-5 h-5" />
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-gray-100">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 bg-red-50 border border-red-200 rounded-xl flex items-center justify-center text-red-600">
+                  <LayoutGrid className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="text-base font-bold text-slate-900 font-serif-luxury">Homepage Featured Service Cards Manager</h3>
+                  <p className="text-xs text-slate-500">
+                    Add & customize white service boxes (Tags, Titles, Subtitles, and Link URLs) displayed on the homepage.
+                  </p>
+                </div>
               </div>
-              <div>
-                <h3 className="text-base font-bold text-slate-900 font-serif-luxury">Homepage 3 Featured Service Cards Manager</h3>
-                <p className="text-xs text-slate-500">
-                  Customize the 3 white service boxes (Tags, Titles, Subtitles, and Link URLs) displayed on the homepage.
-                </p>
-              </div>
+
+              <button
+                type="button"
+                onClick={handleAddFeaturedCard}
+                className="inline-flex items-center space-x-2 px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-bold shadow-md shadow-red-600/20 transition-all hover:scale-[1.02]"
+              >
+                <Plus className="w-4 h-4" />
+                <span>Add New Service Card</span>
+              </button>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-              {(form.featuredServiceCards || DEFAULT_FEATURED_SERVICES).slice(0, 3).map((card, idx) => (
-                <div key={card.id || idx} className="bg-slate-50 border border-gray-200 rounded-2xl p-5 space-y-3.5 shadow-xs relative">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {(form.featuredServiceCards || DEFAULT_FEATURED_SERVICES).map((card, idx) => (
+                <div key={card.id || idx} className="bg-slate-50 border border-gray-200 rounded-2xl p-5 space-y-3.5 shadow-xs relative group hover:border-red-300 transition-colors">
                   <div className="flex items-center justify-between border-b border-gray-200 pb-2">
                     <span className="bg-red-100 text-red-700 text-[10px] font-mono font-bold px-2 py-0.5 rounded">
                       Box #{idx + 1}
                     </span>
-                    <span className="text-[11px] font-bold text-slate-600">Card #{idx + 1}</span>
+
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveFeaturedCard(idx)}
+                      className="p-1 bg-red-50 hover:bg-red-100 text-red-600 rounded-lg text-xs font-semibold transition-colors flex items-center space-x-1 border border-red-200"
+                      title="Delete card"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                      <span className="text-[10px]">Delete</span>
+                    </button>
                   </div>
 
                   <div>

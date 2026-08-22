@@ -346,7 +346,7 @@ export default async function Home() {
                     linkUrl: '/services/full-home-interiors'
                   }
                 ]
-            ).slice(0, 3).map((card, index) => (
+            ).map((card, index) => (
               <div
                 key={card.id || index}
                 className="group bg-white rounded-3xl border border-gray-200/80 p-8 sm:p-10 shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col justify-between items-center text-center hover:-translate-y-2 relative overflow-hidden"

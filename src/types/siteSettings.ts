@@ -13,6 +13,9 @@ export interface SiteSettings {
   heroImages?: string[]
   heroSlides?: HeroSlideItem[]
   galleryHeroImages?: string[]
+  galleryHeroTagline?: string
+  galleryHeroTitle?: string
+  galleryHeroSubtext?: string
   contactEmail: string
   contactPhone: string
   officeAddress: string

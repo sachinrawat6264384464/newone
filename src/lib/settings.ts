@@ -53,6 +53,9 @@ export const DEFAULT_SETTINGS: SiteSettings = {
     'https://res.cloudinary.com/dfjecbhki/image/upload/v1762298138/Homestorey-media/Hero/haemuplqyv9glq1651fc.jpg',
     'https://res.cloudinary.com/dfjecbhki/image/upload/v1762298165/Homestorey-media/What%20we%20create/jjhie0tfazmie9laeimu.jpg'
   ],
+  galleryHeroTagline: 'DESIGN PORTFOLIO',
+  galleryHeroTitle: 'Welcome to Your Dream home Design Journey.',
+  galleryHeroSubtext: 'From the moment you step through your front door to every corner of your living space, we bring your architectural vision to life.',
   contactEmail: 'homestorey@thenidhimittal.com',
   contactPhone: '+91 98765 43210',
   officeAddress: 'Delhi NCR, India',

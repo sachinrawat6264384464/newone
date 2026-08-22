@@ -206,8 +206,11 @@ export default function AdminGalleryPage() {
   const [categoryFilter, setCategoryFilter] = useState('all')
   const [searchTerm, setSearchTerm] = useState('')
 
-  // Gallery Page Hero Mosaic State (3 Images)
+  // Gallery Page Hero Mosaic State (3 Images + Text Content)
   const [heroImages, setHeroImages] = useState<string[]>([])
+  const [heroTagline, setHeroTagline] = useState('DESIGN PORTFOLIO')
+  const [heroTitle, setHeroTitle] = useState('Welcome to Your Dream home Design Journey.')
+  const [heroSubtext, setHeroSubtext] = useState('From the moment you step through your front door to every corner of your living space, we bring your architectural vision to life.')
   const [heroDriveInput, setHeroDriveInput] = useState('')
   const [savingHero, setSavingHero] = useState(false)
   const heroFileInputRef = useRef<HTMLInputElement>(null)
@@ -233,6 +236,9 @@ export default function AdminGalleryPage() {
         getSiteSettings()
       ])
       setItems(data)
+      if (settings.galleryHeroTagline) setHeroTagline(settings.galleryHeroTagline)
+      if (settings.galleryHeroTitle) setHeroTitle(settings.galleryHeroTitle)
+      if (settings.galleryHeroSubtext) setHeroSubtext(settings.galleryHeroSubtext)
       if (settings.galleryHeroImages && settings.galleryHeroImages.length > 0) {
         setHeroImages(settings.galleryHeroImages)
       } else {
@@ -522,9 +528,9 @@ export default function AdminGalleryPage() {
   return (
     <AdminShell
       title="Portfolio Gallery Management"
-      subtitle="Manage public Gallery Hero Mosaic (3 images) and showcase design cards."
+      subtitle="Manage public Gallery Hero Section (headings, 3 mosaic images) and showcase design cards."
     >
-      {/* 1. GALLERY HERO MOSAIC IMAGES SECTION (3 IMAGES) */}
+      {/* 1. GALLERY HERO MOSAIC & HEADING SECTION */}
       <div className="bg-white border border-gray-200/80 rounded-2xl p-6 sm:p-8 shadow-sm mb-10 font-sans">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-gray-100 mb-6">
           <div className="flex items-center space-x-3">
@@ -532,9 +538,9 @@ export default function AdminGalleryPage() {
               <LayoutGrid className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="text-base font-bold text-slate-900 font-serif-luxury">Gallery Page Hero Mosaic (3 Images)</h3>
+              <h3 className="text-base font-bold text-slate-900 font-serif-luxury">Gallery Page Header & Mosaic Settings</h3>
               <p className="text-xs text-slate-500 font-normal">
-                {heroImages.length} / 3 images configured for the public /gallery page top right section.
+                Edit public /gallery top section tagline, main heading, subtext, and 3-image mosaic.
               </p>
             </div>
           </div>
@@ -546,8 +552,53 @@ export default function AdminGalleryPage() {
             className="inline-flex items-center space-x-2 px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-bold shadow-md shadow-red-600/20 disabled:opacity-50 transition-all hover:scale-[1.02]"
           >
             <Save className="w-4 h-4" />
-            <span>{savingHero ? 'Saving Hero...' : 'Save Hero Mosaic'}</span>
+            <span>{savingHero ? 'Saving Hero...' : 'Save Gallery Hero'}</span>
           </button>
+        </div>
+
+        {/* Dynamic Heading Text Controls */}
+        <div className="bg-slate-50 border border-gray-200 rounded-xl p-5 mb-6 space-y-4">
+          <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">Gallery Top Hero Headings</h4>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-xs font-semibold text-slate-700 mb-1">
+                Top Tagline (Red Text)
+              </label>
+              <input
+                type="text"
+                value={heroTagline}
+                onChange={(e) => setHeroTagline(e.target.value)}
+                placeholder="e.g. DESIGN PORTFOLIO"
+                className="w-full bg-white border border-gray-300 rounded-lg px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-red-500 font-sans"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-semibold text-slate-700 mb-1">
+                Main Hero Title
+              </label>
+              <input
+                type="text"
+                value={heroTitle}
+                onChange={(e) => setHeroTitle(e.target.value)}
+                placeholder="e.g. Welcome to Your Dream home Design Journey."
+                className="w-full bg-white border border-gray-300 rounded-lg px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-red-500 font-sans font-medium"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-xs font-semibold text-slate-700 mb-1">
+              Hero Description / Subtext
+            </label>
+            <textarea
+              rows={2}
+              value={heroSubtext}
+              onChange={(e) => setHeroSubtext(e.target.value)}
+              placeholder="e.g. From the moment you step through your front door..."
+              className="w-full bg-white border border-gray-300 rounded-lg px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-red-500 font-sans"
+            />
+          </div>
         </div>
 
         {/* Action Controls for Gallery Hero */}

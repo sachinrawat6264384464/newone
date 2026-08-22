@@ -207,6 +207,12 @@ export default function Gallery() {
     new Array(services.length).fill(0)
   );
 
+  const [heroTagline, setHeroTagline] = useState<string>("DESIGN PORTFOLIO");
+  const [heroTitle, setHeroTitle] = useState<string>("Welcome to Your Dream home Design Journey.");
+  const [heroSubtext, setHeroSubtext] = useState<string>(
+    "From the moment you step through your front door to every corner of your living space, we bring your architectural vision to life."
+  );
+
   const [heroMosaicImages, setHeroMosaicImages] = useState<string[]>([
     "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298136/Homestorey-media/Hero/hfqrz6nqcaxbwa22urgx.jpg",
     "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298138/Homestorey-media/Hero/haemuplqyv9glq1651fc.jpg",
@@ -217,6 +223,15 @@ export default function Gallery() {
     getSiteSettings().then(settings => {
       if (settings.galleryHeroImages && settings.galleryHeroImages.length > 0) {
         setHeroMosaicImages(settings.galleryHeroImages.map(formatGoogleDriveUrl));
+      }
+      if (settings.galleryHeroTagline) {
+        setHeroTagline(settings.galleryHeroTagline);
+      }
+      if (settings.galleryHeroTitle) {
+        setHeroTitle(settings.galleryHeroTitle);
+      }
+      if (settings.galleryHeroSubtext) {
+        setHeroSubtext(settings.galleryHeroSubtext);
       }
     });
 
@@ -263,7 +278,7 @@ export default function Gallery() {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="pt-28 pb-16 bg-[#FAF8F5] relative overflow-hidden border-b border-gray-200/60">
+      <section className="pt-36 sm:pt-40 lg:pt-44 pb-16 bg-[#FAF8F5] relative overflow-hidden border-b border-gray-200/60">
         {/* Subtle grid */}
         <div className="absolute inset-0 opacity-[0.025]"
           style={{ backgroundImage: 'linear-gradient(#000 1px,transparent 1px),linear-gradient(90deg,#000 1px,transparent 1px)', backgroundSize: '56px 56px' }} />
@@ -278,16 +293,14 @@ export default function Gallery() {
               transition={{ duration: 0.8 }}
             >
               <span className="text-red-500 font-semibold text-xs tracking-[0.28em] uppercase block mb-4">
-                Design Portfolio
+                {heroTagline}
               </span>
               <h1 className="font-serif-luxury text-4xl sm:text-5xl lg:text-6xl text-slate-900 font-normal leading-tight mb-5">
-                Welcome to Your
-                <span className="block text-red-600 italic mt-1">Dream home Design</span>
-                <span className="block text-red-600 italic">Journey.</span>
+                {heroTitle}
               </h1>
               <div className="w-10 h-px bg-red-500 mb-5" />
               <p className="text-slate-500 text-base md:text-lg leading-relaxed mb-8 font-light max-w-md">
-                From the moment you step through your front door to every corner of your living space, we bring your architectural vision to life.
+                {heroSubtext}
               </p>
 
               <div className="flex flex-wrap gap-3 mb-8">

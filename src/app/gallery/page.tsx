@@ -220,20 +220,27 @@ export default function Gallery() {
   ]);
 
   useEffect(() => {
-    getSiteSettings().then(settings => {
-      if (settings.galleryHeroImages && settings.galleryHeroImages.length > 0) {
-        setHeroMosaicImages(settings.galleryHeroImages.map(formatGoogleDriveUrl));
-      }
-      if (settings.galleryHeroTagline) {
-        setHeroTagline(settings.galleryHeroTagline);
-      }
-      if (settings.galleryHeroTitle) {
-        setHeroTitle(settings.galleryHeroTitle);
-      }
-      if (settings.galleryHeroSubtext) {
-        setHeroSubtext(settings.galleryHeroSubtext);
-      }
-    });
+    const loadSettings = () => {
+      getSiteSettings().then(settings => {
+        if (settings.galleryHeroImages && settings.galleryHeroImages.length > 0) {
+          setHeroMosaicImages(settings.galleryHeroImages.map(formatGoogleDriveUrl));
+        }
+        if (settings.galleryHeroTagline) {
+          setHeroTagline(settings.galleryHeroTagline);
+        }
+        if (settings.galleryHeroTitle) {
+          setHeroTitle(settings.galleryHeroTitle);
+        }
+        if (settings.galleryHeroSubtext) {
+          setHeroSubtext(settings.galleryHeroSubtext);
+        }
+      });
+    }
+
+    loadSettings();
+    if (typeof window !== 'undefined') {
+      window.addEventListener('site_settings_updated', loadSettings);
+    }
 
     getGalleryItems(true).then(items => {
       if (items && items.length > 0) {
@@ -254,6 +261,12 @@ export default function Gallery() {
         setCarouselStates(new Array(mapped.length).fill(0));
       }
     });
+
+    return () => {
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('site_settings_updated', loadSettings);
+      }
+    }
   }, []);
 
   const updateCarousel = (serviceIndex: number, direction: "next" | "prev") => {

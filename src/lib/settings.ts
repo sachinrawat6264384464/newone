@@ -100,18 +100,7 @@ export async function getSiteSettings(): Promise<SiteSettings> {
     if (docSnap.exists()) {
       const data = docSnap.data() as Partial<SiteSettings>
       
-      // If cached data exists and is newer or holds custom uploaded slides, use cached data
-      if (cached && cached.heroSlides && cached.heroSlides.length > 0) {
-        if (!data.updatedAt || (cached.updatedAt && cached.updatedAt >= data.updatedAt)) {
-          return {
-            ...DEFAULT_SETTINGS,
-            ...data,
-            ...cached
-          }
-        }
-      }
-
-      let finalSlides = (cached && cached.heroSlides) ? cached.heroSlides : (data.heroSlides || null)
+      let finalSlides = data.heroSlides || cached?.heroSlides || null
       if (!finalSlides && data.heroImages && data.heroImages.length > 0) {
         finalSlides = data.heroImages.map((img, idx) => ({
           id: `hero-slide-${idx + 1}`,
@@ -127,8 +116,19 @@ export async function getSiteSettings(): Promise<SiteSettings> {
         ...data,
         heroSlides: finalSlides && finalSlides.length > 0 ? finalSlides : DEFAULT_SETTINGS.heroSlides,
         heroImages: data.heroImages || (finalSlides ? finalSlides.map(s => s.image) : DEFAULT_SETTINGS.heroImages),
-        galleryHeroImages: Array.isArray(data.galleryHeroImages) ? data.galleryHeroImages : DEFAULT_SETTINGS.galleryHeroImages,
-        ...(cached ? cached : {})
+        galleryHeroImages: Array.isArray(data.galleryHeroImages) && data.galleryHeroImages.length > 0
+          ? data.galleryHeroImages
+          : (cached?.galleryHeroImages || DEFAULT_SETTINGS.galleryHeroImages),
+        galleryHeroTagline: data.galleryHeroTagline || cached?.galleryHeroTagline || DEFAULT_SETTINGS.galleryHeroTagline,
+        galleryHeroTitle: data.galleryHeroTitle || cached?.galleryHeroTitle || DEFAULT_SETTINGS.galleryHeroTitle,
+        galleryHeroSubtext: data.galleryHeroSubtext || cached?.galleryHeroSubtext || DEFAULT_SETTINGS.galleryHeroSubtext,
+      }
+
+      if (cached && cached.updatedAt && data.updatedAt && cached.updatedAt > data.updatedAt) {
+        return {
+          ...result,
+          ...cached
+        }
       }
 
       return result
@@ -154,8 +154,10 @@ export async function getSiteSettings(): Promise<SiteSettings> {
 }
 
 export async function saveSiteSettings(settings: Partial<SiteSettings>): Promise<void> {
+  const existing = await getSiteSettings().catch(() => DEFAULT_SETTINGS)
   const payload: SiteSettings = {
     ...DEFAULT_SETTINGS,
+    ...existing,
     ...settings,
     updatedAt: Date.now()
   }
@@ -163,13 +165,14 @@ export async function saveSiteSettings(settings: Partial<SiteSettings>): Promise
   if (typeof window !== 'undefined') {
     try {
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(payload))
+      window.dispatchEvent(new Event('site_settings_updated'))
     } catch (e) {
       console.warn('LocalStorage save error:', e)
     }
   }
 
   try {
-    await setDoc(doc(db, COLLECTION_NAME, SETTINGS_DOC_ID), payload)
+    await setDoc(doc(db, COLLECTION_NAME, SETTINGS_DOC_ID), payload, { merge: true })
   } catch (error: any) {
     if (error?.code === 'permission-denied') {
       console.warn('Firestore write permission denied. Saved to LocalStorage cache successfully.', error)

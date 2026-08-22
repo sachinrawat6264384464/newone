@@ -361,46 +361,7 @@ export default function Contact() {
                   ))}
                 </div>
 
-                {/* Free Consultation CTA Card */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.6 }}
-                  className="bg-slate-950 rounded-2xl p-6 relative overflow-hidden"
-                >
-                  <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-red-500 to-transparent opacity-60" />
-                  <span className="text-red-400 text-xs font-semibold tracking-[0.22em] uppercase block mb-2">Complimentary</span>
-                  <h3 className="font-serif-luxury text-lg font-semibold text-white mb-2">Free Design Consultation</h3>
-                  <p className="text-slate-400 text-xs leading-relaxed mb-4 font-light">
-                    Schedule a free session to discuss your project and get personalised advice from our design team.
-                  </p>
-                  <div className="grid grid-cols-1 gap-2 mb-5">
-                    {features.map((f, i) => (
-                      <div key={i} className="flex items-center gap-2">
-                        <CheckCircle className="w-3.5 h-3.5 text-red-400 flex-shrink-0" />
-                        <span className="text-slate-400 text-xs">{f}</span>
-                      </div>
-                    ))}
-                  </div>
-                  <Link href="https://tidycal.com/homestorey/free-design-discussion" target="_blank" rel="noopener noreferrer">
-                    <motion.button
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      className="w-full bg-red-600 hover:bg-red-700 text-white text-sm font-semibold py-2.5 px-4 rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
-                    >
-                      <span>Book Free Consultation</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </motion.button>
-                  </Link>
-                </motion.div>
 
-                {/* Trustpilot */}
-                <div className="bg-white rounded-xl border border-gray-200/80 p-4 shadow-sm text-center">
-                  <p className="text-slate-500 text-xs mb-3">Loved our work? Leave a review!</p>
-                  <div className="flex justify-center">
-                    <TrustpilotReviewCollector />
-                  </div>
-                </div>
               </motion.div>
             </div>
           </div>

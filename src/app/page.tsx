@@ -1,12 +1,11 @@
 // app/page.tsx
-"use client";
-import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import Layout from "../components/Layout";
 import HeroCarousel from "../components/HeroCarousel";
-import FloatingElements from "../components/FloatingElements";
+import ServiceCard from "@/components/ServiceCard";
+import ManagedServiceCard from "@/components/ManagedServiceCard";
+import ProcessSection from "@/components/ProcessSection";
 import { getServices } from "@/lib/services";
-import { getSiteSettings } from "@/lib/settings";
 import { ServiceItem } from "@/types/service";
 import {
   ChefHat,
@@ -33,6 +32,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import FloatingElements from "../components/FloatingElements";
 import MasonryGrid from "@/components/MasonryGrid";
 import CommonProblems from "../components/CommonProblems";
 
@@ -123,263 +123,6 @@ const services: Service[] = [
   },
 ];
 
-
-// Per-card image carousel component
-function ServiceCard({
-  service,
-  index,
-}: {
-  service: Service;
-  index: number;
-}) {
-  const [currentImg, setCurrentImg] = useState(0);
-  const IconComponent = service.icon;
-
-  const goNext = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setCurrentImg((prev) => (prev + 1) % service.images.length);
-  };
-
-  const goPrev = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setCurrentImg((prev) =>
-      prev === 0 ? service.images.length - 1 : prev - 1
-    );
-  };
-
-  return (
-    <motion.div
-      key={index}
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
-      viewport={{ once: true }}
-      className="group bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-200/80 hover:shadow-2xl hover:border-red-500/30 transition-all duration-500 flex flex-col justify-between"
-    >
-      {/* Image Carousel */}
-      <div className="relative overflow-hidden h-[270px]">
-        {/* All images stacked — only active one is visible */}
-        {service.images.map((img, i) => (
-          <div
-            key={i}
-            className="absolute inset-0 transition-opacity duration-700 ease-out"
-            style={{ opacity: i === currentImg ? 1 : 0, zIndex: i === currentImg ? 1 : 0 }}
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={img}
-              alt={`${service.title} - ${i + 1}`}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-            />
-          </div>
-        ))}
-
-        {/* Dark Vignette Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-black/20 pointer-events-none" style={{ zIndex: 10 }} />
-
-        {/* Left Arrow */}
-        <button
-          onClick={goPrev}
-          style={{ zIndex: 20 }}
-          className="absolute left-3 top-1/2 -translate-y-1/2 bg-slate-900/60 hover:bg-slate-900 text-white backdrop-blur-md rounded-full p-2 shadow-lg transition-all duration-200 hover:scale-110 opacity-0 group-hover:opacity-100 border border-white/20"
-          aria-label="Previous image"
-        >
-          <ChevronLeft className="w-4 h-4" />
-        </button>
-
-        {/* Right Arrow */}
-        <button
-          onClick={goNext}
-          style={{ zIndex: 20 }}
-          className="absolute right-3 top-1/2 -translate-y-1/2 bg-slate-900/60 hover:bg-slate-900 text-white backdrop-blur-md rounded-full p-2 shadow-lg transition-all duration-200 hover:scale-110 opacity-0 group-hover:opacity-100 border border-white/20"
-          aria-label="Next image"
-        >
-          <ChevronRight className="w-4 h-4" />
-        </button>
-
-        {/* Dot indicators */}
-        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5" style={{ zIndex: 20 }}>
-          {service.images.map((_, i) => (
-            <button
-              key={i}
-              onClick={(e) => { e.stopPropagation(); setCurrentImg(i); }}
-              className={`h-1.5 transition-all duration-300 rounded-full ${
-                i === currentImg ? "w-5 bg-white" : "w-1.5 bg-white/50"
-              }`}
-            />
-          ))}
-        </div>
-
-        {/* Category Badge */}
-        <div className="absolute top-4 right-4 bg-slate-900/80 backdrop-blur-md px-3 py-1 rounded-md border border-white/10" style={{ zIndex: 20 }}>
-          <span className="text-[10px] tracking-wider uppercase font-semibold text-white">Luxury Series</span>
-        </div>
-
-        {/* Image Counter Badge */}
-        <div className="absolute top-4 left-4 bg-slate-900/70 backdrop-blur-md px-2.5 py-0.5 rounded-md border border-white/10" style={{ zIndex: 20 }}>
-          <span className="text-xs font-mono font-medium text-gray-200">
-            {currentImg + 1} / {service.images.length}
-          </span>
-        </div>
-      </div>
-
-      {/* Card Content */}
-      <div className="p-7 flex flex-col justify-between flex-1">
-        <div>
-          <div className="flex items-center space-x-3 mb-3">
-            <div className="bg-red-50 text-red-600 p-2.5 rounded-xl group-hover:bg-red-600 group-hover:text-white transition-colors duration-300">
-              <IconComponent className="w-5 h-5" />
-            </div>
-            <h3 className="font-serif-luxury text-2xl font-bold text-slate-950 group-hover:text-red-600 transition-colors">
-              {service.title}
-            </h3>
-          </div>
-          <p className="text-slate-950 text-base sm:text-[17px] leading-relaxed font-bold">{service.description}</p>
-        </div>
-
-        <Link 
-          href="/gallery"
-          className="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-red-600 uppercase tracking-wider group-hover:translate-x-1 transition-transform"
-        >
-          <span>View Design Gallery</span>
-          <ArrowRight className="w-4 h-4" />
-        </Link>
-      </div>
-    </motion.div>
-  );
-}
-
-// Dynamic Managed Service Card
-function ManagedServiceCard({
-  service,
-  index,
-}: {
-  service: ServiceItem;
-  index: number;
-}) {
-  const imagesList = service.images && service.images.length > 0 ? service.images : [service.coverImage];
-  const [currentImg, setCurrentImg] = useState(0);
-
-  const goNext = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setCurrentImg((prev) => (prev + 1) % imagesList.length);
-  };
-
-  const goPrev = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setCurrentImg((prev) => (prev === 0 ? imagesList.length - 1 : prev - 1));
-  };
-
-  return (
-    <motion.div
-      key={service.id || index}
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
-      viewport={{ once: true }}
-      className="group bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-200/80 hover:shadow-2xl hover:border-red-500/30 transition-all duration-500 flex flex-col justify-between"
-    >
-      {/* Image Carousel (Compact 4:3 Ratio Preview) */}
-      <div className="relative overflow-hidden aspect-[4/3] bg-slate-950">
-        {imagesList.map((img, i) => (
-          <div
-            key={i}
-            className="absolute inset-0 transition-opacity duration-700 ease-out"
-            style={{ opacity: i === currentImg ? 1 : 0, zIndex: i === currentImg ? 1 : 0 }}
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={img}
-              alt={`${service.title} - ${i + 1}`}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-            />
-          </div>
-        ))}
-
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-black/20 pointer-events-none" style={{ zIndex: 10 }} />
-
-        {/* Carousel Navigation Arrows */}
-        {imagesList.length > 1 && (
-          <button
-            onClick={goPrev}
-            style={{ zIndex: 20 }}
-            className="absolute left-3 top-1/2 -translate-y-1/2 bg-slate-900/60 hover:bg-slate-900 text-white backdrop-blur-md rounded-full p-1.5 shadow-lg transition-all duration-200 hover:scale-110 opacity-0 group-hover:opacity-100 border border-white/20"
-            aria-label="Previous image"
-          >
-            <ChevronLeft className="w-4 h-4" />
-          </button>
-        )}
-
-        {imagesList.length > 1 && (
-          <button
-            onClick={goNext}
-            style={{ zIndex: 20 }}
-            className="absolute right-3 top-1/2 -translate-y-1/2 bg-slate-900/60 hover:bg-slate-900 text-white backdrop-blur-md rounded-full p-1.5 shadow-lg transition-all duration-200 hover:scale-110 opacity-0 group-hover:opacity-100 border border-white/20"
-            aria-label="Next image"
-          >
-            <ChevronRight className="w-4 h-4" />
-          </button>
-        )}
-
-        {/* Dot Indicators */}
-        {imagesList.length > 1 && (
-          <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex gap-1.5" style={{ zIndex: 20 }}>
-            {imagesList.map((_, i) => (
-              <button
-                key={i}
-                onClick={(e) => { e.stopPropagation(); setCurrentImg(i); }}
-                className={`h-1.5 transition-all duration-300 rounded-full ${
-                  i === currentImg ? "w-5 bg-white" : "w-1.5 bg-white/50"
-                }`}
-              />
-            ))}
-          </div>
-        )}
-
-        {/* Category Badge */}
-        <div className="absolute top-3 right-3 bg-slate-900/80 backdrop-blur-md px-2.5 py-0.5 rounded-md border border-white/10" style={{ zIndex: 20 }}>
-          <span className="text-[10px] tracking-wider uppercase font-semibold text-white">
-            {service.category || "Luxury Series"}
-          </span>
-        </div>
-
-        {/* Image Counter Badge */}
-        <div className="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md px-2 py-0.5 rounded-md border border-white/10" style={{ zIndex: 20 }}>
-          <span className="text-[11px] font-mono font-bold text-white">
-            {currentImg + 1} / {imagesList.length} Images
-          </span>
-        </div>
-      </div>
-
-      <div className="p-5 flex flex-col justify-between flex-1">
-        <div>
-          <div className="flex items-center space-x-2.5 mb-2">
-            <div className="bg-red-50 text-red-600 p-2 rounded-lg group-hover:bg-red-600 group-hover:text-white transition-colors duration-300">
-              <Sparkles className="w-4 h-4" />
-            </div>
-            <h3 className="font-serif-luxury text-xl font-bold text-slate-950 group-hover:text-red-600 transition-colors">
-              {service.title}
-            </h3>
-          </div>
-          {service.subtitle && (
-            <p className="text-xs font-extrabold text-slate-900 mb-1.5">{service.subtitle}</p>
-          )}
-          <p className="text-slate-950 text-sm sm:text-base leading-relaxed font-bold line-clamp-3">{service.description}</p>
-        </div>
-
-        <Link
-          href="/gallery"
-          className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-red-600 uppercase tracking-wider group-hover:translate-x-1 transition-transform"
-        >
-          <span>View Design Gallery</span>
-          <ArrowRight className="w-3.5 h-3.5" />
-        </Link>
-      </div>
-    </motion.div>
-  );
-}
-
-
 const testimonials: Testimonial[] = [
   {
     name: "Akku",
@@ -461,149 +204,8 @@ const problems = [
   },
 ];
 
-const ProcessSection = () => {
-  const steps = [
-    {
-      num: "01",
-      title: "Consultation",
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="w-6 h-6">
-          <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" strokeLinecap="round" strokeLinejoin="round"/>
-          <circle cx="9" cy="7" r="4" strokeLinecap="round" strokeLinejoin="round"/>
-          <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-      ),
-      desc: "Understand your lifestyle, taste, and requirements through detailed discussions and space assessments.",
-      tag: "Free Session",
-    },
-    {
-      num: "02",
-      title: "Concept & Estimate",
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="w-6 h-6">
-          <path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-      ),
-      desc: "Develop creative concepts, moodboards, and material selections while maintaining transparency in pricing.",
-      tag: "3D Visualization",
-    },
-    {
-      num: "03",
-      title: "Execution",
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="w-6 h-6">
-          <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-      ),
-      desc: "Execute the design with precision and craftsmanship, ensuring every element aligns with the vision through quality checks.",
-      tag: "Quality Assured",
-    },
-    {
-      num: "04",
-      title: "Handover",
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="w-6 h-6">
-          <path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-      ),
-      desc: "Complete final styling and walkthroughs, followed by a smooth handover and post-project support for lasting satisfaction.",
-      tag: "Post-Support",
-    },
-  ];
-
-  return (
-    <section className="py-24 bg-slate-950 relative overflow-hidden">
-      {/* Subtle glow lines */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate-700 to-transparent opacity-50" />
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate-700/30 to-transparent" />
-      {/* Background blobs */}
-      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 bg-slate-800/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-64 h-64 bg-slate-800/10 rounded-full blur-3xl pointer-events-none" />
-
-      <div className="container mx-auto px-6 relative max-w-6xl">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-          className="text-center mb-20"
-        >
-          <span className="text-amber-400 font-semibold text-xs tracking-[0.28em] uppercase block mb-3">
-            How We Work
-          </span>
-          <h2 className="font-serif-luxury text-4xl lg:text-5xl text-white font-normal leading-tight mb-4">
-            Our <span className="italic text-amber-300">Process</span>
-          </h2>
-          <div className="w-10 h-px bg-amber-400 mx-auto mb-5 rounded-full" />
-          <p className="text-slate-300 text-base max-w-xl mx-auto leading-relaxed font-light">
-            From initial consultation to final handover — a proven process that ensures your project is delivered on time, within budget, and beyond expectations.
-          </p>
-        </motion.div>
-
-        {/* Steps Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
-          {steps.map((step, i) => (
-            <motion.div
-              key={step.num}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: i * 0.12 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -6, boxShadow: "0 20px 40px rgba(255,255,255,0.06)" }}
-              className="relative bg-slate-900/80 border border-slate-700/80 rounded-2xl p-6 flex flex-col gap-4 cursor-default transition-all duration-300 group shadow-lg"
-            >
-              {/* Top row: Icon badge on left, Big Step Number on top-right */}
-              <div className="flex items-center justify-between">
-                {/* Icon badge */}
-                <div className="bg-white/10 border border-white/20 p-3 rounded-xl text-amber-300 group-hover:bg-white/20 transition-colors duration-300">
-                  {step.icon}
-                </div>
-                {/* Big Step Number (Cleanly positioned at top right) */}
-                <span className="text-[52px] font-extrabold text-white/40 leading-none select-none font-serif-luxury tracking-tight">
-                  {step.num}
-                </span>
-              </div>
-
-              {/* Step label & Tag pill row */}
-              <div className="flex items-center justify-between gap-2 pt-1">
-                <span className="text-xs font-bold text-amber-400 tracking-widest uppercase">STEP {step.num}</span>
-                <span className="text-[10px] tracking-widest text-amber-200 uppercase font-semibold bg-white/10 border border-white/15 px-2.5 py-1 rounded-full">
-                  {step.tag}
-                </span>
-              </div>
-              <div className="w-full h-px bg-white/15" />
-
-              {/* Title */}
-              <h3 className="font-serif-luxury text-xl text-white font-bold leading-snug">
-                {step.title}
-              </h3>
-
-              {/* Description */}
-              <p className="text-slate-200 text-sm sm:text-[15px] leading-relaxed font-medium">
-                {step.desc}
-              </p>
-
-              {/* Bottom accent bar */}
-              <div className="absolute bottom-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-amber-400/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
-export default function Home() {
-  const [managedServices, setManagedServices] = useState<ServiceItem[]>([]);
-
-  useEffect(() => {
-    getServices(true).then((data) => {
-      if (data && data.length > 0) {
-        setManagedServices(data);
-      }
-    });
-  }, []);
+export default async function Home() {
+  const managedServices = await getServices(true);
 
   return (
     <Layout>
@@ -622,13 +224,7 @@ export default function Home() {
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             {/* Left: Nidhi Image Card (Clean Luxury Frame, No Glow) */}
-            <motion.div
-              initial={{ opacity: 0, x: -40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="lg:col-span-5 flex justify-center"
-            >
+            <div className="lg:col-span-5 flex justify-center">
               <div className="relative w-full max-w-[420px]">
                 {/* Main image with clean border and shadow */}
                 <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-200/80 bg-white p-2">
@@ -644,12 +240,7 @@ export default function Home() {
                 </div>
 
                 {/* Floating Experience Badge */}
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4, duration: 0.6 }}
-                  className="absolute -bottom-6 -right-4 sm:right-2 bg-slate-900 text-white p-4 rounded-xl shadow-xl border border-white/10 flex items-center space-x-3"
-                >
+                <div className="absolute -bottom-6 -right-4 sm:right-2 bg-slate-900 text-white p-4 rounded-xl shadow-xl border border-white/10 flex items-center space-x-3">
                   <div className="bg-red-600 p-2.5 rounded-lg text-white">
                     <Award className="w-6 h-6" />
                   </div>
@@ -657,18 +248,12 @@ export default function Home() {
                     <p className="text-sm font-bold text-white leading-tight">10+ Years</p>
                     <p className="text-xs text-gray-300">Design Experience</p>
                   </div>
-                </motion.div>
+                </div>
               </div>
-            </motion.div>
+            </div>
 
             {/* Right: Text Content */}
-            <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="lg:col-span-7 space-y-6"
-            >
+            <div className="lg:col-span-7 space-y-6">
               {/* Header */}
               <div>
                 <span className="text-red-500 font-semibold text-xs sm:text-sm tracking-[0.2em] uppercase block">
@@ -709,20 +294,13 @@ export default function Home() {
               {/* Button */}
               <div className="pt-4">
                 <Link href="https://tidycal.com/homestorey/free-design-discussion" target="_blank" rel="noopener noreferrer">
-                  <motion.button
-                    whileHover={{
-                      scale: 1.03,
-                      boxShadow: "0 12px 25px rgba(239, 68, 68, 0.3)",
-                    }}
-                    whileTap={{ scale: 0.97 }}
-                    className="bg-red-600 hover:bg-red-700 text-white font-bold py-3.5 px-8 rounded-md shadow-md text-base inline-flex items-center space-x-2 transition-all"
-                  >
+                  <button className="bg-red-600 hover:bg-red-700 text-white font-bold py-3.5 px-8 rounded-md shadow-md text-base inline-flex items-center space-x-2 transition-all cursor-pointer">
                     <span>Book a Free Consultation</span>
                     <ArrowRight className="w-4 h-4" />
-                  </motion.button>
+                  </button>
                 </Link>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -730,57 +308,47 @@ export default function Home() {
       {/* Services Section */}
       <section id="services" className="py-24 bg-[#F5F3EF] relative overflow-hidden">
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
+          <div className="text-center mb-16">
             <span className="text-red-500 font-semibold text-xs sm:text-sm tracking-[0.25em] uppercase block mb-3">
-              What We Create
+              SERVICES WE OFFER
             </span>
             <h2 className="font-serif-luxury text-4xl sm:text-5xl lg:text-6xl text-slate-900 font-normal leading-tight">
-              Look At What We Design.
+              Choose As Per Your Requirement.
             </h2>
             <div className="w-16 h-0.5 bg-red-500 mx-auto my-5 rounded-full"></div>
-            <p className="text-slate-600 text-base md:text-lg max-w-2xl mx-auto font-light leading-relaxed">
-              From bespoke architectural facades to functional luxury interiors, we transform spaces with precision, innovation, and timeless elegance.
-            </p>
-          </motion.div>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {managedServices.length > 0
-              ? managedServices.map((service, index) => (
-                  <ManagedServiceCard key={service.id || index} service={service} index={index} />
-                ))
-              : services.map((service, index) => (
-                  <ServiceCard key={index} service={service} index={index} />
-                ))}
+              ? managedServices.slice(0, 3).map((service, index) => (
+                <ManagedServiceCard key={service.id || index} service={service} index={index} />
+              ))
+              : services.slice(0, 3).map((service, index) => (
+                <ServiceCard key={index} service={service} index={index} />
+              ))}
           </div>
 
-          {/* View All Button */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            viewport={{ once: true }}
-            className="mt-14 text-center"
-          >
+          {/* Book Consultation WhatsApp Button */}
+          <div className="mt-14 text-center">
             <Link
-              href="/gallery"
-              className="inline-flex items-center space-x-2 bg-red-600 hover:bg-red-700 text-white font-bold px-9 py-4 rounded-md shadow-lg text-base transition-all hover:scale-[1.02]"
+              href="https://wa.me/919625769768?text=Hi!%20I'm%20interested%20in%20Home%20Storey's%20design%20services.%20I'd%20like%20to%20book%20a%20consultation."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center space-x-3 bg-green-600 hover:bg-green-700 text-white font-bold px-8 py-4 rounded-xl shadow-xl text-base sm:text-lg transition-all hover:scale-[1.03] active:scale-[0.98]"
             >
-              <span>Explore All Designs</span>
-              <ArrowRight className="w-4 h-4" />
+              <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+              </svg>
+              <span>Book Your Consultation</span>
             </Link>
-          </motion.div>
+          </div>
         </div>
       </section>
 
-      <MasonryGrid />
+      {/* Trending Now / Most Requested Design Solutions section (Hidden per user request, easily unhidden anytime) */}
+      {/* <MasonryGrid /> */}
 
-      <CommonProblems problems={problems} />
+      <CommonProblems />
 
       {/* Our Process Section */}
       <ProcessSection />
@@ -788,13 +356,7 @@ export default function Home() {
       {/* Testimonials Section */}
       <section className="py-24 bg-white relative overflow-hidden">
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
+          <div className="text-center mb-16">
             <span className="text-red-500 font-semibold text-xs sm:text-sm tracking-[0.25em] uppercase block mb-3">
               Client Stories
             </span>
@@ -805,16 +367,12 @@ export default function Home() {
             <p className="text-slate-700 text-base md:text-lg max-w-2xl mx-auto font-medium leading-relaxed">
               Hear from satisfied homeowners who trusted us with their architectural and interior dreams.
             </p>
-          </motion.div>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                viewport={{ once: true }}
                 className="bg-white rounded-2xl p-8 relative border border-gray-200/80 hover:border-red-500/30 transition-all duration-300 shadow-md hover:shadow-2xl flex flex-col justify-between"
               >
                 <div>
@@ -827,25 +385,14 @@ export default function Home() {
                 <div>
                   <div className="flex items-center mb-5">
                     {[...Array(Math.floor(testimonial.rating))].map((_, i) => (
-                      <motion.div
-                        key={i}
-                        initial={{ scale: 0 }}
-                        whileInView={{ scale: 1 }}
-                        transition={{ delay: index * 0.2 + i * 0.1 }}
-                      >
+                      <div key={i}>
                         <Star className="w-4 h-4 text-red-500 fill-current" />
-                      </motion.div>
+                      </div>
                     ))}
                     {testimonial.rating % 1 !== 0 && (
-                      <motion.div
-                        initial={{ scale: 0 }}
-                        whileInView={{ scale: 1 }}
-                        transition={{
-                          delay: index * 0.2 + Math.floor(testimonial.rating) * 0.1,
-                        }}
-                      >
+                      <div>
                         <Star className="w-4 h-4 text-red-500 fill-current opacity-40" />
-                      </motion.div>
+                      </div>
                     )}
                   </div>
 
@@ -858,16 +405,16 @@ export default function Home() {
                       height={48}
                     />
                     <div>
-                      <h4 className="font-serif-luxury text-lg font-bold text-slate-950">
+                      <h3 className="font-serif-luxury text-lg font-bold text-slate-950">
                         {testimonial.name}
-                      </h4>
+                      </h3>
                       <p className="text-xs text-slate-600 font-medium">
                         {testimonial.role}
                       </p>
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -876,13 +423,7 @@ export default function Home() {
       {/* CTA Section */}
       <section className="py-24 bg-[#FAF8F5] relative overflow-hidden border-t border-gray-200/60">
         <div className="container mx-auto px-6 text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="max-w-4xl mx-auto"
-          >
+          <div className="max-w-4xl mx-auto">
             <span className="text-red-500 font-semibold text-xs sm:text-sm tracking-[0.25em] uppercase block mb-3">
               LET’S BUILD TOGETHER
             </span>
@@ -900,17 +441,13 @@ export default function Home() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <motion.button
-                  whileHover={{ scale: 1.03, boxShadow: "0 15px 30px rgba(239, 68, 68, 0.3)" }}
-                  whileTap={{ scale: 0.97 }}
-                  className="bg-red-600 hover:bg-red-700 text-white px-9 py-4 rounded-md text-base font-bold transition-all shadow-lg inline-flex items-center space-x-3"
-                >
+                <button className="bg-red-600 hover:bg-red-700 text-white px-9 py-4 rounded-md text-base font-bold transition-all shadow-lg inline-flex items-center space-x-3 cursor-pointer">
                   <span>Book Free Consultation</span>
                   <ArrowRight className="w-5 h-5" />
-                </motion.button>
+                </button>
               </Link>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
     </Layout>

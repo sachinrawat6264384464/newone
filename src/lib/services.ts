@@ -1,116 +1,73 @@
 import { db } from './firebase'
 import { collection, doc, getDocs, setDoc, deleteDoc, query, orderBy } from 'firebase/firestore'
 import { ServiceItem } from '@/types/service'
+import { getCachedData, setCachedData, invalidateCache } from './cache'
 
 const COLLECTION_NAME = 'services'
+const CACHE_KEY = 'services_list'
 
 export const INITIAL_SERVICES: ServiceItem[] = [
   {
-    id: 'facade-design',
-    title: 'Facade Design',
-    subtitle: 'Luxury Exterior Architecture',
-    description: 'Stunning exterior designs that create lasting first impressions with premium materials and lighting.',
+    id: 'end-to-end-construction',
+    title: 'End to End Construction',
+    subtitle: 'Turnkey Construction with Material',
+    description: 'Complete end-to-end turnkey construction service including high-grade material management, architectural facade design, and phase planning of plot.',
     coverImage: 'https://res.cloudinary.com/dfjecbhki/image/upload/v1762298162/Homestorey-media/What%20we%20create/vt9avmrazh3jvii5ytl9.jpg',
     images: [
-      'https://res.cloudinary.com/dfjecbhki/image/upload/v1762298162/Homestorey-media/What%20we%20create/vt9avmrazh3jvii5ytl9.jpg',
-      '/What_we_create/Facade.jpg',
-      '/Facade_1.jpg'
+      'https://res.cloudinary.com/dfjecbhki/image/upload/v1762298162/Homestorey-media/What%20we%20create/vt9avmrazh3jvii5ytl9.jpg'
     ],
-    category: 'Exterior',
-    features: ['3D Elevation Rendering', 'Material Specification', 'Architectural Lighting', 'Structure Optimization'],
+    category: 'Construction',
+    features: [
+      'Construction with material',
+      'Architectural & Facade design',
+      'Phase planning of plot',
+      'Structural supervision'
+    ],
     priceEstimate: 'Custom Quote',
     published: true,
     order: 1,
     updatedAt: Date.now()
   },
   {
-    id: 'living-area',
-    title: 'Living Area',
-    subtitle: 'Bespoke Social & Family Spaces',
-    description: 'Comfortable and stylish living spaces perfect for family gatherings, entertaining guests, and relaxing.',
+    id: 'full-home-interiors',
+    title: 'Full Home Interiors',
+    subtitle: 'Bespoke Luxury Interior Design',
+    description: 'Complete interior design & execution including modular kitchens, living area styling, bedroom suites, and customized woodwork.',
     coverImage: 'https://res.cloudinary.com/dfjecbhki/image/upload/v1762298165/Homestorey-media/What%20we%20create/jjhie0tfazmie9laeimu.jpg',
     images: [
-      'https://res.cloudinary.com/dfjecbhki/image/upload/v1762298165/Homestorey-media/What%20we%20create/jjhie0tfazmie9laeimu.jpg',
-      '/What_we_create/Living-area.jpg',
-      '/Living_1.jpg'
+      'https://res.cloudinary.com/dfjecbhki/image/upload/v1762298165/Homestorey-media/What%20we%20create/jjhie0tfazmie9laeimu.jpg'
     ],
     category: 'Interior',
-    features: ['Custom Sofa & Seating', 'TV Wall & Accent Panels', 'Ambient Ceiling Lights', 'Spatial Layout Planning'],
+    features: [
+      'Modular Kitchens & Wardrobes',
+      'Living & Bedroom Aesthetics',
+      'False Ceiling & Ambient Lighting',
+      'Turnkey Execution'
+    ],
     priceEstimate: 'Custom Quote',
     published: true,
     order: 2,
     updatedAt: Date.now()
   },
   {
-    id: 'kitchen-design',
-    title: 'Kitchen Design',
-    subtitle: 'Modular & High-Function Kitchens',
-    description: 'Modern, highly functional modular kitchens engineered to be the warm, vibrant heart of your home.',
+    id: 'architecture-facade-design',
+    title: 'Architecture & Facade Design',
+    subtitle: '3D Facade & Spatial Engineering',
+    description: 'Stunning 3D facade elevations, floor plans, and spatial plot layout planning tailored for modern luxury homes.',
     coverImage: 'https://res.cloudinary.com/dfjecbhki/image/upload/v1762298164/Homestorey-media/What%20we%20create/t6w21ualgsjkz6ifc8bo.jpg',
     images: [
-      'https://res.cloudinary.com/dfjecbhki/image/upload/v1762298164/Homestorey-media/What%20we%20create/t6w21ualgsjkz6ifc8bo.jpg',
-      '/What_we_create/Kitchen.jpeg',
-      '/kitchen1.jpg'
+      'https://res.cloudinary.com/dfjecbhki/image/upload/v1762298164/Homestorey-media/What%20we%20create/t6w21ualgsjkz6ifc8bo.jpg'
     ],
-    category: 'Interior',
-    features: ['Italian Hardware & Pull-outs', 'Quartz Countertops', 'Pantry & Storage Units', 'Ergonomic Work Triangle'],
+    category: 'Architecture',
+    features: [
+      '3D Facade Elevation Concepts',
+      'Plot Layout & Floor Planning',
+      'Material Specifications',
+      'Structural Blueprints'
+    ],
     priceEstimate: 'Custom Quote',
     published: true,
     order: 3,
-    updatedAt: Date.now()
-  },
-  {
-    id: 'bedroom-design',
-    title: 'Bedroom Design',
-    subtitle: 'Peaceful Sanctuary & Suites',
-    description: 'Peaceful, luxurious bedroom retreats designed for rest, deep sleep, and personalized comfort.',
-    coverImage: 'https://res.cloudinary.com/dfjecbhki/image/upload/v1762298161/Homestorey-media/What%20we%20create/edh6sfa6zt7byruupb2b.jpg',
-    images: [
-      'https://res.cloudinary.com/dfjecbhki/image/upload/v1762298161/Homestorey-media/What%20we%20create/edh6sfa6zt7byruupb2b.jpg',
-      '/What_we_create/Bedroom.jpeg',
-      '/Bedroom_1.png'
-    ],
-    category: 'Interior',
-    features: ['Upholstered Headboards', 'Walk-in Wardrobe Design', 'Acoustic Soundproofing', 'Mood Lighting Controls'],
-    priceEstimate: 'Custom Quote',
-    published: true,
-    order: 4,
-    updatedAt: Date.now()
-  },
-  {
-    id: 'bathroom-design',
-    title: 'Bathroom Design',
-    subtitle: 'Spa & Wellness Sanctuaries',
-    description: 'Spa-like master bathrooms combining luxury stone finishes, rainfall showers, and seamless functionality.',
-    coverImage: 'https://res.cloudinary.com/dfjecbhki/image/upload/v1762298160/Homestorey-media/What%20we%20create/wqnxhezwbtsnivywxqej.jpg',
-    images: [
-      'https://res.cloudinary.com/dfjecbhki/image/upload/v1762298160/Homestorey-media/What%20we%20create/wqnxhezwbtsnivywxqej.jpg',
-      '/What_we_create/Bathroom.jpg',
-      '/Bathroom_1.jpg'
-    ],
-    category: 'Interior',
-    features: ['Glass Enclosures', 'Concealed Sanitary Fittings', 'Anti-skid Marble Tiles', 'Vanity & LED Mirror Setup'],
-    priceEstimate: 'Custom Quote',
-    published: true,
-    order: 5,
-    updatedAt: Date.now()
-  },
-  {
-    id: 'home-office',
-    title: 'Home Office Design',
-    subtitle: 'Productive Workspaces',
-    description: 'Productive, ergonomically designed work-from-home spaces tailored to focus, creativity, and privacy.',
-    coverImage: 'https://res.cloudinary.com/dfjecbhki/image/upload/v1762298163/Homestorey-media/What%20we%20create/hqflyynqrv1uccqarkmf.jpg',
-    images: [
-      'https://res.cloudinary.com/dfjecbhki/image/upload/v1762298163/Homestorey-media/What%20we%20create/hqflyynqrv1uccqarkmf.jpg',
-      '/What_we_create/Home-office.jpeg',
-      '/home_office1.jpg'
-    ],
-    category: 'Commercial / WFH',
-    features: ['Ergonomic Desk & Storage', 'Integrated Cable Management', 'Acoustic Wall Panels', 'Video Call Backdrop'],
-    priceEstimate: 'Custom Quote',
-    published: true,
-    order: 6,
     updatedAt: Date.now()
   }
 ]
@@ -124,7 +81,15 @@ function fetchWithTimeout<T>(promise: Promise<T>, timeoutMs = 3500): Promise<T> 
   ]);
 }
 
-export async function getServices(publishedOnly = false): Promise<ServiceItem[]> {
+export async function getServices(publishedOnly = false, forceRefresh = false): Promise<ServiceItem[]> {
+  // 1. Check TTL cache if forceRefresh is false
+  if (!forceRefresh) {
+    const cached = getCachedData<ServiceItem[]>(CACHE_KEY);
+    if (cached && cached.length > 0) {
+      return publishedOnly ? cached.filter(s => s.published) : cached;
+    }
+  }
+
   try {
     const servicesRef = collection(db, COLLECTION_NAME)
     const q = query(servicesRef, orderBy('order', 'asc'))
@@ -140,7 +105,6 @@ export async function getServices(publishedOnly = false): Promise<ServiceItem[]>
     const missingDefaults = INITIAL_SERVICES.filter(s => !existingIds.has(s.id))
     
     if (missingDefaults.length > 0) {
-      // Auto-seed missing default services to Firestore so they persist
       Promise.all(
         missingDefaults.map(s => setDoc(doc(db, COLLECTION_NAME, s.id), s, { merge: true }))
       ).catch(err => console.warn('Auto-seed services error:', err))
@@ -148,12 +112,17 @@ export async function getServices(publishedOnly = false): Promise<ServiceItem[]>
 
     const mergedItems = [...items, ...missingDefaults].sort((a, b) => (a.order || 99) - (b.order || 99))
 
+    // Store in cache
+    setCachedData(CACHE_KEY, mergedItems);
+
     return publishedOnly ? mergedItems.filter(s => s.published) : mergedItems
   } catch (error: unknown) {
     if ((error as { code?: string })?.code !== 'permission-denied') {
       console.warn('Error fetching services from Firestore, using initial fallback:', error)
     }
-    return publishedOnly ? INITIAL_SERVICES.filter(s => s.published) : INITIAL_SERVICES
+    const fallback = publishedOnly ? INITIAL_SERVICES.filter(s => s.published) : INITIAL_SERVICES;
+    setCachedData(CACHE_KEY, fallback);
+    return fallback;
   }
 }
 
@@ -180,6 +149,7 @@ export async function saveService(service: Partial<ServiceItem> & { title: strin
 
   try {
     await setDoc(doc(db, COLLECTION_NAME, serviceId), payload, { merge: true })
+    invalidateCache(CACHE_KEY);
   } catch (error) {
     console.error('Error saving service to Firestore:', error)
     throw error
@@ -189,6 +159,7 @@ export async function saveService(service: Partial<ServiceItem> & { title: strin
 export async function deleteService(id: string): Promise<void> {
   try {
     await deleteDoc(doc(db, COLLECTION_NAME, id))
+    invalidateCache(CACHE_KEY);
   } catch (error) {
     console.error('Error deleting service from Firestore:', error)
     throw error

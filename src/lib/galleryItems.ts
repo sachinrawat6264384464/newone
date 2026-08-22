@@ -1,8 +1,10 @@
 import { db } from './firebase'
 import { collection, doc, getDocs, setDoc, deleteDoc, query, orderBy } from 'firebase/firestore'
 import { GalleryItem } from '@/types/galleryItem'
+import { getCachedData, setCachedData, invalidateCache } from './cache'
 
 const COLLECTION_NAME = 'gallery_items'
+const CACHE_KEY = 'gallery_items_list'
 
 export const INITIAL_GALLERY_ITEMS: GalleryItem[] = [
   {
@@ -128,7 +130,14 @@ function fetchWithTimeout<T>(promise: Promise<T>, timeoutMs = 3500): Promise<T> 
   ]);
 }
 
-export async function getGalleryItems(publishedOnly = false): Promise<GalleryItem[]> {
+export async function getGalleryItems(publishedOnly = false, forceRefresh = false): Promise<GalleryItem[]> {
+  if (!forceRefresh) {
+    const cached = getCachedData<GalleryItem[]>(CACHE_KEY);
+    if (cached && cached.length > 0) {
+      return publishedOnly ? cached.filter(g => g.published) : cached;
+    }
+  }
+
   try {
     const galleryRef = collection(db, COLLECTION_NAME)
     const q = query(galleryRef, orderBy('order', 'asc'))
@@ -143,12 +152,16 @@ export async function getGalleryItems(publishedOnly = false): Promise<GalleryIte
     const missingDefaults = INITIAL_GALLERY_ITEMS.filter(g => !existingIds.has(g.id))
     const mergedItems = [...items, ...missingDefaults].sort((a, b) => (a.order || 99) - (b.order || 99))
 
+    setCachedData(CACHE_KEY, mergedItems);
+
     return publishedOnly ? mergedItems.filter(g => g.published) : mergedItems
   } catch (error: unknown) {
     if ((error as { code?: string })?.code !== 'permission-denied') {
       console.warn('Error fetching gallery items from Firestore, using initial fallback:', error)
     }
-    return publishedOnly ? INITIAL_GALLERY_ITEMS.filter(g => g.published) : INITIAL_GALLERY_ITEMS
+    const fallback = publishedOnly ? INITIAL_GALLERY_ITEMS.filter(g => g.published) : INITIAL_GALLERY_ITEMS;
+    setCachedData(CACHE_KEY, fallback);
+    return fallback;
   }
 }
 
@@ -175,6 +188,7 @@ export async function saveGalleryItem(item: Partial<GalleryItem> & { title: stri
 
   try {
     await setDoc(doc(db, COLLECTION_NAME, itemId), payload, { merge: true })
+    invalidateCache(CACHE_KEY);
   } catch (error) {
     console.error('Error saving gallery item to Firestore:', error)
     throw error
@@ -184,6 +198,7 @@ export async function saveGalleryItem(item: Partial<GalleryItem> & { title: stri
 export async function deleteGalleryItem(id: string): Promise<void> {
   try {
     await deleteDoc(doc(db, COLLECTION_NAME, id))
+    invalidateCache(CACHE_KEY);
   } catch (error) {
     console.error('Error deleting gallery item from Firestore:', error)
     throw error

@@ -208,18 +208,42 @@ interface RootLayoutProps {
   children: ReactNode
 }
 
+import { Cormorant_Garamond, Inter } from 'next/font/google'
+
+const cormorant = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-cormorant',
+  display: 'swap',
+})
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+})
+
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={`${inter.variable} ${cormorant.variable}`} suppressHydrationWarning>
       <head>
         <link rel="icon" href="/logo1img.png" type="image/png" sizes="32x32" />
+        <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://res.cloudinary.com" />
+
+        {/* Local SEO Geo Meta Tags */}
+        <meta name="geo.region" content="IN-DL" />
+        <meta name="geo.placename" content="Delhi" />
+        <meta name="geo.position" content="28.6139;77.2090" />
+        <meta name="ICBM" content="28.6139, 77.2090" />
 
         <meta
           name="p:domain_verify"
           content="1a1790fb7ce1e5bb3f196d4367d7142a"
         />
         <meta name="google-site-verification" content="jufd1vJSo-ATHiHu6zigKKAwxWM_5UIZbIV3kbp2O-o" />
-        <script src="https://analytics.ahrefs.com/analytics.js" data-key="ZVvidUlDOMv+0ah0YoWFYg" async></script>
+        
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -233,13 +257,21 @@ export default function RootLayout({ children }: RootLayoutProps) {
           }}
         />
 
+        {/* ✅ Ahrefs Analytics */}
+        <Script
+          id="ahrefs-analytics"
+          src="https://analytics.ahrefs.com/analytics.js"
+          data-key="ZVvidUlDOMv+0ah0YoWFYg"
+          strategy="lazyOnload"
+        />
+
         {/* ✅ Google Analytics (gtag.js) */}
         <Script
           id="google-gtag"
           src="https://www.googletagmanager.com/gtag/js?id=G-8C1BX4DVDH"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
-        <Script id="google-analytics" strategy="afterInteractive">
+        <Script id="google-analytics" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
@@ -256,7 +288,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         />
 
         {/* ✅ Meta Pixel Code */}
-        <Script id="meta-pixel" strategy="afterInteractive">
+        <Script id="meta-pixel" strategy="lazyOnload">
           {`
             !function(f,b,e,v,n,t,s)
             {if(f.fbq)return;n=f.fbq=function(){n.callMethod?

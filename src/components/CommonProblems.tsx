@@ -1,6 +1,18 @@
 // components/CommonProblems.tsx
+'use client';
+
 import { motion } from 'framer-motion';
-import { LucideIcon } from 'lucide-react';
+import {
+  DollarSign,
+  Clock,
+  Ruler,
+  AlertTriangle,
+  Palette,
+  Zap,
+  Users,
+  Briefcase,
+  LucideIcon
+} from 'lucide-react';
 
 interface Problem {
   title: string;
@@ -8,11 +20,50 @@ interface Problem {
   icon: LucideIcon;
 }
 
-interface CommonProblemsProps {
-  problems: Problem[];
-}
+const defaultProblems: Problem[] = [
+  {
+    title: "Budget Overruns",
+    description: "Unexpected costs and hidden expenses that derail your project finances and timeline.",
+    icon: DollarSign,
+  },
+  {
+    title: "Time Delays",
+    description: "Projects taking longer than planned due to poor planning and coordination issues.",
+    icon: Clock,
+  },
+  {
+    title: "Space Planning Issues",
+    description: "Inefficient use of space leading to cramped areas and poor functionality in daily use.",
+    icon: Ruler,
+  },
+  {
+    title: "Quality Compromises",
+    description: "Substandard materials and workmanship that affect durability and overall satisfaction.",
+    icon: AlertTriangle,
+  },
+  {
+    title: "Design Inconsistency",
+    description: "Mismatched styles and themes creating a disjointed look throughout your home.",
+    icon: Palette,
+  },
+  {
+    title: "Poor Functionality",
+    description: "Beautiful designs that don't work for your lifestyle and daily routines.",
+    icon: Zap,
+  },
+  {
+    title: "Communication Gaps",
+    description: "Misunderstandings between homeowners, designers, and contractors causing rework.",
+    icon: Users,
+  },
+  {
+    title: "Technical Challenges",
+    description: "Structural, electrical, and plumbing issues that weren't anticipated in the design.",
+    icon: Briefcase,
+  },
+];
 
-const CommonProblems: React.FC<CommonProblemsProps> = ({ problems }) => {
+export default function CommonProblems() {
   return (
     <section className="py-24 bg-[#FAF8F5] relative overflow-hidden">
       <div className="container mx-auto px-6 lg:px-12 relative z-10">
@@ -27,7 +78,7 @@ const CommonProblems: React.FC<CommonProblemsProps> = ({ problems }) => {
             Solutions That Matter
           </span>
           <h2 className="font-serif-luxury text-3xl sm:text-4xl lg:text-5xl text-slate-900 font-normal leading-tight">
-            We Help You Avoid Common Design Challenges.
+            We help you avoid costly mistakes
           </h2>
           <div className="w-16 h-0.5 bg-red-500 mx-auto my-5 rounded-full"></div>
           <p className="text-slate-600 text-base md:text-lg max-w-2xl mx-auto font-light leading-relaxed">
@@ -36,7 +87,7 @@ const CommonProblems: React.FC<CommonProblemsProps> = ({ problems }) => {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-          {problems.map((problem, index) => {
+          {defaultProblems.map((problem, index) => {
             const IconComponent = problem.icon;
             return (
               <motion.div
@@ -63,6 +114,4 @@ const CommonProblems: React.FC<CommonProblemsProps> = ({ problems }) => {
       </div>
     </section>
   );
-};
-
-export default CommonProblems;
+}

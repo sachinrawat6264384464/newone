@@ -135,7 +135,7 @@ export default function AdminDashboardPage() {
             </Link>
           </div>
           <p className="text-xs font-mono uppercase tracking-wider text-slate-500 font-semibold mb-1">
-            Total Enquiries
+            Contact Leads
           </p>
           <h4 className="text-3xl font-extrabold text-slate-900">
             {loading ? '-' : stats.totalLeads}

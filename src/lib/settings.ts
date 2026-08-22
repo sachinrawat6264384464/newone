@@ -111,7 +111,7 @@ export async function getSiteSettings(): Promise<SiteSettings> {
         }))
       }
 
-      const result: SiteSettings = {
+      const merged: SiteSettings = {
         ...DEFAULT_SETTINGS,
         ...data,
         heroSlides: finalSlides && finalSlides.length > 0 ? finalSlides : DEFAULT_SETTINGS.heroSlides,
@@ -124,14 +124,18 @@ export async function getSiteSettings(): Promise<SiteSettings> {
         galleryHeroSubtext: data.galleryHeroSubtext || cached?.galleryHeroSubtext || DEFAULT_SETTINGS.galleryHeroSubtext,
       }
 
-      if (cached && cached.updatedAt && data.updatedAt && cached.updatedAt > data.updatedAt) {
-        return {
-          ...result,
-          ...cached
+      if (cached) {
+        const cacheTime = cached.updatedAt || 0
+        const dataTime = data.updatedAt || 0
+        if (cacheTime >= dataTime) {
+          return {
+            ...merged,
+            ...cached
+          }
         }
       }
 
-      return result
+      return merged
     }
 
     if (cached) {

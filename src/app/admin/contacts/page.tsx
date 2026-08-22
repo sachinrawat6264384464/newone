@@ -38,41 +38,7 @@ interface ContactLead {
 
 const LOCAL_LEADS_KEY = 'homestorey_contact_leads_cache'
 
-const FALLBACK_CONTACTS: ContactLead[] = [
-  {
-    id: 'lead-1',
-    firstName: 'Ananya',
-    lastName: 'Sharma',
-    email: 'ananya.sharma@gmail.com',
-    phone: '+91 98112 34567',
-    projectType: 'living-area',
-    budget: '₹15 - 25 Lakhs',
-    message: 'Looking for a complete interior redesign of our 4BHK living room and modular kitchen in Noida Sector 44.',
-    status: 'new'
-  },
-  {
-    id: 'lead-2',
-    firstName: 'Rahul',
-    lastName: 'Verma',
-    email: 'rahul.verma@outlook.com',
-    phone: '+91 98765 12345',
-    projectType: 'facade-design',
-    budget: '₹30+ Lakhs',
-    message: 'Interested in modern 3D exterior elevation facade design for our 3-storey villa in Greater Kailash, Delhi.',
-    status: 'contacted'
-  },
-  {
-    id: 'lead-3',
-    firstName: 'Priya',
-    lastName: 'Kapoor',
-    email: 'priya.k@gmail.com',
-    phone: '+91 99100 88776',
-    projectType: 'kitchen-design',
-    budget: '₹8 - 12 Lakhs',
-    message: 'Need an Italian modular kitchen with island counter, quartz countertops, and concealed lighting.',
-    status: 'completed'
-  }
-]
+const FALLBACK_CONTACTS: ContactLead[] = []
 
 export default function AdminContactsPage() {
   const [contacts, setContacts] = useState<ContactLead[]>(FALLBACK_CONTACTS)
@@ -222,16 +188,6 @@ export default function AdminContactsPage() {
       title="Contact Leads & Inquiries"
       subtitle="Track, filter, and respond to incoming prospective client inquiries."
     >
-      {/* Notice Pill if Using Fallback Leads */}
-      {usingFallback && (
-        <div className="mb-6 p-3 bg-amber-50 border border-amber-200 rounded-xl flex items-center justify-between text-xs text-amber-800 font-sans">
-          <div className="flex items-center space-x-2">
-            <Info className="w-4 h-4 text-amber-600 flex-shrink-0" />
-            <span>Displaying pre-loaded lead inquiries. New submissions from your website contact form will sync here.</span>
-          </div>
-          <span className="text-[10px] font-mono bg-amber-200 text-amber-900 px-2 py-0.5 rounded font-bold uppercase">Demo Mode</span>
-        </div>
-      )}
 
       {/* Filters Bar */}
       <div className="bg-white border border-gray-200/80 rounded-2xl p-6 mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm font-sans">

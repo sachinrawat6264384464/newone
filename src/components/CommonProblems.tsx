@@ -1,7 +1,8 @@
-// components/CommonProblems.tsx
 'use client';
 
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { getSiteSettings } from '@/lib/settings';
 import {
   DollarSign,
   Clock,
@@ -64,6 +65,29 @@ const defaultProblems: Problem[] = [
 ];
 
 export default function CommonProblems() {
+  const [tagline, setTagline] = useState('SOLUTIONS THAT MATTER')
+  const [title, setTitle] = useState('We help you avoid costly mistakes')
+  const [subtext, setSubtext] = useState('Our bespoke turnkey approach saves you from the typical stress, delays, and cost overruns in home construction.')
+
+  useEffect(() => {
+    const loadData = () => {
+      getSiteSettings().then(settings => {
+        if (settings.problemsTagline) setTagline(settings.problemsTagline)
+        if (settings.problemsTitle) setTitle(settings.problemsTitle)
+        if (settings.problemsSubtext) setSubtext(settings.problemsSubtext)
+      })
+    }
+    loadData()
+    if (typeof window !== 'undefined') {
+      window.addEventListener('site_settings_updated', loadData)
+      window.addEventListener('storage', loadData)
+      return () => {
+        window.removeEventListener('site_settings_updated', loadData)
+        window.removeEventListener('storage', loadData)
+      }
+    }
+  }, [])
+
   return (
     <section className="py-24 bg-[#FAF8F5] relative overflow-hidden">
       <div className="container mx-auto px-6 lg:px-12 relative z-10">
@@ -75,14 +99,14 @@ export default function CommonProblems() {
           className="text-center mb-16"
         >
           <span className="text-red-500 font-semibold text-xs sm:text-sm tracking-[0.25em] uppercase block mb-3">
-            Solutions That Matter
+            {tagline}
           </span>
           <h2 className="font-serif-luxury text-3xl sm:text-4xl lg:text-5xl text-slate-900 font-normal leading-tight">
-            We help you avoid costly mistakes
+            {title}
           </h2>
           <div className="w-16 h-0.5 bg-red-500 mx-auto my-5 rounded-full"></div>
           <p className="text-slate-600 text-base md:text-lg max-w-2xl mx-auto font-light leading-relaxed">
-            Our bespoke turnkey approach saves you from the typical stress, delays, and cost overruns in home construction.
+            {subtext}
           </p>
         </motion.div>
 

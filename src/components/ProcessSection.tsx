@@ -1,7 +1,32 @@
 "use client";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { getSiteSettings } from "@/lib/settings";
 
 export default function ProcessSection() {
+  const [tagline, setTagline] = useState('HOW WE WORK')
+  const [title, setTitle] = useState('Our Process.')
+  const [subtext, setSubtext] = useState('A transparent, 5-step journey from initial consultation to final handover and 3 months warranty support.')
+
+  useEffect(() => {
+    const loadData = () => {
+      getSiteSettings().then(settings => {
+        if (settings.processTagline) setTagline(settings.processTagline)
+        if (settings.processTitle) setTitle(settings.processTitle)
+        if (settings.processSubtext) setSubtext(settings.processSubtext)
+      })
+    }
+    loadData()
+    if (typeof window !== 'undefined') {
+      window.addEventListener('site_settings_updated', loadData)
+      window.addEventListener('storage', loadData)
+      return () => {
+        window.removeEventListener('site_settings_updated', loadData)
+        window.removeEventListener('storage', loadData)
+      }
+    }
+  }, [])
+
   const steps = [
     {
       num: "01",
@@ -68,14 +93,14 @@ export default function ProcessSection() {
       <div className="container mx-auto px-6 lg:px-12 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="text-red-500 font-semibold text-xs sm:text-sm tracking-[0.25em] uppercase block mb-3">
-            HOW WE WORK
+            {tagline}
           </span>
           <h2 className="font-serif-luxury text-4xl sm:text-5xl lg:text-6xl text-slate-900 font-normal leading-tight">
-            Our Process.
+            {title}
           </h2>
           <div className="w-16 h-0.5 bg-red-500 mx-auto my-5 rounded-full"></div>
           <p className="text-slate-600 text-base sm:text-lg font-light leading-relaxed">
-            A transparent, 5-step journey from initial consultation to final handover and 3 months warranty support.
+            {subtext}
           </p>
         </div>
 

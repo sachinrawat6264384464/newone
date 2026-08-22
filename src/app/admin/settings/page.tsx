@@ -392,7 +392,196 @@ export default function AdminSettingsPage() {
                     </div>
                   </div>
                 </div>
-              ))}
+            </div>
+          </div>
+
+          {/* Dynamic Website Section Headings Manager */}
+          <div className="bg-white border border-gray-200/80 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
+            <div className="flex items-center space-x-3 pb-4 border-b border-gray-100">
+              <div className="w-10 h-10 bg-rose-50 border border-rose-200 rounded-xl flex items-center justify-center text-red-600">
+                <Edit className="w-5 h-5" />
+              </div>
+              <div>
+                <h3 className="text-base font-bold text-slate-900 font-serif-luxury">Homepage Section Headings Manager</h3>
+                <p className="text-xs text-slate-500">
+                  Dynamically customize all red taglines, main titles, and descriptions across the website sections.
+                </p>
+              </div>
+            </div>
+
+            {/* 1. Services Section Headings */}
+            <div className="bg-slate-50 border border-gray-200 rounded-xl p-5 space-y-4">
+              <h4 className="text-xs font-bold font-mono text-slate-700 uppercase tracking-wider">1. Services We Offer Section</h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-red-600 mb-1">Tagline (Red Text)</label>
+                  <input
+                    type="text"
+                    value={form.servicesTagline || ''}
+                    onChange={(e) => setForm({ ...form, servicesTagline: e.target.value })}
+                    placeholder="SERVICES WE OFFER"
+                    className="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:border-red-500 font-sans shadow-xs font-medium"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-1">Main Section Title</label>
+                  <input
+                    type="text"
+                    value={form.servicesTitle || ''}
+                    onChange={(e) => setForm({ ...form, servicesTitle: e.target.value })}
+                    placeholder="Choose As Per Your Requirement."
+                    className="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2 text-sm text-slate-900 focus:outline-none focus:border-red-500 font-serif-luxury font-bold shadow-xs"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* 2. Common Problems Section Headings */}
+            <div className="bg-slate-50 border border-gray-200 rounded-xl p-5 space-y-4">
+              <h4 className="text-xs font-bold font-mono text-slate-700 uppercase tracking-wider">2. Solutions & Avoid Mistakes Section</h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-red-600 mb-1">Tagline (Red Text)</label>
+                  <input
+                    type="text"
+                    value={form.problemsTagline || ''}
+                    onChange={(e) => setForm({ ...form, problemsTagline: e.target.value })}
+                    placeholder="SOLUTIONS THAT MATTER"
+                    className="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:border-red-500 font-sans shadow-xs font-medium"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-1">Main Section Title</label>
+                  <input
+                    type="text"
+                    value={form.problemsTitle || ''}
+                    onChange={(e) => setForm({ ...form, problemsTitle: e.target.value })}
+                    placeholder="We help you avoid costly mistakes"
+                    className="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2 text-sm text-slate-900 focus:outline-none focus:border-red-500 font-serif-luxury font-bold shadow-xs"
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-1">Description Paragraph</label>
+                <input
+                  type="text"
+                  value={form.problemsSubtext || ''}
+                  onChange={(e) => setForm({ ...form, problemsSubtext: e.target.value })}
+                  placeholder="Our bespoke turnkey approach saves you from the typical stress..."
+                  className="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:border-red-500 font-sans shadow-xs"
+                />
+              </div>
+            </div>
+
+            {/* 3. Our Process Section Headings */}
+            <div className="bg-slate-50 border border-gray-200 rounded-xl p-5 space-y-4">
+              <h4 className="text-xs font-bold font-mono text-slate-700 uppercase tracking-wider">3. Our Process Section</h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-red-600 mb-1">Tagline (Red Text)</label>
+                  <input
+                    type="text"
+                    value={form.processTagline || ''}
+                    onChange={(e) => setForm({ ...form, processTagline: e.target.value })}
+                    placeholder="HOW WE WORK"
+                    className="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:border-red-500 font-sans shadow-xs font-medium"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-1">Main Section Title</label>
+                  <input
+                    type="text"
+                    value={form.processTitle || ''}
+                    onChange={(e) => setForm({ ...form, processTitle: e.target.value })}
+                    placeholder="Our Process."
+                    className="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2 text-sm text-slate-900 focus:outline-none focus:border-red-500 font-serif-luxury font-bold shadow-xs"
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-1">Description Paragraph</label>
+                <input
+                  type="text"
+                  value={form.processSubtext || ''}
+                  onChange={(e) => setForm({ ...form, processSubtext: e.target.value })}
+                  placeholder="A transparent, 5-step journey from initial consultation to final handover..."
+                  className="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:border-red-500 font-sans shadow-xs"
+                />
+              </div>
+            </div>
+
+            {/* 4. Testimonials Section Headings */}
+            <div className="bg-slate-50 border border-gray-200 rounded-xl p-5 space-y-4">
+              <h4 className="text-xs font-bold font-mono text-slate-700 uppercase tracking-wider">4. Client Stories / Testimonials Section</h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-red-600 mb-1">Tagline (Red Text)</label>
+                  <input
+                    type="text"
+                    value={form.testimonialsTagline || ''}
+                    onChange={(e) => setForm({ ...form, testimonialsTagline: e.target.value })}
+                    placeholder="CLIENT STORIES"
+                    className="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:border-red-500 font-sans shadow-xs font-medium"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-1">Main Section Title</label>
+                  <input
+                    type="text"
+                    value={form.testimonialsTitle || ''}
+                    onChange={(e) => setForm({ ...form, testimonialsTitle: e.target.value })}
+                    placeholder="What Our Clients Say."
+                    className="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2 text-sm text-slate-900 focus:outline-none focus:border-red-500 font-serif-luxury font-bold shadow-xs"
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-1">Description Paragraph</label>
+                <input
+                  type="text"
+                  value={form.testimonialsSubtext || ''}
+                  onChange={(e) => setForm({ ...form, testimonialsSubtext: e.target.value })}
+                  placeholder="Hear from satisfied homeowners who trusted us..."
+                  className="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:border-red-500 font-sans shadow-xs"
+                />
+              </div>
+            </div>
+
+            {/* 5. Bottom CTA Section Headings */}
+            <div className="bg-slate-50 border border-gray-200 rounded-xl p-5 space-y-4">
+              <h4 className="text-xs font-bold font-mono text-slate-700 uppercase tracking-wider">5. Bottom CTA Banner Section</h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-red-600 mb-1">Tagline (Red Text)</label>
+                  <input
+                    type="text"
+                    value={form.ctaTagline || ''}
+                    onChange={(e) => setForm({ ...form, ctaTagline: e.target.value })}
+                    placeholder="LET’S BUILD TOGETHER"
+                    className="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:border-red-500 font-sans shadow-xs font-medium"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-1">Main Section Title</label>
+                  <input
+                    type="text"
+                    value={form.ctaTitle || ''}
+                    onChange={(e) => setForm({ ...form, ctaTitle: e.target.value })}
+                    placeholder="Ready To Transform Your Dream Space?"
+                    className="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2 text-sm text-slate-900 focus:outline-none focus:border-red-500 font-serif-luxury font-bold shadow-xs"
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-1">Description Paragraph</label>
+                <input
+                  type="text"
+                  value={form.ctaSubtext || ''}
+                  onChange={(e) => setForm({ ...form, ctaSubtext: e.target.value })}
+                  placeholder="Book a complimentary design discussion..."
+                  className="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:border-red-500 font-sans shadow-xs"
+                />
+              </div>
             </div>
           </div>
 

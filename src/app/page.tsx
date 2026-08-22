@@ -310,10 +310,10 @@ export default async function Home() {
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
           <div className="text-center mb-16">
             <span className="text-red-500 font-semibold text-xs sm:text-sm tracking-[0.25em] uppercase block mb-3">
-              SERVICES WE OFFER
+              {siteSettings.servicesTagline || 'SERVICES WE OFFER'}
             </span>
             <h2 className="font-serif-luxury text-4xl sm:text-5xl lg:text-6xl text-slate-900 font-normal leading-tight">
-              Choose As Per Your Requirement.
+              {siteSettings.servicesTitle || 'Choose As Per Your Requirement.'}
             </h2>
             <div className="w-16 h-0.5 bg-red-500 mx-auto my-5 rounded-full"></div>
           </div>
@@ -358,14 +358,14 @@ export default async function Home() {
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
           <div className="text-center mb-16">
             <span className="text-red-500 font-semibold text-xs sm:text-sm tracking-[0.25em] uppercase block mb-3">
-              Client Stories
+              {siteSettings.testimonialsTagline || 'CLIENT STORIES'}
             </span>
             <h2 className="font-serif-luxury text-4xl sm:text-5xl lg:text-6xl text-slate-900 font-normal leading-tight">
-              What Our Clients Say.
+              {siteSettings.testimonialsTitle || 'What Our Clients Say.'}
             </h2>
             <div className="w-16 h-0.5 bg-red-500 mx-auto my-5 rounded-full"></div>
             <p className="text-slate-700 text-base md:text-lg max-w-2xl mx-auto font-medium leading-relaxed">
-              Hear from satisfied homeowners who trusted us with their architectural and interior dreams.
+              {siteSettings.testimonialsSubtext || 'Hear from satisfied homeowners who trusted us with their architectural and interior dreams.'}
             </p>
           </div>
 
@@ -425,14 +425,13 @@ export default async function Home() {
         <div className="container mx-auto px-6 text-center relative z-10">
           <div className="max-w-4xl mx-auto">
             <span className="text-red-500 font-semibold text-xs sm:text-sm tracking-[0.25em] uppercase block mb-3">
-              LET’S BUILD TOGETHER
+              {siteSettings.ctaTagline || "LET'S BUILD TOGETHER"}
             </span>
             <h2 className="font-serif-luxury text-4xl sm:text-6xl lg:text-7xl text-slate-900 font-normal mb-6 leading-tight">
-              Ready To Transform Your{" "}
-              <span className="block italic text-red-600">Dream Space?</span>
+              {siteSettings.ctaTitle || 'Ready To Transform Your Dream Space?'}
             </h2>
             <p className="text-slate-600 text-base md:text-xl mb-10 leading-relaxed max-w-2xl mx-auto font-light">
-              Book a complimentary design discussion and discover how we turn your architectural vision into reality.
+              {siteSettings.ctaSubtext || 'Book a complimentary design discussion and discover how we turn your architectural vision into reality.'}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-5 justify-center items-center">

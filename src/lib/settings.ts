@@ -56,6 +56,27 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   galleryHeroTagline: 'DESIGN PORTFOLIO',
   galleryHeroTitle: 'Welcome to Your Dream home Design Journey.',
   galleryHeroSubtext: 'From the moment you step through your front door to every corner of your living space, we bring your architectural vision to life.',
+
+  // Dynamic Section Headings across Website
+  servicesTagline: 'SERVICES WE OFFER',
+  servicesTitle: 'Choose As Per Your Requirement.',
+
+  problemsTagline: 'SOLUTIONS THAT MATTER',
+  problemsTitle: 'We help you avoid costly mistakes',
+  problemsSubtext: 'Our bespoke turnkey approach saves you from the typical stress, delays, and cost overruns in home construction.',
+
+  processTagline: 'HOW WE WORK',
+  processTitle: 'Our Process.',
+  processSubtext: 'A transparent, 5-step journey from initial consultation to final handover and 3 months warranty support.',
+
+  testimonialsTagline: 'CLIENT STORIES',
+  testimonialsTitle: 'What Our Clients Say.',
+  testimonialsSubtext: 'Hear from satisfied homeowners who trusted us with their architectural and interior dreams.',
+
+  ctaTagline: "LET'S BUILD TOGETHER",
+  ctaTitle: 'Ready To Transform Your Dream Space?',
+  ctaSubtext: 'Book a complimentary design discussion and discover how we turn your architectural vision into reality.',
+
   contactEmail: 'homestorey@thenidhimittal.com',
   contactPhone: '+91 98765 43210',
   officeAddress: 'Delhi NCR, India',

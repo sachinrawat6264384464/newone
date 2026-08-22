@@ -119,9 +119,9 @@ export async function getSiteSettings(): Promise<SiteSettings> {
         galleryHeroImages: Array.isArray(data.galleryHeroImages) && data.galleryHeroImages.length > 0
           ? data.galleryHeroImages
           : (cached?.galleryHeroImages || DEFAULT_SETTINGS.galleryHeroImages),
-        galleryHeroTagline: data.galleryHeroTagline || cached?.galleryHeroTagline || DEFAULT_SETTINGS.galleryHeroTagline,
-        galleryHeroTitle: data.galleryHeroTitle || cached?.galleryHeroTitle || DEFAULT_SETTINGS.galleryHeroTitle,
-        galleryHeroSubtext: data.galleryHeroSubtext || cached?.galleryHeroSubtext || DEFAULT_SETTINGS.galleryHeroSubtext,
+        galleryHeroTagline: cached?.galleryHeroTagline || data.galleryHeroTagline || DEFAULT_SETTINGS.galleryHeroTagline,
+        galleryHeroTitle: cached?.galleryHeroTitle || data.galleryHeroTitle || DEFAULT_SETTINGS.galleryHeroTitle,
+        galleryHeroSubtext: cached?.galleryHeroSubtext || data.galleryHeroSubtext || DEFAULT_SETTINGS.galleryHeroSubtext,
       }
 
       if (cached) {

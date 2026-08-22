@@ -342,12 +342,15 @@ export default function AdminGalleryPage() {
     setSavingHero(true)
     try {
       await saveSiteSettings({
-        galleryHeroImages: heroImages
+        galleryHeroImages: heroImages,
+        galleryHeroTagline: heroTagline,
+        galleryHeroTitle: heroTitle,
+        galleryHeroSubtext: heroSubtext
       })
-      toast.success('Gallery Hero Mosaic images saved successfully!')
+      toast.success('Gallery Hero Settings & Mosaic saved successfully!')
     } catch (err) {
-      console.error('Error saving gallery hero mosaic:', err)
-      toast.error('Failed to save gallery hero mosaic')
+      console.error('Error saving gallery hero content:', err)
+      toast.error('Failed to save gallery hero content')
     } finally {
       setSavingHero(false)
     }

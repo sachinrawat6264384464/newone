@@ -48,22 +48,25 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   }, [])
 
   const login = async (email: string, password: string): Promise<UserCredential | MockCredential> => {
-    // Demo credentials
-    const adminEmail = process.env.NEXT_PUBLIC_ADMIN_USERNAME || 'admin@gmail.com'
-    const adminPassword = process.env.NEXT_PUBLIC_ADMIN_PASSWORD || 'admin@123'
+    const cleanEmail = email.trim().toLowerCase()
+    const cleanPassword = password.trim()
+
+    // Admin credentials (env or fallback)
+    const adminEmail = (process.env.NEXT_PUBLIC_ADMIN_USERNAME || 'admin@gmail.com').trim().toLowerCase()
+    const adminPassword = (process.env.NEXT_PUBLIC_ADMIN_PASSWORD || 'admin@123').trim()
     
-    if (email === adminEmail && password === adminPassword) {
-      console.log('Demo credentials detected, bypassing Firebase auth')
+    if (cleanEmail === adminEmail && cleanPassword === adminPassword) {
+      console.log('Admin credentials detected, using admin session')
       
-      // Create a mock user object for demo purposes
+      // Create a mock user object for admin session
       const mockUser: MockUser = {
         uid: 'demo-admin-uid',
-        email: adminEmail,
-        displayName: 'Demo Admin',
+        email: cleanEmail,
+        displayName: 'Home Storey Admin',
         emailVerified: true
       }
       
-      // Set the user state manually for demo
+      // Set the user state manually
       setUser(mockUser as User)
       
       // Return a mock credential object
@@ -77,9 +80,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     // For non-demo credentials, try Firebase authentication
     try {
       return await signInWithEmailAndPassword(auth, email, password)
-    } catch (error) {
-      console.error('Firebase authentication failed:', error)
-      throw new Error('Invalid credentials')
+    } catch (error: any) {
+      console.warn('Firebase authentication failed:', error?.code || error)
+      throw new Error(error?.message || 'Invalid credentials')
     }
   }
 

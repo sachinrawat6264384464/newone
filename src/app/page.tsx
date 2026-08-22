@@ -35,6 +35,7 @@ import Image from "next/image";
 import FloatingElements from "../components/FloatingElements";
 import MasonryGrid from "@/components/MasonryGrid";
 import CommonProblems from "../components/CommonProblems";
+import { getSiteSettings } from "@/lib/settings";
 
 interface Service {
   icon: LucideIcon;
@@ -206,6 +207,7 @@ const problems = [
 
 export default async function Home() {
   const managedServices = await getServices(true);
+  const siteSettings = await getSiteSettings();
 
   return (
     <Layout>

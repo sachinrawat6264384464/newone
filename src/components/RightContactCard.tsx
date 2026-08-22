@@ -26,6 +26,29 @@ export default function RightContactCard({ isOpen, onClose }: RightContactCardPr
 
   const onSubmit: SubmitHandler<ContactCardFormData> = async (data) => {
     setIsSubmitting(true)
+
+    // Save lead to local cache for instant admin sync
+    const newLead = {
+      id: 'lead-' + Date.now(),
+      firstName: data.name,
+      lastName: '',
+      email: data.email,
+      phone: data.phone,
+      message: data.message,
+      status: 'new',
+      timestamp: { toDate: () => new Date() }
+    }
+    if (typeof window !== 'undefined') {
+      try {
+        const stored = localStorage.getItem('homestorey_contact_leads_cache')
+        const existing = stored ? JSON.parse(stored) : []
+        localStorage.setItem('homestorey_contact_leads_cache', JSON.stringify([newLead, ...existing]))
+        window.dispatchEvent(new Event('contact_leads_updated'))
+      } catch (e) {
+        console.warn('LocalStorage save lead error:', e)
+      }
+    }
+
     try {
       await addDoc(collection(db, 'contacts'), {
         firstName: data.name,

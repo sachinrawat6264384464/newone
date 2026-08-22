@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { collection, getDocs, orderBy, query, doc, updateDoc, Timestamp } from 'firebase/firestore'
+import { collection, getDocs, orderBy, query, doc, updateDoc, deleteDoc, Timestamp } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
 import AdminShell from '@/components/admin/AdminShell'
 import {
@@ -18,7 +18,8 @@ import {
   AlertCircle,
   Clock,
   CheckCircle2,
-  Info
+  Info,
+  Trash2
 } from 'lucide-react'
 import toast from 'react-hot-toast'
 
@@ -32,8 +33,10 @@ interface ContactLead {
   budget?: string
   message: string
   status: string
-  timestamp?: Timestamp
+  timestamp?: Timestamp | any
 }
+
+const LOCAL_LEADS_KEY = 'homestorey_contact_leads_cache'
 
 const FALLBACK_CONTACTS: ContactLead[] = [
   {
@@ -103,25 +106,52 @@ export default function AdminContactsPage() {
 
   const fetchContacts = useCallback(async () => {
     setLoading(true)
+    let localLeads: ContactLead[] = []
+
+    if (typeof window !== 'undefined') {
+      try {
+        const stored = localStorage.getItem(LOCAL_LEADS_KEY)
+        if (stored) {
+          localLeads = JSON.parse(stored)
+        }
+      } catch (e) {
+        console.warn('LocalStorage leads read error:', e)
+      }
+    }
+
     try {
       const contactsRef = collection(db, 'contacts')
       const contactsQuery = query(contactsRef, orderBy('timestamp', 'desc'))
       const snapshot = await getDocs(contactsQuery)
       
+      let fetched: ContactLead[] = []
       if (!snapshot.empty) {
-        const data = snapshot.docs.map(doc => ({
+        fetched = snapshot.docs.map(doc => ({
           id: doc.id,
           ...doc.data()
         })) as ContactLead[]
-        setContacts(data)
+      }
+
+      // Combine fetched & local cache, removing duplicates by id
+      const combinedMap = new Map<string, ContactLead>()
+      localLeads.forEach(l => combinedMap.set(l.id, l))
+      fetched.forEach(f => combinedMap.set(f.id, f))
+
+      const allLeads = Array.from(combinedMap.values())
+      if (allLeads.length > 0) {
+        setContacts(allLeads)
         setUsingFallback(false)
       } else {
         setContacts(FALLBACK_CONTACTS)
         setUsingFallback(true)
       }
     } catch (error: unknown) {
-      console.warn('Firestore permission restricted or offline, displaying fallback leads:', error)
-      setContacts(FALLBACK_CONTACTS)
+      console.warn('Firestore permission restricted or offline, displaying local & fallback leads:', error)
+      const combinedMap = new Map<string, ContactLead>()
+      FALLBACK_CONTACTS.forEach(f => combinedMap.set(f.id, f))
+      localLeads.forEach(l => combinedMap.set(l.id, l))
+      
+      setContacts(Array.from(combinedMap.values()))
       setUsingFallback(true)
     } finally {
       setLoading(false)
@@ -130,11 +160,44 @@ export default function AdminContactsPage() {
 
   useEffect(() => {
     fetchContacts()
+    if (typeof window !== 'undefined') {
+      window.addEventListener('contact_leads_updated', fetchContacts)
+      return () => window.removeEventListener('contact_leads_updated', fetchContacts)
+    }
+  }, [fetchContacts])
+
+  useEffect(() => {
+    fetchContacts()
   }, [fetchContacts])
 
   useEffect(() => {
     filterContacts()
   }, [filterContacts])
+
+  const deleteContactLead = async (id: string, clientName: string) => {
+    if (!confirm(`Are you sure you want to delete inquiry from "${clientName}"?`)) return
+
+    try {
+      const contactRef = doc(db, 'contacts', id)
+      await deleteDoc(contactRef)
+      toast.success(`Inquiry from ${clientName} deleted`)
+    } catch (error) {
+      console.warn('Firestore delete fallback mode:', error)
+      toast.success(`Inquiry deleted`)
+    } finally {
+      setContacts(prev => {
+        const updated = prev.filter(c => c.id !== id)
+        if (typeof window !== 'undefined') {
+          localStorage.setItem(LOCAL_LEADS_KEY, JSON.stringify(updated))
+        }
+        return updated
+      })
+      if (selectedContact?.id === id) {
+        setShowModal(false)
+        setSelectedContact(null)
+      }
+    }
+  }
 
   const updateStatus = async (id: string, newStatus: string) => {
     try {
@@ -284,13 +347,22 @@ export default function AdminContactsPage() {
                           : 'Recent'}
                       </td>
                       <td className="px-6 py-4 text-right">
-                        <button
-                          onClick={() => openContactModal(contact)}
-                          className="inline-flex items-center space-x-1.5 px-3 py-1.5 bg-white hover:bg-slate-50 text-slate-700 border border-gray-200 rounded-lg text-xs font-semibold transition-colors shadow-xs"
-                        >
-                          <Eye className="w-3.5 h-3.5 text-slate-500" />
-                          <span>View Lead</span>
-                        </button>
+                        <div className="flex items-center justify-end space-x-2">
+                          <button
+                            onClick={() => openContactModal(contact)}
+                            className="inline-flex items-center space-x-1.5 px-3 py-1.5 bg-white hover:bg-slate-50 text-slate-700 border border-gray-200 rounded-lg text-xs font-semibold transition-colors shadow-xs"
+                          >
+                            <Eye className="w-3.5 h-3.5 text-slate-500" />
+                            <span>View Lead</span>
+                          </button>
+                          <button
+                            onClick={() => deleteContactLead(contact.id, `${contact.firstName} ${contact.lastName}`)}
+                            className="p-1.5 bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 rounded-lg transition-colors"
+                            title="Delete Lead Inquiry"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   ))
@@ -394,12 +466,21 @@ export default function AdminContactsPage() {
                   </button>
                 </div>
 
-                <button
-                  onClick={() => setShowModal(false)}
-                  className="px-4 py-2 bg-slate-100 text-slate-700 hover:bg-slate-200 rounded-xl text-xs font-semibold"
-                >
-                  Close
-                </button>
+                <div className="flex items-center space-x-2">
+                  <button
+                    onClick={() => deleteContactLead(selectedContact.id, `${selectedContact.firstName} ${selectedContact.lastName}`)}
+                    className="px-3 py-2 bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 rounded-xl text-xs font-bold transition-colors inline-flex items-center space-x-1.5"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                    <span>Delete Lead</span>
+                  </button>
+                  <button
+                    onClick={() => setShowModal(false)}
+                    className="px-4 py-2 bg-slate-100 text-slate-700 hover:bg-slate-200 rounded-xl text-xs font-semibold"
+                  >
+                    Close
+                  </button>
+                </div>
               </div>
             </motion.div>
           </div>

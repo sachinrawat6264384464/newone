@@ -37,6 +37,25 @@ export default function Contact() {
 
   const onSubmit: SubmitHandler<ContactFormData> = async (data) => {
     setIsSubmitting(true)
+
+    // Sync to local cache so new lead shows up instantly in Admin Contact Leads
+    const newLead = {
+      id: 'lead-' + Date.now(),
+      ...data,
+      status: 'new',
+      timestamp: { toDate: () => new Date() }
+    }
+    if (typeof window !== 'undefined') {
+      try {
+        const stored = localStorage.getItem('homestorey_contact_leads_cache')
+        const existing = stored ? JSON.parse(stored) : []
+        localStorage.setItem('homestorey_contact_leads_cache', JSON.stringify([newLead, ...existing]))
+        window.dispatchEvent(new Event('contact_leads_updated'))
+      } catch (e) {
+        console.warn('LocalStorage save lead error:', e)
+      }
+    }
+
     try {
       await addDoc(collection(db, 'contacts'), {
         ...data,

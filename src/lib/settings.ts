@@ -37,6 +37,30 @@ export const DEFAULT_HERO_SLIDES: HeroSlideItem[] = [
   }
 ]
 
+export const DEFAULT_FEATURED_SERVICES: FeaturedServiceCard[] = [
+  {
+    id: 'feat-service-1',
+    tag: 'CONSTRUCTION',
+    title: 'End to End Construction',
+    subtitle: 'TURNKEY CONSTRUCTION WITH MATERIAL',
+    linkUrl: '/services/end-to-end-construction'
+  },
+  {
+    id: 'feat-service-2',
+    tag: 'EXTERIOR',
+    title: 'Facade Design',
+    subtitle: 'LUXURY EXTERIOR ARCHITECTURE',
+    linkUrl: '/services/facade-design'
+  },
+  {
+    id: 'feat-service-3',
+    tag: 'INTERIOR',
+    title: 'Full Home Interiors',
+    subtitle: 'BESPOKE LUXURY INTERIOR DESIGN',
+    linkUrl: '/services/full-home-interiors'
+  }
+]
+
 export const DEFAULT_SETTINGS: SiteSettings = {
   siteName: 'Home Storey',
   heroTitle: 'Look At What We Design.',
@@ -48,6 +72,7 @@ export const DEFAULT_SETTINGS: SiteSettings = {
     'https://res.cloudinary.com/dfjecbhki/image/upload/v1762298165/Homestorey-media/What%20we%20create/jjhie0tfazmie9laeimu.jpg'
   ],
   heroSlides: DEFAULT_HERO_SLIDES,
+  featuredServiceCards: DEFAULT_FEATURED_SERVICES,
   galleryHeroImages: [
     'https://res.cloudinary.com/dfjecbhki/image/upload/v1762298136/Homestorey-media/Hero/hfqrz6nqcaxbwa22urgx.jpg',
     'https://res.cloudinary.com/dfjecbhki/image/upload/v1762298138/Homestorey-media/Hero/haemuplqyv9glq1651fc.jpg',
@@ -137,6 +162,9 @@ export async function getSiteSettings(): Promise<SiteSettings> {
         ...data,
         heroSlides: finalSlides && finalSlides.length > 0 ? finalSlides : DEFAULT_SETTINGS.heroSlides,
         heroImages: data.heroImages || (finalSlides ? finalSlides.map(s => s.image) : DEFAULT_SETTINGS.heroImages),
+        featuredServiceCards: Array.isArray(data.featuredServiceCards) && data.featuredServiceCards.length > 0
+          ? data.featuredServiceCards
+          : (cached?.featuredServiceCards || DEFAULT_SETTINGS.featuredServiceCards),
         galleryHeroImages: Array.isArray(data.galleryHeroImages) && data.galleryHeroImages.length > 0
           ? data.galleryHeroImages
           : (cached?.galleryHeroImages || DEFAULT_SETTINGS.galleryHeroImages),

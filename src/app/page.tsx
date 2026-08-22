@@ -320,14 +320,75 @@ export default async function Home() {
             <div className="w-16 h-0.5 bg-red-500 mx-auto my-5 rounded-full"></div>
           </div>
 
-          <div className={`grid grid-cols-1 md:grid-cols-2 ${managedServices.length >= 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3'} gap-6`}>
-            {managedServices.length > 0
-              ? managedServices.map((service, index) => (
-                <ManagedServiceCard key={service.id || index} service={service} index={index} />
-              ))
-              : services.map((service, index) => (
-                <ServiceCard key={index} service={service} index={index} />
-              ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {(siteSettings.featuredServiceCards && siteSettings.featuredServiceCards.length > 0
+              ? siteSettings.featuredServiceCards
+              : [
+                  {
+                    id: 'feat-service-1',
+                    tag: 'CONSTRUCTION',
+                    title: 'End to End Construction',
+                    subtitle: 'TURNKEY CONSTRUCTION WITH MATERIAL',
+                    linkUrl: '/services/end-to-end-construction'
+                  },
+                  {
+                    id: 'feat-service-2',
+                    tag: 'EXTERIOR',
+                    title: 'Facade Design',
+                    subtitle: 'LUXURY EXTERIOR ARCHITECTURE',
+                    linkUrl: '/services/facade-design'
+                  },
+                  {
+                    id: 'feat-service-3',
+                    tag: 'INTERIOR',
+                    title: 'Full Home Interiors',
+                    subtitle: 'BESPOKE LUXURY INTERIOR DESIGN',
+                    linkUrl: '/services/full-home-interiors'
+                  }
+                ]
+            ).slice(0, 3).map((card, index) => (
+              <div
+                key={card.id || index}
+                className="group bg-white rounded-3xl border border-gray-200/80 p-8 sm:p-10 shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col justify-between items-center text-center hover:-translate-y-2 relative overflow-hidden"
+              >
+                {/* Top subtle accent bar on hover */}
+                <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-red-500 to-rose-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                <div className="flex flex-col items-center text-center w-full">
+                  {/* Category Tag Pill */}
+                  {card.tag && (
+                    <span className="text-[11px] font-bold text-red-600 bg-red-50 px-3.5 py-1 rounded-full uppercase tracking-widest mb-4 inline-block">
+                      {card.tag}
+                    </span>
+                  )}
+
+                  {/* Service Icon Container */}
+                  <div className="w-16 h-16 bg-red-50 text-red-600 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-red-600 group-hover:text-white transition-all duration-300 shadow-sm mx-auto">
+                    <Sparkles className="w-8 h-8" />
+                  </div>
+
+                  {/* Big Centered Title */}
+                  <h3 className="font-serif-luxury text-3xl sm:text-4xl font-bold text-slate-900 mb-3 group-hover:text-red-600 transition-colors leading-tight text-center">
+                    {card.title}
+                  </h3>
+
+                  {/* Subtitle */}
+                  {card.subtitle && (
+                    <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4 text-center">{card.subtitle}</p>
+                  )}
+                </div>
+
+                {/* View More Details Link */}
+                <Link
+                  href={card.linkUrl || '/contact'}
+                  prefetch={false}
+                  className="mt-8 pt-5 w-full border-t border-gray-100 flex items-center justify-center space-x-2 text-xs font-bold text-red-600 uppercase tracking-wider group-hover:translate-x-1 transition-transform cursor-pointer"
+                >
+                  <span>View More Details</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+            ))}
           </div>
 
           {/* Book Consultation WhatsApp Button */}

@@ -6,12 +6,21 @@ export interface HeroSlideItem {
   image: string
 }
 
+export interface FeaturedServiceCard {
+  id: string
+  tag: string
+  title: string
+  subtitle: string
+  linkUrl: string
+}
+
 export interface SiteSettings {
   siteName: string
   heroTitle: string
   heroSubtitle: string
   heroImages?: string[]
   heroSlides?: HeroSlideItem[]
+  featuredServiceCards?: FeaturedServiceCard[]
   galleryHeroImages?: string[]
   galleryHeroTagline?: string
   galleryHeroTitle?: string

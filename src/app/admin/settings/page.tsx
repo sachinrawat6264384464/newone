@@ -2,9 +2,9 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react'
 import AdminShell from '@/components/admin/AdminShell'
-import { SiteSettings, HeroSlideItem } from '@/types/siteSettings'
-import { getSiteSettings, saveSiteSettings, DEFAULT_HERO_SLIDES } from '@/lib/settings'
-import { Settings, Save, Sparkles, Phone, Mail, MapPin, Globe, Megaphone, Images, Upload, HardDrive, Trash2, Plus, Edit } from 'lucide-react'
+import { SiteSettings, HeroSlideItem, FeaturedServiceCard } from '@/types/siteSettings'
+import { getSiteSettings, saveSiteSettings, DEFAULT_HERO_SLIDES, DEFAULT_FEATURED_SERVICES } from '@/lib/settings'
+import { Settings, Save, Sparkles, Phone, Mail, MapPin, Globe, Megaphone, Images, Upload, HardDrive, Trash2, Plus, Edit, LayoutGrid } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { uploadToCloudinary } from '@/lib/cloudinary'
 
@@ -84,6 +84,9 @@ export default function AdminSettingsPage() {
       if (!data.heroSlides || data.heroSlides.length === 0) {
         data.heroSlides = DEFAULT_HERO_SLIDES
       }
+      if (!data.featuredServiceCards || data.featuredServiceCards.length === 0) {
+        data.featuredServiceCards = DEFAULT_FEATURED_SERVICES
+      }
       setForm(data)
     } catch (err) {
       console.error('Error loading settings:', err)
@@ -108,6 +111,20 @@ export default function AdminSettingsPage() {
         ...prev,
         heroSlides: updatedSlides,
         heroImages: updatedSlides.map(s => s.image)
+      }
+    })
+  }
+
+  // Featured Card Field Handler
+  const updateFeaturedCardField = (index: number, field: keyof FeaturedServiceCard, value: string) => {
+    setForm((prev) => {
+      const updatedCards = [...(prev.featuredServiceCards || DEFAULT_FEATURED_SERVICES)]
+      if (updatedCards[index]) {
+        updatedCards[index] = { ...updatedCards[index], [field]: value }
+      }
+      return {
+        ...prev,
+        featuredServiceCards: updatedCards
       }
     })
   }
@@ -583,6 +600,87 @@ export default function AdminSettingsPage() {
                   className="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:border-red-500 font-sans shadow-xs"
                 />
               </div>
+            </div>
+          </div>
+
+          {/* Homepage 3 Featured Service Cards Manager */}
+          <div className="bg-white border border-gray-200/80 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
+            <div className="flex items-center space-x-3 pb-4 border-b border-gray-100">
+              <div className="w-10 h-10 bg-red-50 border border-red-200 rounded-xl flex items-center justify-center text-red-600">
+                <LayoutGrid className="w-5 h-5" />
+              </div>
+              <div>
+                <h3 className="text-base font-bold text-slate-900 font-serif-luxury">Homepage 3 Featured Service Cards Manager</h3>
+                <p className="text-xs text-slate-500">
+                  Customize the 3 white service boxes (Tags, Titles, Subtitles, and Link URLs) displayed on the homepage.
+                </p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              {(form.featuredServiceCards || DEFAULT_FEATURED_SERVICES).slice(0, 3).map((card, idx) => (
+                <div key={card.id || idx} className="bg-slate-50 border border-gray-200 rounded-2xl p-5 space-y-3.5 shadow-xs relative">
+                  <div className="flex items-center justify-between border-b border-gray-200 pb-2">
+                    <span className="bg-red-100 text-red-700 text-[10px] font-mono font-bold px-2 py-0.5 rounded">
+                      Box #{idx + 1}
+                    </span>
+                    <span className="text-[11px] font-bold text-slate-600">Card #{idx + 1}</span>
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-red-600 mb-1">
+                      Top Pill Tag (Red Text)
+                    </label>
+                    <input
+                      type="text"
+                      value={card.tag}
+                      onChange={(e) => updateFeaturedCardField(idx, 'tag', e.target.value)}
+                      placeholder="e.g. CONSTRUCTION"
+                      className="w-full bg-white border border-gray-300 rounded-xl px-3 py-1.5 text-xs text-slate-900 focus:outline-none focus:border-red-500 font-sans shadow-xs font-bold uppercase"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-700 mb-1">
+                      Main Box Title *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={card.title}
+                      onChange={(e) => updateFeaturedCardField(idx, 'title', e.target.value)}
+                      placeholder="e.g. End to End Construction"
+                      className="w-full bg-white border border-gray-300 rounded-xl px-3 py-1.5 text-xs text-slate-900 focus:outline-none focus:border-red-500 font-serif-luxury font-bold shadow-xs"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-700 mb-1">
+                      Subtitle / Tagline
+                    </label>
+                    <input
+                      type="text"
+                      value={card.subtitle}
+                      onChange={(e) => updateFeaturedCardField(idx, 'subtitle', e.target.value)}
+                      placeholder="e.g. TURNKEY CONSTRUCTION WITH MATERIAL"
+                      className="w-full bg-white border border-gray-300 rounded-xl px-3 py-1.5 text-[11px] text-slate-900 focus:outline-none focus:border-red-500 font-sans shadow-xs font-medium uppercase"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-700 mb-1">
+                      View Details Target Link URL
+                    </label>
+                    <input
+                      type="text"
+                      value={card.linkUrl}
+                      onChange={(e) => updateFeaturedCardField(idx, 'linkUrl', e.target.value)}
+                      placeholder="/services/end-to-end-construction"
+                      className="w-full bg-white border border-gray-300 rounded-xl px-3 py-1.5 text-[11px] text-slate-900 focus:outline-none focus:border-red-500 font-mono shadow-xs"
+                    />
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 

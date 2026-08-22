@@ -320,12 +320,12 @@ export default async function Home() {
             <div className="w-16 h-0.5 bg-red-500 mx-auto my-5 rounded-full"></div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className={`grid grid-cols-1 md:grid-cols-2 ${managedServices.length >= 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3'} gap-6`}>
             {managedServices.length > 0
               ? managedServices.map((service, index) => (
                 <ManagedServiceCard key={service.id || index} service={service} index={index} />
               ))
-              : services.slice(0, 4).map((service, index) => (
+              : services.map((service, index) => (
                 <ServiceCard key={index} service={service} index={index} />
               ))}
           </div>

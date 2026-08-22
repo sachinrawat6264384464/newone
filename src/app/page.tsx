@@ -56,34 +56,72 @@ interface Testimonial {
 const services: Service[] = [
   {
     icon: HomeIcon,
-    title: "End to End Construction",
-    description:
-      "Complete turnkey construction with material management, architectural facade design, and phase planning.",
-    images: [
-      "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298162/Homestorey-media/What%20we%20create/vt9avmrazh3jvii5ytl9.jpg"
-    ],
-    color: "from-red-400 to-red-600",
-  },
-  {
-    icon: HomeIcon,
     title: "Facade Design",
     description:
-      "Stunning 3D exterior elevation facade designs that create lasting first impressions.",
+      "Stunning exterior designs that create lasting first impressions",
     images: [
-      "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298138/Homestorey-media/Hero/haemuplqyv9glq1651fc.jpg"
+      "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298162/Homestorey-media/What%20we%20create/vt9avmrazh3jvii5ytl9.jpg",
+      "/What_we_create/20220325_164704.jpg",
+      "/What_we_create/IMG-20220420-WA0006.jpg",
     ],
     color: "from-red-400 to-red-600",
   },
   {
     icon: Sofa,
-    title: "Full Home Interiors",
+    title: "Living Area",
     description:
-      "Bespoke luxury interior design & turnkey execution including modular kitchens, living areas, and bedrooms.",
+      "Comfortable and stylish living spaces perfect for family gatherings",
     images: [
-      "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298165/Homestorey-media/What%20we%20create/jjhie0tfazmie9laeimu.jpg"
+      "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298165/Homestorey-media/What%20we%20create/jjhie0tfazmie9laeimu.jpg",
+      "/What_we_create/20230301_170056.jpg",
+      "/What_we_create/20230301_170142.jpg",
     ],
     color: "from-red-400 to-red-600",
-  }
+  },
+  {
+    icon: ChefHat,
+    title: "Kitchen Design",
+    description: "Modern, functional kitchens that are the heart of your home",
+    images: [
+      "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298164/Homestorey-media/What%20we%20create/t6w21ualgsjkz6ifc8bo.jpg",
+      "/What_we_create/Kitchen.jpeg",
+      "/What_we_create/12.jpg",
+    ],
+    color: "from-red-400 to-red-600",
+  },
+  {
+    icon: Bed,
+    title: "Bedroom Design",
+    description: "Peaceful retreats designed for rest and rejuvenation",
+    images: [
+      "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298161/Homestorey-media/What%20we%20create/edh6sfa6zt7byruupb2b.jpg",
+      "/What_we_create/Bedroom.jpeg",
+      "/What_we_create/IMG-20251129-WA0016.jpg",
+    ],
+    color: "from-red-400 to-red-600",
+  },
+  {
+    icon: Bath,
+    title: "Bathroom Design",
+    description: "Spa-like bathrooms combining luxury and functionality",
+    images: [
+      "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298160/Homestorey-media/What%20we%20create/wqnxhezwbtsnivywxqej.jpg",
+      "/What_we_create/Bathroom.jpg",
+      "/What_we_create/IMG-20251129-WA0018.jpg",
+    ],
+    color: "from-red-400 to-red-600",
+  },
+  {
+    icon: Briefcase,
+    title: "Home Office Design",
+    description: "Productive work-from-home spaces tailored to your needs",
+    images: [
+      "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298163/Homestorey-media/What%20we%20create/hqflyynqrv1uccqarkmf.jpg",
+      "/What_we_create/Home-office.jpeg",
+      "/What_we_create/IMG-20251129-WA0021.jpg",
+    ],
+    color: "from-red-400 to-red-600",
+  },
 ];
 
 const testimonials: Testimonial[] = [
@@ -282,12 +320,12 @@ export default async function Home() {
             <div className="w-16 h-0.5 bg-red-500 mx-auto my-5 rounded-full"></div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {managedServices.length > 0
-              ? managedServices.slice(0, 3).map((service, index) => (
+              ? managedServices.map((service, index) => (
                 <ManagedServiceCard key={service.id || index} service={service} index={index} />
               ))
-              : services.slice(0, 3).map((service, index) => (
+              : services.slice(0, 4).map((service, index) => (
                 <ServiceCard key={index} service={service} index={index} />
               ))}
           </div>

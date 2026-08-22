@@ -10,7 +10,7 @@ export const INITIAL_SERVICES: ServiceItem[] = [
   {
     id: 'end-to-end-construction',
     title: 'End to End Construction',
-    subtitle: 'TURNKEY CONSTRUCTION WITH MATERIAL',
+    subtitle: 'Turnkey Construction with Material',
     description: 'Complete end-to-end turnkey construction service including high-grade material management, architectural facade design, and phase planning of plot.',
     coverImage: 'https://res.cloudinary.com/dfjecbhki/image/upload/v1762298162/Homestorey-media/What%20we%20create/vt9avmrazh3jvii5ytl9.jpg',
     images: [
@@ -29,30 +29,9 @@ export const INITIAL_SERVICES: ServiceItem[] = [
     updatedAt: Date.now()
   },
   {
-    id: 'facade-design',
-    title: 'Facade Design',
-    subtitle: 'LUXURY EXTERIOR ARCHITECTURE',
-    description: 'Stunning exterior designs that create lasting first impressions with premium materials, 3D elevation rendering, and architectural lighting.',
-    coverImage: 'https://res.cloudinary.com/dfjecbhki/image/upload/v1762298138/Homestorey-media/Hero/haemuplqyv9glq1651fc.jpg',
-    images: [
-      'https://res.cloudinary.com/dfjecbhki/image/upload/v1762298138/Homestorey-media/Hero/haemuplqyv9glq1651fc.jpg'
-    ],
-    category: 'Exterior',
-    features: [
-      '3D Elevation Rendering',
-      'Material Specification',
-      'Architectural Lighting',
-      'Structure Optimization'
-    ],
-    priceEstimate: 'Custom Quote',
-    published: true,
-    order: 2,
-    updatedAt: Date.now()
-  },
-  {
     id: 'full-home-interiors',
     title: 'Full Home Interiors',
-    subtitle: 'BESPOKE LUXURY INTERIOR DESIGN',
+    subtitle: 'Bespoke Luxury Interior Design',
     description: 'Complete interior design & execution including modular kitchens, living area styling, bedroom suites, and customized woodwork.',
     coverImage: 'https://res.cloudinary.com/dfjecbhki/image/upload/v1762298165/Homestorey-media/What%20we%20create/jjhie0tfazmie9laeimu.jpg',
     images: [
@@ -64,6 +43,27 @@ export const INITIAL_SERVICES: ServiceItem[] = [
       'Living & Bedroom Aesthetics',
       'False Ceiling & Ambient Lighting',
       'Turnkey Execution'
+    ],
+    priceEstimate: 'Custom Quote',
+    published: true,
+    order: 2,
+    updatedAt: Date.now()
+  },
+  {
+    id: 'architecture-facade-design',
+    title: 'Architecture & Facade Design',
+    subtitle: '3D Facade & Spatial Engineering',
+    description: 'Stunning 3D facade elevations, floor plans, and spatial plot layout planning tailored for modern luxury homes.',
+    coverImage: 'https://res.cloudinary.com/dfjecbhki/image/upload/v1762298164/Homestorey-media/What%20we%20create/t6w21ualgsjkz6ifc8bo.jpg',
+    images: [
+      'https://res.cloudinary.com/dfjecbhki/image/upload/v1762298164/Homestorey-media/What%20we%20create/t6w21ualgsjkz6ifc8bo.jpg'
+    ],
+    category: 'Architecture',
+    features: [
+      '3D Facade Elevation Concepts',
+      'Plot Layout & Floor Planning',
+      'Material Specifications',
+      'Structural Blueprints'
     ],
     priceEstimate: 'Custom Quote',
     published: true,

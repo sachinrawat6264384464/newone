@@ -101,25 +101,25 @@ export default function AdminDashboardPage() {
         </div>
         <div className="flex items-center gap-3">
           <Link
-            href="/admin/services"
+            href="/admin/projects"
             className="inline-flex items-center space-x-2 px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-bold shadow-md shadow-red-600/20 transition-all hover:scale-[1.02]"
           >
             <Plus className="w-4 h-4" />
-            <span>Add New Service</span>
+            <span>Add Project</span>
           </Link>
           <Link
-            href="/admin/projects"
+            href="/admin/blogs"
             className="inline-flex items-center space-x-2 px-4 py-2.5 bg-white hover:bg-slate-50 text-slate-700 border border-gray-200 rounded-xl text-xs font-bold transition-all shadow-xs"
           >
             <Plus className="w-4 h-4" />
-            <span>Add Project</span>
+            <span>Add Blog</span>
           </Link>
         </div>
       </div>
 
       {/* Metrics Cards Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-        {/* Services Card */}
+        {/* Total Client Leads Card */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -128,21 +128,48 @@ export default function AdminDashboardPage() {
         >
           <div className="flex items-center justify-between mb-4">
             <div className="w-12 h-12 bg-red-50 border border-red-200 rounded-xl flex items-center justify-center text-red-600 group-hover:scale-110 transition-transform">
-              <Sparkles className="w-6 h-6" />
+              <Users className="w-6 h-6" />
             </div>
-            <Link href="/admin/services" className="text-slate-400 hover:text-slate-900 transition-colors">
+            <Link href="/admin/contacts" className="text-slate-400 hover:text-slate-900 transition-colors">
               <ArrowUpRight className="w-5 h-5" />
             </Link>
           </div>
           <p className="text-xs font-mono uppercase tracking-wider text-slate-500 font-semibold mb-1">
-            Active Services
+            Contact Leads
           </p>
           <h4 className="text-3xl font-extrabold text-slate-900">
-            {loading ? '-' : stats.totalServices}
+            {loading ? '-' : stats.totalLeads}
           </h4>
           <div className="mt-3 pt-3 border-t border-gray-100 flex items-center justify-between text-[11px] text-slate-500">
-            <span>Manage Offerings</span>
-            <span className="text-red-600 font-semibold">Live on Home</span>
+            <span>Client Submissions</span>
+            <span className="text-red-600 font-semibold">Active Leads</span>
+          </div>
+        </motion.div>
+
+        {/* New Unread Leads Card */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.1 }}
+          className="bg-white border border-gray-200/80 rounded-2xl p-6 relative overflow-hidden group hover:border-amber-400 transition-all shadow-sm"
+        >
+          <div className="flex items-center justify-between mb-4">
+            <div className="w-12 h-12 bg-amber-50 border border-amber-200 rounded-xl flex items-center justify-center text-amber-600 group-hover:scale-110 transition-transform">
+              <AlertCircle className="w-6 h-6" />
+            </div>
+            <Link href="/admin/contacts" className="text-slate-400 hover:text-slate-900 transition-colors">
+              <ArrowUpRight className="w-5 h-5" />
+            </Link>
+          </div>
+          <p className="text-xs font-mono uppercase tracking-wider text-slate-500 font-semibold mb-1">
+            New Pending Leads
+          </p>
+          <h4 className="text-3xl font-extrabold text-slate-900">
+            {loading ? '-' : stats.newLeads}
+          </h4>
+          <div className="mt-3 pt-3 border-t border-gray-100 flex items-center justify-between text-[11px] text-slate-500">
+            <span>Needs Response</span>
+            <span className="text-amber-600 font-semibold">Pending Action</span>
           </div>
         </motion.div>
 
@@ -150,7 +177,7 @@ export default function AdminDashboardPage() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.1 }}
+          transition={{ duration: 0.4, delay: 0.2 }}
           className="bg-white border border-gray-200/80 rounded-2xl p-6 relative overflow-hidden group hover:border-red-400 transition-all shadow-sm"
         >
           <div className="flex items-center justify-between mb-4">
@@ -177,7 +204,7 @@ export default function AdminDashboardPage() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.2 }}
+          transition={{ duration: 0.4, delay: 0.3 }}
           className="bg-white border border-gray-200/80 rounded-2xl p-6 relative overflow-hidden group hover:border-red-400 transition-all shadow-sm"
         >
           <div className="flex items-center justify-between mb-4">
@@ -197,40 +224,6 @@ export default function AdminDashboardPage() {
           <div className="mt-3 pt-3 border-t border-gray-100 flex items-center justify-between text-[11px] text-slate-500">
             <span>SEO Content</span>
             <span className="text-blue-600 font-semibold">Published</span>
-          </div>
-        </motion.div>
-
-        {/* Leads Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.3 }}
-          className="bg-white border border-gray-200/80 rounded-2xl p-6 relative overflow-hidden group hover:border-red-400 transition-all shadow-sm"
-        >
-          <div className="flex items-center justify-between mb-4">
-            <div className="w-12 h-12 bg-emerald-50 border border-emerald-200 rounded-xl flex items-center justify-center text-emerald-600 group-hover:scale-110 transition-transform">
-              <Users className="w-6 h-6" />
-            </div>
-            <Link href="/admin/contacts" className="text-slate-400 hover:text-slate-900 transition-colors">
-              <ArrowUpRight className="w-5 h-5" />
-            </Link>
-          </div>
-          <p className="text-xs font-mono uppercase tracking-wider text-slate-500 font-semibold mb-1">
-            Total Leads Received
-          </p>
-          <div className="flex items-baseline space-x-2">
-            <h4 className="text-3xl font-extrabold text-slate-900">
-              {loading ? '-' : stats.totalLeads}
-            </h4>
-            {stats.newLeads > 0 && (
-              <span className="text-xs font-bold text-red-600 bg-red-100 px-2 py-0.5 rounded-full border border-red-200">
-                {stats.newLeads} New
-              </span>
-            )}
-          </div>
-          <div className="mt-3 pt-3 border-t border-gray-100 flex items-center justify-between text-[11px] text-slate-500">
-            <span>Client Inquiries</span>
-            <span className="text-emerald-600 font-semibold">Active Pipeline</span>
           </div>
         </motion.div>
       </div>

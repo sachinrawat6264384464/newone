@@ -29,7 +29,6 @@ interface AdminShellProps {
 
 const NAV_ITEMS = [
   { name: 'Dashboard',    href: '/admin/dashboard', icon: LayoutDashboard },
-  { name: 'Services',     href: '/admin/services',  icon: Sparkles },
   { name: 'Projects',     href: '/admin/projects',  icon: FolderKanban },
   { name: 'Gallery',      href: '/admin/gallery',   icon: Images },
   { name: 'Blogs',        href: '/admin/blogs',     icon: FileText },

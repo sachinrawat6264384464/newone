@@ -18,14 +18,16 @@ import {
   Youtube
 } from 'lucide-react';
 import WhatsAppButton from '../components/WhatsAppButton'
-
 import TrustpilotReviewCollector from './TrustPilotReviewCollector';
+import RightContactCard from './RightContactCard';
+
 interface LayoutProps {
   children: ReactNode;
 }
 
 const Layout = ({ children }: LayoutProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isContactCardOpen, setIsContactCardOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
 
@@ -71,7 +73,7 @@ const Layout = ({ children }: LayoutProps) => {
       },
       { 
         icon: Youtube, 
-        href: "https://www.youtube.com/@homestorey.interiors", 
+        href: "https://youtube.com/@homestorey.interiors?si=Hiz-DJl8cY_iRPsI", 
         label: "YouTube", 
         color: "hover:text-red-600" 
       },
@@ -106,22 +108,15 @@ const Layout = ({ children }: LayoutProps) => {
               viewport={{ once: true }}
               className="lg:col-span-1"
             >
-              <div className="flex items-center gap-2.5 mb-5">
-                {/* Original logo in clean white pill */}
-                <div className="bg-white rounded-xl px-2 py-1.5 shadow-md">
-                  <Image
-                    src="/logo1img.png"
-                    alt="Home Storey Logo"
-                    width={36}
-                    height={36}
-                    className="h-8 w-auto object-contain"
-                  />
-                </div>
-                {/* Wordmark */}
-                <div className="flex flex-col leading-none">
-                  <span className="text-white font-bold text-base tracking-tight" style={{ fontFamily: 'Georgia, serif' }}>HomeStorey</span>
-                  <span className="text-[7.5px] tracking-[0.3em] text-red-400 uppercase font-semibold mt-0.5">Build · Design · Live</span>
-                </div>
+              <div className="flex flex-col items-start mb-5">
+                <Image
+                  src="/logo1img.png"
+                  alt="Home Storey Logo"
+                  width={64}
+                  height={64}
+                  className="h-11 sm:h-14 w-auto object-contain"
+                />
+                <span className="text-[9px] sm:text-[10px] tracking-[0.3em] text-red-500 uppercase font-bold mt-1.5">BUILD · DESIGN · LIVE</span>
               </div>
 
               <p className="text-slate-400 leading-relaxed mb-6 text-sm font-light">
@@ -292,14 +287,14 @@ const Layout = ({ children }: LayoutProps) => {
             viewport={{ once: true }}
             className="border-t border-white/10 mt-14 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3"
           >
-            <p className="text-slate-500 text-xs">© 2025 HomeStorey. All rights reserved.</p>
+            <p className="text-slate-500 text-xs">© 2026 HomeStorey. All rights reserved.</p>
             <p className="text-slate-600 text-xs flex items-center gap-1">
               Made with <Heart className="w-3 h-3 text-red-500 fill-current" /> by
               <Link
                 href="https://botmartz.com"
                 className="text-slate-400 hover:text-red-400 font-semibold transition-colors duration-200 ml-0.5"
               >
-                Botmartz IT Solutions
+                Botmartz Ai solution pvt ltd
               </Link>
             </p>
           </motion.div>
@@ -319,53 +314,73 @@ const Layout = ({ children }: LayoutProps) => {
         <nav className="container mx-auto px-4 py-3">
           <div className="flex justify-between items-center">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2 group">
-              {/* Original logo in clean white pill - responsive size */}
-              <div className="bg-white rounded-lg px-1.5 sm:px-2.5 py-1 sm:py-1.5 shadow-md group-hover:shadow-lg transition-shadow duration-300">
-                <Image
-                  src="/logo1img.png"
-                  alt="Home Storey Logo"
-                  width={48}
-                  height={48}
-                  className="h-7 sm:h-10 w-auto object-contain"
-                  priority
-                />
-              </div>
-              {/* Wordmark - hidden on xs, visible sm+ */}
-              <div className="hidden sm:flex flex-col leading-none">
-                <span className="text-white font-bold text-[15px] sm:text-[17px] tracking-tight" style={{ fontFamily: 'Georgia, serif' }}>HomeStorey</span>
-                <span className="text-[8px] tracking-[0.3em] text-red-400 uppercase font-semibold mt-0.5">Build · Design · Live</span>
-              </div>
+            <Link href="/" className="flex flex-col items-start justify-center group">
+              <Image
+                src="/logo1img.png"
+                alt="Home Storey Logo"
+                width={70}
+                height={70}
+                className="h-10 sm:h-12 md:h-14 w-auto object-contain"
+                priority
+              />
+              <span className="text-[8px] sm:text-[9.5px] tracking-[0.3em] text-red-500 uppercase font-bold mt-1">
+                BUILD · DESIGN · LIVE
+              </span>
             </Link>
 
             {/* Right Side: Desktop Menu Links + CTA Button */}
             <div className="hidden lg:flex items-center space-x-10">
-              <div className="flex items-center space-x-10 mr-8">
-                {[
-                  { name: "Home", href: "/" },
-                  { name: "Gallery", href: "/gallery" },
-                  { name: "Contact", href: "/contact" },
-                ].map((item) => {
-                  const isActive = pathname === item.href;
-                  return (
-                    <Link
-                      key={item.name}
-                      href={item.href}
-                      className={`relative text-sm font-semibold tracking-wider uppercase transition-colors duration-200 py-1 ${
-                        isActive ? "text-red-500 font-bold" : "text-gray-200 hover:text-white"
-                      }`}
-                    >
-                      <span>{item.name}</span>
-                      {isActive && (
-                        <motion.div
-                          layoutId="activeNavIndicator"
-                          className="absolute -bottom-1 left-0 right-0 h-0.5 bg-red-500 rounded-full"
-                          transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                        />
-                      )}
-                    </Link>
-                  );
-                })}
+              <div className="flex items-center space-x-8 mr-4">
+                <Link
+                  href="/"
+                  prefetch={false}
+                  className={`relative text-sm font-semibold tracking-wider uppercase transition-colors duration-200 py-1 ${
+                    pathname === '/' ? "text-red-500 font-bold" : "text-gray-200 hover:text-white"
+                  }`}
+                >
+                  <span>Home</span>
+                  {pathname === '/' && (
+                    <motion.div
+                      layoutId="activeNavIndicator"
+                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-red-500 rounded-full"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                </Link>
+
+                <Link
+                  href="/gallery"
+                  prefetch={false}
+                  className={`relative text-sm font-semibold tracking-wider uppercase transition-colors duration-200 py-1 ${
+                    pathname === '/gallery' ? "text-red-500 font-bold" : "text-gray-200 hover:text-white"
+                  }`}
+                >
+                  <span>Gallery</span>
+                  {pathname === '/gallery' && (
+                    <motion.div
+                      layoutId="activeNavIndicator"
+                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-red-500 rounded-full"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                </Link>
+
+                <Link
+                  href="/contact"
+                  prefetch={false}
+                  className={`relative text-sm font-semibold tracking-wider uppercase transition-colors duration-200 py-1 ${
+                    pathname === '/contact' ? "text-red-500 font-bold" : "text-gray-200 hover:text-white"
+                  }`}
+                >
+                  <span>Contact</span>
+                  {pathname === '/contact' && (
+                    <motion.div
+                      layoutId="activeNavIndicator"
+                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-red-500 rounded-full"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                </Link>
               </div>
 
               {/* CTA Button */}
@@ -412,6 +427,12 @@ const Layout = ({ children }: LayoutProps) => {
       {/* Enhanced Footer */}
       <Footer />
 
+      {/* Right Side Floating Contact Form Card */}
+      <RightContactCard
+        isOpen={isContactCardOpen}
+        onClose={() => setIsContactCardOpen(false)}
+      />
+
       {/* ── Mobile Bottom Navigation Bar ── */}
       <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-slate-950/97 backdrop-blur-md border-t border-white/10">
         <div className="flex items-center justify-around px-4 py-3">
@@ -434,6 +455,7 @@ const Layout = ({ children }: LayoutProps) => {
           {/* Gallery */}
           <Link
             href="/gallery"
+            prefetch={false}
             className={`flex flex-col items-center gap-0.5 px-5 py-1 rounded-xl transition-all duration-200 ${
               pathname === '/gallery' ? 'text-red-400' : 'text-slate-400'
             }`}
@@ -451,6 +473,7 @@ const Layout = ({ children }: LayoutProps) => {
           {/* Contact */}
           <Link
             href="/contact"
+            prefetch={false}
             className={`flex flex-col items-center gap-0.5 px-5 py-1 rounded-xl transition-all duration-200 ${
               pathname === '/contact' ? 'text-red-400' : 'text-slate-400'
             }`}

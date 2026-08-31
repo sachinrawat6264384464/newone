@@ -7,12 +7,13 @@ const COLLECTION_NAME = 'pages'
 export async function getCustomPages(publishedOnly = true): Promise<CustomPage[]> {
   try {
     const pagesRef = collection(db, COLLECTION_NAME)
-    const q = publishedOnly 
-      ? query(pagesRef, where('published', '==', true), orderBy('createdAt', 'desc'))
-      : query(pagesRef, orderBy('createdAt', 'desc'))
-      
-    const snapshot = await getDocs(q)
-    return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as CustomPage))
+    const snapshot = await getDocs(pagesRef)
+    let items = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as CustomPage))
+    if (publishedOnly) {
+      items = items.filter(p => p.published)
+    }
+    items.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0))
+    return items
   } catch (error: unknown) {
     if ((error as { code?: string })?.code !== 'permission-denied') {
       console.error('Error fetching custom pages:', error)

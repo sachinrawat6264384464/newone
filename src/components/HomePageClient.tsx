@@ -561,7 +561,7 @@ export default function HomePageClient() {
 
       <MasonryGrid />
 
-      <CommonProblems problems={problems} />
+      <CommonProblems />
 
       {/* Testimonials Section */}
       <section className="py-24 bg-white relative overflow-hidden">

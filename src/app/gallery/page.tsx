@@ -191,9 +191,8 @@ const ImageCarousel = ({
           {images.map((_, index) => (
             <div
               key={index}
-              className={`h-2 rounded-full transition-all duration-300 ${
-                index === currentIndex ? "w-6 bg-white" : "w-2 bg-white/60"
-              }`}
+              className={`h-2 rounded-full transition-all duration-300 ${index === currentIndex ? "w-6 bg-white" : "w-2 bg-white/60"
+                }`}
             ></div>
           ))}
         </div>
@@ -208,6 +207,12 @@ export default function Gallery() {
     new Array(services.length).fill(0)
   );
 
+  const [heroTagline, setHeroTagline] = useState<string>("DESIGN PORTFOLIO");
+  const [heroTitle, setHeroTitle] = useState<string>("Welcome to Your Dream home Design Journey.");
+  const [heroSubtext, setHeroSubtext] = useState<string>(
+    "From the moment you step through your front door to every corner of your living space, we bring your architectural vision to life."
+  );
+
   const [heroMosaicImages, setHeroMosaicImages] = useState<string[]>([
     "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298136/Homestorey-media/Hero/hfqrz6nqcaxbwa22urgx.jpg",
     "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298138/Homestorey-media/Hero/haemuplqyv9glq1651fc.jpg",
@@ -215,11 +220,27 @@ export default function Gallery() {
   ]);
 
   useEffect(() => {
-    getSiteSettings().then(settings => {
-      if (settings.galleryHeroImages && settings.galleryHeroImages.length > 0) {
-        setHeroMosaicImages(settings.galleryHeroImages.map(formatGoogleDriveUrl));
-      }
-    });
+    const loadSettings = () => {
+      getSiteSettings().then(settings => {
+        if (settings.galleryHeroImages && settings.galleryHeroImages.length > 0) {
+          setHeroMosaicImages(settings.galleryHeroImages.map(formatGoogleDriveUrl));
+        }
+        if (settings.galleryHeroTagline) {
+          setHeroTagline(settings.galleryHeroTagline);
+        }
+        if (settings.galleryHeroTitle) {
+          setHeroTitle(settings.galleryHeroTitle);
+        }
+        if (settings.galleryHeroSubtext) {
+          setHeroSubtext(settings.galleryHeroSubtext);
+        }
+      });
+    }
+
+    loadSettings();
+    if (typeof window !== 'undefined') {
+      window.addEventListener('site_settings_updated', loadSettings);
+    }
 
     getGalleryItems(true).then(items => {
       if (items && items.length > 0) {
@@ -240,6 +261,12 @@ export default function Gallery() {
         setCarouselStates(new Array(mapped.length).fill(0));
       }
     });
+
+    return () => {
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('site_settings_updated', loadSettings);
+      }
+    }
   }, []);
 
   const updateCarousel = (serviceIndex: number, direction: "next" | "prev") => {
@@ -264,7 +291,7 @@ export default function Gallery() {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="pt-28 pb-16 bg-[#FAF8F5] relative overflow-hidden border-b border-gray-200/60">
+      <section className="pt-36 sm:pt-40 lg:pt-44 pb-16 bg-[#FAF8F5] relative overflow-hidden border-b border-gray-200/60">
         {/* Subtle grid */}
         <div className="absolute inset-0 opacity-[0.025]"
           style={{ backgroundImage: 'linear-gradient(#000 1px,transparent 1px),linear-gradient(90deg,#000 1px,transparent 1px)', backgroundSize: '56px 56px' }} />
@@ -279,16 +306,14 @@ export default function Gallery() {
               transition={{ duration: 0.8 }}
             >
               <span className="text-red-500 font-semibold text-xs tracking-[0.28em] uppercase block mb-4">
-                Design Portfolio
+                {heroTagline}
               </span>
               <h1 className="font-serif-luxury text-4xl sm:text-5xl lg:text-6xl text-slate-900 font-normal leading-tight mb-5">
-                Welcome Home<br />to Your
-                <span className="block text-red-600 italic mt-1">Dream Design</span>
-                <span className="block text-red-600 italic">Journey.</span>
+                {heroTitle}
               </h1>
               <div className="w-10 h-px bg-red-500 mb-5" />
               <p className="text-slate-500 text-base md:text-lg leading-relaxed mb-8 font-light max-w-md">
-                From the moment you step through your front door to every corner of your living space, we bring your architectural vision to life.
+                {heroSubtext}
               </p>
 
               <div className="flex flex-wrap gap-3 mb-8">
@@ -429,16 +454,14 @@ export default function Gallery() {
                   </motion.div>
 
                   <div
-                    className={`grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-center ${
-                      index % 2 === 0 ? "" : "lg:grid-flow-col-dense"
-                    }`}
+                    className={`grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-center ${index % 2 === 0 ? "" : "lg:grid-flow-col-dense"
+                      }`}
                   >
                     <motion.div
                       whileHover={{ scale: 1.02, y: -5 }}
                       transition={{ type: "spring", stiffness: 300 }}
-                      className={`${
-                        index % 2 === 0 ? "lg:pr-16" : "lg:col-start-2 lg:pl-16"
-                      }`}
+                      className={`${index % 2 === 0 ? "lg:pr-16" : "lg:col-start-2 lg:pl-16"
+                        }`}
                     >
                       <div className="relative">
                         <ImageCarousel
@@ -452,9 +475,8 @@ export default function Gallery() {
                     </motion.div>
 
                     <motion.div
-                      className={`space-y-4 ${
-                        index % 2 === 0 ? "lg:pl-16" : "lg:col-start-1 lg:pr-16"
-                      }`}
+                      className={`space-y-4 ${index % 2 === 0 ? "lg:pl-16" : "lg:col-start-1 lg:pr-16"
+                        }`}
                     >
                       <div
                         className="bg-white p-7 lg:p-9 rounded-2xl shadow-md hover:shadow-xl border border-gray-200/80 transition-all duration-300 relative overflow-hidden"

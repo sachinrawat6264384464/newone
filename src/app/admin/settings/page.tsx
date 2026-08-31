@@ -2,9 +2,9 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react'
 import AdminShell from '@/components/admin/AdminShell'
-import { SiteSettings, HeroSlideItem } from '@/types/siteSettings'
-import { getSiteSettings, saveSiteSettings, DEFAULT_HERO_SLIDES } from '@/lib/settings'
-import { Settings, Save, Sparkles, Phone, Mail, MapPin, Globe, Megaphone, Images, Upload, HardDrive, Trash2, Plus, Edit } from 'lucide-react'
+import { SiteSettings, HeroSlideItem, FeaturedServiceCard } from '@/types/siteSettings'
+import { getSiteSettings, saveSiteSettings, DEFAULT_HERO_SLIDES, DEFAULT_FEATURED_SERVICES } from '@/lib/settings'
+import { Settings, Save, Sparkles, Phone, Mail, MapPin, Globe, Megaphone, Images, Upload, HardDrive, Trash2, Plus, Edit, LayoutGrid } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { uploadToCloudinary } from '@/lib/cloudinary'
 
@@ -84,6 +84,9 @@ export default function AdminSettingsPage() {
       if (!data.heroSlides || data.heroSlides.length === 0) {
         data.heroSlides = DEFAULT_HERO_SLIDES
       }
+      if (!data.featuredServiceCards || data.featuredServiceCards.length === 0) {
+        data.featuredServiceCards = DEFAULT_FEATURED_SERVICES
+      }
       setForm(data)
     } catch (err) {
       console.error('Error loading settings:', err)
@@ -110,6 +113,55 @@ export default function AdminSettingsPage() {
         heroImages: updatedSlides.map(s => s.image)
       }
     })
+  }
+
+  // Featured Card Field Handler
+  const updateFeaturedCardField = (index: number, field: keyof FeaturedServiceCard, value: string) => {
+    setForm((prev) => {
+      const updatedCards = [...(prev.featuredServiceCards || DEFAULT_FEATURED_SERVICES)]
+      if (updatedCards[index]) {
+        updatedCards[index] = { ...updatedCards[index], [field]: value }
+      }
+      return {
+        ...prev,
+        featuredServiceCards: updatedCards
+      }
+    })
+  }
+
+  // Add a New Featured Service Card
+  const handleAddFeaturedCard = () => {
+    const current = form.featuredServiceCards || DEFAULT_FEATURED_SERVICES
+    const newCard: FeaturedServiceCard = {
+      id: `feat-service-${Date.now()}`,
+      tag: 'NEW SERVICE',
+      title: 'Custom Architecture & Interior',
+      subtitle: 'BESPOKE DESIGN SOLUTIONS',
+      linkUrl: '/contact'
+    }
+
+    const updatedCards = [...current, newCard]
+    setForm((prev) => ({
+      ...prev,
+      featuredServiceCards: updatedCards
+    }))
+    toast.success(`Service Card #${updatedCards.length} added!`)
+  }
+
+  // Remove a Featured Service Card
+  const handleRemoveFeaturedCard = (index: number) => {
+    const current = form.featuredServiceCards || DEFAULT_FEATURED_SERVICES
+    if (current.length <= 1) {
+      toast.error('At least 1 featured service card is required')
+      return
+    }
+
+    const updatedCards = current.filter((_, i) => i !== index)
+    setForm((prev) => ({
+      ...prev,
+      featuredServiceCards: updatedCards
+    }))
+    toast.success(`Service Card #${index + 1} deleted!`)
   }
 
   // File Upload for a specific Slide Background Image
@@ -390,6 +442,297 @@ export default function AdminSettingsPage() {
                         />
                       </div>
                     </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Dynamic Website Section Headings Manager */}
+          <div className="bg-white border border-gray-200/80 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
+            <div className="flex items-center space-x-3 pb-4 border-b border-gray-100">
+              <div className="w-10 h-10 bg-rose-50 border border-rose-200 rounded-xl flex items-center justify-center text-red-600">
+                <Edit className="w-5 h-5" />
+              </div>
+              <div>
+                <h3 className="text-base font-bold text-slate-900 font-serif-luxury">Homepage Section Headings Manager</h3>
+                <p className="text-xs text-slate-500">
+                  Dynamically customize all red taglines, main titles, and descriptions across the website sections.
+                </p>
+              </div>
+            </div>
+
+            {/* 1. Services Section Headings */}
+            <div className="bg-slate-50 border border-gray-200 rounded-xl p-5 space-y-4">
+              <h4 className="text-xs font-bold font-mono text-slate-700 uppercase tracking-wider">1. Services We Offer Section</h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-red-600 mb-1">Tagline (Red Text)</label>
+                  <input
+                    type="text"
+                    value={form.servicesTagline || ''}
+                    onChange={(e) => setForm({ ...form, servicesTagline: e.target.value })}
+                    placeholder="SERVICES WE OFFER"
+                    className="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:border-red-500 font-sans shadow-xs font-medium"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-1">Main Section Title</label>
+                  <input
+                    type="text"
+                    value={form.servicesTitle || ''}
+                    onChange={(e) => setForm({ ...form, servicesTitle: e.target.value })}
+                    placeholder="Choose As Per Your Requirement."
+                    className="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2 text-sm text-slate-900 focus:outline-none focus:border-red-500 font-serif-luxury font-bold shadow-xs"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* 2. Common Problems Section Headings */}
+            <div className="bg-slate-50 border border-gray-200 rounded-xl p-5 space-y-4">
+              <h4 className="text-xs font-bold font-mono text-slate-700 uppercase tracking-wider">2. Solutions & Avoid Mistakes Section</h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-red-600 mb-1">Tagline (Red Text)</label>
+                  <input
+                    type="text"
+                    value={form.problemsTagline || ''}
+                    onChange={(e) => setForm({ ...form, problemsTagline: e.target.value })}
+                    placeholder="SOLUTIONS THAT MATTER"
+                    className="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:border-red-500 font-sans shadow-xs font-medium"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-1">Main Section Title</label>
+                  <input
+                    type="text"
+                    value={form.problemsTitle || ''}
+                    onChange={(e) => setForm({ ...form, problemsTitle: e.target.value })}
+                    placeholder="We help you avoid costly mistakes"
+                    className="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2 text-sm text-slate-900 focus:outline-none focus:border-red-500 font-serif-luxury font-bold shadow-xs"
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-1">Description Paragraph</label>
+                <input
+                  type="text"
+                  value={form.problemsSubtext || ''}
+                  onChange={(e) => setForm({ ...form, problemsSubtext: e.target.value })}
+                  placeholder="Our bespoke turnkey approach saves you from the typical stress..."
+                  className="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:border-red-500 font-sans shadow-xs"
+                />
+              </div>
+            </div>
+
+            {/* 3. Our Process Section Headings */}
+            <div className="bg-slate-50 border border-gray-200 rounded-xl p-5 space-y-4">
+              <h4 className="text-xs font-bold font-mono text-slate-700 uppercase tracking-wider">3. Our Process Section</h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-red-600 mb-1">Tagline (Red Text)</label>
+                  <input
+                    type="text"
+                    value={form.processTagline || ''}
+                    onChange={(e) => setForm({ ...form, processTagline: e.target.value })}
+                    placeholder="HOW WE WORK"
+                    className="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:border-red-500 font-sans shadow-xs font-medium"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-1">Main Section Title</label>
+                  <input
+                    type="text"
+                    value={form.processTitle || ''}
+                    onChange={(e) => setForm({ ...form, processTitle: e.target.value })}
+                    placeholder="Our Process."
+                    className="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2 text-sm text-slate-900 focus:outline-none focus:border-red-500 font-serif-luxury font-bold shadow-xs"
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-1">Description Paragraph</label>
+                <input
+                  type="text"
+                  value={form.processSubtext || ''}
+                  onChange={(e) => setForm({ ...form, processSubtext: e.target.value })}
+                  placeholder="A transparent, 5-step journey from initial consultation to final handover..."
+                  className="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:border-red-500 font-sans shadow-xs"
+                />
+              </div>
+            </div>
+
+            {/* 4. Testimonials Section Headings */}
+            <div className="bg-slate-50 border border-gray-200 rounded-xl p-5 space-y-4">
+              <h4 className="text-xs font-bold font-mono text-slate-700 uppercase tracking-wider">4. Client Stories / Testimonials Section</h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-red-600 mb-1">Tagline (Red Text)</label>
+                  <input
+                    type="text"
+                    value={form.testimonialsTagline || ''}
+                    onChange={(e) => setForm({ ...form, testimonialsTagline: e.target.value })}
+                    placeholder="CLIENT STORIES"
+                    className="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:border-red-500 font-sans shadow-xs font-medium"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-1">Main Section Title</label>
+                  <input
+                    type="text"
+                    value={form.testimonialsTitle || ''}
+                    onChange={(e) => setForm({ ...form, testimonialsTitle: e.target.value })}
+                    placeholder="What Our Clients Say."
+                    className="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2 text-sm text-slate-900 focus:outline-none focus:border-red-500 font-serif-luxury font-bold shadow-xs"
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-1">Description Paragraph</label>
+                <input
+                  type="text"
+                  value={form.testimonialsSubtext || ''}
+                  onChange={(e) => setForm({ ...form, testimonialsSubtext: e.target.value })}
+                  placeholder="Hear from satisfied homeowners who trusted us..."
+                  className="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:border-red-500 font-sans shadow-xs"
+                />
+              </div>
+            </div>
+
+            {/* 5. Bottom CTA Section Headings */}
+            <div className="bg-slate-50 border border-gray-200 rounded-xl p-5 space-y-4">
+              <h4 className="text-xs font-bold font-mono text-slate-700 uppercase tracking-wider">5. Bottom CTA Banner Section</h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-red-600 mb-1">Tagline (Red Text)</label>
+                  <input
+                    type="text"
+                    value={form.ctaTagline || ''}
+                    onChange={(e) => setForm({ ...form, ctaTagline: e.target.value })}
+                    placeholder="LET’S BUILD TOGETHER"
+                    className="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:border-red-500 font-sans shadow-xs font-medium"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-1">Main Section Title</label>
+                  <input
+                    type="text"
+                    value={form.ctaTitle || ''}
+                    onChange={(e) => setForm({ ...form, ctaTitle: e.target.value })}
+                    placeholder="Ready To Transform Your Dream Space?"
+                    className="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2 text-sm text-slate-900 focus:outline-none focus:border-red-500 font-serif-luxury font-bold shadow-xs"
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-1">Description Paragraph</label>
+                <input
+                  type="text"
+                  value={form.ctaSubtext || ''}
+                  onChange={(e) => setForm({ ...form, ctaSubtext: e.target.value })}
+                  placeholder="Book a complimentary design discussion..."
+                  className="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:border-red-500 font-sans shadow-xs"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Homepage Featured Service Cards Manager */}
+          <div className="bg-white border border-gray-200/80 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-gray-100">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 bg-red-50 border border-red-200 rounded-xl flex items-center justify-center text-red-600">
+                  <LayoutGrid className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="text-base font-bold text-slate-900 font-serif-luxury">Homepage Featured Service Cards Manager</h3>
+                  <p className="text-xs text-slate-500">
+                    Add & customize white service boxes (Tags, Titles, Subtitles, and Link URLs) displayed on the homepage.
+                  </p>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={handleAddFeaturedCard}
+                className="inline-flex items-center space-x-2 px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-bold shadow-md shadow-red-600/20 transition-all hover:scale-[1.02]"
+              >
+                <Plus className="w-4 h-4" />
+                <span>Add New Service Card</span>
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {(form.featuredServiceCards || DEFAULT_FEATURED_SERVICES).map((card, idx) => (
+                <div key={card.id || idx} className="bg-slate-50 border border-gray-200 rounded-2xl p-5 space-y-3.5 shadow-xs relative group hover:border-red-300 transition-colors">
+                  <div className="flex items-center justify-between border-b border-gray-200 pb-2">
+                    <span className="bg-red-100 text-red-700 text-[10px] font-mono font-bold px-2 py-0.5 rounded">
+                      Box #{idx + 1}
+                    </span>
+
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveFeaturedCard(idx)}
+                      className="p-1 bg-red-50 hover:bg-red-100 text-red-600 rounded-lg text-xs font-semibold transition-colors flex items-center space-x-1 border border-red-200"
+                      title="Delete card"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                      <span className="text-[10px]">Delete</span>
+                    </button>
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-red-600 mb-1">
+                      Top Pill Tag (Red Text)
+                    </label>
+                    <input
+                      type="text"
+                      value={card.tag}
+                      onChange={(e) => updateFeaturedCardField(idx, 'tag', e.target.value)}
+                      placeholder="e.g. CONSTRUCTION"
+                      className="w-full bg-white border border-gray-300 rounded-xl px-3 py-1.5 text-xs text-slate-900 focus:outline-none focus:border-red-500 font-sans shadow-xs font-bold uppercase"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-700 mb-1">
+                      Main Box Title *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={card.title}
+                      onChange={(e) => updateFeaturedCardField(idx, 'title', e.target.value)}
+                      placeholder="e.g. End to End Construction"
+                      className="w-full bg-white border border-gray-300 rounded-xl px-3 py-1.5 text-xs text-slate-900 focus:outline-none focus:border-red-500 font-serif-luxury font-bold shadow-xs"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-700 mb-1">
+                      Subtitle / Tagline
+                    </label>
+                    <input
+                      type="text"
+                      value={card.subtitle}
+                      onChange={(e) => updateFeaturedCardField(idx, 'subtitle', e.target.value)}
+                      placeholder="e.g. TURNKEY CONSTRUCTION WITH MATERIAL"
+                      className="w-full bg-white border border-gray-300 rounded-xl px-3 py-1.5 text-[11px] text-slate-900 focus:outline-none focus:border-red-500 font-sans shadow-xs font-medium uppercase"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-700 mb-1">
+                      View Details Target Link URL
+                    </label>
+                    <input
+                      type="text"
+                      value={card.linkUrl}
+                      onChange={(e) => updateFeaturedCardField(idx, 'linkUrl', e.target.value)}
+                      placeholder="/services/end-to-end-construction"
+                      className="w-full bg-white border border-gray-300 rounded-xl px-3 py-1.5 text-[11px] text-slate-900 focus:outline-none focus:border-red-500 font-mono shadow-xs"
+                    />
                   </div>
                 </div>
               ))}

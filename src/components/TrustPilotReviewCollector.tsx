@@ -7,7 +7,7 @@ export default function TrustpilotReviewCollector() {
   return (
     <div className="inline-block my-2">
       <motion.a
-        href="https://g.page/r/homestorey/review"
+        href="https://share.google/6roeXCSqjImcMgpDi"
         target="_blank"
         rel="noopener noreferrer"
         whileHover={{ scale: 1.05, boxShadow: "0 10px 25px rgba(66, 133, 244, 0.2)" }}

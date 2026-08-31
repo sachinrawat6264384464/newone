@@ -37,6 +37,30 @@ export const DEFAULT_HERO_SLIDES: HeroSlideItem[] = [
   }
 ]
 
+export const DEFAULT_FEATURED_SERVICES: FeaturedServiceCard[] = [
+  {
+    id: 'feat-service-1',
+    tag: 'CONSTRUCTION',
+    title: 'End to End Construction',
+    subtitle: 'TURNKEY CONSTRUCTION WITH MATERIAL',
+    linkUrl: '/services/end-to-end-construction'
+  },
+  {
+    id: 'feat-service-2',
+    tag: 'EXTERIOR',
+    title: 'Facade Design',
+    subtitle: 'LUXURY EXTERIOR ARCHITECTURE',
+    linkUrl: '/services/facade-design'
+  },
+  {
+    id: 'feat-service-3',
+    tag: 'INTERIOR',
+    title: 'Full Home Interiors',
+    subtitle: 'BESPOKE LUXURY INTERIOR DESIGN',
+    linkUrl: '/services/full-home-interiors'
+  }
+]
+
 export const DEFAULT_SETTINGS: SiteSettings = {
   siteName: 'Home Storey',
   heroTitle: 'Look At What We Design.',
@@ -48,11 +72,36 @@ export const DEFAULT_SETTINGS: SiteSettings = {
     'https://res.cloudinary.com/dfjecbhki/image/upload/v1762298165/Homestorey-media/What%20we%20create/jjhie0tfazmie9laeimu.jpg'
   ],
   heroSlides: DEFAULT_HERO_SLIDES,
+  featuredServiceCards: DEFAULT_FEATURED_SERVICES,
   galleryHeroImages: [
     'https://res.cloudinary.com/dfjecbhki/image/upload/v1762298136/Homestorey-media/Hero/hfqrz6nqcaxbwa22urgx.jpg',
     'https://res.cloudinary.com/dfjecbhki/image/upload/v1762298138/Homestorey-media/Hero/haemuplqyv9glq1651fc.jpg',
     'https://res.cloudinary.com/dfjecbhki/image/upload/v1762298165/Homestorey-media/What%20we%20create/jjhie0tfazmie9laeimu.jpg'
   ],
+  galleryHeroTagline: 'DESIGN PORTFOLIO',
+  galleryHeroTitle: 'Welcome to Your Dream home Design Journey.',
+  galleryHeroSubtext: 'From the moment you step through your front door to every corner of your living space, we bring your architectural vision to life.',
+
+  // Dynamic Section Headings across Website
+  servicesTagline: 'SERVICES WE OFFER',
+  servicesTitle: 'Choose As Per Your Requirement.',
+
+  problemsTagline: 'SOLUTIONS THAT MATTER',
+  problemsTitle: 'We help you avoid costly mistakes',
+  problemsSubtext: 'Our bespoke turnkey approach saves you from the typical stress, delays, and cost overruns in home construction.',
+
+  processTagline: 'HOW WE WORK',
+  processTitle: 'Our Process.',
+  processSubtext: 'A transparent, 5-step journey from initial consultation to final handover and 3 months warranty support.',
+
+  testimonialsTagline: 'CLIENT STORIES',
+  testimonialsTitle: 'What Our Clients Say.',
+  testimonialsSubtext: 'Hear from satisfied homeowners who trusted us with their architectural and interior dreams.',
+
+  ctaTagline: "LET'S BUILD TOGETHER",
+  ctaTitle: 'Ready To Transform Your Dream Space?',
+  ctaSubtext: 'Book a complimentary design discussion and discover how we turn your architectural vision into reality.',
+
   contactEmail: 'homestorey@thenidhimittal.com',
   contactPhone: '+91 98765 43210',
   officeAddress: 'Delhi NCR, India',
@@ -66,6 +115,15 @@ export const DEFAULT_SETTINGS: SiteSettings = {
     linkUrl: 'https://tidycal.com/homestorey/free-design-discussion'
   },
   updatedAt: Date.now()
+}
+
+function fetchWithTimeout<T>(promise: Promise<T>, timeoutMs = 3500): Promise<T> {
+  return Promise.race([
+    promise,
+    new Promise<T>((_, reject) =>
+      setTimeout(() => reject(new Error('Firestore timeout')), timeoutMs)
+    )
+  ]);
 }
 
 export async function getSiteSettings(): Promise<SiteSettings> {
@@ -83,23 +141,12 @@ export async function getSiteSettings(): Promise<SiteSettings> {
 
   try {
     const docRef = doc(db, COLLECTION_NAME, SETTINGS_DOC_ID)
-    const docSnap = await getDoc(docRef)
+    const docSnap = await fetchWithTimeout(getDoc(docRef))
     
     if (docSnap.exists()) {
       const data = docSnap.data() as Partial<SiteSettings>
       
-      // If cached data exists and is newer or holds custom uploaded slides, use cached data
-      if (cached && cached.heroSlides && cached.heroSlides.length > 0) {
-        if (!data.updatedAt || (cached.updatedAt && cached.updatedAt >= data.updatedAt)) {
-          return {
-            ...DEFAULT_SETTINGS,
-            ...data,
-            ...cached
-          }
-        }
-      }
-
-      let finalSlides = (cached && cached.heroSlides) ? cached.heroSlides : (data.heroSlides || null)
+      let finalSlides = data.heroSlides || cached?.heroSlides || null
       if (!finalSlides && data.heroImages && data.heroImages.length > 0) {
         finalSlides = data.heroImages.map((img, idx) => ({
           id: `hero-slide-${idx + 1}`,
@@ -110,16 +157,34 @@ export async function getSiteSettings(): Promise<SiteSettings> {
         }))
       }
 
-      const result: SiteSettings = {
+      const merged: SiteSettings = {
         ...DEFAULT_SETTINGS,
         ...data,
         heroSlides: finalSlides && finalSlides.length > 0 ? finalSlides : DEFAULT_SETTINGS.heroSlides,
         heroImages: data.heroImages || (finalSlides ? finalSlides.map(s => s.image) : DEFAULT_SETTINGS.heroImages),
-        galleryHeroImages: Array.isArray(data.galleryHeroImages) ? data.galleryHeroImages : DEFAULT_SETTINGS.galleryHeroImages,
-        ...(cached ? cached : {})
+        featuredServiceCards: Array.isArray(data.featuredServiceCards) && data.featuredServiceCards.length > 0
+          ? data.featuredServiceCards
+          : (cached?.featuredServiceCards || DEFAULT_SETTINGS.featuredServiceCards),
+        galleryHeroImages: Array.isArray(data.galleryHeroImages) && data.galleryHeroImages.length > 0
+          ? data.galleryHeroImages
+          : (cached?.galleryHeroImages || DEFAULT_SETTINGS.galleryHeroImages),
+        galleryHeroTagline: cached?.galleryHeroTagline || data.galleryHeroTagline || DEFAULT_SETTINGS.galleryHeroTagline,
+        galleryHeroTitle: cached?.galleryHeroTitle || data.galleryHeroTitle || DEFAULT_SETTINGS.galleryHeroTitle,
+        galleryHeroSubtext: cached?.galleryHeroSubtext || data.galleryHeroSubtext || DEFAULT_SETTINGS.galleryHeroSubtext,
       }
 
-      return result
+      if (cached) {
+        const cacheTime = cached.updatedAt || 0
+        const dataTime = data.updatedAt || 0
+        if (cacheTime >= dataTime) {
+          return {
+            ...merged,
+            ...cached
+          }
+        }
+      }
+
+      return merged
     }
 
     if (cached) {
@@ -142,8 +207,10 @@ export async function getSiteSettings(): Promise<SiteSettings> {
 }
 
 export async function saveSiteSettings(settings: Partial<SiteSettings>): Promise<void> {
+  const existing = await getSiteSettings().catch(() => DEFAULT_SETTINGS)
   const payload: SiteSettings = {
     ...DEFAULT_SETTINGS,
+    ...existing,
     ...settings,
     updatedAt: Date.now()
   }
@@ -151,13 +218,14 @@ export async function saveSiteSettings(settings: Partial<SiteSettings>): Promise
   if (typeof window !== 'undefined') {
     try {
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(payload))
+      window.dispatchEvent(new Event('site_settings_updated'))
     } catch (e) {
       console.warn('LocalStorage save error:', e)
     }
   }
 
   try {
-    await setDoc(doc(db, COLLECTION_NAME, SETTINGS_DOC_ID), payload)
+    await setDoc(doc(db, COLLECTION_NAME, SETTINGS_DOC_ID), payload, { merge: true })
   } catch (error: any) {
     if (error?.code === 'permission-denied') {
       console.warn('Firestore write permission denied. Saved to LocalStorage cache successfully.', error)

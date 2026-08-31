@@ -6,13 +6,44 @@ export interface HeroSlideItem {
   image: string
 }
 
+export interface FeaturedServiceCard {
+  id: string
+  tag: string
+  title: string
+  subtitle: string
+  linkUrl: string
+}
+
 export interface SiteSettings {
   siteName: string
   heroTitle: string
   heroSubtitle: string
   heroImages?: string[]
   heroSlides?: HeroSlideItem[]
+  featuredServiceCards?: FeaturedServiceCard[]
   galleryHeroImages?: string[]
+  galleryHeroTagline?: string
+  galleryHeroTitle?: string
+  // Dynamic Section Headings across Website
+  servicesTagline?: string
+  servicesTitle?: string
+
+  problemsTagline?: string
+  problemsTitle?: string
+  problemsSubtext?: string
+
+  processTagline?: string
+  processTitle?: string
+  processSubtext?: string
+
+  testimonialsTagline?: string
+  testimonialsTitle?: string
+  testimonialsSubtext?: string
+
+  ctaTagline?: string
+  ctaTitle?: string
+  ctaSubtext?: string
+
   contactEmail: string
   contactPhone: string
   officeAddress: string

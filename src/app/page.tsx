@@ -1,5 +1,8 @@
 // app/page.tsx
-import dynamic from "next/dynamic";
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
+import dynamicImport from "next/dynamic";
 import Layout from "../components/Layout";
 import HeroCarousel from "../components/HeroCarousel";
 import ServiceCard from "@/components/ServiceCard";

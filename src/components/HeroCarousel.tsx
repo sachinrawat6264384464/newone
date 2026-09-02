@@ -98,7 +98,11 @@ const HeroCarousel = () => {
   useEffect(() => {
     fetchSlides()
     window.addEventListener('storage', fetchSlides)
-    return () => window.removeEventListener('storage', fetchSlides)
+    window.addEventListener('site_settings_updated', fetchSlides)
+    return () => {
+      window.removeEventListener('storage', fetchSlides)
+      window.removeEventListener('site_settings_updated', fetchSlides)
+    }
   }, [])
 
   // Auto loop removed per user request (manual slide navigation only)

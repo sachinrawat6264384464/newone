@@ -177,12 +177,10 @@ export default function AdminLogin() {
             </motion.button>
           </form>
 
-          {/* Admin Credentials Hint */}
-          <div className="mt-6 pt-5 border-t border-gray-100 text-center">
-            <p className="text-xs font-semibold text-slate-500 mb-1">Admin Portal Credentials:</p>
-            <div className="inline-block bg-red-50 border border-red-100 rounded-lg px-3 py-1.5 text-xs text-slate-700 font-mono">
-              <span className="font-bold text-red-600">Email:</span> admin@gmail.com &nbsp;|&nbsp; <span className="font-bold text-red-600">Password:</span> admin@123
-            </div>
+          {/* Secure Portal Security Badge */}
+          <div className="mt-6 pt-5 border-t border-gray-100 text-center flex items-center justify-center space-x-2 text-xs text-slate-400 font-medium">
+            <Shield className="w-3.5 h-3.5 text-red-600" />
+            <span>Encrypted & Authorized Admin Access Only</span>
           </div>
         </motion.div>
       </motion.div>

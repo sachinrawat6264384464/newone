@@ -19,6 +19,7 @@ import {
   X,
   Home,
   ShieldCheck,
+  Search,
 } from 'lucide-react'
 
 interface AdminShellProps {
@@ -33,6 +34,7 @@ const NAV_ITEMS = [
   { name: 'Gallery',      href: '/admin/gallery',   icon: Images },
   { name: 'Blogs',        href: '/admin/blogs',     icon: FileText },
   { name: 'Contact Leads',href: '/admin/contacts',  icon: Users },
+  { name: 'SEO Agent',    href: '/admin/seo',       icon: Search },
   { name: 'Site Settings',href: '/admin/settings',  icon: Settings },
 ]
 

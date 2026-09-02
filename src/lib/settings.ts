@@ -159,28 +159,27 @@ export async function getSiteSettings(): Promise<SiteSettings> {
 
       const merged: SiteSettings = {
         ...DEFAULT_SETTINGS,
+        ...cached,
         ...data,
-        heroSlides: finalSlides && finalSlides.length > 0 ? finalSlides : DEFAULT_SETTINGS.heroSlides,
-        heroImages: data.heroImages || (finalSlides ? finalSlides.map(s => s.image) : DEFAULT_SETTINGS.heroImages),
+        heroSlides: Array.isArray(data.heroSlides) && data.heroSlides.length > 0
+          ? data.heroSlides
+          : (cached?.heroSlides || DEFAULT_SETTINGS.heroSlides),
+        heroImages: data.heroImages || (data.heroSlides ? data.heroSlides.map(s => s.image) : (cached?.heroImages || DEFAULT_SETTINGS.heroImages)),
         featuredServiceCards: Array.isArray(data.featuredServiceCards) && data.featuredServiceCards.length > 0
           ? data.featuredServiceCards
           : (cached?.featuredServiceCards || DEFAULT_SETTINGS.featuredServiceCards),
         galleryHeroImages: Array.isArray(data.galleryHeroImages) && data.galleryHeroImages.length > 0
           ? data.galleryHeroImages
           : (cached?.galleryHeroImages || DEFAULT_SETTINGS.galleryHeroImages),
-        galleryHeroTagline: cached?.galleryHeroTagline || data.galleryHeroTagline || DEFAULT_SETTINGS.galleryHeroTagline,
-        galleryHeroTitle: cached?.galleryHeroTitle || data.galleryHeroTitle || DEFAULT_SETTINGS.galleryHeroTitle,
-        galleryHeroSubtext: cached?.galleryHeroSubtext || data.galleryHeroSubtext || DEFAULT_SETTINGS.galleryHeroSubtext,
+        galleryHeroTagline: data.galleryHeroTagline || cached?.galleryHeroTagline || DEFAULT_SETTINGS.galleryHeroTagline,
+        galleryHeroTitle: data.galleryHeroTitle || cached?.galleryHeroTitle || DEFAULT_SETTINGS.galleryHeroTitle,
+        galleryHeroSubtext: data.galleryHeroSubtext || cached?.galleryHeroSubtext || DEFAULT_SETTINGS.galleryHeroSubtext,
       }
 
-      if (cached) {
-        const cacheTime = cached.updatedAt || 0
-        const dataTime = data.updatedAt || 0
-        if (cacheTime >= dataTime) {
-          return {
-            ...merged,
-            ...cached
-          }
+      if (cached && (cached.updatedAt || 0) > (data.updatedAt || 0)) {
+        return {
+          ...merged,
+          ...cached
         }
       }
 
@@ -219,6 +218,7 @@ export async function saveSiteSettings(settings: Partial<SiteSettings>): Promise
     try {
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(payload))
       window.dispatchEvent(new Event('site_settings_updated'))
+      window.dispatchEvent(new Event('storage'))
     } catch (e) {
       console.warn('LocalStorage save error:', e)
     }

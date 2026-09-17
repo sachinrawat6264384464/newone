@@ -48,7 +48,7 @@ export default function AdminPagesManager() {
     }
   }
 
-  if (loading || status === 'loading') {
+  if (loading) {
     return <div className="p-8">Loading...</div>
   }
 
@@ -57,7 +57,7 @@ export default function AdminPagesManager() {
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold text-lux-charcoal">Page Builder</h1>
         <Link 
-          href="/admin/dashboard/pages/new" 
+          href="/admin/dashboard/site-pages/new" 
           className="bg-lux-gold text-white px-6 py-2 rounded-lg hover:bg-lux-darkGold transition"
         >
           Create New Page
@@ -97,7 +97,7 @@ export default function AdminPagesManager() {
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                    <Link href={`/admin/dashboard/pages/edit/${page.slug}`} className="text-lux-gold hover:text-lux-darkGold mr-4">
+                    <Link href={`/admin/dashboard/site-pages/edit/${page.slug}`} className="text-lux-gold hover:text-lux-darkGold mr-4">
                       Edit
                     </Link>
                     <button 

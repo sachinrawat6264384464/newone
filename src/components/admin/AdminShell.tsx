@@ -76,7 +76,7 @@ export default function AdminShell({ children, title, subtitle }: AdminShellProp
       <aside className="hidden lg:flex lg:flex-col lg:w-64 xl:w-72 bg-white border-r border-gray-200/80 fixed inset-y-0 left-0 z-30 shadow-sm">
         {/* Logo */}
         <div className="p-5 border-b border-gray-200/80 flex items-center justify-between">
-          <Link href="/admin/dashboard" className="flex items-center space-x-3 group">
+          <Link href="/admin/dashboard" prefetch={false} className="flex items-center space-x-3 group">
             <div className="w-9 h-9 bg-red-600 rounded-xl flex items-center justify-center shadow-md shadow-red-600/20 group-hover:scale-105 transition-transform flex-shrink-0">
               <Home className="w-5 h-5 text-white" />
             </div>
@@ -94,7 +94,7 @@ export default function AdminShell({ children, title, subtitle }: AdminShellProp
             const Icon = item.icon
             const isActive = pathname === item.href || (item.href !== '/admin/dashboard' && pathname?.startsWith(item.href))
             return (
-              <Link key={item.name} href={item.href}
+              <Link key={item.name} href={item.href} prefetch={false}
                 className={`flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${
                   isActive
                     ? 'bg-red-50 text-red-600 border border-red-200/80 font-bold shadow-sm'
@@ -113,7 +113,7 @@ export default function AdminShell({ children, title, subtitle }: AdminShellProp
 
         {/* Sidebar Footer */}
         <div className="p-3 border-t border-gray-200/80 space-y-2">
-          <Link href="/" target="_blank"
+          <Link href="/" target="_blank" prefetch={false}
             className="flex items-center justify-between px-3 py-2 bg-slate-50 hover:bg-slate-100 border border-gray-200 rounded-xl text-xs font-medium text-slate-700 transition-all group"
           >
             <span className="flex items-center space-x-2">
@@ -179,7 +179,7 @@ export default function AdminShell({ children, title, subtitle }: AdminShellProp
                   const Icon = item.icon
                   const isActive = pathname === item.href || (item.href !== '/admin/dashboard' && pathname?.startsWith(item.href))
                   return (
-                    <Link key={item.name} href={item.href} onClick={() => setMobileOpen(false)}
+                    <Link key={item.name} href={item.href} prefetch={false} onClick={() => setMobileOpen(false)}
                       className={`flex items-center space-x-3 px-3.5 py-3 rounded-xl text-sm font-medium transition-all ${
                         isActive
                           ? 'bg-red-600 text-white font-semibold shadow-md shadow-red-600/20'
@@ -204,7 +204,7 @@ export default function AdminShell({ children, title, subtitle }: AdminShellProp
                     <p className="text-[10px] text-slate-500 truncate">{user.email}</p>
                   </div>
                 </div>
-                <Link href="/" target="_blank"
+                <Link href="/" target="_blank" prefetch={false}
                   className="flex items-center justify-center space-x-2 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-sm font-medium transition-colors"
                 >
                   <ExternalLink className="w-4 h-4" />
@@ -247,7 +247,7 @@ export default function AdminShell({ children, title, subtitle }: AdminShellProp
 
           {/* Right: Actions */}
           <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
-            <Link href="/" target="_blank"
+            <Link href="/" target="_blank" prefetch={false}
               className="hidden md:inline-flex items-center space-x-1.5 px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-lg text-xs font-semibold border border-gray-200 transition-all"
             >
               <ExternalLink className="w-3.5 h-3.5 text-slate-600" />

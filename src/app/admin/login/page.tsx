@@ -17,7 +17,7 @@ export default function AdminLogin() {
   const [isLoading, setIsLoading] = useState(false)
   const { login } = useAuth()
   const router = useRouter()
-  const { register, handleSubmit, formState: { errors } } = useForm<LoginFormData>()
+  const { register, handleSubmit, setValue, formState: { errors } } = useForm<LoginFormData>()
 
   const onSubmit: SubmitHandler<LoginFormData> = async (data) => {
     setIsLoading(true)
@@ -34,9 +34,9 @@ export default function AdminLogin() {
         router.push('/admin/dashboard')
       }, 1000)
       
-    } catch (error) {
-      console.error('Login error:', error)
-      toast.error('Invalid credentials. Please try again.')
+    } catch (error: any) {
+      console.warn('Login attempt failed:', error?.message || error)
+      toast.error(error?.message || 'Invalid credentials. Please try again.')
     } finally {
       setIsLoading(false)
     }
@@ -175,6 +175,24 @@ export default function AdminLogin() {
                 </>
               )}
             </motion.button>
+
+            {/* Demo Credentials Helper */}
+            <div className="mt-4 p-3.5 bg-red-50/80 border border-red-100 rounded-xl text-xs text-red-700 flex items-center justify-between">
+              <div>
+                <span className="font-bold text-red-900">Admin Demo Credentials:</span>
+                <p className="text-[11px] font-mono text-red-700 mt-0.5">admin@gmail.com / admin@123</p>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setValue('email', 'admin@gmail.com')
+                  setValue('password', 'admin@123')
+                }}
+                className="text-[11px] bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 rounded-lg font-semibold transition-colors shadow-xs"
+              >
+                Auto-fill
+              </button>
+            </div>
           </form>
 
           {/* Secure Portal Security Badge */}

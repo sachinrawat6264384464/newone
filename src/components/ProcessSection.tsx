@@ -3,10 +3,14 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { getSiteSettings } from "@/lib/settings";
 
-export default function ProcessSection() {
-  const [tagline, setTagline] = useState('HOW WE WORK')
-  const [title, setTitle] = useState('Our Process.')
-  const [subtext, setSubtext] = useState('A transparent, 5-step journey from initial consultation to final handover and 3 months warranty support.')
+interface ProcessSectionProps {
+  siteSettings?: any
+}
+
+export default function ProcessSection({ siteSettings }: ProcessSectionProps) {
+  const [tagline, setTagline] = useState(siteSettings?.processTagline || 'HOW WE WORK')
+  const [title, setTitle] = useState(siteSettings?.processTitle || 'Our Process.')
+  const [subtext, setSubtext] = useState(siteSettings?.processSubtext || 'A transparent, 5-step journey from initial consultation to final handover and 3 months warranty support.')
 
   useEffect(() => {
     const loadData = () => {

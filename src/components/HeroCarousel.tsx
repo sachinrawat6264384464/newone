@@ -14,6 +14,7 @@ interface Slide {
 }
 
 import { getSiteSettings } from '@/lib/settings'
+import { formatCloudinaryUrl } from '@/lib/cloudinary'
 
 import Image from 'next/image'
 
@@ -65,9 +66,26 @@ const DEFAULT_SLIDES: Slide[] = [
   },
 ]
 
-const HeroCarousel = () => {
+interface HeroCarouselProps {
+  siteSettings?: any
+}
+
+const HeroCarousel = ({ siteSettings }: HeroCarouselProps) => {
+  const getInitialSlides = (): Slide[] => {
+    if (siteSettings?.heroSlides && siteSettings.heroSlides.length > 0) {
+      return siteSettings.heroSlides.map((slide: any, idx: number) => ({
+        id: idx + 1,
+        tagline: slide.tagline || "CONSTRUCTION · INTERIORS · ARCHITECTURE",
+        title: slide.title || "Look At What We Design.",
+        subtitle: slide.subtitle || "From bespoke architectural facades to functional luxury interiors...",
+        image: formatGoogleDriveUrl(slide.image)
+      }))
+    }
+    return DEFAULT_SLIDES
+  }
+
   const [currentSlide, setCurrentSlide] = useState(0)
-  const [slides, setSlides] = useState<Slide[]>(DEFAULT_SLIDES)
+  const [slides, setSlides] = useState<Slide[]>(getInitialSlides)
 
   const fetchSlides = () => {
     getSiteSettings().then(settings => {
@@ -120,25 +138,22 @@ const HeroCarousel = () => {
 
   return (
     <div className="relative min-h-[90vh] lg:h-screen w-full overflow-hidden bg-slate-950 flex items-center justify-center">
-      {/* Preload active slide image for fast LCP */}
-      <link rel="preload" as="image" href={activeSlide.image} fetchPriority="high" />
-
       <AnimatePresence mode="wait">
         <motion.div
           key={safeIdx}
-          initial={{ opacity: 0, scale: 1.08 }}
+          initial={safeIdx === 0 ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 1.05 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.96 }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
           className="absolute inset-0"
         >
           {/* Optimized Hero Image */}
           <Image
-            src={activeSlide.image}
+            src={formatCloudinaryUrl(activeSlide.image, 800)}
             alt={activeSlide.title}
             fill
             priority
-            sizes="100vw"
+            sizes="(max-width: 768px) 100vw, 1200px"
             quality={75}
             className="object-cover object-center z-0"
           />

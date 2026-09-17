@@ -64,10 +64,14 @@ const defaultProblems: Problem[] = [
   },
 ];
 
-export default function CommonProblems() {
-  const [tagline, setTagline] = useState('SOLUTIONS THAT MATTER')
-  const [title, setTitle] = useState('We help you avoid costly mistakes')
-  const [subtext, setSubtext] = useState('Our bespoke turnkey approach saves you from the typical stress, delays, and cost overruns in home construction.')
+interface CommonProblemsProps {
+  siteSettings?: any
+}
+
+export default function CommonProblems({ siteSettings }: CommonProblemsProps) {
+  const [tagline, setTagline] = useState(siteSettings?.problemsTagline || 'SOLUTIONS THAT MATTER')
+  const [title, setTitle] = useState(siteSettings?.problemsTitle || 'We help you avoid costly mistakes')
+  const [subtext, setSubtext] = useState(siteSettings?.problemsSubtext || 'Our bespoke turnkey approach saves you from the typical stress, delays, and cost overruns in home construction.')
 
   useEffect(() => {
     const loadData = () => {

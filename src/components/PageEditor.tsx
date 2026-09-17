@@ -72,7 +72,7 @@ export default function PageEditor({ initialData }: PageEditorProps) {
       setLoading(true)
       await saveCustomPage(formData as CustomPage)
       toast.success(initialData ? 'Page updated' : 'Page created')
-      router.push('/admin/dashboard/pages')
+      router.push('/admin/dashboard/site-pages')
     } catch (error) {
       toast.error('Failed to save page')
     } finally {

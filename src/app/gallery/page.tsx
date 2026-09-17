@@ -9,9 +9,13 @@ import Image from "next/image";
 import { getGalleryItems } from "@/lib/galleryItems";
 import { getSiteSettings } from "@/lib/settings";
 import { GalleryItem } from "@/types/galleryItem";
+import { formatCloudinaryUrl } from "@/lib/cloudinary";
 
 function formatGoogleDriveUrl(url: string): string {
   if (!url) return url
+  if (url.includes('res.cloudinary.com')) {
+    return formatCloudinaryUrl(url, 1000);
+  }
   const driveMatch = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || url.match(/[?&]id=([a-zA-Z0-9_-]+)/)
   if (driveMatch && driveMatch[1]) {
     return `https://lh3.googleusercontent.com/d/${driveMatch[1]}`
@@ -150,11 +154,13 @@ const ImageCarousel = ({
   return (
     <div className="relative w-full aspect-square rounded-2xl overflow-hidden shadow-2xl bg-slate-950">
       <div className="relative w-full h-full">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
           src={formattedSrc}
           alt={`Gallery image ${currentIndex + 1}`}
-          className="w-full h-full object-cover transition-all duration-500"
+          fill
+          sizes="(max-width: 768px) 100vw, 50vw"
+          quality={80}
+          className="object-cover transition-all duration-500"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20"></div>
       </div>
@@ -328,6 +334,7 @@ export default function Gallery() {
                 href="https://tidycal.com/homestorey/free-design-discussion"
                 target="_blank"
                 rel="noopener noreferrer"
+                prefetch={false}
               >
                 <motion.button
                   whileHover={{ scale: 1.03, boxShadow: "0 12px 25px rgba(239, 68, 68, 0.3)" }}
@@ -351,13 +358,15 @@ export default function Gallery() {
               <motion.div
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.4 }}
-                className="rounded-2xl overflow-hidden shadow-lg row-span-2"
+                className="rounded-2xl overflow-hidden shadow-lg row-span-2 relative"
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src={heroMosaicImages[0] || "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298136/Homestorey-media/Hero/hfqrz6nqcaxbwa22urgx.jpg"}
                   alt="Interior Design"
-                  className="w-full h-full object-cover"
+                  fill
+                  sizes="25vw"
+                  quality={80}
+                  className="object-cover"
                 />
               </motion.div>
 
@@ -365,13 +374,15 @@ export default function Gallery() {
               <motion.div
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.4 }}
-                className="rounded-2xl overflow-hidden shadow-lg"
+                className="rounded-2xl overflow-hidden shadow-lg relative"
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src={heroMosaicImages[1] || "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298138/Homestorey-media/Hero/haemuplqyv9glq1651fc.jpg"}
                   alt="Luxury Bedroom"
-                  className="w-full h-full object-cover"
+                  fill
+                  sizes="25vw"
+                  quality={80}
+                  className="object-cover"
                 />
               </motion.div>
 
@@ -381,14 +392,16 @@ export default function Gallery() {
                 transition={{ duration: 0.4 }}
                 className="rounded-2xl overflow-hidden shadow-lg relative"
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src={heroMosaicImages[2] || "https://res.cloudinary.com/dfjecbhki/image/upload/v1762298165/Homestorey-media/What%20we%20create/jjhie0tfazmie9laeimu.jpg"}
                   alt="Living Space"
-                  className="w-full h-full object-cover"
+                  fill
+                  sizes="25vw"
+                  quality={80}
+                  className="object-cover"
                 />
                 {/* Badge */}
-                <div className="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-md">
+                <div className="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-md z-10">
                   <p className="text-slate-900 text-xs font-bold">300+ Designs</p>
                   <p className="text-red-500 text-[10px] font-medium">Delivered</p>
                 </div>
@@ -576,6 +589,7 @@ export default function Gallery() {
                 href="https://tidycal.com/homestorey/free-design-discussion"
                 target="_blank"
                 rel="noopener noreferrer"
+                prefetch={false}
               >
                 <motion.button
                   whileHover={{ scale: 1.05, y: -2 }}

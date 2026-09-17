@@ -10,11 +10,22 @@ function AnalyticsTracker() {
   const searchParams = useSearchParams()
 
   useEffect(() => {
-    if (pathname && analytics) {
-      const url = pathname + searchParams.toString()
-      logEvent(analytics, 'page_view', {
-        page_path: url,
+    if (typeof window === 'undefined') return
+    const logAnalytics = () => {
+      import('@/lib/firebase').then(({ analytics }) => {
+        if (pathname && analytics) {
+          import('firebase/analytics').then(({ logEvent }) => {
+            const url = pathname + (searchParams?.toString() ? `?${searchParams.toString()}` : '')
+            logEvent(analytics, 'page_view', { page_path: url })
+          })
+        }
       })
+    }
+
+    if ('requestIdleCallback' in window) {
+      (window as any).requestIdleCallback(logAnalytics)
+    } else {
+      setTimeout(logAnalytics, 4000)
     }
   }, [pathname, searchParams])
 

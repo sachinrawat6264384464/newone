@@ -102,6 +102,7 @@ export default function AdminDashboardPage() {
         <div className="flex items-center gap-3">
           <Link
             href="/admin/projects"
+            prefetch={false}
             className="inline-flex items-center space-x-2 px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-bold shadow-md shadow-red-600/20 transition-all hover:scale-[1.02]"
           >
             <Plus className="w-4 h-4" />
@@ -109,6 +110,7 @@ export default function AdminDashboardPage() {
           </Link>
           <Link
             href="/admin/blogs"
+            prefetch={false}
             className="inline-flex items-center space-x-2 px-4 py-2.5 bg-white hover:bg-slate-50 text-slate-700 border border-gray-200 rounded-xl text-xs font-bold transition-all shadow-xs"
           >
             <Plus className="w-4 h-4" />
@@ -130,7 +132,7 @@ export default function AdminDashboardPage() {
             <div className="w-12 h-12 bg-red-50 border border-red-200 rounded-xl flex items-center justify-center text-red-600 group-hover:scale-110 transition-transform">
               <Users className="w-6 h-6" />
             </div>
-            <Link href="/admin/contacts" className="text-slate-400 hover:text-slate-900 transition-colors">
+            <Link href="/admin/contacts" prefetch={false} className="text-slate-400 hover:text-slate-900 transition-colors">
               <ArrowUpRight className="w-5 h-5" />
             </Link>
           </div>
@@ -157,7 +159,7 @@ export default function AdminDashboardPage() {
             <div className="w-12 h-12 bg-amber-50 border border-amber-200 rounded-xl flex items-center justify-center text-amber-600 group-hover:scale-110 transition-transform">
               <AlertCircle className="w-6 h-6" />
             </div>
-            <Link href="/admin/contacts" className="text-slate-400 hover:text-slate-900 transition-colors">
+            <Link href="/admin/contacts" prefetch={false} className="text-slate-400 hover:text-slate-900 transition-colors">
               <ArrowUpRight className="w-5 h-5" />
             </Link>
           </div>
@@ -184,7 +186,7 @@ export default function AdminDashboardPage() {
             <div className="w-12 h-12 bg-amber-50 border border-amber-200 rounded-xl flex items-center justify-center text-amber-600 group-hover:scale-110 transition-transform">
               <FolderKanban className="w-6 h-6" />
             </div>
-            <Link href="/admin/projects" className="text-slate-400 hover:text-slate-900 transition-colors">
+            <Link href="/admin/projects" prefetch={false} className="text-slate-400 hover:text-slate-900 transition-colors">
               <ArrowUpRight className="w-5 h-5" />
             </Link>
           </div>
@@ -211,7 +213,7 @@ export default function AdminDashboardPage() {
             <div className="w-12 h-12 bg-blue-50 border border-blue-200 rounded-xl flex items-center justify-center text-blue-600 group-hover:scale-110 transition-transform">
               <FileText className="w-6 h-6" />
             </div>
-            <Link href="/admin/blogs" className="text-slate-400 hover:text-slate-900 transition-colors">
+            <Link href="/admin/blogs" prefetch={false} className="text-slate-400 hover:text-slate-900 transition-colors">
               <ArrowUpRight className="w-5 h-5" />
             </Link>
           </div>
@@ -237,6 +239,7 @@ export default function AdminDashboardPage() {
           </div>
           <Link
             href="/admin/contacts"
+            prefetch={false}
             className="text-xs font-semibold text-red-600 hover:text-red-700 flex items-center space-x-1"
           >
             <span>View All Leads</span>
@@ -304,6 +307,7 @@ export default function AdminDashboardPage() {
                     <td className="px-6 py-4 text-right">
                       <Link
                         href="/admin/contacts"
+                        prefetch={false}
                         className="inline-flex items-center space-x-1 text-slate-500 hover:text-slate-900 text-xs font-semibold"
                       >
                         <Eye className="w-3.5 h-3.5" />

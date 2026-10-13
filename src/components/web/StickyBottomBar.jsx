@@ -57,39 +57,38 @@ export default function StickyBottomBar({ content, onOpenModal }) {
   return (
     /* Clean solid luxury dark bar - ZERO BLUR, 100% mobile responsive */
     <div
-      className="fixed bottom-0 left-0 right-0 z-40 border-t border-border shadow-2xl"
-      style={{ backgroundColor: "#161412" }}
+      className="fixed bottom-0 left-0 right-0 z-40 border-t border-[#e5c158]/30 shadow-[0_-10px_35px_rgba(0,0,0,0.85)] bg-[#13100e]/95 backdrop-blur-md"
     >
-      <div className="w-full max-w-6xl mx-auto px-2.5 sm:px-4 py-2 sm:py-3 flex items-center justify-between gap-1.5 sm:gap-4">
+      <div className="w-full max-w-6xl mx-auto px-3 sm:px-5 py-2.5 sm:py-3.5 flex items-center justify-between gap-2 sm:gap-4">
         {/* Price & Dynamic Deadline (Tablet/Desktop) */}
         <div className="hidden md:block text-left">
           <div className="flex items-center gap-2">
-            <span className="font-display text-xl text-primary font-bold">{price}</span>
-            <span className="font-body text-muted-foreground line-through text-sm">{originalPrice}</span>
+            <span className="font-display text-xl text-[#e5c158] font-bold">{price}</span>
+            <span className="font-body text-[#a89f92] line-through text-sm">{originalPrice}</span>
           </div>
-          <p className="font-body text-muted-foreground text-xs" suppressHydrationWarning>
+          <p className="font-body text-[#a89f92] text-xs" suppressHydrationWarning>
             {deadlineText || "Deadline Loading..."}
           </p>
         </div>
 
         {/* Real-time countdown timer */}
         <div className="flex items-center gap-1.5 sm:gap-3">
-          <span className="font-display text-[10px] sm:text-xs md:text-sm text-muted-foreground uppercase tracking-wide whitespace-nowrap">
+          <span className="font-display text-[11px] sm:text-xs md:text-sm text-[#a89f92] uppercase tracking-wider whitespace-nowrap">
             Seats close in
           </span>
           <div className="flex items-center gap-1">
-            <div className="bg-primary/20 border border-primary/40 rounded px-1.5 sm:px-2 py-0.5 sm:py-1">
+            <div className="bg-[#e5c158]/15 border border-[#e5c158]/40 rounded-lg px-2 sm:px-2.5 py-1">
               <span
-                className="font-display text-xs sm:text-base md:text-lg text-primary tabular-nums"
+                className="font-display text-xs sm:text-base md:text-lg text-[#e5c158] font-bold tabular-nums"
                 suppressHydrationWarning
               >
                 {String(minutes).padStart(2, "0")}
               </span>
             </div>
-            <span className="font-display text-xs sm:text-base text-primary">:</span>
-            <div className="bg-primary/20 border border-primary/40 rounded px-1.5 sm:px-2 py-0.5 sm:py-1">
+            <span className="font-display text-xs sm:text-base text-[#e5c158] font-bold">:</span>
+            <div className="bg-[#e5c158]/15 border border-[#e5c158]/40 rounded-lg px-2 sm:px-2.5 py-1">
               <span
-                className="font-display text-xs sm:text-base md:text-lg text-primary tabular-nums"
+                className="font-display text-xs sm:text-base md:text-lg text-[#e5c158] font-bold tabular-nums"
                 suppressHydrationWarning
               >
                 {String(seconds).padStart(2, "0")}
@@ -99,16 +98,16 @@ export default function StickyBottomBar({ content, onOpenModal }) {
         </div>
 
         {/* Seats Scarcity & CTA Action */}
-        <div className="flex items-center gap-1.5 sm:gap-3">
-          <div className="hidden sm:flex items-center bg-primary/20 border border-primary/40 rounded-full px-2.5 sm:px-3 py-0.5 sm:py-1">
-            <span className="font-display text-[11px] sm:text-xs text-primary font-semibold whitespace-nowrap">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <div className="hidden sm:flex items-center bg-[#e5c158]/15 border border-[#e5c158]/40 rounded-full px-3 py-1">
+            <span className="font-display text-[11px] sm:text-xs text-[#e5c158] font-semibold whitespace-nowrap">
               {seatsLeft}
             </span>
           </div>
           <button
             onClick={onOpenModal}
             type="button"
-            className="bg-destructive hover:bg-destructive/90 px-3.5 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 text-xs sm:text-sm md:text-base font-display text-white border-0 rounded-lg cursor-pointer transition-colors font-bold shadow-lg whitespace-nowrap"
+            className="mirror-button px-4 sm:px-8 py-2.5 sm:py-3.5 text-xs sm:text-sm font-display cursor-pointer hover:scale-105 transition-transform whitespace-nowrap shadow-xl"
           >
             {ctaText}
           </button>

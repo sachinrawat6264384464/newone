@@ -1,69 +1,193 @@
-.web-scope {
-  --background: 20 10% 8%;
-  --foreground: 45 30% 90%;
-  --card: 20 12% 12%;
-  --card-foreground: 45 30% 90%;
-  --popover: 20 12% 10%;
-  --popover-foreground: 45 30% 90%;
-  --primary: 43 74% 49%;
-  --primary-foreground: 20 10% 8%;
-  --secondary: 20 15% 18%;
-  --secondary-foreground: 45 30% 90%;
-  --muted: 20 12% 20%;
-  --muted-foreground: 45 15% 60%;
-  --accent: 43 74% 49%;
-  --accent-foreground: 20 10% 8%;
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 210 40% 98%;
-  --border: 43 30% 25%;
-  --input: 20 15% 20%;
-  --ring: 43 74% 49%;
-  --radius: 0.5rem;
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
 
-  --gold: 43 74% 49%;
-  --gold-light: 43 80% 65%;
-  --gold-dark: 43 70% 35%;
+/* --- LUXURY WEBINAR THEME SCOPE --- */
+.web-scope {
+  --background: 20 10% 6%;
+  --foreground: 45 30% 92%;
+  --card: 20 12% 10%;
+  --card-foreground: 45 30% 92%;
+  --popover: 20 12% 9%;
+  --popover-foreground: 45 30% 92%;
+  --primary: 43 78% 52%;
+  --primary-foreground: 20 10% 6%;
+  --secondary: 20 15% 16%;
+  --secondary-foreground: 45 30% 92%;
+  --muted: 20 12% 18%;
+  --muted-foreground: 40 15% 65%;
+  --accent: 43 78% 52%;
+  --accent-foreground: 20 10% 6%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 43 30% 22%;
+  --input: 20 15% 18%;
+  --ring: 43 78% 52%;
+  --radius: 0.75rem;
+
+  --gold: 43 78% 52%;
+  --gold-light: 43 85% 70%;
+  --gold-dark: 43 72% 38%;
   --bronze: 30 50% 40%;
   --marble: 40 20% 85%;
   --obsidian: 20 10% 6%;
 
-  --font-display: "Cinzel", serif;
-  --font-body: "Cormorant Garamond", serif;
-
-  background-color: hsl(var(--background));
-  color: hsl(var(--foreground));
-  font-family: var(--font-body);
+  background-color: #0d0b09 !important;
+  color: #f3ece4 !important;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  min-height: 100vh;
+  width: 100%;
 }
 
-/* --- UNIVERSAL RESPONSIVE RESET & RESILIENCE --- */
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+/* Typography Overrides */
+.web-scope .font-display,
+.web-scope h1,
+.web-scope h2,
+.web-scope h3,
+.web-scope h4,
+.web-scope h5,
+.web-scope h6 {
+  font-family: 'Cinzel', serif !important;
+  letter-spacing: 0.02em;
 }
 
-html, body {
-  overflow-x: hidden !important;
-  max-width: 100vw !important;
-  width: 100% !important;
-  background-color: hsl(var(--background));
-  color: hsl(var(--foreground));
-  font-family: var(--font-body);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.web-scope .font-body,
+.web-scope p,
+.web-scope li {
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-display);
+.web-scope .font-sans,
+.web-scope button,
+.web-scope input,
+.web-scope select,
+.web-scope label {
+  font-family: 'Instrument Sans', system-ui, -apple-system, sans-serif !important;
 }
 
-img, video {
-  max-width: 100%;
-  height: auto;
-  display: block;
+/* Base Utility Classes */
+.web-scope .bg-background {
+  background-color: #0d0b09 !important;
+}
+.web-scope .text-foreground {
+  color: #f3ece4 !important;
+}
+.web-scope .text-foreground\/90 {
+  color: rgba(243, 236, 228, 0.9) !important;
+}
+.web-scope .text-foreground\/80 {
+  color: rgba(243, 236, 228, 0.8) !important;
 }
 
-.container {
+.web-scope .bg-card {
+  background-color: #171411 !important;
+}
+.web-scope .text-card-foreground {
+  color: #f3ece4 !important;
+}
+
+.web-scope .text-primary {
+  color: #e5c158 !important;
+}
+.web-scope .bg-primary {
+  background-color: #e5c158 !important;
+}
+.web-scope .border-primary {
+  border-color: #e5c158 !important;
+}
+.web-scope .text-primary-foreground {
+  color: #0d0b09 !important;
+}
+
+.web-scope .bg-primary\/10 {
+  background-color: rgba(229, 193, 88, 0.1) !important;
+}
+.web-scope .bg-primary\/20 {
+  background-color: rgba(229, 193, 88, 0.2) !important;
+}
+.web-scope .bg-primary\/30 {
+  background-color: rgba(229, 193, 88, 0.3) !important;
+}
+.web-scope .border-primary\/30 {
+  border-color: rgba(229, 193, 88, 0.3) !important;
+}
+.web-scope .border-primary\/40 {
+  border-color: rgba(229, 193, 88, 0.4) !important;
+}
+.web-scope .border-primary\/50 {
+  border-color: rgba(229, 193, 88, 0.5) !important;
+}
+
+.web-scope .text-muted-foreground {
+  color: #a89f92 !important;
+}
+.web-scope .bg-muted {
+  background-color: #231f1a !important;
+}
+
+.web-scope .border-border {
+  border-color: #383026 !important;
+}
+
+.web-scope .text-destructive {
+  color: #ff4757 !important;
+}
+.web-scope .bg-destructive {
+  background-color: #e11d48 !important;
+}
+.web-scope .border-destructive {
+  border-color: #e11d48 !important;
+}
+.web-scope .bg-destructive\/10 {
+  background-color: rgba(225, 29, 72, 0.12) !important;
+}
+.web-scope .bg-destructive\/20 {
+  background-color: rgba(225, 29, 72, 0.22) !important;
+}
+.web-scope .border-destructive\/30 {
+  border-color: rgba(225, 29, 72, 0.35) !important;
+}
+.web-scope .border-destructive\/40 {
+  border-color: rgba(225, 29, 72, 0.45) !important;
+}
+
+/* --- LUXURY GOLD METALLIC EFFECTS --- */
+.web-scope .text-gradient-gold {
+  background: linear-gradient(135deg, #FFF4CC 0%, #E5C158 45%, #C89628 80%, #E5C158 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  display: inline-block;
+  font-weight: 700;
+}
+
+.web-scope .border-gradient-gold {
+  border: 1px solid rgba(229, 193, 88, 0.3) !important;
+  background: linear-gradient(180deg, #181410 0%, #120f0d 100%) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(229, 193, 88, 0.2) !important;
+}
+
+.web-scope .glow-gold {
+  box-shadow: 0 0 25px rgba(229, 193, 88, 0.35), 0 0 60px rgba(229, 193, 88, 0.15), inset 0 1px rgba(255, 244, 204, 0.3) !important;
+}
+
+.web-scope .mirror-button {
+  background: linear-gradient(180deg, #FFF0B3 0%, #E5C158 35%, #B38318 75%, #E5C158 100%) !important;
+  color: #0d0b09 !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: none !important;
+  border-radius: 0.75rem !important;
+  box-shadow: 0 6px 24px rgba(229, 193, 88, 0.4), inset 0 2px 3px rgba(255, 255, 255, 0.7), inset 0 -2px 4px rgba(138, 97, 10, 0.6) !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.web-scope .mirror-button:hover {
+  transform: translateY(-2px) scale(1.02) !important;
+  box-shadow: 0 10px 36px rgba(229, 193, 88, 0.6), inset 0 2px 3px rgba(255, 255, 255, 0.85), inset 0 -2px 4px rgba(138, 97, 10, 0.6) !important;
+}
+
+/* Container */
+.web-scope .container {
   width: 100%;
   margin-left: auto;
   margin-right: auto;
@@ -71,108 +195,25 @@ img, video {
   padding-right: 1rem;
 }
 @media (min-width: 640px) {
-  .container {
+  .web-scope .container {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
   }
 }
 @media (min-width: 1024px) {
-  .container {
+  .web-scope .container {
+    max-width: 1160px;
     padding-left: 2rem;
     padding-right: 2rem;
-    max-width: 1200px;
   }
-}
-@media (min-width: 1400px) {
-  .container {
-    max-width: 1400px;
-  }
-}
-
-/* --- LUXURY ROMAN GOLD DESIGN SYSTEM --- */
-.text-gradient-gold {
-  background: linear-gradient(135deg, hsl(var(--gold-light)), hsl(var(--gold)), hsl(var(--gold-dark)));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.border-gradient-gold {
-  border: 2px solid transparent;
-  background: linear-gradient(hsl(var(--background)), hsl(var(--background))) padding-box,
-              linear-gradient(135deg, hsl(var(--gold-light)), hsl(var(--gold)), hsl(var(--gold-dark))) border-box;
-}
-
-.glow-gold {
-  box-shadow: 0 0 30px hsl(var(--gold) / 0.3), 0 0 60px hsl(var(--gold) / 0.15), inset 0 1px hsl(var(--gold-light) / 0.3);
-}
-
-.mirror-button {
-  background: linear-gradient(180deg, hsl(var(--gold-light)), hsl(var(--gold)) 30%, hsl(var(--gold-dark)) 70%, hsl(var(--gold)));
-  box-shadow: 0 4px 20px hsl(var(--gold) / 0.4), 0 8px 40px hsl(var(--gold) / 0.2), inset 0 2px 4px rgba(255, 242, 204, 0.5), inset 0 -2px 4px hsl(var(--gold-dark) / 0.5);
-  transition: all 0.3s ease;
-}
-
-.mirror-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 30px hsl(var(--gold) / 0.5), 0 12px 50px hsl(var(--gold) / 0.3), inset 0 2px 4px rgba(255, 242, 204, 0.6), inset 0 -2px 4px hsl(var(--gold-dark) / 0.5);
-}
-
-/* Strict circular avatar sizing */
-.avatar-circular {
-  width: 72px !important;
-  height: 72px !important;
-  min-width: 72px !important;
-  max-width: 72px !important;
-  min-height: 72px !important;
-  max-height: 72px !important;
-  border-radius: 9999px !important;
-  overflow: hidden !important;
-  flex-shrink: 0 !important;
-  display: inline-block !important;
-}
-
-.avatar-circular img {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  display: block !important;
-}
-
-/* Strict host preview box sizing */
-.host-preview-box {
-  width: 180px !important;
-  height: 180px !important;
-  max-width: 100% !important;
-  aspect-ratio: 1 / 1 !important;
-  border-radius: 1rem !important;
-  overflow: hidden !important;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.host-preview-box img {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  display: block !important;
-}
-
-/* Tab scrollbar hidden */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
 }
 
 /* Animations */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
+  from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-.animate-fade-in {
+.web-scope .animate-fade-in {
   animation: fadeIn 0.4s ease-out forwards;
 }

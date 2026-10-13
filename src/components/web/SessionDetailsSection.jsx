@@ -50,42 +50,46 @@ export default function SessionDetailsSection({ content, onOpenModal }) {
         </p>
 
         {/* Feature Cards Grid (Dynamic, Crisp, Clean - NO BLUR) */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-7 max-w-5xl mx-auto">
           {cards.map((card, idx) => (
             <div
               key={card.id || idx}
-              className="border-gradient-gold rounded-xl p-5 sm:p-6 text-center bg-[#1d1916] hover:scale-[1.02] transition-transform duration-300 group shadow-lg"
+              className="rounded-2xl p-6 sm:p-7 text-center bg-gradient-to-b from-[#1b1713] to-[#110e0c] border border-[#e5c158]/30 hover:border-[#e5c158]/70 hover:-translate-y-1.5 transition-all duration-300 group shadow-2xl flex flex-col items-center justify-between"
             >
-              <div className="text-3xl sm:text-4xl mb-3 sm:mb-4 group-hover:scale-110 transition-transform">{card.icon}</div>
-              <span className="inline-block bg-primary/20 text-primary text-[11px] sm:text-xs font-display tracking-wider px-3 py-1 rounded-full mb-3">
-                {card.highlight}
-              </span>
-              <h3 className="font-display text-base sm:text-lg text-foreground mb-2">{card.title}</h3>
-              <p className="font-body text-muted-foreground text-xs sm:text-sm leading-relaxed">{card.description}</p>
+              <div>
+                <div className="text-4xl sm:text-5xl mb-4 group-hover:scale-110 transition-transform duration-300 drop-shadow-md">{card.icon}</div>
+                <span className="inline-block bg-[#e5c158]/15 border border-[#e5c158]/40 text-[#e5c158] text-[11px] sm:text-xs font-sans font-semibold tracking-wider px-3.5 py-1 rounded-full mb-3 uppercase">
+                  {card.highlight}
+                </span>
+                <h3 className="font-display text-lg sm:text-xl text-[#f3ece4] font-semibold mb-2.5">{card.title}</h3>
+                <p className="font-body text-[#a89f92] text-sm sm:text-base leading-relaxed">{card.description}</p>
+              </div>
             </div>
           ))}
         </div>
 
         {/* Pricing Summary */}
-        <div className="text-center mt-8 sm:mt-10 px-2">
-          <p className="font-body text-muted-foreground text-xs sm:text-sm mb-1 sm:mb-2">
-            Total Value: <span className="line-through">{totalValue}</span>
-          </p>
-          <p className="font-display text-xl sm:text-2xl text-primary">
-            Your Investment: <span className="text-gradient-gold text-2xl sm:text-3xl">{investment}</span>
-          </p>
+        <div className="text-center mt-12 sm:mt-14 px-2">
+          <div className="inline-block bg-[#161310] border border-[#e5c158]/30 rounded-2xl px-6 sm:px-12 py-5 sm:py-6 shadow-2xl">
+            <p className="font-sans text-xs sm:text-sm text-[#a89f92] uppercase tracking-wider mb-1.5">
+              Total Value: <span className="line-through text-red-400 font-semibold">{totalValue}</span>
+            </p>
+            <p className="font-display text-xl sm:text-2xl text-[#f3ece4]">
+              Your Investment: <span className="text-gradient-gold text-3xl sm:text-4xl font-extrabold ml-2">{investment}</span>
+            </p>
+          </div>
         </div>
 
         {/* Action Button */}
-        <div className="text-center mt-6 sm:mt-8 flex flex-col items-center gap-2 px-2">
+        <div className="text-center mt-8 sm:mt-10 flex flex-col items-center gap-2.5 px-2">
           <button
             onClick={onOpenModal}
             type="button"
-            className="w-full sm:w-auto max-w-md mirror-button px-6 sm:px-10 py-3.5 sm:py-5 text-base sm:text-lg font-display text-primary-foreground border-0 rounded-xl cursor-pointer hover:scale-105 transition-transform"
+            className="w-full sm:w-auto mirror-button px-8 sm:px-14 py-4 sm:py-5 text-lg sm:text-xl font-display cursor-pointer hover:scale-105 transition-transform"
           >
             {ctaText}
           </button>
-          <span className="font-display text-primary text-sm sm:text-base md:text-lg tracking-wide mt-1">
+          <span className="font-display text-[#e5c158] text-sm sm:text-base md:text-lg tracking-wide mt-1.5 font-medium">
             {dateText}
           </span>
         </div>

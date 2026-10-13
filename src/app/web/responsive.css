@@ -1,0 +1,64 @@
+/* --- UNIVERSAL RESPONSIVE GUARDS & RESET --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Ensure circular avatars & previews never expand past their defined sizes */
+.avatar-circular {
+  width: 72px !important;
+  height: 72px !important;
+  min-width: 72px !important;
+  max-width: 72px !important;
+  min-height: 72px !important;
+  max-height: 72px !important;
+  border-radius: 9999px !important;
+  overflow: hidden !important;
+  flex-shrink: 0 !important;
+  display: inline-block !important;
+}
+
+.avatar-circular img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+.host-preview-box {
+  width: 180px !important;
+  height: 180px !important;
+  max-width: 100% !important;
+  aspect-ratio: 1 / 1 !important;
+  border-radius: 1rem !important;
+  overflow: hidden !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.host-preview-box img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+/* Hide scrollbars for tab bars */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

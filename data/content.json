@@ -1,0 +1,104 @@
+{
+  "hero": {
+    "badge": "NO ",
+    "preheading": "Would You Trade Just 2 Hours...?",
+    "headlineLive": "LIVE:",
+    "headlineMain1": "Build Your",
+    "headlineGold": "₹1 CRORE",
+    "headlineMain2": "Profit Plan For 2026",
+    "description": "We'll Map Your Entire Calendar, Design Your Scalable Offer & Create Your Complete Revenue Roadmap — LIVE",
+    "ctaText": "🔥 Claim Your FREE Seat Now",
+    "dateText": "📅 17th January, 7 PM",
+    "noticeText": "⚡ Takes only 30 seconds to register",
+    "hostName": "Shubh Jain",
+    "hostTagline": "The Mafia Behind The Biggest Coaches Of 🇮🇳",
+    "hostImage": "/assets/shubh-jain-BAGpkc-R.webp",
+    "bgVideo": "/assets/roman-hero-bg-BAaz7ED8.mp4",
+    "videoOpacity": "70"
+  },
+  "session": {
+    "eyebrow": "In This 2-Hour Session",
+    "title": "You'll Walk Away With",
+    "titleGold": "Everything",
+    "titleSuffix": "You Need",
+    "description": "No fluff. No theory. Just a complete, actionable plan you can execute immediately.",
+    "cards": [
+      {
+        "id": "1",
+        "icon": "📅",
+        "highlight": "Worth ₹25,000",
+        "title": "Your 2026 Calendar",
+        "description": "Complete quarterly roadmap with weekly action items — ready to execute"
+      },
+      {
+        "id": "2",
+        "icon": "💎",
+        "highlight": "Worth ₹50,000",
+        "title": "1 Scalable Offer",
+        "description": "A high-ticket offer designed to generate ₹1L+ per sale consistently"
+      },
+      {
+        "id": "3",
+        "icon": "🎯",
+        "highlight": "Worth ₹15,000",
+        "title": "Revenue Calculator",
+        "description": "Know exactly how many clients you need and when to hit ₹1 Crore"
+      }
+    ],
+    "totalValue": "₹90,000",
+    "investment": "FREE",
+    "ctaText": "Reserve My Spot Now →",
+    "dateText": "📅 17th January, 7 PM"
+  },
+  "host": {
+    "eyebrow": "Your Host",
+    "title": "Meet",
+    "titleGold": "Shubh Jain",
+    "tagline": "The Mafia Behind The Biggest Coaches Of 🇮🇳",
+    "bio1": "Shubh Jain has helped 48,000+ coaches and consultants of India build hyper profitable 8 figure companies using his IPs and self-built systems.",
+    "bio2": "His clients (The Biggest Names You Admire In This Country) have collectively generated over ₹210 Crores in last 1 year, and now he is sharing his exact blueprint with you — for free.",
+    "hostImage": "/assets/shubh-jain-BAGpkc-R.webp",
+    "stats": [
+      {
+        "id": "1",
+        "value": "48,000+",
+        "label": "Coaches Trained"
+      },
+      {
+        "id": "2",
+        "value": "₹210Cr+",
+        "label": "Client Revenue (1 Year)"
+      },
+      {
+        "id": "3",
+        "value": "8 Figure",
+        "label": "Companies Built"
+      }
+    ]
+  },
+  "finalCta": {
+    "scarcityBadge": "⚠️ Only 47 Seats Left — Workshop Starts Soon",
+    "quote": "2025 gave you lessons. 2026 is where you turn them into crores.",
+    "attribution": "— Shubh Jain",
+    "heading": "Stop Watching. Start Building.",
+    "description": "You have 2 choices: Close this tab and stay stuck, or register now and finally build the coaching business you deserve.",
+    "ctaText": "🔥 Claim Your FREE Seat Now",
+    "dateText": "📅 17th January, 7 PM",
+    "guarantee": "100% Free • No Credit Card Required • Instant Access",
+    "copyright": "© 2026 Shubh Jain. All Rights Reserved."
+  },
+  "stickyBar": {
+    "price": "FREE",
+    "originalPrice": "₹999",
+    "countdownMinutes": 4,
+    "seatsLeft": "47 Seats Left",
+    "ctaText": "ENROLL NOW"
+  },
+  "thankYou": {
+    "whatsappUrl": "https://lp1.launchatscale.com/Joinwhatsapp",
+    "workshopDate": "17th January 2025",
+    "workshopTime": "7:00 PM IST",
+    "copyright": "© 2024 Shubh Jain. All Rights Reserved."
+  },
+  "webhookUrl": "https://connect.pabbly.com/workflow/sendwebhookdata/IjU3NjcwNTZkMDYzZjA0MzY1MjY1NTUzNzUxMzUi_pc"
+}

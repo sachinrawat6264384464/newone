@@ -12,28 +12,28 @@ export const DEFAULT_HERO_SLIDES: HeroSlideItem[] = [
     tagline: 'CONSTRUCTION · INTERIORS · ARCHITECTURE',
     title: 'Look At What We Design.',
     subtitle: 'From bespoke architectural facades to functional luxury interiors, we transform spaces with precision, innovation, and timeless elegance.',
-    image: 'https://res.cloudinary.com/dfjecbhki/image/upload/v1762298136/Homestorey-media/Hero/hfqrz6nqcaxbwa22urgx.jpg'
+    image: 'https://res.cloudinary.com/dfjecbhki/image/upload/v1791811243/Homestorey-media/Hero/slide-1-dining.webp'
   },
   {
     id: 'hero-slide-2',
     tagline: 'ARCHITECTURE · INTERIORS · TURNKEY',
     title: 'Bespoke Residences. Unmatched Quality.',
     subtitle: 'Transforming residential and commercial properties into architectural masterpieces tailored meticulously to your lifestyle.',
-    image: 'https://res.cloudinary.com/dfjecbhki/image/upload/v1762298138/Homestorey-media/Hero/haemuplqyv9glq1651fc.jpg'
+    image: 'https://res.cloudinary.com/dfjecbhki/image/upload/v1791811243/Homestorey-media/Hero/slide-2-kitchen.webp'
   },
   {
     id: 'hero-slide-3',
     tagline: 'LUXURY HOMES · EXPERT EXECUTION',
     title: 'Crafting Elegance. Creating Comfort.',
     subtitle: 'From initial conceptual rendering to key handover, our team manages every detail of your dream build with complete transparency.',
-    image: 'https://res.cloudinary.com/dfjecbhki/image/upload/v1762298162/Homestorey-media/What%20we%20create/vt9avmrazh3jvii5ytl9.jpg'
+    image: 'https://res.cloudinary.com/dfjecbhki/image/upload/v1791811244/Homestorey-media/Hero/slide-3-facade.webp'
   },
   {
     id: 'hero-slide-4',
     tagline: 'SERENE BEDROOMS · MODERN KITCHENS',
     title: 'Interior Refinement. Lasting Luxury.',
     subtitle: 'Redefine your living environments with thoughtfully curated interiors that bring warmth, style, and functional elegance.',
-    image: 'https://res.cloudinary.com/dfjecbhki/image/upload/v1762298165/Homestorey-media/What%20we%20create/jjhie0tfazmie9laeimu.jpg'
+    image: 'https://res.cloudinary.com/dfjecbhki/image/upload/v1791811245/Homestorey-media/Hero/slide-4-bedroom.webp'
   }
 ]
 
@@ -66,10 +66,10 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   heroTitle: 'Look At What We Design.',
   heroSubtitle: 'From bespoke architectural facades to functional luxury interiors, we transform spaces with precision, innovation, and timeless elegance.',
   heroImages: [
-    'https://res.cloudinary.com/dfjecbhki/image/upload/v1762298136/Homestorey-media/Hero/hfqrz6nqcaxbwa22urgx.jpg',
-    'https://res.cloudinary.com/dfjecbhki/image/upload/v1762298138/Homestorey-media/Hero/haemuplqyv9glq1651fc.jpg',
-    'https://res.cloudinary.com/dfjecbhki/image/upload/v1762298162/Homestorey-media/What%20we%20create/vt9avmrazh3jvii5ytl9.jpg',
-    'https://res.cloudinary.com/dfjecbhki/image/upload/v1762298165/Homestorey-media/What%20we%20create/jjhie0tfazmie9laeimu.jpg'
+    'https://res.cloudinary.com/dfjecbhki/image/upload/v1791811243/Homestorey-media/Hero/slide-1-dining.webp',
+    'https://res.cloudinary.com/dfjecbhki/image/upload/v1791811243/Homestorey-media/Hero/slide-2-kitchen.webp',
+    'https://res.cloudinary.com/dfjecbhki/image/upload/v1791811244/Homestorey-media/Hero/slide-3-facade.webp',
+    'https://res.cloudinary.com/dfjecbhki/image/upload/v1791811245/Homestorey-media/Hero/slide-4-bedroom.webp'
   ],
   heroSlides: DEFAULT_HERO_SLIDES,
   featuredServiceCards: DEFAULT_FEATURED_SERVICES,

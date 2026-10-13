@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import defaultContent from "../../../data/content.json";
 import HeroSection from "@/components/web/HeroSection";
 import SectionDivider from "@/components/web/SectionDivider";
 import SessionDetailsSection from "@/components/web/SessionDetailsSection";
@@ -10,7 +11,7 @@ import StickyBottomBar from "@/components/web/StickyBottomBar";
 import RegistrationModal from "@/components/web/RegistrationModal";
 
 export default function Home() {
-  const [content, setContent] = useState(null);
+  const [content, setContent] = useState(defaultContent);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {

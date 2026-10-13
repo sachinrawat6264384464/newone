@@ -13,8 +13,10 @@ export default function StickyBottomBar({ content, onOpenModal }) {
 
   const [secondsLeft, setSecondsLeft] = useState(defaultMinutes * 60);
   const [deadlineText, setDeadlineText] = useState("");
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     // Dynamic deadline string
     const now = new Date();
     const formatted = now.toLocaleDateString("en-US", {
@@ -50,6 +52,8 @@ export default function StickyBottomBar({ content, onOpenModal }) {
 
     return () => clearInterval(interval);
   }, [defaultMinutes]);
+
+  if (!mounted) return null;
 
   const minutes = Math.floor(secondsLeft / 60);
   const seconds = secondsLeft % 60;

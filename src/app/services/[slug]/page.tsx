@@ -1,5 +1,6 @@
-// app/services/[slug]/page.tsx
+import type { Metadata } from 'next'
 import { getServices } from '@/lib/services'
+import { siteUrl, siteName } from '@/lib/site'
 import Layout from '@/components/Layout'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
@@ -93,6 +94,46 @@ const DETAILED_SERVICES_DATA: Record<string, {
 
 interface PageProps {
   params: Promise<{ slug: string }>
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const resolvedParams = await params
+  const slug = resolvedParams.slug
+  const detailed = DETAILED_SERVICES_DATA[slug]
+  const services = await getServices()
+  const foundService = services.find(s => s.id === slug)
+
+  const title = detailed?.title || foundService?.title || 'Service Details'
+  const subtitle = detailed?.subtitle || foundService?.subtitle || 'Luxury Architecture & Interior Design'
+  const overview = detailed?.overview || foundService?.description || 'Discover bespoke architectural and interior design services by Home Storey.'
+
+  const pageTitle = `${title} | ${siteName}`
+  const pageUrl = `${siteUrl}/services/${slug}`
+
+  return {
+    title: pageTitle,
+    description: `${subtitle}. ${overview.slice(0, 150)}...`,
+    alternates: {
+      canonical: pageUrl,
+    },
+    openGraph: {
+      title: pageTitle,
+      description: subtitle,
+      url: pageUrl,
+      siteName: siteName,
+      type: 'article',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: pageTitle,
+      description: subtitle,
+    },
+  }
+}
+
+export async function generateStaticParams() {
+  const defaultSlugs = Object.keys(DETAILED_SERVICES_DATA)
+  return defaultSlugs.map(slug => ({ slug }))
 }
 
 export default async function ServiceDetailPage({ params }: PageProps) {

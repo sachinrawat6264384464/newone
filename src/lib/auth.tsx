@@ -36,12 +36,11 @@ interface AuthProviderProps {
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<User | null>(null)
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user)
-      setLoading(false)
     })
 
     return () => unsubscribe()
@@ -55,7 +54,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     const adminEmail = (process.env.NEXT_PUBLIC_ADMIN_USERNAME || 'admin@gmail.com').trim().toLowerCase()
     const adminPassword = (process.env.NEXT_PUBLIC_ADMIN_PASSWORD || 'admin@123').trim()
     
-    if (cleanEmail === adminEmail && cleanPassword === adminPassword) {
+    const isDefaultAdmin = (cleanEmail === adminEmail || cleanEmail === 'admin') && cleanPassword === adminPassword
+
+    if (isDefaultAdmin) {
       console.log('Admin credentials detected, using admin session')
       
       // Create a mock user object for admin session
@@ -79,10 +80,21 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     
     // For non-demo credentials, try Firebase authentication
     try {
-      return await signInWithEmailAndPassword(auth, email, password)
+      return await signInWithEmailAndPassword(auth, cleanEmail, password)
     } catch (error: any) {
       console.warn('Firebase authentication failed:', error?.code || error)
-      throw new Error(error?.message || 'Invalid credentials')
+      const code = error?.code || ''
+      let userFriendlyMessage = 'Invalid email or password. Please try again.'
+      if (code === 'auth/invalid-credential' || code === 'auth/wrong-password' || code === 'auth/user-not-found') {
+        userFriendlyMessage = 'Invalid credentials. For admin access, use admin@gmail.com / admin@123'
+      } else if (code === 'auth/invalid-email') {
+        userFriendlyMessage = 'Invalid email address format.'
+      } else if (code === 'auth/too-many-requests') {
+        userFriendlyMessage = 'Too many failed login attempts. Please try again later.'
+      } else if (error?.message) {
+        userFriendlyMessage = error.message
+      }
+      throw new Error(userFriendlyMessage)
     }
   }
 
@@ -106,7 +118,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   return (
     <AuthContext.Provider value={value}>
-      {!loading && children}
+      {children}
     </AuthContext.Provider>
   )
 }

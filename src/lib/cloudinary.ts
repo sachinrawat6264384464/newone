@@ -31,3 +31,15 @@ export async function uploadToCloudinary(file: File | string): Promise<string> {
     return ''
   }
 }
+
+/**
+ * Transforms Cloudinary URLs to automatically request AVIF/WebP, quality compression, and width limit.
+ */
+export function formatCloudinaryUrl(url: string, width: number = 1000): string {
+  if (!url || typeof url !== 'string') return url
+  if (url.includes('res.cloudinary.com') && url.includes('/upload/') && !url.includes('f_auto')) {
+    return url.replace('/upload/', `/upload/f_auto,q_auto,w_${width},c_limit/`)
+  }
+  return url
+}
+

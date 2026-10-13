@@ -1,39 +1,18 @@
-import type { Metadata } from "next";
-import type { ReactNode } from "react";
-import { siteUrl, siteName } from "@/lib/site";
-
-const title = `Gallery | ${siteName}`;
-const description =
-  "Explore Home Storey interior design gallery: facades, living spaces, kitchens, bedrooms, and bespoke spaces across Delhi NCR.";
+import type { Metadata } from 'next'
+import { siteUrl, siteName } from '@/lib/site'
 
 export const metadata: Metadata = {
-  title,
-  description,
-  alternates: {
-    canonical: `${siteUrl}/gallery`,
-  },
+  title: `Design Portfolio & Gallery | Home Storey Luxury Interiors & Architecture`,
+  description: 'Explore our portfolio of completed luxury villa facades, modern modular kitchens, serene bedroom suites, and turnkey construction projects in Delhi NCR.',
+  alternates: { canonical: `${siteUrl}/gallery` },
   openGraph: {
-    type: "website",
+    title: `Design Portfolio & Showcase | Home Storey`,
+    description: 'Explore luxury home architectural facade renderings and bespoke interior designs by Home Storey.',
     url: `${siteUrl}/gallery`,
     siteName,
-    title,
-    description,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title,
-    description,
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-};
+  }
+}
 
-export default function GalleryLayout({
-  children,
-}: {
-  children: ReactNode;
-}) {
-  return children;
+export default function GalleryLayout({ children }: { children: React.ReactNode }) {
+  return <>{children}</>
 }

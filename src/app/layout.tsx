@@ -1,13 +1,14 @@
 // app/layout.tsx
 import './globals.css'
 import type { Metadata } from 'next'
+import { ReactNode } from 'react'
+import Image from 'next/image'
+import { Cormorant_Garamond, Inter } from 'next/font/google'
 import { AuthProvider } from '../lib/auth'
 import { Toaster } from 'react-hot-toast'
-import { ReactNode } from 'react'
-import Script from 'next/script'
-import Image from 'next/image'
 import { siteUrl, siteName, defaultDescription } from '@/lib/site'
 import FirebaseAnalytics from '@/components/FirebaseAnalytics'
+import ThirdPartyScripts from '@/components/ThirdPartyScripts'
 
 const ogImage = `${siteUrl}/logo1img.png`
 
@@ -208,8 +209,6 @@ interface RootLayoutProps {
   children: ReactNode
 }
 
-import { Cormorant_Garamond, Inter } from 'next/font/google'
-
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
@@ -229,6 +228,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en" className={`${inter.variable} ${cormorant.variable}`} suppressHydrationWarning>
       <head>
         <link rel="icon" href="/logo1img.png" type="image/png" sizes="32x32" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://res.cloudinary.com" />
 
@@ -257,52 +258,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
           }}
         />
 
-        {/* ✅ Ahrefs Analytics */}
-        <Script
-          id="ahrefs-analytics"
-          src="https://analytics.ahrefs.com/analytics.js"
-          data-key="ZVvidUlDOMv+0ah0YoWFYg"
-          strategy="lazyOnload"
-        />
-
-        {/* ✅ Google Analytics (gtag.js) */}
-        <Script
-          id="google-gtag"
-          src="https://www.googletagmanager.com/gtag/js?id=G-8C1BX4DVDH"
-          strategy="lazyOnload"
-        />
-        <Script id="google-analytics" strategy="lazyOnload">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-8C1BX4DVDH');
-          `}
-        </Script>
-
-        {/* ✅ Trustpilot Script */}
-        <Script
-          id="trustpilot-script"
-          src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js"
-          strategy="lazyOnload"
-        />
-
-        {/* ✅ Meta Pixel Code */}
-        <Script id="meta-pixel" strategy="lazyOnload">
-          {`
-            !function(f,b,e,v,n,t,s)
-            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-            n.queue=[];t=b.createElement(e);t.async=!0;
-            t.src=v;s=b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t,s)}(window, document,'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '2437076866695197');
-            fbq('track', 'PageView');
-          `}
-        </Script>
-
         {/* ✅ noscript fallback using Next.js Image */}
         <noscript>
           <Image
@@ -318,6 +273,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
       <body>
         <FirebaseAnalytics />
+        <ThirdPartyScripts />
         <AuthProvider>
           {children}
           <Toaster position="top-right" />

@@ -14,6 +14,7 @@ interface Slide {
 }
 
 import { getSiteSettings } from '@/lib/settings'
+import { formatCloudinaryUrl } from '@/lib/cloudinary'
 
 import Image from 'next/image'
 
@@ -91,9 +92,26 @@ const DEFAULT_SLIDES: Slide[] = [
   },
 ]
 
-const HeroCarousel = () => {
+interface HeroCarouselProps {
+  siteSettings?: any
+}
+
+const HeroCarousel = ({ siteSettings }: HeroCarouselProps) => {
+  const getInitialSlides = (): Slide[] => {
+    if (siteSettings?.heroSlides && siteSettings.heroSlides.length > 0) {
+      return siteSettings.heroSlides.map((slide: any, idx: number) => ({
+        id: idx + 1,
+        tagline: slide.tagline || "CONSTRUCTION · INTERIORS · ARCHITECTURE",
+        title: slide.title || "Look At What We Design.",
+        subtitle: slide.subtitle || "From bespoke architectural facades to functional luxury interiors...",
+        image: formatGoogleDriveUrl(slide.image)
+      }))
+    }
+    return DEFAULT_SLIDES
+  }
+
   const [currentSlide, setCurrentSlide] = useState(0)
-  const [slides, setSlides] = useState<Slide[]>(DEFAULT_SLIDES)
+  const [slides, setSlides] = useState<Slide[]>(getInitialSlides)
 
   const fetchSlides = () => {
     getSiteSettings().then(settings => {

@@ -1,39 +1,18 @@
-import type { Metadata } from "next";
-import type { ReactNode } from "react";
-import { siteUrl, siteName } from "@/lib/site";
-
-const title = `Contact | ${siteName}`;
-const description =
-  "Get in touch with Home Storey for a free design consultation. Share your project details and we will respond within 24 hours.";
+import type { Metadata } from 'next'
+import { siteUrl, siteName } from '@/lib/site'
 
 export const metadata: Metadata = {
-  title,
-  description,
-  alternates: {
-    canonical: `${siteUrl}/contact`,
-  },
+  title: `Contact Home Storey | Book Interior & Architectural Consultation in Delhi NCR`,
+  description: 'Get in touch with Home Storey & Nidhi Mittal for luxury interior design, turnkey construction, and 3D architectural facade design in Delhi NCR and Noida.',
+  alternates: { canonical: `${siteUrl}/contact` },
   openGraph: {
-    type: "website",
+    title: `Contact Home Storey | Interior & Architectural Consultation`,
+    description: 'Book a complimentary 3D design discussion for turnkey construction and luxury home interiors in Delhi NCR.',
     url: `${siteUrl}/contact`,
     siteName,
-    title,
-    description,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title,
-    description,
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-};
+  }
+}
 
-export default function ContactLayout({
-  children,
-}: {
-  children: ReactNode;
-}) {
-  return children;
+export default function ContactLayout({ children }: { children: React.ReactNode }) {
+  return <>{children}</>
 }

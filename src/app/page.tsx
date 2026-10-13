@@ -1,15 +1,11 @@
 // app/page.tsx
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+export const revalidate = 3600;
 
 import dynamicImport from "next/dynamic";
 import Layout from "../components/Layout";
 import HeroCarousel from "../components/HeroCarousel";
-import ServiceCard from "@/components/ServiceCard";
-import ManagedServiceCard from "@/components/ManagedServiceCard";
-import ProcessSection from "@/components/ProcessSection";
 import { getServices } from "@/lib/services";
-import { ServiceItem } from "@/types/service";
+import { getSiteSettings } from "@/lib/settings";
 import {
   ChefHat,
   Sofa,
@@ -29,16 +25,15 @@ import {
   Ruler,
   Zap,
   Palette,
-  ChevronLeft,
-  ChevronRight,
   Sparkles,
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import FloatingElements from "../components/FloatingElements";
-import MasonryGrid from "@/components/MasonryGrid";
-import CommonProblems from "../components/CommonProblems";
-import { getSiteSettings } from "@/lib/settings";
+import { formatCloudinaryUrl } from "@/lib/cloudinary";
+
+const ProcessSection = dynamicImport(() => import("@/components/ProcessSection"));
+const FloatingElements = dynamicImport(() => import("../components/FloatingElements"));
+const CommonProblems = dynamicImport(() => import("../components/CommonProblems"));
 
 interface Service {
   icon: LucideIcon;
@@ -218,7 +213,7 @@ export default async function Home() {
       <FloatingElements />
 
       {/* Hero Carousel */}
-      <HeroCarousel />
+      <HeroCarousel siteSettings={siteSettings} />
 
       {/* Meet Nidhi Section */}
       <section id="nidhi" className="relative py-24 overflow-hidden bg-[#FAF8F5]">
@@ -235,7 +230,7 @@ export default async function Home() {
                 <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-200/80 bg-white p-2">
                   <div className="relative rounded-xl overflow-hidden h-[480px]">
                     <Image
-                      src="https://res.cloudinary.com/dfjecbhki/image/upload/v1762298139/Homestorey-media/Owner/xyergldmjm9mfacihjb5.jpg"
+                      src={formatCloudinaryUrl("https://res.cloudinary.com/dfjecbhki/image/upload/v1762298139/Homestorey-media/Owner/xyergldmjm9mfacihjb5.jpg", 600)}
                       alt="Nidhi Mittal - Principal Designer"
                       width={500}
                       height={700}
@@ -298,7 +293,7 @@ export default async function Home() {
 
               {/* Button */}
               <div className="pt-4">
-                <Link href="https://tidycal.com/homestorey/free-design-discussion" target="_blank" rel="noopener noreferrer">
+                <Link href="https://tidycal.com/homestorey/free-design-discussion" target="_blank" rel="noopener noreferrer" prefetch={false}>
                   <button className="bg-red-600 hover:bg-red-700 text-white font-bold py-3.5 px-8 rounded-md shadow-md text-base inline-flex items-center space-x-2 transition-all cursor-pointer">
                     <span>Book a Free Consultation</span>
                     <ArrowRight className="w-4 h-4" />
@@ -400,6 +395,7 @@ export default async function Home() {
               href="https://wa.me/919625769768?text=Hi!%20I'm%20interested%20in%20Home%20Storey's%20design%20services.%20I'd%20like%20to%20book%20a%20consultation."
               target="_blank"
               rel="noopener noreferrer"
+              prefetch={false}
               className="inline-flex items-center space-x-3 bg-green-600 hover:bg-green-700 text-white font-bold px-8 py-4 rounded-xl shadow-xl text-base sm:text-lg transition-all hover:scale-[1.03] active:scale-[0.98]"
             >
               <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24">
@@ -414,10 +410,10 @@ export default async function Home() {
       {/* Trending Now / Most Requested Design Solutions section (Hidden per user request, easily unhidden anytime) */}
       {/* <MasonryGrid /> */}
 
-      <CommonProblems />
+      <CommonProblems siteSettings={siteSettings} />
 
       {/* Our Process Section */}
-      <ProcessSection />
+      <ProcessSection siteSettings={siteSettings} />
 
       {/* Testimonials Section */}
       <section className="py-24 bg-white relative overflow-hidden">
@@ -505,6 +501,7 @@ export default async function Home() {
                 href="https://tidycal.com/homestorey/free-design-discussion"
                 target="_blank"
                 rel="noopener noreferrer"
+                prefetch={false}
               >
                 <button className="bg-red-600 hover:bg-red-700 text-white px-9 py-4 rounded-md text-base font-bold transition-all shadow-lg inline-flex items-center space-x-3 cursor-pointer">
                   <span>Book Free Consultation</span>

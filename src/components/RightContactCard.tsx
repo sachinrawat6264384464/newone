@@ -16,11 +16,11 @@ interface ContactCardFormData {
 }
 
 interface RightContactCardProps {
-  isOpen: boolean
-  onClose: () => void
+  isOpen?: boolean
+  onClose?: () => void
 }
 
-export default function RightContactCard({ isOpen, onClose }: RightContactCardProps) {
+export default function RightContactCard({ isOpen = false, onClose = () => {} }: RightContactCardProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const { register, handleSubmit, reset, formState: { errors } } = useForm<ContactCardFormData>()
 

@@ -1,7 +1,6 @@
-"use client";
-
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { saveWebinarApplication } from "@/lib/webinarApplications";
 
 const DEFAULT_WEBHOOK =
   "https://connect.pabbly.com/workflow/sendwebhookdata/IjU3NjcwNTZkMDYzZjA0MzY1MjY1NTUzNzUxMzUi_pc";
@@ -21,6 +20,9 @@ export default function RegistrationModal({ content, isOpen, onClose }) {
 
   const [step, setStep] = useState("identity"); // identity | coaching | confidential | commitment | contact | rejected
   const [selectedIdentity, setSelectedIdentity] = useState("");
+  const [coachingGoal, setCoachingGoal] = useState("");
+  const [confidentialAck, setConfidentialAck] = useState("");
+  const [liveCommitment, setLiveCommitment] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Form state
@@ -34,6 +36,9 @@ export default function RegistrationModal({ content, isOpen, onClose }) {
     setTimeout(() => {
       setStep("identity");
       setSelectedIdentity("");
+      setCoachingGoal("");
+      setConfidentialAck("");
+      setLiveCommitment("");
       setFormData({ name: "", email: "", phone: "" });
       setErrors({ name: "", email: "", phone: "" });
       setIsSubmitting(false);
@@ -76,8 +81,24 @@ export default function RegistrationModal({ content, isOpen, onClose }) {
     }, 300);
   };
 
+  // Step navigation helper
+  const handleBackStep = () => {
+    if (step === "coaching") setStep("identity");
+    else if (step === "confidential") setStep("coaching");
+    else if (step === "commitment") setStep("confidential");
+    else if (step === "contact") setStep("commitment");
+    else if (step === "rejected") setStep("identity");
+  };
+
   // Step 2 Coaching question handler
   const handleCoachingAnswer = (ans) => {
+    const textVal =
+      ans === "yes"
+        ? "YES I WANT TO"
+        : ans === "maybe"
+        ? "MAYBE"
+        : "NO NOT AT ALL";
+    setCoachingGoal(textVal);
     if (ans === "no") {
       setStep("rejected");
     } else {
@@ -87,6 +108,8 @@ export default function RegistrationModal({ content, isOpen, onClose }) {
 
   // Step 3 Confidential handler
   const handleConfidentialAnswer = (ans) => {
+    const textVal = ans === "yes" ? "YES" : "NO";
+    setConfidentialAck(textVal);
     if (ans === "no") {
       setStep("rejected");
     } else {
@@ -96,6 +119,8 @@ export default function RegistrationModal({ content, isOpen, onClose }) {
 
   // Step 4 Commitment handler
   const handleCommitmentAnswer = (ans) => {
+    const textVal = ans === "yes" ? "YES" : "NO";
+    setLiveCommitment(textVal);
     if (ans === "no") {
       setStep("rejected");
     } else {
@@ -156,23 +181,62 @@ export default function RegistrationModal({ content, isOpen, onClose }) {
 
     setIsSubmitting(true);
 
-    try {
-      await fetch(webhookUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        mode: "no-cors",
-        body: JSON.stringify({
-          identity: selectedIdentity || "Already A Coach",
-          name: trimmedName,
-          email: trimmedEmail,
-          phone: trimmedPhone,
-          submitted_at: new Date().toISOString(),
-        }),
-      });
+    const applicationPayload = {
+      name: trimmedName,
+      email: trimmedEmail,
+      phone: trimmedPhone,
+      identity: selectedIdentity || "Already A Coach",
+      coachingGoal: coachingGoal || "YES I WANT TO",
+      confidentialAck: confidentialAck || "YES",
+      liveCommitment: liveCommitment || "YES",
+      status: "new",
+      source: "webinar_popup_form",
+    };
 
+    try {
+      // 1. Save directly into Firestore database
+      let dbSaved = false;
+      try {
+        await saveWebinarApplication(applicationPayload);
+        dbSaved = true;
+      } catch (dbErr) {
+        console.warn("Direct Firestore SDK call error, trying server API fallback:", dbErr);
+      }
+
+      // Fallback via Next.js server route if direct SDK was blocked
+      if (!dbSaved) {
+        try {
+          await fetch("/api/webinar-applications", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(applicationPayload),
+          });
+        } catch (apiErr) {
+          console.error("API fallback save error:", apiErr);
+        }
+      }
+
+      // 2. Send webhook to Pabbly
+      try {
+        await fetch(webhookUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          mode: "no-cors",
+          body: JSON.stringify({
+            ...applicationPayload,
+            submitted_at: new Date().toISOString(),
+          }),
+        });
+      } catch (whErr) {
+        console.warn("Webhook dispatch error:", whErr);
+      }
+
+      // 3. Trigger Facebook Pixel Lead event
       if (typeof window !== "undefined" && window.fbq) {
         try {
-          window.fbq("track", "Lead", {});
+          window.fbq("track", "Lead", {
+            content_name: applicationPayload.identity,
+          });
         } catch (_) {}
       }
 
@@ -206,6 +270,30 @@ export default function RegistrationModal({ content, isOpen, onClose }) {
           boxShadow: "0 25px 60px -15px rgba(0, 0, 0, 0.95), 0 0 35px rgba(217, 165, 32, 0.25)",
         }}
       >
+        {/* Back button */}
+        {step !== "identity" && (
+          <button
+            onClick={handleBackStep}
+            type="button"
+            className="absolute top-3 sm:top-4 left-3 sm:left-4 text-muted-foreground hover:text-foreground p-1.5 transition-colors rounded-full hover:bg-white/10 cursor-pointer z-10 flex items-center gap-1"
+            aria-label="Previous step"
+          >
+            <svg
+              className="w-4 h-4"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+            <span className="font-sans text-[11px] hidden sm:inline text-muted-foreground">Back</span>
+          </button>
+        )}
+
         {/* Close button */}
         <button
           onClick={handleClose}

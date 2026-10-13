@@ -34,6 +34,8 @@ const NAV_ITEMS = [
   { name: 'Gallery',      href: '/admin/gallery',   icon: Images },
   { name: 'Blogs',        href: '/admin/blogs',     icon: FileText },
   { name: 'Contact Leads',href: '/admin/contacts',  icon: Users },
+  { name: 'Webinar Leads',href: '/web/admin/applications', icon: Users },
+  { name: 'Webinar CMS',  href: '/web/admin',       icon: Sparkles },
   { name: 'SEO Agent',    href: '/admin/seo',       icon: Search },
   { name: 'Site Settings',href: '/admin/settings',  icon: Settings },
 ]

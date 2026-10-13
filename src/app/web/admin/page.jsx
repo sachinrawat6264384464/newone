@@ -198,7 +198,13 @@ export default function AdminPage() {
           </p>
         </div>
 
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
+          <Link
+            href="/web/admin/applications"
+            className="flex-1 sm:flex-initial text-center px-3 sm:px-4 py-2 rounded-lg bg-primary/15 border border-primary/60 text-primary hover:bg-primary/25 transition-colors font-display text-xs sm:text-sm flex items-center justify-center gap-1.5 font-semibold"
+          >
+            <span>📋</span> View Applications
+          </Link>
           <Link
             href={typeof window !== 'undefined' && window.location.pathname.startsWith('/web') ? '/web' : '/'}
             target="_blank"

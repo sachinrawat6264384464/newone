@@ -32,5 +32,9 @@ service cloud.firestore {
     match /contacts/{docId} {
       allow read, write: if true;
     }
+
+    match /webinar_applications/{docId} {
+      allow read, write: if true;
+    }
   }
 }

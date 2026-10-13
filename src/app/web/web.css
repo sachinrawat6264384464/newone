@@ -217,3 +217,75 @@
 .web-scope .animate-fade-in {
   animation: fadeIn 0.4s ease-out forwards;
 }
+
+/* --- DEDICATED ADMIN CMS POLISHED THEME --- */
+.web-scope.admin-cms,
+.admin-cms,
+.admin-cms * {
+  box-sizing: border-box;
+}
+
+.admin-cms {
+  background-color: #0c0b09 !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", sans-serif !important;
+  color: #f4f4f5 !important;
+}
+
+.admin-cms h1,
+.admin-cms h2 {
+  font-family: 'Cinzel', serif !important;
+}
+
+.admin-cms p,
+.admin-cms span,
+.admin-cms button {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", sans-serif !important;
+}
+
+.admin-cms label {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", sans-serif !important;
+  color: #c4b9ad !important;
+  font-size: 11.5px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+  margin-bottom: 6px !important;
+  display: block !important;
+}
+
+.admin-cms input[type="text"],
+.admin-cms input[type="url"],
+.admin-cms input[type="number"],
+.admin-cms textarea,
+.admin-cms select {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", sans-serif !important;
+  background-color: #161311 !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(229, 193, 88, 0.25) !important;
+  border-radius: 8px !important;
+  padding: 9px 13px !important;
+  font-size: 13.5px !important;
+  line-height: 1.4 !important;
+  transition: all 0.2s ease !important;
+}
+
+.admin-cms input:focus,
+.admin-cms textarea:focus,
+.admin-cms select:focus {
+  border-color: #e5c158 !important;
+  box-shadow: 0 0 0 2px rgba(229, 193, 88, 0.2) !important;
+  outline: none !important;
+  background-color: #1a1714 !important;
+}
+
+.admin-cms input[type="range"] {
+  accent-color: #e5c158 !important;
+}
+
+.admin-cms .border-gradient-gold {
+  border: 1px solid rgba(229, 193, 88, 0.25) !important;
+  background: #13100e !important;
+  border-radius: 16px !important;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6) !important;
+}
+

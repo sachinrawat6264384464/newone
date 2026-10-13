@@ -173,7 +173,7 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#12100e] text-foreground font-body pb-24 overflow-x-hidden w-full max-w-full">
+    <div className="admin-cms min-h-screen bg-[#0c0b09] text-[#f4f4f5] pb-24 overflow-x-hidden w-full max-w-full">
       {/* Toast Notification */}
       {toast && (
         <div
